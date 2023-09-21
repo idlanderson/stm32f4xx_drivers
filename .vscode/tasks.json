@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Clean and Build drivers_cpp.elf",
+			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build; cmake --build build",
+			"problemMatcher": []
+		}
+	]
+}
