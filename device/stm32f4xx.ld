@@ -22,6 +22,13 @@ SECTIONS
         _etext = .;     /* Symbol for address of the end of text section. */
     }> FLASH            /* VMA = LMA in this case */
 
+    __exidx_start = .;
+    .exidx :
+    {
+        *(.exidx* .gnu.linkonce.exidx*)
+    } >FLASH
+    __exidx_end = .;
+
     _la_data = LOADADDR(.data);
 
     .data :

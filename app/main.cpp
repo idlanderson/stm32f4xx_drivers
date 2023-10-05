@@ -1,20 +1,19 @@
-#include <cstdint>
+#include "gpio_ports.hpp"
 
-static volatile unsigned &RCC_AHB1 = *reinterpret_cast<unsigned *>(0x40021014);
-
-class Test
-{
-public:
-    std::uint32_t Add(std::uint32_t a, std::uint32_t b) 
-    { 
-        return a + b; 
-    }
-};
+using Pin = GPIO::PinNumber;
 
 int main()
 {
-    Test test;
-    test.Add(1, 2);
+    GPIOA.SetPinMode(Pin::Pin0, GPIO::PinMode::Input);
+    GPIOA.SetPinSpeed(Pin::Pin0, GPIO::PinSpeed::VeryHighSpeed);
+    GPIOA.SetPinPullUpPullDown(Pin::Pin0, GPIO::PullUpPullDown::None);
+    GPIOA.SetPinOutputType(Pin::Pin0, GPIO::OutputType::PushPull);
+    GPIOA.SetAltFcn((Pin)16, GPIO::AltFcnNumber::AltFcn0);
+
+    GPIOA.Read();
+    GPIOA.ReadPin(Pin::Pin0);
+    GPIOA.Write(4U);
+    GPIOA.WritePin(Pin::Pin0, 1U);
 
     return 0U;
 }
