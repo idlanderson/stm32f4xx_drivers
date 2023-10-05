@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "cstdint": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "disabled"
 }

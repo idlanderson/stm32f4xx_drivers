@@ -4,8 +4,20 @@
 		{
 			"type": "shell",
 			"label": "Clean and Build drivers_cpp.elf",
-			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build; cmake --build build",
+			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build",
 			"problemMatcher": []
-		}
+		},
+		{
+			"type": "shell",
+			"label": "Clean and Build Unit Tests",
+			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=ON; cmake --build build",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Build",
+			"command": "cmake --build build",
+			"problemMatcher": []
+		},
 	]
 }

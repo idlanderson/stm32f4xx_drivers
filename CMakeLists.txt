@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.27.2)
 
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/toolchain.cmake")
+option(BUILD_TESTS "Build the unit tests" OFF)
+
+if (NOT BUILD_TESTS)
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/toolchain.cmake")
+endif()
 
 # CMake normally attempts a 'test compile and link'. This will fail when
 # using the ARM cross-compiler with the custom linker flags we have set
@@ -14,4 +18,9 @@ project(drivers_cpp
     LANGUAGES C CXX)
 
 add_subdirectory(gpio)
-add_subdirectory(app)
+
+if (BUILD_TESTS)
+    add_subdirectory(test)
+else()
+    add_subdirectory(app)
+endif()

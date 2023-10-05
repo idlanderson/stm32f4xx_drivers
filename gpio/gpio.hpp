@@ -97,10 +97,10 @@ private:
 
     DeviceRegister MODER;	    /* Address Offset 0x00. GPIO port mode register */
 	DeviceRegister OTYPER;	    /* Address Offset 0x04. GPIO port output type register */
-	DeviceRegister OSPEEDR;    /* Address Offset 0x08. GPIO port output speed register */
+	DeviceRegister OSPEEDR;     /* Address Offset 0x08. GPIO port output speed register */
 	DeviceRegister PUPDR;	    /* Address Offset 0x0C. GPIO port pull-up/pull-down register */
-	DeviceRegister IDR;		/* Address Offset 0x10. GPIO port input data register */
-	DeviceRegister ODR;		/* Address Offset 0x14. GPIO port output data register */
+	DeviceRegister IDR;		    /* Address Offset 0x10. GPIO port input data register */
+	DeviceRegister ODR;		    /* Address Offset 0x14. GPIO port output data register */
 	DeviceRegister BSRR;		/* Address Offset 0x18. GPIO port bit set/reset register */
 	DeviceRegister LCKR;		/* Address Offset 0x1C. GPIO port configuration lock register */
 	DeviceRegister AFR[2];	    /* Address Offset 0x20. AFR[0] = GPIO alternate function low register, AFR[1] = GPIO alternate function high register */
