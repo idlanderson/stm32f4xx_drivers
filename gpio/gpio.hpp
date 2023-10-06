@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef GPIO_HPP_
 #define GPIO_HPP_
 
@@ -7,6 +5,7 @@
 #include <cstdint>
 
 using DeviceRegister = std::uint32_t volatile;
+using ReservedField = uint32_t;
 
 class GPIO
 {
@@ -85,13 +84,18 @@ public:
     void SetPinSpeed(PinNumber pin, PinSpeed speed);
     void SetPinPullUpPullDown(PinNumber pin, PullUpPullDown config);
     void SetPinOutputType(PinNumber pin, OutputType outputType);
-    void SetAltFcn(PinNumber pin, AltFcnNumber altFcn);
+    void SetPinAltFcn(PinNumber pin, AltFcnNumber altFcn);
     
+    void ConfigureInputPin(PinNumber pin, PinSpeed speed);
+    void ConfigureOutputPin(PinNumber pin, PinSpeed speed, PullUpPullDown pullUpPullDown, OutputType outputType);
+
     uint16_t Read();
     void Write(uint16_t value);
 
     uint8_t ReadPin(PinNumber pin);
     void WritePin(PinNumber pin, uint8_t value);
+
+    void TogglePin(PinNumber pin);
 
 private:
 

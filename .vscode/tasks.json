@@ -19,5 +19,23 @@
 			"command": "cmake --build build",
 			"problemMatcher": []
 		},
+		{
+			"type": "shell",
+			"label": "Run OpenOCD",
+			"command": "openocd -f board/stm32f4discovery.cfg",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Run GDB and Flash Target",
+			"command": "arm-none-eabi-gdb -x scripts/flash_gdb --batch",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Clean/Build drivers.elf and Flash to Target",
+			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build; arm-none-eabi-gdb -x scripts/flash_gdb --batch",
+			"problemMatcher": []
+		}
 	]
 }

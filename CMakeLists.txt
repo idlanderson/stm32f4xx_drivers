@@ -17,6 +17,7 @@ project(drivers_cpp
     DESCRIPTION "STM32F4xx Drivers (C++)"
     LANGUAGES C CXX)
 
+add_subdirectory(rcc)
 add_subdirectory(gpio)
 
 if (BUILD_TESTS)

@@ -14,4 +14,5 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_subdirectory(gpio)
+add_subdirectory(rcc)
 #add_subdirectory(spi)

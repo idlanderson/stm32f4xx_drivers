@@ -45,13 +45,29 @@ void GPIO::SetPinOutputType(PinNumber pin, OutputType outputType)
     SetRegField_1Bit(this->OTYPER, (uint8_t)pin, (uint8_t)outputType);
 }
 
-void GPIO::SetAltFcn(PinNumber pin, AltFcnNumber altFcn)
+void GPIO::SetPinAltFcn(PinNumber pin, AltFcnNumber altFcn)
 {
     uint8_t registerIndex      = (uint8_t)pin / 8U;
     uint8_t positionInRegister = (uint8_t)pin % 8U;
 
     this->AFR[registerIndex] &= ~(0xFU << (4U * positionInRegister));
     this->AFR[registerIndex] |= (uint8_t)altFcn << (4U * positionInRegister);
+}
+
+void GPIO::ConfigureInputPin(PinNumber pin, PinSpeed speed)
+{
+    this->SetPinMode(pin, PinMode::Input);
+    this->SetPinSpeed(pin, speed);
+    this->SetPinPullUpPullDown(pin, PullUpPullDown::None);
+    this->SetPinOutputType(pin, OutputType::PushPull);
+}
+
+void GPIO::ConfigureOutputPin(PinNumber pin, PinSpeed speed, PullUpPullDown pullUpPullDown, OutputType outputType)
+{
+    this->SetPinMode(pin, PinMode::Output);
+    this->SetPinSpeed(pin, speed);
+    this->SetPinPullUpPullDown(pin, pullUpPullDown);
+    this->SetPinOutputType(pin, outputType);
 }
 
 uint8_t GPIO::ReadPin(PinNumber pin)
@@ -68,15 +84,20 @@ void GPIO::WritePin(PinNumber pin, uint8_t value)
 {
     if (value > 0U)
     {
-        this->ODR |= (1U << (uint8_t)pin);
+        this->ODR |= (1U << (uint32_t)pin);
     }
     else
     {
-        this->ODR &= ~(1U << (uint8_t)pin);
+        this->ODR &= ~(1U << (uint32_t)pin);
     }
 }
 
 void GPIO::Write(uint16_t value)
 {
     this->ODR = (uint32_t)value;
+}
+
+void GPIO::TogglePin(PinNumber pin)
+{
+    this->ODR ^= (1U << (uint32_t)pin);
 }
