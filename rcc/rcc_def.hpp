@@ -3,6 +3,6 @@
 
 #include "rcc.hpp"
 
-RCC &rcc = *reinterpret_cast<RCC*>(RCC_BASEADDR);
+RCC &RCC_ = *reinterpret_cast<RCC*>(RCC_BASEADDR);
 
 #endif // RCC_DEF_HPP_

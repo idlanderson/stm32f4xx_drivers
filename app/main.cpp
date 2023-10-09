@@ -1,5 +1,6 @@
 #include "gpio_ports.hpp"
 #include "rcc_def.hpp"
+#include "spi_def.hpp"
 
 using Pin = GPIO::PinNumber;
 using PinSpeed = GPIO::PinSpeed;
@@ -9,7 +10,7 @@ using AHB1 = RCC::AHB1_Peripheral;
 
 void delay(void)
 {
-	for (int i = 0U; i < 500000U / 2U; i++);
+	for (uint32_t i = 0U; i < 500000U / 2U; i++);
 }
 
 bool IsUserButtonB1Pressed(void)
@@ -27,8 +28,8 @@ void WaitForButtonPress(void)
 
 int main()
 {
-    rcc.SetAHB1PeripheralClockEnabled(AHB1::GPIOA, true);
-    rcc.SetAHB1PeripheralClockEnabled(AHB1::GPIOD, true);
+    RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOA, true);
+    RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOD, true);
 
     GPIOA.ConfigureInputPin(Pin::Pin0, PinSpeed::VeryHighSpeed);
 

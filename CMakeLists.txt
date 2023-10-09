@@ -19,6 +19,7 @@ project(drivers_cpp
 
 add_subdirectory(rcc)
 add_subdirectory(gpio)
+add_subdirectory(spi)
 
 if (BUILD_TESTS)
     add_subdirectory(test)
