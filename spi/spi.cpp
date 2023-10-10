@@ -132,7 +132,7 @@ void SPI::SetSlaveSelectOutputEnabled(bool isEnabled)
     SetRegField_1Bit(this->CR2, SPI_CR2_SSOE, (uint8_t)isEnabled);
 }
 
-void SPI::PeripheralControl(bool isEnabled)
+void SPI::SetEnabled(bool isEnabled)
 {
     SetRegField_1Bit(this->CR1, SPI_CR1_SPE, (uint8_t)isEnabled);
 }
@@ -165,4 +165,64 @@ bool SPI::HasModeFaultOccurred() const
 bool SPI::HasOverrunOccurred() const
 {
     return (bool)((this->SR >> SPI_SR_OVR) & 0x1U);
+}
+
+void SPI::SendData(std::vector<uint8_t> data)
+{
+    uint32_t remainingLengthToSend = data.size();
+    uint32_t currentIndex = 0U;
+    DataFrameFormat dataFrameFormat = GetDataFrameFormat();
+
+    while (remainingLengthToSend > 0U)
+    {
+        while (!IsTransmitBufferEmpty());
+
+        if (dataFrameFormat == DataFrameFormat::EightBit)
+        {
+            this->DR = (0x0000U | data[currentIndex]);
+            remainingLengthToSend--;
+            currentIndex++;
+        }
+        else if (dataFrameFormat == DataFrameFormat::SixteenBit)
+        {
+            this->DR = ((data[currentIndex] << 8U) | data[currentIndex + 1U]);
+            remainingLengthToSend -= 2U;
+            currentIndex += 2U;
+        }
+        else
+        {
+            remainingLengthToSend = 0U;
+        }
+    }
+}
+
+std::vector<uint8_t> SPI::ReceiveData(uint32_t length)
+{
+    uint32_t remainingLengthToReceive = length;
+    DataFrameFormat dataFrameFormat = GetDataFrameFormat();
+    std::vector<uint8_t> dataReceived;
+
+    while (remainingLengthToReceive > 0U)
+    {
+        while (!IsReceiveBufferNotEmpty()); // While the RxBuffer is NOT NOT empty (i.e. while it's empty).
+
+        if (dataFrameFormat == DataFrameFormat::EightBit)
+        {
+            uint8_t data = (uint8_t)this->DR;
+            dataReceived.push_back(data);
+            remainingLengthToReceive--;
+        }
+        else if (dataFrameFormat == DataFrameFormat::SixteenBit)
+        {
+            uint16_t data = (uint16_t)this->DR;
+            dataReceived.push_back(data);
+            remainingLengthToReceive -= 2U;
+        }
+        else
+        {
+            remainingLengthToReceive = 0U;
+        }
+    }
+
+    return dataReceived;
 }

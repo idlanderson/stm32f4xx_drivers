@@ -2,7 +2,6 @@
 #define SPI_HPP_H_
 
 #include "stm32f4xx.hpp"
-#include "spi_reg.hpp"
 #include <cstdint>
 #include <vector>
 
@@ -93,8 +92,7 @@ public:
     void SetSlaveManagement(SlaveManagement slaveManagement);
     void SetInternalSlaveSelect(bool isEnabled);
     void SetSlaveSelectOutputEnabled(bool isEnabled);
-    
-    void PeripheralControl(bool isEnabled);
+    void SetEnabled(bool isEnabled);
 
     bool IsReceiveBufferNotEmpty() const;
     bool IsTransmitBufferEmpty() const;
@@ -103,8 +101,8 @@ public:
     bool HasOverrunOccurred() const;
     bool IsBusy() const;
 
-    uint32_t ReadData() const;
-    void WriteData(uint32_t data);
+    void SendData(std::vector<uint8_t> data);
+    std::vector<uint8_t> ReceiveData(uint32_t length);
 
 private:
 
