@@ -3,6 +3,8 @@
 #include "spi.hpp"
 
 using namespace stm32::spi;
+using namespace testing;
+using ::testing::Return;
 
 class MockSpiRegisterMap : public ISpiRegisterMap
 {
@@ -124,4 +126,76 @@ TEST_F(SpiPeripheralTest, SetDeviceModeSlave)
     EXPECT_CALL(spiRegisters, setMSTR(0U)).Times(1);
 
     spi.SetDeviceMode(DeviceMode::Slave);
+}
+
+TEST_F(SpiPeripheralTest, SendDataEightBit)
+{
+    EXPECT_CALL(spiRegisters, getDFF)
+        .Times(1)
+        .WillOnce(Return((uint8_t)DataFrameFormat::EightBit));
+
+    EXPECT_CALL(spiRegisters, getTXE).Times(4).WillRepeatedly(Return((uint8_t)true));
+
+    EXPECT_CALL(spiRegisters, setDR(0x00000001U)).Times(1);
+    EXPECT_CALL(spiRegisters, setDR(0x00000002U)).Times(1);
+    EXPECT_CALL(spiRegisters, setDR(0x00000003U)).Times(1);
+    EXPECT_CALL(spiRegisters, setDR(0x00000004U)).Times(1);
+
+    std::vector<uint8_t> data = { 1U, 2U, 3U, 4U };
+    spi.SendData(data);
+}
+
+TEST_F(SpiPeripheralTest, SendDataSixteenBit)
+{
+    EXPECT_CALL(spiRegisters, getDFF)
+        .Times(1)
+        .WillOnce(Return((uint8_t)DataFrameFormat::SixteenBit));
+
+    EXPECT_CALL(spiRegisters, getTXE).Times(2).WillRepeatedly(Return((uint8_t)true));
+
+    EXPECT_CALL(spiRegisters, setDR(0x00000102U)).Times(1);
+    EXPECT_CALL(spiRegisters, setDR(0x00000304U)).Times(1);
+
+    std::vector<uint8_t> data = { 1U, 2U, 3U, 4U };
+    spi.SendData(data);
+}
+
+TEST_F(SpiPeripheralTest, ReceiveDataEightBit)
+{
+    EXPECT_CALL(spiRegisters, getDFF)
+        .Times(1)
+        .WillOnce(Return((uint8_t)DataFrameFormat::EightBit));
+    
+    EXPECT_CALL(spiRegisters, getRXNE).Times(4).WillRepeatedly(Return((uint8_t)true));
+
+    EXPECT_CALL(spiRegisters, getDR)
+        .Times(4)
+        .WillOnce(Return(1U))
+        .WillOnce(Return(2U))
+        .WillOnce(Return(3U))
+        .WillOnce(Return(4U));
+
+    std::vector<uint8_t> data = spi.ReceiveData(4U);
+
+    EXPECT_THAT(data, Contains(4));
+    EXPECT_THAT(data, ElementsAre(1U, 2U, 3U, 4U));
+}
+
+TEST_F(SpiPeripheralTest, ReceiveDataSixteenBit)
+{
+    EXPECT_CALL(spiRegisters, getDFF)
+        .Times(1)
+        .WillOnce(Return((uint8_t)DataFrameFormat::SixteenBit));
+    
+    EXPECT_CALL(spiRegisters, getRXNE).Times(2).WillRepeatedly(Return((uint8_t)true));
+
+    EXPECT_CALL(spiRegisters, getDR)
+        .Times(2)
+        .WillOnce(Return(0x00000102U))
+        .WillOnce(Return(0x00000304U));
+
+    std::vector<uint8_t> data = spi.ReceiveData(4U);
+
+    EXPECT_THAT(data, Contains(4));
+    EXPECT_THAT(data, ElementsAre(1U, 2U, 3U, 4U));
 }

@@ -164,7 +164,8 @@ namespace stm32::spi
             else if (dataFrameFormat == DataFrameFormat::SixteenBit)
             {
                 uint16_t data = (uint16_t)device.getDR();
-                dataReceived.push_back(data);
+                dataReceived.push_back((uint8_t)(0x000000FFU & (data >> 8U)));
+                dataReceived.push_back((uint8_t)(0x000000FFU & data));
                 remainingLengthToReceive -= 2U;
             }
             else
