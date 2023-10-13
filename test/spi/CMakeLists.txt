@@ -8,6 +8,7 @@ target_link_libraries(
     spi
     device
     GTest::gtest_main
+    gmock_main
 )
 
 include(GoogleTest)
