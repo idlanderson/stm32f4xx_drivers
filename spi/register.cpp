@@ -1,8 +1,7 @@
-#ifndef SPI_HPP_H_
-#define SPI_HPP_H_
+#ifndef REGISTER_HPP_
+#define REGISTER_HPP_
 
 #include "stm32f4xx.hpp"
-#include <cstdint>
 #include <vector>
 
 namespace stm32::spi
@@ -262,101 +261,21 @@ namespace stm32::spi
         const uint8_t I2SPR_I2SDIV = 0U;
     };
 
-    enum class DeviceMode
-    {
-        Slave  = 0U,
-        Master = 1U
-    };
 
-    enum class BusConfig
-    {
-        FullDuplex    = 0U,
-        HalfDuplex    = 1U,
-        SimplexRxOnly = 2U
-    };
-
-    enum class RxOnly
-    {
-        FullDuplex_TxAndRx    = 0U,
-        OutputDisabled_RxOnly = 1U
-    };
-
-    enum class BaudRate
-    {
-        Div2   = 0U,
-        Div4   = 1U,
-        Div8   = 2U,
-        Div16  = 3U,
-        Div32  = 4U,
-        Div64  = 5U,
-        Div128 = 6U,
-        Div256 = 7U
-    };
-
-    enum class DataFrameFormat
-    {
-        EightBit   = 0U,
-        SixteenBit = 1U
-    };
-
-    enum class ClockPolarity
-    {
-        Low  = 0U,  
-        High = 1U
-    };
-
-    enum class ClockPhase
-    {
-        FirstEdge  = 0U,
-        SecondEdge = 1U
-    };
-
-    enum class SlaveManagement
-    {
-        Hardware = 0U,
-        Software = 1U
-    };
-
-    enum class BidirectionalMode
-    {
-        Unidirectional = 0U,
-        Bidirectional  = 1U
-    };
-
-    enum class OutputEnableInBidirectionalMode
-    {
-        Disabled_RxOnly = 0U,
-        Enabled_TxOnly  = 1U
-    };
 
     class SpiPeripheral
     {
     public:
 
+        enum class DataFrameFormat
+        {
+            EightBit  = 0U,
+            SixteenBit = 1U
+        };
+
         SpiPeripheral(ISpiRegisterMap & device) : device(device) { }
 
         DataFrameFormat GetDataFrameFormat() const;
-
-        void SetDeviceMode(DeviceMode deviceMode);
-        void SetBidirectionalMode(BidirectionalMode mode);
-        void SetRxOnly(RxOnly rxOnly);
-        void SetBusConfig(BusConfig busConfig);
-        void SetOutputEnableInBidirectionalMode(OutputEnableInBidirectionalMode isEnabled);
-        void SetDataFrameFormat(DataFrameFormat format);
-        void SetClockPolarity(ClockPolarity polarity);
-        void SetClockPhase(ClockPhase phase);
-        void SetBaudRate(BaudRate baudRate);
-        void SetSlaveManagement(SlaveManagement slaveManagement);
-        void SetInternalSlaveSelect(bool isEnabled);
-        void SetSlaveSelectOutputEnabled(bool isEnabled);
-        void SetEnabled(bool isEnabled);
-
-        bool IsReceiveBufferNotEmpty() const;
-        bool IsTransmitBufferEmpty() const;
-        bool HasCrcErrorOccurred() const;
-        bool HasModeFaultOccurred() const;
-        bool HasOverrunOccurred() const;
-        bool IsBusy() const;
 
         void SendData(std::vector<uint8_t> data);
         std::vector<uint8_t> ReceiveData(uint32_t length);
@@ -365,6 +284,79 @@ namespace stm32::spi
 
         ISpiRegisterMap & device;
     };
-}
 
-#endif // SPI_HPP_H_
+    SpiPeripheral::DataFrameFormat SpiPeripheral::GetDataFrameFormat() const
+    {
+        return (DataFrameFormat)device.getDFF();
+    }
+
+    void SpiPeripheral::SendData(std::vector<uint8_t> data)
+    {
+        uint32_t remainingLengthToSend = data.size();
+        uint32_t currentIndex = 0U;
+        DataFrameFormat dataFrameFormat = GetDataFrameFormat();
+
+        while (remainingLengthToSend > 0U)
+        {
+            while (!device.getTXE());
+
+            if (dataFrameFormat == DataFrameFormat::EightBit)
+            {
+                device.setDR(0x0000U | data[currentIndex]);
+                remainingLengthToSend--;
+                currentIndex++;
+            }
+            else if (dataFrameFormat == DataFrameFormat::SixteenBit)
+            {
+                device.setDR((data[currentIndex] << 8U) | data[currentIndex + 1U]);
+                remainingLengthToSend -= 2U;
+                currentIndex += 2U;
+            }
+            else
+            {
+                remainingLengthToSend = 0U;
+            }
+        }
+    }
+    }
+
+    /*
+class SpiRegisterMap
+{
+public:
+    explicit SpiRegisterMap(DeviceRegister * baseAddress):
+        CR1    (baseAddress + 0x00),
+        CR2    (baseAddress + 0x04),
+        SR     (baseAddress + 0x08),
+        DR     (baseAddress + 0x0C),
+        CRCPR  (baseAddress + 0x10),
+        RXCRCR (baseAddress + 0x14),
+        TXCRCR (baseAddress + 0x18),
+        I2SCFGR(baseAddress + 0x1C),
+        I2SPR  (baseAddress + 0x20) {}
+
+    uint32_t ReadData()
+    {
+        return DR.Read();
+    }
+
+    void WriteData(uint32_t value)
+    {
+        DR.Write(value);
+    }
+    
+private:
+    Register CR1;
+    Register CR2;
+    Register SR;
+    Register DR;
+    Register CRCPR;
+    Register RXCRCR;
+    Register TXCRCR;
+    Register I2SCFGR;
+    Register I2SPR;
+};
+
+SpiRegisterMap SPI1((DeviceRegister *)0x40004000);
+*/
+#endif // REGISTER_HPP_

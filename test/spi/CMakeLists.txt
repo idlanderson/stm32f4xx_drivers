@@ -6,6 +6,7 @@ add_executable(
 target_link_libraries(
     spi_test
     spi
+    device
     GTest::gtest_main
 )
 
