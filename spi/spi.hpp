@@ -7,6 +7,35 @@
 
 namespace stm32::spi
 {
+    enum class DataFrameFormat : bool
+    {
+        EightBit   = 0U,
+        SixteenBit = 1U
+    };
+
+    union ControlRegister1
+    {
+        volatile struct
+        {
+            uint8_t CPHA : 1;
+            uint8_t CPOL : 1;
+            uint8_t MSTR : 1;
+            uint8_t BR   : 3;
+            uint8_t SPE  : 1;
+            uint8_t LSBFIRST : 1;
+            uint8_t SSI : 1;
+            uint8_t SSM : 1;
+            uint8_t RXONLY : 1;
+            uint8_t DFF : 1;
+            uint8_t CRCNEXT : 1;
+            uint8_t CRCEN : 1;
+            uint8_t BIDIOE : 1;
+            uint8_t BIDIMODE : 1;
+            uint16_t Reserved : 16;
+        } Fields;
+        volatile uint32_t Value;
+    };
+
     class ISpiRegisterMap : public RegisterMap
     {
     public:
@@ -110,34 +139,34 @@ namespace stm32::spi
     {
     public:
         // CR1 Fields
-        uint8_t getBIDIMODE() const override { return GetField_1Bit(CR1, CR1_BIDIMODE); }
-        uint8_t getBIDIOE() const override { return GetField_1Bit(CR1, CR1_BIDIOE); }
-        uint8_t getCRCEN() const override { return GetField_1Bit(CR1, CR1_CRCEN); }
-        uint8_t getCRCNEXT() const override { return GetField_1Bit(CR1, CR1_CRCNEXT); }
-        uint8_t getDFF() const override { return GetField_1Bit(CR1, CR1_DFF); }
-        uint8_t getRXONLY() const override { return GetField_1Bit(CR1, CR1_RXONLY); }
-        uint8_t getSSM() const override { return GetField_1Bit(CR1, CR1_SSM); }
-        uint8_t getSSI() const override { return GetField_1Bit(CR1, CR1_SSI); }
-        uint8_t getLSBFIRST() const override { return GetField_1Bit(CR1, CR1_LSBFIRST); }
-        uint8_t getSPE() const override { return GetField_1Bit(CR1, CR1_SPE); }
-        uint8_t getBR() const override { return GetField_3Bit(CR1, CR1_BR); }
-        uint8_t getMSTR() const override { return GetField_1Bit(CR1, CR1_MSTR); }
-        uint8_t getCPOL() const override { return GetField_1Bit(CR1, CR1_CPOL); }
-        uint8_t getCPHA() const override { return GetField_1Bit(CR1, CR1_CPHA); }
-        void setBIDIMODE(uint8_t value) override { return SetField_1Bit(CR1, CR1_BIDIMODE, value); }
-        void setBIDIOE(uint8_t value) override { return SetField_1Bit(CR1, CR1_BIDIOE, value); }
-        void setCRCEN(uint8_t value) override { return SetField_1Bit(CR1, CR1_CRCEN, value); }
-        void setCRCNEXT(uint8_t value) override { return SetField_1Bit(CR1, CR1_CRCNEXT, value); }
-        void setDFF(uint8_t value) override { return SetField_1Bit(CR1, CR1_DFF, value); }
-        void setRXONLY(uint8_t value) override { return SetField_1Bit(CR1, CR1_RXONLY, value); }
-        void setSSM(uint8_t value) override { return SetField_1Bit(CR1, CR1_SSM, value); }
-        void setSSI(uint8_t value) override { return SetField_1Bit(CR1, CR1_SSI, value); }
-        void setLSBFIRST(uint8_t value) override { return SetField_1Bit(CR1, CR1_LSBFIRST, value); }
-        void setSPE(uint8_t value) override { return SetField_1Bit(CR1, CR1_SPE, value); }
-        void setBR(uint8_t value) override { return SetField_3Bit(CR1, CR1_BR, value); }
-        void setMSTR(uint8_t value) override { return SetField_1Bit(CR1, CR1_MSTR, value); }
-        void setCPOL(uint8_t value) override { return SetField_1Bit(CR1, CR1_CPOL, value); }
-        void setCPHA(uint8_t value) override { return SetField_1Bit(CR1, CR1_CPHA, value); }
+        uint8_t getBIDIMODE() const override { return CR1.Fields.BIDIMODE; }
+        uint8_t getBIDIOE() const override { return CR1.Fields.BIDIOE; }
+        uint8_t getCRCEN() const override { return CR1.Fields.CRCEN; }
+        uint8_t getCRCNEXT() const override { return CR1.Fields.CRCNEXT; }
+        uint8_t getDFF() const override { return CR1.Fields.DFF; }
+        uint8_t getRXONLY() const override { return CR1.Fields.RXONLY; }
+        uint8_t getSSM() const override { return CR1.Fields.SSM; }
+        uint8_t getSSI() const override { return CR1.Fields.SSI; }
+        uint8_t getLSBFIRST() const override { return CR1.Fields.LSBFIRST; }
+        uint8_t getSPE() const override { return CR1.Fields.SPE; }
+        uint8_t getBR() const override { return CR1.Fields.BR; }
+        uint8_t getMSTR() const override { return CR1.Fields.MSTR; }
+        uint8_t getCPOL() const override { return CR1.Fields.CPOL; }
+        uint8_t getCPHA() const override { return CR1.Fields.CPHA; }
+        void setBIDIMODE(uint8_t value) override { CR1.Fields.BIDIMODE = value; }
+        void setBIDIOE(uint8_t value) override { CR1.Fields.BIDIOE = value; }
+        void setCRCEN(uint8_t value) override { CR1.Fields.CRCEN = value; }
+        void setCRCNEXT(uint8_t value) override { CR1.Fields.CRCNEXT = value; }
+        void setDFF(uint8_t value) override { CR1.Fields.DFF = value; }
+        void setRXONLY(uint8_t value) override { CR1.Fields.RXONLY = value; }
+        void setSSM(uint8_t value) override { CR1.Fields.SSM = value; }
+        void setSSI(uint8_t value) override { CR1.Fields.SSI = value; }
+        void setLSBFIRST(uint8_t value) override { CR1.Fields.LSBFIRST = value; }
+        void setSPE(uint8_t value) override { CR1.Fields.SPE = value; }
+        void setBR(uint8_t value) override { CR1.Fields.BR = value; }
+        void setMSTR(uint8_t value) override { CR1.Fields.MSTR = value; }
+        void setCPOL(uint8_t value) override { CR1.Fields.CPOL = value; }
+        void setCPHA(uint8_t value) override { CR1.Fields.CPHA = value; }
 
         // CR2 Fields
         uint8_t getRXNEIE() const override { return GetField_1Bit(CR2, CR2_RXNEIE); }
@@ -205,7 +234,7 @@ namespace stm32::spi
 
     private:
 
-        DeviceRegister CR1;
+        ControlRegister1 CR1;
         DeviceRegister CR2;
         DeviceRegister SR;
         DeviceRegister DR;
@@ -291,12 +320,6 @@ namespace stm32::spi
         Div64  = 5U,
         Div128 = 6U,
         Div256 = 7U
-    };
-
-    enum class DataFrameFormat
-    {
-        EightBit   = 0U,
-        SixteenBit = 1U
     };
 
     enum class ClockPolarity

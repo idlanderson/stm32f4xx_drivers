@@ -1,6 +1,7 @@
 #include "gpio_ports.hpp"
 #include "rcc_def.hpp"
 #include "spi_def.hpp"
+#include <type_traits>
 
 using Pin = GPIO::PinNumber;
 using PinSpeed = GPIO::PinSpeed;
@@ -28,6 +29,7 @@ void WaitForButtonPress(void)
 
 int main()
 {
+
     RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOA, true);
     RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOD, true);
 

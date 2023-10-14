@@ -114,6 +114,126 @@ protected:
     SpiPeripheral spi;
 };
 
+TEST(ControlRegister1, CPHA)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.CPHA = 1;
+    EXPECT_EQ(0x00000001U, cr1.Value);
+}
+
+TEST(ControlRegister1, CPOL)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.CPOL = 1;
+    EXPECT_EQ(0x00000002U, cr1.Value);
+}
+
+TEST(ControlRegister1, MSTR)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.MSTR = 1;
+    EXPECT_EQ(0x00000004U, cr1.Value);
+}
+
+TEST(ControlRegister1, BR)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.BR = 7; // Assuming the desired value is 7
+    EXPECT_EQ(0x00000038U, cr1.Value);
+}
+
+TEST(ControlRegister1, SPE)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.SPE = 1;
+    EXPECT_EQ(0x00000040U, cr1.Value);
+}
+
+TEST(ControlRegister1, LSBFIRST)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.LSBFIRST = 1;
+    EXPECT_EQ(0x00000080U, cr1.Value);
+}
+
+TEST(ControlRegister1, SSI)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.SSI = 1;
+    EXPECT_EQ(0x00000100U, cr1.Value);
+}
+
+TEST(ControlRegister1, SSM)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.SSM = 1;
+    EXPECT_EQ(0x00000200U, cr1.Value);
+}
+
+TEST(ControlRegister1, RXONLY)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.RXONLY = 1;
+    EXPECT_EQ(0x00000400U, cr1.Value);
+}
+
+TEST(ControlRegister1, DFF)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.DFF = 1;
+    EXPECT_EQ(0x00000800U, cr1.Value);
+}
+
+TEST(ControlRegister1, CRCNEXT)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.CRCNEXT = 1;
+    EXPECT_EQ(0x00001000U, cr1.Value);
+}
+
+TEST(ControlRegister1, CRCEN)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.CRCEN = 1;
+    EXPECT_EQ(0x00002000U, cr1.Value);
+}
+
+TEST(ControlRegister1, BIDIOE)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.BIDIOE = 1;
+    EXPECT_EQ(0x00004000U, cr1.Value);
+}
+
+TEST(ControlRegister1, BIDIMODE)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.BIDIMODE = 1;
+    EXPECT_EQ(0x00008000U, cr1.Value);
+}
+
+TEST(ControlRegister1, Reserved)
+{
+    stm32::spi::ControlRegister1 cr1;
+    cr1.Value = 0;
+    cr1.Fields.Reserved = 0xFFFF;
+    EXPECT_EQ(0xFFFF0000U, cr1.Value);
+}
+
 TEST_F(SpiPeripheralTest, SetDeviceModeMaster)
 {
     EXPECT_CALL(spiRegisters, setMSTR(1U)).Times(1);
