@@ -2,6 +2,7 @@ import csv
 import textwrap
 
 top_level_namespace = "stm32"
+reverse_bit_field_order = False
 
 class RegisterField:
 
@@ -18,23 +19,60 @@ class RegisterField:
     def generate_method_name(self, prefix):
         return f"{prefix}_{self.reg_short_name}_{self.name}"
 
+    def generate_data_type(self):
+
+        if self.type is not None and self.type != "":
+            return self.type
+        else:
+            words = self.description.strip().split()
+            camel_case = ''.join(word.strip().title() for word in words)
+            return camel_case
+
+    def generate_enum(self):
+
+        if ("RESERVED" in self.name):
+            return ""
+        elif (len(self.type.strip()) > 0):
+            return ""
+
+        base_type = ""
+
+        if self.width <= 8:
+            base_type = "uint8_t"
+        elif self.width > 8 and self.width <= 16:
+            base_type = "uint16_t"
+        else:
+            base_type = "uint32_t"
+
+        output = (
+            f"enum class {self.generate_data_type()} : {base_type}\n"
+            f"{{\n"
+        )
+
+        for i in range(0, (2 ** self.width)):
+            output += f"\tValue{i} = {i}U,\n"
+
+        output += f"}};\n"
+
+        return output
+
     def generate_getter(self):
-        return f"{self.type} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
+        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
 
     def generate_setter(self):
-        return f"void {self.generate_method_name('set')}({self.type} value) override {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
+        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) override {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
 
     def generate_virtual_getter(self):
-        return f"virtual {self.type} {self.generate_method_name('get')}() const = 0;\n"
+        return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
 
     def generate_virtual_setter(self):
-        return f"virtual void {self.generate_method_name('set')}({self.type} value) = 0;\n"
+        return f"virtual void {self.generate_method_name('set')}({self.generate_data_type()} value) = 0;\n"
 
     def generate_mock_getter(self):
-        return f"MOCK_CONST_METHOD0({self.generate_method_name('get')}, {self.type}());\n"
+        return f"MOCK_CONST_METHOD0({self.generate_method_name('get')}, {self.generate_data_type()}());\n"
 
     def generate_mock_setter(self):
-        return f"MOCK_METHOD1({self.generate_method_name('set')}, void({self.type} value));\n"
+        return f"MOCK_METHOD1({self.generate_method_name('set')}, void({self.generate_data_type()} value));\n"
 
     def generate_unit_test(self):
 
@@ -45,7 +83,7 @@ class RegisterField:
             f"{{\n"
             f"\t{self.reg_long_name} reg;\n"
             f"\treg.Value = 0U;\n"
-            f"\treg.Fields.{self.name} = ({self.type})1U;\n"
+            f"\treg.Fields.{self.name} = ({self.generate_data_type()})1U;\n"
             f"\tEXPECT_EQ(0x{format(expected_value, '08X')}U, reg.Value);\n"
             f"}}\n\n"
         )
@@ -63,6 +101,15 @@ class Register:
     def generate_class_member_variable(self):
         return f"{self.long_name} {self.short_name};\n";
 
+    def generate_enums(self):
+
+        output = ""
+
+        for field in self.fields:
+            output += field.generate_enum()
+
+        return output
+
     def generate_union(self):
 
         bits_used = 0
@@ -75,6 +122,14 @@ class Register:
             f"\t{{\n"
         )
         
+        self.fields.sort(key=lambda x: x.bit_position, reverse=reverse_bit_field_order)
+
+        data_type_length = 0
+
+        for field in self.fields:
+            if len(field.generate_data_type()) > data_type_length:
+                data_type_length = len(field.generate_data_type())
+
         for field in self.fields:
 
             bit_comment = ""
@@ -86,14 +141,14 @@ class Register:
                 last_bit = field.bit_position + field.width - 1
                 bit_comment = f"{f'[{last_bit}:{first_bit}]':6} {field.access:<3}: {field.description}"
 
-            output += f"\t\tuint32_t {field.name:<9} : {str(field.width)}; // {bit_comment}\n"
+            output += f"\t\t{field.generate_data_type():<{data_type_length}} {field.name:<9} : {str(field.width)}; // {bit_comment}\n"
             bits_used += field.width
 
             if "RESERVED" in field.name:
                 number_of_reserved += 1
 
         if bits_used < 32:
-            output += f"\t\tuint32_t RESERVED{str(number_of_reserved + 1):<1} : {str(32 - bits_used)};\n"
+            output += f"\t\t{'uint32_t':<{data_type_length}} RESERVED{str(number_of_reserved + 1):<1} : {str(32 - bits_used)};\n"
 
         output += (
             f"\t}} Fields;\n"
@@ -188,6 +243,15 @@ class Peripheral:
 
                 register.add_field(field_name, field_description, bit_position, width, access, field_type)
 
+    def generate_enums(self):
+
+        output = ""
+
+        for register in self.registers:
+            output += register.generate_enums()
+
+        return output
+
     def generate_unions(self):
 
         output = ""
@@ -260,6 +324,7 @@ class Peripheral:
 
         with open(file_name, 'w') as file:   
         
+            enums           = textwrap.indent(self.generate_enums(), "\t")
             unions          = textwrap.indent(self.generate_unions(), "\t")
             interface_class = textwrap.indent(self.generate_interface_class(), "\t")
             concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
@@ -269,6 +334,7 @@ class Peripheral:
                 f"using namespace std;\n\n"
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
                 f"{{\n"
+                f"{enums}"
                 f"{unions}"
                 f"{interface_class}"
                 f"{concrete_class}"
