@@ -321,15 +321,12 @@ class Peripheral:
 
         return output
 
-    def generate_header(self, file_name):
+    def generate_types_header(self, file_name):
 
-        with open(file_name, 'w') as file:   
-        
+        with open(file_name, 'w') as file:
+
             header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
             enums           = textwrap.indent(self.generate_enums(), "\t")
-            unions          = textwrap.indent(self.generate_unions(), "\t")
-            interface_class = textwrap.indent(self.generate_interface_class(), "\t")
-            concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
 
             file.write(
                 f"#ifndef {header_guard}\n"
@@ -339,6 +336,27 @@ class Peripheral:
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
                 f"{{\n"
                 f"{enums}"
+                f"}}\n"
+                f"#endif // {header_guard}"
+            )
+
+    def generate_header(self, file_name):
+
+        with open(file_name, 'w') as file:
+        
+            header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
+            unions          = textwrap.indent(self.generate_unions(), "\t")
+            interface_class = textwrap.indent(self.generate_interface_class(), "\t")
+            concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
+
+            file.write(
+                f"#ifndef {header_guard}\n"
+                f"#define {header_guard}\n\n"
+                f"#include <cstdint>\n"
+                f"#include \"{self.name.lower()}_types.hpp\"\n\n"
+                f"using namespace std;\n\n"
+                f"namespace {top_level_namespace}::{self.name.lower()}\n"
+                f"{{\n"
                 f"{unions}"
                 f"{interface_class}"
                 f"{concrete_class}"
@@ -377,6 +395,7 @@ class Peripheral:
 
 spi = Peripheral("Spi")
 spi.parse_csv("spi_registers.csv")
+spi.generate_types_header("../spi/spi_types.hpp")
 spi.generate_header("../spi/spi_register_map.hpp")
 spi.generate_unit_test_file("../test/spi/spi_register_map_test.cpp", "spi_register_map.hpp")
 spi.generate_mock_file("../test/spi/spi_register_map_mock.hpp", "spi_register_map.hpp")
