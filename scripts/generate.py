@@ -1,51 +1,54 @@
 import csv
 import textwrap
 
+top_level_namespace = "stm32"
+
 class RegisterField:
 
-    def __init__(self, reg_long_name, reg_short_name, name, bit_position, width, access, type="uint32_t"):
+    def __init__(self, reg_long_name, reg_short_name, name, description, bit_position, width, access, type="uint32_t"):
         self.reg_long_name = reg_long_name
         self.reg_short_name = reg_short_name
         self.type = type
         self.name = name
+        self.description = description
         self.bit_position = bit_position
         self.width = width
         self.access = access
 
     def generate_method_name(self, prefix):
-        return prefix + "_" + self.reg_short_name + "_" + self.name
+        return f"{prefix}_{self.reg_short_name}_{self.name}"
 
     def generate_getter(self):
-        return self.type + " " + self.generate_method_name("get") + "() const override { return " + self.reg_short_name + ".Fields." + self.name + "; }\n"
+        return f"{self.type} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
 
     def generate_setter(self):
-        return "void " + self.generate_method_name("set") + "(" + self.type + " value) override { " + self.reg_short_name + ".Fields." + self.name + " = value; }\n"
+        return f"void {self.generate_method_name('set')}({self.type} value) override {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
 
     def generate_virtual_getter(self):
-        return "virtual " + self.type + " " + self.generate_method_name("get") + "() const = 0;\n"
+        return f"virtual {self.type} {self.generate_method_name('get')}() const = 0;\n"
 
     def generate_virtual_setter(self):
-        return "virtual void " + self.generate_method_name("set") + "(" + self.type + " value) = 0;\n"
+        return f"virtual void {self.generate_method_name('set')}({self.type} value) = 0;\n"
 
     def generate_mock_getter(self):
-        return "MOCK_CONST_METHOD0(" + self.generate_method_name("get") + ", " + self.type + "());\n"
+        return f"MOCK_CONST_METHOD0({self.generate_method_name('get')}, {self.type}());\n"
 
     def generate_mock_setter(self):
-        return "MOCK_METHOD1(" + self.generate_method_name("set") + ", void(" + self.type + " value));\n"
+        return f"MOCK_METHOD1({self.generate_method_name('set')}, void({self.type} value));\n"
 
     def generate_unit_test(self):
 
         expected_value = 1 << self.bit_position
 
-        output = "TEST(" + self.reg_long_name + ", " + self.name + ")\n" + \
-            "{\n" + \
-            "\t" + self.reg_long_name + " reg;\n" + \
-            "\treg.Value = 0U;\n" + \
-            "\treg.Fields." + self.name + " = (" + self.type + ")1U;\n" + \
-            "\tEXPECT_EQ(0x" + format(expected_value, '08X') + "U, reg.Value);\n" + \
-            "}\n"
-
-        return output
+        return (
+            f"TEST({self.reg_long_name}, {self.name})\n"
+            f"{{\n"
+            f"\t{self.reg_long_name} reg;\n"
+            f"\treg.Value = 0U;\n"
+            f"\treg.Fields.{self.name} = ({self.type})1U;\n"
+            f"\tEXPECT_EQ(0x{format(expected_value, '08X')}U, reg.Value);\n"
+            f"}}\n\n"
+        )
 
 class Register:
 
@@ -54,42 +57,55 @@ class Register:
         self.short_name = short_name
         self.fields = []
 
-    def add_field(self, name, bit_position, width, access, type):
-        self.fields.append(RegisterField(self.long_name, self.short_name, name, bit_position, width, access, type))
+    def add_field(self, name, description, bit_position, width, access, type):
+        self.fields.append(RegisterField(self.long_name, self.short_name, name, description, bit_position, width, access, type))
 
-    def generate_class_field(self):
-
-        return self.long_name + " " + self.short_name + ";\n";
+    def generate_class_member_variable(self):
+        return f"{self.long_name} {self.short_name};\n";
 
     def generate_union(self):
 
         bits_used = 0
         number_of_reserved = 0
 
-        output = "union " + self.long_name + "\n" + \
-                "{\n" + \
-                "\tvolatile struct\n" + \
-                "\t{\n"
+        output = (
+            f"union {self.long_name}\n"
+            f"{{\n"
+            f"\tvolatile struct\n"
+            f"\t{{\n"
+        )
         
         for field in self.fields:
-            output += "\t\tuint32_t " + field.name + " : " + str(field.width) + ";\n"
+
+            bit_comment = ""
+
+            if field.width == 1:
+                bit_comment = f"{f'[{field.bit_position}]':6} {field.access:<3}: {field.description}"
+            else:
+                first_bit = field.bit_position
+                last_bit = field.bit_position + field.width - 1
+                bit_comment = f"{f'[{last_bit}:{first_bit}]':6} {field.access:<3}: {field.description}"
+
+            output += f"\t\tuint32_t {field.name:<9} : {str(field.width)}; // {bit_comment}\n"
             bits_used += field.width
 
             if "RESERVED" in field.name:
                 number_of_reserved += 1
 
         if bits_used < 32:
-            output += "\t\tuint32_t RESERVED" + str(number_of_reserved + 1) + " : " + str(32 - bits_used) + ";\n"
+            output += f"\t\tuint32_t RESERVED{str(number_of_reserved + 1):<1} : {str(32 - bits_used)};\n"
 
-        output += "\t} Fields;\n" + \
-            "\tvolatile uint32_t Value;\n" + \
-            "};\n"
+        output += (
+            f"\t}} Fields;\n"
+            f"\tvolatile uint32_t Value;\n"
+            f"}};\n"
+        )
 
         return output
 
     def generate_getters_and_setters(self):
         
-        output = "// " + self.short_name + " Fields\n"
+        output = f"// {self.short_name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -103,7 +119,7 @@ class Register:
     
     def generate_virtual_getters_and_setters(self):
         
-        output = "// " + self.short_name + " Fields\n"
+        output = f"// {self.short_name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -117,7 +133,7 @@ class Register:
     
     def generate_mock_methods(self):
 
-        output = "\n// " + self.short_name + " Fields\n"
+        output = f"\n// {self.short_name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -145,9 +161,9 @@ class Peripheral:
         self.registers = []
 
     def parse_csv(self, file_name):
-        # Open the CSV file
+        
         with open(file_name, 'r', encoding='utf-8-sig') as file:
-            # Create a CSV reader object
+            
             csv_reader = csv.reader(file)
 
             register = None
@@ -164,12 +180,13 @@ class Peripheral:
                     self.registers.append(register)
 
                 field_type = row[2]
-                field_name = row[3]
-                bit_position = int(row[4])
-                width = int(row[5])
-                access = row[6]
+                field_description = row[3]
+                field_name = row[4]
+                bit_position = int(row[5])
+                width = int(row[6])
+                access = row[7]
 
-                register.add_field(field_name, bit_position, width, access, field_type)
+                register.add_field(field_name, field_description, bit_position, width, access, field_type)
 
     def generate_unions(self):
 
@@ -182,9 +199,11 @@ class Peripheral:
 
     def generate_interface_class(self):
 
-        output = "class I" + self.name + "RegisterMap\n" + \
-            "{\n" + \
+        output = (
+            f"class I{self.name}RegisterMap\n"
+            "{\n"
             "public:\n"
+        )
         
         for register in self.registers:
             output += "\n" + textwrap.indent(register.generate_virtual_getters_and_setters(), "\t")
@@ -195,9 +214,11 @@ class Peripheral:
 
     def generate_concrete_class(self):
 
-        output = "class " + self.name + "RegisterMap : public I" + self.name + "RegisterMap\n" + \
-            "{\n" + \
-            "public:\n"
+        output = (
+            f"class {self.name}RegisterMap : public I{self.name}RegisterMap\n"
+            f"{{\n"
+            f"public:\n"
+        )
         
         for register in self.registers:
             output += "\n" + textwrap.indent(register.generate_getters_and_setters(), "\t")
@@ -205,7 +226,7 @@ class Peripheral:
         output += "\nprivate:\n\n"
 
         for register in self.registers:
-            output += textwrap.indent(register.generate_class_field(), "\t")
+            output += textwrap.indent(register.generate_class_member_variable(), "\t")
 
         output += "};\n"
 
@@ -213,9 +234,11 @@ class Peripheral:
 
     def generate_mock_class(self):
 
-        output = "class Mock" + self.name + "RegisterMap : public I" + self.name + "RegisterMap\n" + \
-            "{\n" + \
-            "public:\n"
+        output = (
+            f"class Mock{self.name}RegisterMap : public I{self.name}RegisterMap\n"
+            f"{{\n"
+            f"public:\n"
+        )
         
         for register in self.registers:
             output += textwrap.indent(register.generate_mock_methods(), "\t")
@@ -237,35 +260,36 @@ class Peripheral:
 
         with open(file_name, 'w') as file:   
         
-            unions = textwrap.indent(self.generate_unions(), "\t")
+            unions          = textwrap.indent(self.generate_unions(), "\t")
             interface_class = textwrap.indent(self.generate_interface_class(), "\t")
-            concrete_class = textwrap.indent(self.generate_concrete_class(), "\t")
+            concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
 
-            file.write("#include <cstdint>\n\n" + \
-                "using namespace std;\n\n" + \
-                "namespace stm32::" + self.name.lower() + "\n" + \
-                "{\n" + \
-                unions + \
-                interface_class + \
-                concrete_class + \
-                "}")
+            file.write(                
+                f"#include <cstdint>\n\n"
+                f"using namespace std;\n\n"
+                f"namespace {top_level_namespace}::{self.name.lower()}\n"
+                f"{{\n"
+                f"{unions}"
+                f"{interface_class}"
+                f"{concrete_class}"
+                f"}}")
     
     def generate_unit_test_file(self, file_name, header_to_include):
         
         with open(file_name, 'w') as file:   
         
-            preamble = "#include <gtest/gtest.h>\n" + \
-                "#include <gmock/gmock.h>\n" + \
-                "#include \"" + header_to_include + "\"\n\n" + \
-                "using namespace stm32::" + self.name.lower() + ";" + "\n" + \
-                "using namespace testing;\n\n"
-            
             mock_class = self.generate_mock_class()
             unit_tests = self.generate_unit_tests()
-
-            file.write(preamble + \
-                mock_class + \
-                unit_tests)
+        
+            file.write(
+                f"#include <gtest/gtest.h>\n"
+                f"#include <gmock/gmock.h>\n"
+                f"#include \"{header_to_include}\"\n\n"
+                f"using namespace {top_level_namespace}::{self.name.lower()};\n"
+                f"using namespace testing;\n\n"
+                f"{mock_class}"
+                f"{unit_tests}"
+            )
 
 spi = Peripheral("Spi")
 spi.parse_csv("spi_registers.csv")

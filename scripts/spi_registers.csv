@@ -1,47 +1,47 @@
-﻿ControlRegister1,CR1,uint32_t,CPHA,0,1,rw
-ControlRegister1,CR1,uint32_t,CPOL,1,1,rw
-ControlRegister1,CR1,uint32_t,MSTR,2,1,rw
-ControlRegister1,CR1,uint32_t,BR,3,3,rw
-ControlRegister1,CR1,uint32_t,SPE,6,1,rw
-ControlRegister1,CR1,uint32_t,LSBFIRST,7,1,rw
-ControlRegister1,CR1,uint32_t,SSI,8,1,rw
-ControlRegister1,CR1,uint32_t,SSM,9,1,rw
-ControlRegister1,CR1,uint32_t,RXONLY,10,1,rw
-ControlRegister1,CR1,uint32_t,DFF,11,1,rw
-ControlRegister1,CR1,uint32_t,CRCNEXT,12,1,rw
-ControlRegister1,CR1,uint32_t,CRCEN,13,1,rw
-ControlRegister1,CR1,uint32_t,BIDIOE,14,1,rw
-ControlRegister1,CR1,uint32_t,BIDIMODE,15,1,rw
-ControlRegister2,CR2,uint32_t,RXDMAEN,0,1,rw
-ControlRegister2,CR2,uint32_t,TXDMAEN,1,1,rw
-ControlRegister2,CR2,uint32_t,SSOE,2,1,rw
-ControlRegister2,CR2,uint32_t,RESERVED1,3,1,
-ControlRegister2,CR2,uint32_t,FRF,4,1,rw
-ControlRegister2,CR2,uint32_t,ERRIE,5,1,rw
-ControlRegister2,CR2,uint32_t,RXNEIE,6,1,rw
-ControlRegister2,CR2,uint32_t,TXEIE,7,1,rw
-StatusRegister,SR,uint32_t,RXNE,0,1,r
-StatusRegister,SR,uint32_t,TXE,1,1,r
-StatusRegister,SR,uint32_t,CHSIDE,2,1,r
-StatusRegister,SR,uint32_t,UDR,3,1,r
-StatusRegister,SR,uint32_t,CRCERR,4,1,rw
-StatusRegister,SR,uint32_t,MODF,5,1,r
-StatusRegister,SR,uint32_t,OVR,6,1,r
-StatusRegister,SR,uint32_t,BSY,7,1,r
-StatusRegister,SR,uint32_t,FRE,8,1,r
-DataRegister,DR,uint16_t,DR,0,16,rw
-CrcPolynomialRegister,CRCPR,uint16_t,CRCPOLY,0,16,rw
-RxCrcRegister,RXCRCR,uint16_t,RXCRC,0,16,r
-TxCrcRegister,TXCRCR,uint16_t,TXCRC,0,16,r
-I2SConfigurationRegister,I2SCFGR,uint32_t,CHLEN,0,1,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,DATLEN,1,2,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,CKPOL,3,1,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,I2SSTD,4,2,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,RESERVED1,6,1,
-I2SConfigurationRegister,I2SCFGR,uint32_t,PCMSYNC,7,1,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,I2SCFG,8,2,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,I2SE,10,1,rw
-I2SConfigurationRegister,I2SCFGR,uint32_t,I2SMOD,11,1,rw
-I2SPrescalarRegister,I2SPR,uint32_t,I2SDIV,0,8,rw
-I2SPrescalarRegister,I2SPR,uint32_t,ODD,8,1,rw
-I2SPrescalarRegister,I2SPR,uint32_t,MCKOE,9,1,rw
+﻿ControlRegister1,CR1,uint32_t,Clock phase,CPHA,0,1,rw
+ControlRegister1,CR1,uint32_t,Clock polarity,CPOL,1,1,rw
+ControlRegister1,CR1,uint32_t,Master selection,MSTR,2,1,rw
+ControlRegister1,CR1,uint32_t,Baud rate control,BR,3,3,rw
+ControlRegister1,CR1,uint32_t,SPI enable,SPE,6,1,rw
+ControlRegister1,CR1,uint32_t,Frame format,LSBFIRST,7,1,rw
+ControlRegister1,CR1,uint32_t,Internal slave select,SSI,8,1,rw
+ControlRegister1,CR1,uint32_t,Software slave management,SSM,9,1,rw
+ControlRegister1,CR1,uint32_t,Receive only,RXONLY,10,1,rw
+ControlRegister1,CR1,uint32_t,Data frame format,DFF,11,1,rw
+ControlRegister1,CR1,uint32_t,CRC transfer next,CRCNEXT,12,1,rw
+ControlRegister1,CR1,uint32_t,Hardware CRC calculation enable,CRCEN,13,1,rw
+ControlRegister1,CR1,uint32_t,Output enable in bidirectional mode,BIDIOE,14,1,rw
+ControlRegister1,CR1,uint32_t,Bidirectional data mode enable,BIDIMODE,15,1,rw
+ControlRegister2,CR2,uint32_t,Rx buffer DMA enable,RXDMAEN,0,1,rw
+ControlRegister2,CR2,uint32_t,Tx buffer DMA enable,TXDMAEN,1,1,rw
+ControlRegister2,CR2,uint32_t,SS output enable,SSOE,2,1,rw
+ControlRegister2,CR2,uint32_t,Reserved. Forced to 0 by hardware,RESERVED1,3,1,
+ControlRegister2,CR2,uint32_t,Frame format,FRF,4,1,rw
+ControlRegister2,CR2,uint32_t,Error interrupt enable,ERRIE,5,1,rw
+ControlRegister2,CR2,uint32_t,RX buffer not empty interrupt enable,RXNEIE,6,1,rw
+ControlRegister2,CR2,uint32_t,Tx buffer empty interrupt enable,TXEIE,7,1,rw
+StatusRegister,SR,uint32_t,Receive buffer not empty,RXNE,0,1,r
+StatusRegister,SR,uint32_t,Transmit buffer empty,TXE,1,1,r
+StatusRegister,SR,uint32_t,Channel side,CHSIDE,2,1,r
+StatusRegister,SR,uint32_t,Underrun flag,UDR,3,1,r
+StatusRegister,SR,uint32_t,CRC error flag,CRCERR,4,1,rw
+StatusRegister,SR,uint32_t,Mode fault,MODF,5,1,r
+StatusRegister,SR,uint32_t,Overrun flag,OVR,6,1,r
+StatusRegister,SR,uint32_t,Busy flag,BSY,7,1,r
+StatusRegister,SR,uint32_t,Frame format error,FRE,8,1,r
+DataRegister,DR,uint16_t,Data register,DR,0,16,rw
+CrcPolynomialRegister,CRCPR,uint16_t,CRC polynomial register,CRCPOLY,0,16,rw
+RxCrcRegister,RXCRCR,uint16_t,Rx CRC register,RXCRC,0,16,r
+TxCrcRegister,TXCRCR,uint16_t,Tx CRC register,TXCRC,0,16,r
+I2SConfigurationRegister,I2SCFGR,uint32_t,Channel length (number of bits per audio channel),CHLEN,0,1,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,Data length to be transferred,DATLEN,1,2,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,Steady state clock polarity,CKPOL,3,1,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,I2S standard selection,I2SSTD,4,2,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,Reserved: forced at 0 by hardware,RESERVED1,6,1,
+I2SConfigurationRegister,I2SCFGR,uint32_t,PCM frame synchronization,PCMSYNC,7,1,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,I2S configuration mode,I2SCFG,8,2,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,I2S Enable,I2SE,10,1,rw
+I2SConfigurationRegister,I2SCFGR,uint32_t,I2S mode selection,I2SMOD,11,1,rw
+I2SPrescalarRegister,I2SPR,uint32_t,I2S Linear prescaler,I2SDIV,0,8,rw
+I2SPrescalarRegister,I2SPR,uint32_t,Odd factor for the prescaler,ODD,8,1,rw
+I2SPrescalarRegister,I2SPR,uint32_t,Master clock output enable,MCKOE,9,1,rw
