@@ -3,7 +3,7 @@ ControlRegister1,CR1,,Clock polarity,CPOL,1,1,rw
 ControlRegister1,CR1,,Master selection,MSTR,2,1,rw
 ControlRegister1,CR1,,Baud rate control,BR,3,3,rw
 ControlRegister1,CR1,,SPI enable,SPE,6,1,rw
-ControlRegister1,CR1,,Frame format,LSBFIRST,7,1,rw
+ControlRegister1,CR1,,LSB First,LSBFIRST,7,1,rw
 ControlRegister1,CR1,,Internal slave select,SSI,8,1,rw
 ControlRegister1,CR1,,Software slave management,SSM,9,1,rw
 ControlRegister1,CR1,,Receive only,RXONLY,10,1,rw

@@ -1,6 +1,7 @@
 add_executable(
     spi_test
     spi_test.cpp
+    spi_register_map_test.cpp
 )
 
 target_link_libraries(

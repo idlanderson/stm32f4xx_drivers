@@ -1,5 +1,6 @@
 import csv
 import textwrap
+import os
 
 top_level_namespace = "stm32"
 reverse_bit_field_order = False
@@ -52,7 +53,7 @@ class RegisterField:
         for i in range(0, (2 ** self.width)):
             output += f"\tValue{i} = {i}U,\n"
 
-        output += f"}};\n"
+        output += f"}};\n\n"
 
         return output
 
@@ -324,12 +325,15 @@ class Peripheral:
 
         with open(file_name, 'w') as file:   
         
+            header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
             enums           = textwrap.indent(self.generate_enums(), "\t")
             unions          = textwrap.indent(self.generate_unions(), "\t")
             interface_class = textwrap.indent(self.generate_interface_class(), "\t")
             concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
 
-            file.write(                
+            file.write(
+                f"#ifndef {header_guard}\n"
+                f"#define {header_guard}\n\n"
                 f"#include <cstdint>\n\n"
                 f"using namespace std;\n\n"
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
@@ -338,14 +342,29 @@ class Peripheral:
                 f"{unions}"
                 f"{interface_class}"
                 f"{concrete_class}"
-                f"}}")
+                f"}}\n"
+                f"#endif // {header_guard}"
+            )
     
     def generate_unit_test_file(self, file_name, header_to_include):
         
         with open(file_name, 'w') as file:   
         
-            mock_class = self.generate_mock_class()
             unit_tests = self.generate_unit_tests()
+        
+            file.write(
+                f"#include <gtest/gtest.h>\n"
+                f"#include <gmock/gmock.h>\n"
+                f"#include \"{header_to_include}\"\n\n"
+                f"using namespace {top_level_namespace}::{self.name.lower()};\n\n"
+                f"{unit_tests}"
+            )
+    
+    def generate_mock_file(self, file_name, header_to_include):
+
+        with open(file_name, 'w') as file:   
+        
+            mock_class = self.generate_mock_class()
         
             file.write(
                 f"#include <gtest/gtest.h>\n"
@@ -354,10 +373,10 @@ class Peripheral:
                 f"using namespace {top_level_namespace}::{self.name.lower()};\n"
                 f"using namespace testing;\n\n"
                 f"{mock_class}"
-                f"{unit_tests}"
             )
 
 spi = Peripheral("Spi")
 spi.parse_csv("spi_registers.csv")
-spi.generate_header("spi2.hpp")
-spi.generate_unit_test_file("spi2_test.cpp", "spi2.hpp")
+spi.generate_header("../spi/spi_register_map.hpp")
+spi.generate_unit_test_file("../test/spi/spi_register_map_test.cpp", "spi_register_map.hpp")
+spi.generate_mock_file("../test/spi/spi_register_map_mock.hpp", "spi_register_map.hpp")
