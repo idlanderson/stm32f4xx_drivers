@@ -1,0 +1,33 @@
+PortMode,0,Input
+PortMode,1,General Purpose Output
+PortMode,2,Alternate function
+PortMode,3,Analog
+OutputType,0,Push-Pull
+OutputType,1,Open-Drain
+OutputSpeed,0,Low Speed
+OutputSpeed,1,Medium Speed
+OutputSpeed,2,High Speed
+OutputSpeed,3,Very High Speed
+PullUpPullDown,0,"No Pull-Up, Pull-Down"
+PullUpPullDown,1,Pull-Up
+PullUpPullDown,2,Pull-Down
+PortConfigurationLock,0,Not Locked
+PortConfigurationLock,1,Locked
+PortConfigurationLockKey,0,Key Not Active
+PortConfigurationLockKey,1,Key Active
+AlternateFunction,0,AF0
+AlternateFunction,1,AF1
+AlternateFunction,2,AF2
+AlternateFunction,3,AF3
+AlternateFunction,4,AF4
+AlternateFunction,5,AF5
+AlternateFunction,6,AF6
+AlternateFunction,7,AF7
+AlternateFunction,8,AF8
+AlternateFunction,9,AF9
+AlternateFunction,10,AF10
+AlternateFunction,11,AF11
+AlternateFunction,12,AF12
+AlternateFunction,13,AF13
+AlternateFunction,14,AF14
+AlternateFunction,15,AF15

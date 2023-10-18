@@ -1,0 +1,92 @@
+ClockPhase,0,First Clock Transition
+ClockPhase,1,Second Clock Transition
+ClockPolarity,0,CK to 0 when idle
+ClockPolarity,1,CK to 1 when idle
+MasterSelection,0,Slave
+MasterSelection,1,Master
+BaudRateControl,0,fPCLK Div 2
+BaudRateControl,1,fPCLK Div 4
+BaudRateControl,2,fPCLK Div 8
+BaudRateControl,3,fPCLK Div 16
+BaudRateControl,4,fPCLK Div 32
+BaudRateControl,5,fPCLK Div 64
+BaudRateControl,6,fPCLK Div 128
+BaudRateControl,7,fPCLK Div 256
+SpiEnable,0,Disabled
+SpiEnable,1,Enabled
+LsbFirst,0,MSB transmitted first
+LsbFirst,1,LSB transmitted first
+InternalSlaveSelect,0,Drive NSS Low
+InternalSlaveSelect,1,Drive NSS High
+SoftwareSlaveManagement,0,Disabled
+SoftwareSlaveManagement,1,Enabled
+ReceiveOnly,0,Full duplex
+ReceiveOnly,1,Output disabled
+DataFrameFormat,0,8-Bit
+DataFrameFormat,1,16-Bit
+CrcTransferNext,0,Data phase
+CrcTransferNext,1,Next transfer is CRC
+HardwareCrcCalculationEnable,0,Disabled
+HardwareCrcCalculationEnable,1,Enabled
+OutputEnableInBidirectionalMode,0,Disabled
+OutputEnableInBidirectionalMode,1,Enabled
+BidirectionalDataModeEnable,0,2-line unidirectional
+BidirectionalDataModeEnable,1,1-line bidirectional
+RxBufferDmaEnable,0,Disabled
+RxBufferDmaEnable,1,Enabled
+TxBufferDmaEnable,0,Disabled
+TxBufferDmaEnable,1,Enabled
+SsOutputEnable,0,Disabled
+SsOutputEnable,1,Enabled
+FrameFormat,0,Motorola mode
+FrameFormat,1,TI mode
+ErrorInterruptEnable,0,masked
+ErrorInterruptEnable,1,enabled
+RxBufferNotEmptyInterruptEnable,0,masked
+RxBufferNotEmptyInterruptEnable,1,not masked
+TxBufferEmptyInterruptEnable,0,masked
+TxBufferEmptyInterruptEnable,1,not masked
+ReceiveBufferNotEmpty,0,empty
+ReceiveBufferNotEmpty,1,not empty
+TransmitBufferEmpty,0,not empty
+TransmitBufferEmpty,1,empty
+ChannelSide,0,Left
+ChannelSide,1,Right
+UnderrunFlag,0,No underrun occurred
+UnderrunFlag,1,Underrun occurred
+CrcErrorFlag,0,matches
+CrcErrorFlag,1,does not match
+ModeFault,0,No mode fault
+ModeFault,1,Mode fault
+OverrunFlag,0,No overrun occurred
+OverrunFlag,1,Overrun occurred
+BusyFlag,0,not busy
+BusyFlag,1,busy
+FrameFormatError,0,No frame format error
+FrameFormatError,1,frame format error occurred
+ChannelLength,0,16-bit
+ChannelLength,1,32-bit
+DataLengthToBeTransferred,0,16-bit
+DataLengthToBeTransferred,1,24-bit
+DataLengthToBeTransferred,2,32-bit
+DataLengthToBeTransferred,3,Not allowed
+SteadyStateClockPolarity,0,Low
+SteadyStateClockPolarity,1,High
+I2SStandardSelection,0,I2S Philips standard
+I2SStandardSelection,1,MSB justified standard
+I2SStandardSelection,2,LSB justified standard
+I2SStandardSelection,3,PCM standard
+PcmFrameSynchronization,0,Short frame
+PcmFrameSynchronization,1,Long frame
+I2SConfigurationMode,0,Slave - transmit
+I2SConfigurationMode,1,Slave - receive
+I2SConfigurationMode,2,Master - transmit
+I2SConfigurationMode,3,Master - receive
+I2SEnable,0,Disabled
+I2SEnable,1,Enabled
+I2SModeSelection,0,SPI mode
+I2SModeSelection,1,I2S mode
+OddFactorForThePrescaler,0,I2SDIV Times 2
+OddFactorForThePrescaler,1,I2SDIV Times 2 Plus 1
+MasterClockOutputEnable,0,Disabled
+MasterClockOutputEnable,1,Enabled

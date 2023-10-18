@@ -2,6 +2,7 @@ import csv
 import textwrap
 import os
 import re
+from typing import List
 
 top_level_namespace = "stm32"
 reverse_bit_field_order = False
@@ -17,12 +18,39 @@ def to_camel_case(string):
 
     return camel_case
 
-class RegisterFieldValue:
+class EnumValue:
+
+    value : int
+    description : str
 
     def __init__(self, value, description):
         self.value = value
         self.description = description
         print(f"\tNew Value: {self.value} : {self.description}")
+
+class EnumType:
+
+    name : str
+    enum_values : List[EnumValue]
+
+    def __init__(self, name):
+        self.name = name
+        self.enum_values = []
+        print(f"New Enum: {self.name}")
+
+    def add_enum_value(self, value, description):
+        self.enum_values.append(EnumValue(value, description))
+
+    def generate(self):
+
+        output = f"enum class {self.name} : uint8_t\n{{\n"
+
+        for enum_value in self.enum_values:
+            output += f"\t{to_camel_case(enum_value.description)} = {enum_value.value}U,\n"
+        
+        output += "};\n\n"
+
+        return output
 
 class RegisterField:
 
@@ -35,11 +63,7 @@ class RegisterField:
         self.bit_position = bit_position
         self.width = width
         self.access = access
-        self.values = []
         print(f" - [{reg_short_name}] New Field: Name={name}, Description={description}, Bit Position={str(bit_position)}, Width={width}, Access={access}, Type={type}")
-
-    def add_value(self, value, description):
-        self.values.append(RegisterFieldValue(value, description))
 
     def generate_method_name(self, prefix):
         return f"{prefix}_{self.reg_short_name}_{self.name}"
@@ -50,38 +74,6 @@ class RegisterField:
             return self.type
         else:
             return to_camel_case(self.description)
-
-    def generate_enum(self):
-
-        if ("RESERVED" in self.name):
-            return ""
-        elif (len(self.type.strip()) > 0):
-            return ""
-
-        base_type = ""
-
-        if self.width <= 8:
-            base_type = "uint8_t"
-        elif self.width > 8 and self.width <= 16:
-            base_type = "uint16_t"
-        else:
-            base_type = "uint32_t"
-
-        output = (
-            f"enum class {self.generate_data_type()} : {base_type}\n"
-            f"{{\n"
-        )
-
-        if len(self.values) == 0:
-            for i in range(0, (2 ** self.width)):
-                output += f"\tValue{i} = {i}U,\n"
-        else:
-            for value in self.values:
-                output += f"\t{to_camel_case(value.description)} = {str(value.value)}U,\n"
-
-        output += f"}};\n\n"
-
-        return output
 
     def generate_getter(self):
         return f"{self.generate_data_type()} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
@@ -118,6 +110,8 @@ class RegisterField:
 
 class Register:
 
+    fields : List[RegisterField]
+
     def __init__(self, long_name, short_name):
         self.long_name = long_name
         self.short_name = short_name
@@ -127,24 +121,8 @@ class Register:
     def add_field(self, name, description, bit_position, width, access, type):
         self.fields.append(RegisterField(self.long_name, self.short_name, name, description, bit_position, width, access, type))
 
-    def add_value_to_field(self, field_name, value, description):
-
-        matching_field = [field for field in self.fields if field.name == field_name]
-
-        if matching_field:
-            matching_field[0].add_value(value, description)
-
     def generate_class_member_variable(self):
-        return f"{self.long_name} {self.short_name};\n";
-
-    def generate_enums(self):
-
-        output = ""
-
-        for field in self.fields:
-            output += field.generate_enum()
-
-        return output
+        return f"{self.long_name} {self.short_name};\n"
 
     def generate_union(self):
 
@@ -247,9 +225,14 @@ class Register:
 
 class Peripheral:
 
+    name : str
+    registers : List[Register]
+    types : List[EnumType]
+
     def __init__(self, name):
         self.name = name
         self.registers = []
+        self.types = []
 
     def parse_registers_csv(self, file_name):
         
@@ -290,32 +273,36 @@ class Peripheral:
         else:
             return None
 
-    def parse_values_csv(self, file_name):
+    def parse_types_csv(self, file_name):
 
-        print(f"Parsing CSV Values File: {file_name}")
+        print(f"Parsing CSV Types File: {file_name}")
 
         with open(file_name, 'r', encoding='utf-8-sig') as file:
             
             csv_reader = csv.reader(file)
 
+            type_name = ""
+            type : EnumType = None
+
             for row in csv_reader:
 
-                register_short_name = row[0]
-                field_name = row[1]
-                value = int(row[2])
-                description = row[3]
+                if row[0] != type_name:
 
-                matching_register = self.lookup_register(register_short_name)
+                    type_name = row[0]
+                    type = EnumType(type_name)
+                    self.types.append(type)
+                
+                enum_value = int(row[1])
+                enum_description = row[2]
 
-                if matching_register is not None:
-                    matching_register.add_value_to_field(field_name, value, description)
+                type.add_enum_value(enum_value, enum_description)
 
     def generate_enums(self):
 
         output = ""
 
-        for register in self.registers:
-            output += register.generate_enums()
+        for type in self.types:
+            output += type.generate()
 
         return output
 
@@ -461,8 +448,8 @@ class Peripheral:
 
 spi = Peripheral("Spi")
 
+spi.parse_types_csv("spi_types.csv")
 spi.parse_registers_csv("spi_registers.csv")
-spi.parse_values_csv("spi_register_values.csv")
 
 spi.generate_types_header("../spi/spi_types.hpp")
 spi.generate_header("../spi/spi_register_map.hpp")

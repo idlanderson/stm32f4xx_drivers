@@ -1,0 +1,161 @@
+PortModeRegister,MODER,PortMode,Port Mode for Pin 0,MODER0,0,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 1,MODER1,2,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 2,MODER2,4,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 3,MODER3,6,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 4,MODER4,8,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 5,MODER5,10,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 6,MODER6,12,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 7,MODER7,14,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 8,MODER8,16,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 9,MODER9,18,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 10,MODER10,20,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 11,MODER11,22,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 12,MODER12,24,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 13,MODER13,26,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 14,MODER14,28,2,rw
+PortModeRegister,MODER,PortMode,Port Mode for Pin 15,MODER15,30,2,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 0,OT0,0,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 1,OT1,1,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 2,OT2,2,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 3,OT3,3,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 4,OT4,4,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 5,OT5,5,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 6,OT6,6,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 7,OT7,7,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 8,OT8,8,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 9,OT9,9,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 10,OT10,10,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 11,OT11,11,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 12,OT12,12,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 13,OT13,13,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 14,OT14,14,1,rw
+PortOutputTypeRegister,OTYPER,OutputType,Output Type for Pin 15,OT15,15,1,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 0,OSPEEDR0,0,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 1,OSPEEDR1,2,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 2,OSPEEDR2,4,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 3,OSPEEDR3,6,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 4,OSPEEDR4,8,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 5,OSPEEDR5,10,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 6,OSPEEDR6,12,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 7,OSPEEDR7,14,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 8,OSPEEDR8,16,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 9,OSPEEDR9,18,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 10,OSPEEDR10,20,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 11,OSPEEDR11,22,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 12,OSPEEDR12,24,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 13,OSPEEDR13,26,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 14,OSPEEDR14,28,2,rw
+PortOutputSpeedRegister,OSPEEDR,OutputSpeed,Output Speed for Pin 15,OSPEEDR15,30,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 0,PUPDR0,0,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 1,PUPDR1,2,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 2,PUPDR2,4,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 3,PUPDR3,6,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 4,PUPDR4,8,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 5,PUPDR5,10,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 6,PUPDR6,12,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 7,PUPDR7,14,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 8,PUPDR8,16,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 9,PUPDR9,18,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 10,PUPDR10,20,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 11,PUPDR11,22,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 12,PUPDR12,24,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 13,PUPDR13,26,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 14,PUPDR14,28,2,rw
+PortPullUpPullDownRegister,PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 15,PUPDR15,30,2,rw
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 0,IDR0,0,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 1,IDR1,1,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 2,IDR2,2,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 3,IDR3,3,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 4,IDR4,4,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 5,IDR5,5,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 6,IDR6,6,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 7,IDR7,7,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 8,IDR8,8,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 9,IDR9,9,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 10,IDR10,10,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 11,IDR11,11,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 12,IDR12,12,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 13,IDR13,13,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 14,IDR14,14,1,r
+PortInputDataRegister,IDR,uint8_t,Input Data for Pin 15,IDR15,15,1,r
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 0,ODR0,0,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 1,ODR1,1,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 2,ODR2,2,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 3,ODR3,3,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 4,ODR4,4,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 5,ODR5,5,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 6,ODR6,6,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 7,ODR7,7,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 8,ODR8,8,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 9,ODR9,9,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 10,ODR10,10,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 11,ODR11,11,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 12,ODR12,12,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 13,ODR13,13,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 14,ODR14,14,1,rw
+PortOutputDataRegister,ODR,uint8_t,Output Data for Pin 15,ODR15,15,1,rw
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 0,BS0,0,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 1,BS1,1,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 2,BS2,2,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 3,BS3,3,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 4,BS4,4,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 5,BS5,5,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 6,BS6,6,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 7,BS7,7,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 8,BS8,8,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 9,BS9,9,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 10,BS10,10,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 11,BS11,11,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 12,BS12,12,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 13,BS13,13,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 14,BS14,14,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Set Bit 15,BS15,15,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 0,BR0,16,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 1,BR1,17,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 2,BR2,18,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 3,BR3,19,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 4,BR4,20,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 5,BR5,21,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 6,BR6,22,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 7,BR7,23,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 8,BR8,24,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 9,BR9,25,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 10,BR10,26,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 11,BR11,27,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 12,BR12,28,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 13,BR13,29,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 14,BR14,30,1,w
+PortBitSetResetRegister,BSRR,uint8_t,Port Reset Bit 15,BR15,31,1,w
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 0,LCK0,0,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 1,LCK1,1,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 2,LCK2,2,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 3,LCK3,3,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 4,LCK4,4,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 5,LCK5,5,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 6,LCK6,6,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 7,LCK7,7,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 8,LCK8,8,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 9,LCK9,9,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 10,LCK10,10,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 11,LCK11,11,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 12,LCK12,12,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 13,LCK13,13,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 14,LCK14,14,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLock,Port Configuration Lock for Bit 15,LCK15,15,1,rw
+PortConfigurationLockRegister,LCKR,PortConfigurationLockKey,Port Configuration Lock Key,LCKK,16,1,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 0,AFRL0,0,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 1,AFRL1,4,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 2,AFRL2,8,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 3,AFRL3,12,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 4,AFRL4,16,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 5,AFRL5,20,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 6,AFRL6,24,4,rw
+AlternateFunctionLowRegister,AFRL,AlternateFunction,Alternate Function for Pin 7,AFRL7,28,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 8,AFRH8,0,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 9,AFRH9,4,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 10,AFRH10,8,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 11,AFRH11,12,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 12,AFRH12,16,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 13,AFRH13,20,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 14,AFRH14,24,4,rw
+AlternateFunctionHighRegister,AFRH,AlternateFunction,Alternate Function for Pin 15,AFRH15,28,4,rw
