@@ -77,14 +77,15 @@ class RegisterField:
 
     def generate_unit_test(self):
 
-        expected_value = 1 << self.bit_position
+        assigned_value = (2 ** self.width) - 1
+        expected_value = assigned_value << self.bit_position
 
         return (
             f"TEST({self.reg_long_name}, {self.name})\n"
             f"{{\n"
             f"\t{self.reg_long_name} reg;\n"
             f"\treg.Value = 0U;\n"
-            f"\treg.Fields.{self.name} = ({self.generate_data_type()})1U;\n"
+            f"\treg.Fields.{self.name} = ({self.generate_data_type()}){assigned_value}U;\n"
             f"\tEXPECT_EQ(0x{format(expected_value, '08X')}U, reg.Value);\n"
             f"}}\n\n"
         )

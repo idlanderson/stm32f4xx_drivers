@@ -32,8 +32,8 @@ TEST(ControlRegister1, BR)
 {
 	ControlRegister1 reg;
 	reg.Value = 0U;
-	reg.Fields.BR = (BaudRateControl)1U;
-	EXPECT_EQ(0x00000008U, reg.Value);
+	reg.Fields.BR = (BaudRateControl)7U;
+	EXPECT_EQ(0x00000038U, reg.Value);
 }
 
 TEST(ControlRegister1, SPE)
@@ -256,32 +256,32 @@ TEST(DataRegister, DR)
 {
 	DataRegister reg;
 	reg.Value = 0U;
-	reg.Fields.DR = (uint16_t)1U;
-	EXPECT_EQ(0x00000001U, reg.Value);
+	reg.Fields.DR = (uint16_t)65535U;
+	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
 TEST(CrcPolynomialRegister, CRCPOLY)
 {
 	CrcPolynomialRegister reg;
 	reg.Value = 0U;
-	reg.Fields.CRCPOLY = (uint16_t)1U;
-	EXPECT_EQ(0x00000001U, reg.Value);
+	reg.Fields.CRCPOLY = (uint16_t)65535U;
+	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
 TEST(RxCrcRegister, RXCRC)
 {
 	RxCrcRegister reg;
 	reg.Value = 0U;
-	reg.Fields.RXCRC = (uint16_t)1U;
-	EXPECT_EQ(0x00000001U, reg.Value);
+	reg.Fields.RXCRC = (uint16_t)65535U;
+	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
 TEST(TxCrcRegister, TXCRC)
 {
 	TxCrcRegister reg;
 	reg.Value = 0U;
-	reg.Fields.TXCRC = (uint16_t)1U;
-	EXPECT_EQ(0x00000001U, reg.Value);
+	reg.Fields.TXCRC = (uint16_t)65535U;
+	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
 TEST(I2SConfigurationRegister, CHLEN)
@@ -296,8 +296,8 @@ TEST(I2SConfigurationRegister, DATLEN)
 {
 	I2SConfigurationRegister reg;
 	reg.Value = 0U;
-	reg.Fields.DATLEN = (DataLengthToBeTransferred)1U;
-	EXPECT_EQ(0x00000002U, reg.Value);
+	reg.Fields.DATLEN = (DataLengthToBeTransferred)3U;
+	EXPECT_EQ(0x00000006U, reg.Value);
 }
 
 TEST(I2SConfigurationRegister, CKPOL)
@@ -312,8 +312,8 @@ TEST(I2SConfigurationRegister, I2SSTD)
 {
 	I2SConfigurationRegister reg;
 	reg.Value = 0U;
-	reg.Fields.I2SSTD = (I2SStandardSelection)1U;
-	EXPECT_EQ(0x00000010U, reg.Value);
+	reg.Fields.I2SSTD = (I2SStandardSelection)3U;
+	EXPECT_EQ(0x00000030U, reg.Value);
 }
 
 TEST(I2SConfigurationRegister, RESERVED1)
@@ -336,8 +336,8 @@ TEST(I2SConfigurationRegister, I2SCFG)
 {
 	I2SConfigurationRegister reg;
 	reg.Value = 0U;
-	reg.Fields.I2SCFG = (I2SConfigurationMode)1U;
-	EXPECT_EQ(0x00000100U, reg.Value);
+	reg.Fields.I2SCFG = (I2SConfigurationMode)3U;
+	EXPECT_EQ(0x00000300U, reg.Value);
 }
 
 TEST(I2SConfigurationRegister, I2SE)
@@ -360,8 +360,8 @@ TEST(I2SPrescalarRegister, I2SDIV)
 {
 	I2SPrescalarRegister reg;
 	reg.Value = 0U;
-	reg.Fields.I2SDIV = (uint8_t)1U;
-	EXPECT_EQ(0x00000001U, reg.Value);
+	reg.Fields.I2SDIV = (uint8_t)255U;
+	EXPECT_EQ(0x000000FFU, reg.Value);
 }
 
 TEST(I2SPrescalarRegister, ODD)
