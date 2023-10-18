@@ -127,13 +127,13 @@ namespace stm32::spi
         {
             while (!IsTransmitBufferEmpty());
 
-            if (dataFrameFormat == DataFrameFormat::Value0)
+            if (dataFrameFormat == DataFrameFormat::_8Bit)
             {
                 device.set_DR_DR(0x0000U | data[currentIndex]);
                 remainingLengthToSend--;
                 currentIndex++;
             }
-            else if (dataFrameFormat == DataFrameFormat::Value1)
+            else if (dataFrameFormat == DataFrameFormat::_16Bit)
             {
                 device.set_DR_DR((data[currentIndex] << 8U) | data[currentIndex + 1U]);
                 remainingLengthToSend -= 2U;
@@ -156,13 +156,13 @@ namespace stm32::spi
         {
             while (!IsReceiveBufferNotEmpty()); // While the RxBuffer is NOT NOT empty (i.e. while it's empty).
 
-            if (dataFrameFormat == DataFrameFormat::Value0)
+            if (dataFrameFormat == DataFrameFormat::_8Bit)
             {
                 uint8_t data = (uint8_t)device.get_DR_DR();
                 dataReceived.push_back(data);
                 remainingLengthToReceive--;
             }
-            else if (dataFrameFormat == DataFrameFormat::Value1)
+            else if (dataFrameFormat == DataFrameFormat::_16Bit)
             {
                 uint16_t data = (uint16_t)device.get_DR_DR();
                 dataReceived.push_back((uint8_t)(0x000000FFU & (data >> 8U)));

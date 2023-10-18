@@ -1,0 +1,92 @@
+CR1,CPHA,0,First Clock Transition
+CR1,CPHA,1,Second Clock Transition
+CR1,CPOL,0,CK to 0 when idle
+CR1,CPOL,1,CK to 1 when idle
+CR1,MSTR,0,Slave
+CR1,MSTR,1,Master
+CR1,BR,0,fPCLK Div 2
+CR1,BR,1,fPCLK Div 4
+CR1,BR,2,fPCLK Div 8
+CR1,BR,3,fPCLK Div 16
+CR1,BR,4,fPCLK Div 32
+CR1,BR,5,fPCLK Div 64
+CR1,BR,6,fPCLK Div 128
+CR1,BR,7,fPCLK Div 256
+CR1,SPE,0,Disabled
+CR1,SPE,1,Enabled
+CR1,LSBFIRST,0,MSB transmitted first
+CR1,LSBFIRST,1,LSB transmitted first
+CR1,SSI,0,Drive NSS Low
+CR1,SSI,1,Drive NSS High
+CR1,SSM,0,Disabled
+CR1,SSM,1,Enabled
+CR1,RXONLY,0,Full duplex
+CR1,RXONLY,1,Output disabled
+CR1,DFF,0,8-Bit
+CR1,DFF,1,16-Bit
+CR1,CRCNEXT,0,Data phase
+CR1,CRCNEXT,1,Next transfer is CRC
+CR1,CRCEN,0,Disabled
+CR1,CRCEN,1,Enabled
+CR1,BIDIOE,0,Disabled
+CR1,BIDIOE,1,Enabled
+CR1,BIDIMODE,0,2-line unidirectional
+CR1,BIDIMODE,1,1-line bidirectional
+CR2,RXDMAEN,0,Disabled
+CR2,RXDMAEN,1,Enabled
+CR2,TXDMAEN,0,Disabled
+CR2,TXDMAEN,1,Enabled
+CR2,SSOE,0,Disabled
+CR2,SSOE,1,Enabled
+CR2,FRF,0,Motorola mode
+CR2,FRF,1,TI mode
+CR2,ERRIE,0,masked
+CR2,ERRIE,1,enabled
+CR2,RXNEIE,0,masked
+CR2,RXNEIE,1,not masked
+CR2,TXEIE,0,masked
+CR2,TXEIE,1,not masked
+SR,RXNE,0,empty
+SR,RXNE,1,not empty
+SR,TXE,0,not empty
+SR,TXE,1,empty
+SR,CHSIDE,0,Left
+SR,CHSIDE,1,Right
+SR,UDR,0,No underrun occurred
+SR,UDR,1,Underrun occurred
+SR,CRCERR,0,matches
+SR,CRCERR,1,does not match
+SR,MODF,0,No mode fault
+SR,MODF,1,Mode fault
+SR,OVR,0,No overrun occurred
+SR,OVR,1,Overrun occurred
+SR,BSY,0,not busy
+SR,BSY,1,busy
+SR,FRE,0,No frame format error
+SR,FRE,1,frame format error occurred
+I2SCFGR,CHLEN,0,16-bit
+I2SCFGR,CHLEN,1,32-bit
+I2SCFGR,DATLEN,0,16-bit
+I2SCFGR,DATLEN,1,24-bit
+I2SCFGR,DATLEN,2,32-bit
+I2SCFGR,DATLEN,3,Not allowed
+I2SCFGR,CKPOL,0,Low
+I2SCFGR,CKPOL,1,High
+I2SCFGR,I2SSTD,0,I2S Philips standard
+I2SCFGR,I2SSTD,1,MSB justified standard
+I2SCFGR,I2SSTD,2,LSB justified standard
+I2SCFGR,I2SSTD,3,PCM standard
+I2SCFGR,PCMSYNC,0,Short frame
+I2SCFGR,PCMSYNC,1,Long frame
+I2SCFGR,I2SCFG,0,Slave - transmit
+I2SCFGR,I2SCFG,1,Slave - receive
+I2SCFGR,I2SCFG,2,Master - transmit
+I2SCFGR,I2SCFG,3,Master - receive
+I2SCFGR,I2SE,0,Disabled
+I2SCFGR,I2SE,1,Enabled
+I2SCFGR,I2SMOD,0,SPI mode
+I2SCFGR,I2SMOD,1,I2S mode
+I2SPR,ODD,0,I2SDIV Times 2
+I2SPR,ODD,1,I2SDIV Times 2 Plus 1
+I2SPR,MCKOE,0,Disabled
+I2SPR,MCKOE,1,Enabled

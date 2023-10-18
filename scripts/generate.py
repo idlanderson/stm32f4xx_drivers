@@ -1,13 +1,32 @@
 import csv
 import textwrap
 import os
+import re
 
 top_level_namespace = "stm32"
 reverse_bit_field_order = False
 
+def to_camel_case(string):
+
+    words = string.strip().split()
+    camel_case = ''.join(word.strip().title() for word in words)
+    camel_case = re.sub(r'\W+', '', camel_case)
+
+    if camel_case[0].isdigit():
+        camel_case = "_" + camel_case
+
+    return camel_case
+
+class RegisterFieldValue:
+
+    def __init__(self, value, description):
+        self.value = value
+        self.description = description
+        print(f"\tNew Value: {self.value} : {self.description}")
+
 class RegisterField:
 
-    def __init__(self, reg_long_name, reg_short_name, name, description, bit_position, width, access, type="uint32_t"):
+    def __init__(self, reg_long_name, reg_short_name, name, description, bit_position, width, access, type):
         self.reg_long_name = reg_long_name
         self.reg_short_name = reg_short_name
         self.type = type
@@ -16,6 +35,11 @@ class RegisterField:
         self.bit_position = bit_position
         self.width = width
         self.access = access
+        self.values = []
+        print(f" - [{reg_short_name}] New Field: Name={name}, Description={description}, Bit Position={str(bit_position)}, Width={width}, Access={access}, Type={type}")
+
+    def add_value(self, value, description):
+        self.values.append(RegisterFieldValue(value, description))
 
     def generate_method_name(self, prefix):
         return f"{prefix}_{self.reg_short_name}_{self.name}"
@@ -25,9 +49,7 @@ class RegisterField:
         if self.type is not None and self.type != "":
             return self.type
         else:
-            words = self.description.strip().split()
-            camel_case = ''.join(word.strip().title() for word in words)
-            return camel_case
+            return to_camel_case(self.description)
 
     def generate_enum(self):
 
@@ -50,8 +72,12 @@ class RegisterField:
             f"{{\n"
         )
 
-        for i in range(0, (2 ** self.width)):
-            output += f"\tValue{i} = {i}U,\n"
+        if len(self.values) == 0:
+            for i in range(0, (2 ** self.width)):
+                output += f"\tValue{i} = {i}U,\n"
+        else:
+            for value in self.values:
+                output += f"\t{to_camel_case(value.description)} = {str(value.value)}U,\n"
 
         output += f"}};\n\n"
 
@@ -96,9 +122,17 @@ class Register:
         self.long_name = long_name
         self.short_name = short_name
         self.fields = []
+        print(f"New Register: Long Name={self.long_name}, Short Name={self.short_name}")
 
     def add_field(self, name, description, bit_position, width, access, type):
         self.fields.append(RegisterField(self.long_name, self.short_name, name, description, bit_position, width, access, type))
+
+    def add_value_to_field(self, field_name, value, description):
+
+        matching_field = [field for field in self.fields if field.name == field_name]
+
+        if matching_field:
+            matching_field[0].add_value(value, description)
 
     def generate_class_member_variable(self):
         return f"{self.long_name} {self.short_name};\n";
@@ -217,8 +251,10 @@ class Peripheral:
         self.name = name
         self.registers = []
 
-    def parse_csv(self, file_name):
+    def parse_registers_csv(self, file_name):
         
+        print(f"Parsing CSV File: {file_name}")
+
         with open(file_name, 'r', encoding='utf-8-sig') as file:
             
             csv_reader = csv.reader(file)
@@ -244,6 +280,35 @@ class Peripheral:
                 access = row[7]
 
                 register.add_field(field_name, field_description, bit_position, width, access, field_type)
+
+    def lookup_register(self, register_name):
+        
+        matching_register = [register for register in self.registers if register.short_name == register_name]
+
+        if matching_register:
+            return matching_register[0]
+        else:
+            return None
+
+    def parse_values_csv(self, file_name):
+
+        print(f"Parsing CSV Values File: {file_name}")
+
+        with open(file_name, 'r', encoding='utf-8-sig') as file:
+            
+            csv_reader = csv.reader(file)
+
+            for row in csv_reader:
+
+                register_short_name = row[0]
+                field_name = row[1]
+                value = int(row[2])
+                description = row[3]
+
+                matching_register = self.lookup_register(register_short_name)
+
+                if matching_register is not None:
+                    matching_register.add_value_to_field(field_name, value, description)
 
     def generate_enums(self):
 
@@ -395,7 +460,10 @@ class Peripheral:
             )
 
 spi = Peripheral("Spi")
-spi.parse_csv("spi_registers.csv")
+
+spi.parse_registers_csv("spi_registers.csv")
+spi.parse_values_csv("spi_register_values.csv")
+
 spi.generate_types_header("../spi/spi_types.hpp")
 spi.generate_header("../spi/spi_register_map.hpp")
 spi.generate_unit_test_file("../test/spi/spi_register_map_test.cpp", "spi_register_map.hpp")
