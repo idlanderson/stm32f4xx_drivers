@@ -14,14 +14,14 @@ namespace stm32::rcc
 		{
 			EnableFlag     HSION       : 1; // [0]     rw : Internal high-speed clock enable
 			ReadyFlag      HSIRDY      : 1; // [1]     r  : Internal high-speed clock ready flag
-			uint8_t        Reserved1   : 1; // [2]        : Reserved, must be kept at reset value
-			uint8_t        HSITRIM     : 5; // [7:3]   rw : Internal high-speed clock trimming
-			uint8_t        HSICAL      : 8; // [15:8]  r  : Internal high-speed clock calibration
+			uint32_t       Reserved1   : 1; // [2]        : Reserved, must be kept at reset value
+			uint32_t       HSITRIM     : 5; // [7:3]   rw : Internal high-speed clock trimming
+			uint32_t       HSICAL      : 8; // [15:8]  r  : Internal high-speed clock calibration
 			EnableFlag     HSEON       : 1; // [16]    rw : HSE clock enable
 			ReadyFlag      HSERDY      : 1; // [17]    r  : HSE clock ready flag
 			HseClockBypass HSEBYP      : 1; // [18]    rw : HSE clock bypass
 			EnableFlag     CSSON       : 1; // [19]    rw : Clock security system enable
-			uint8_t        Reserved2   : 4; // [23:20]    : Reserved, must be kept at reset value.
+			uint32_t       Reserved2   : 4; // [23:20]    : Reserved, must be kept at reset value.
 			EnableFlag     PLLON       : 1; // [24]    rw : Main PLL (PLL) enable
 			ReadyFlag      PLLRDY      : 1; // [25]    r  : Main PLL (PLL) clock ready flag
 			EnableFlag     PLLI2SON    : 1; // [26]    rw : PLLI2S enable
@@ -35,15 +35,15 @@ namespace stm32::rcc
 	{
 		volatile struct
 		{
-			uint8_t                            PLLM        : 5; // [4:0]   rw : Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-			uint16_t                           PLLN        : 9; // [14:6]  rw : Main PLL (PLL) multiplication factor for VCO
-			uint8_t                            Reserved1   : 1; // [15]       : 
+			uint32_t                           PLLM        : 6; // [5:0]   rw : Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
+			uint32_t                           PLLN        : 9; // [14:6]  rw : Main PLL (PLL) multiplication factor for VCO
+			uint32_t                           Reserved1   : 1; // [15]       : 
 			MainPllDivisionFactor              PLLP        : 2; // [17:16] rw : Main PLL (PLL) division factor for main system clock
-			uint8_t                            Reserved2   : 4; // [21:18]    : 
+			uint32_t                           Reserved2   : 4; // [21:18]    : 
 			MainPllAndAudioPllEntryClockSource PLLSRC      : 1; // [22]    rw : Main PLL(PLL) and audio PLL (PLLI2S) entry clock source
-			uint8_t                            Reserved3   : 1; // [23]       : 
-			uint8_t                            PLLQ        : 4; // [27:24] rw : Main PLL (PLL) division factor for USB OTG FS SDIO and random number generator clocks
-			uint32_t                           Reserved4   : 5; // Pad to 32 bits 
+			uint32_t                           Reserved3   : 1; // [23]       : 
+			uint32_t                           PLLQ        : 4; // [27:24] rw : Main PLL (PLL) division factor for USB OTG FS SDIO and random number generator clocks
+			uint32_t                           Reserved4   : 4; // Pad to 32 bits 
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -55,10 +55,10 @@ namespace stm32::rcc
 			SystemClock                 SW          : 2; // [1:0]   rw : System clock switch
 			SystemClock                 SWS         : 2; // [3:2]   r  : System clock switch status
 			AhbPrescaler                HPRE        : 4; // [7:4]   rw : AHB prescaler
-			uint8_t                     Reserved1   : 2; // [9:8]      : 
+			uint32_t                    Reserved1   : 2; // [9:8]      : 
 			ApbPrescaler                PPRE1       : 3; // [12:10] rw : APB Low speed prescaler (APB1)
 			ApbPrescaler                PPRE2       : 3; // [15:13] rw : APB high-speed prescaler (APB2)
-			uint8_t                     RTCPRE      : 5; // [20:16] rw : HSE division factor for RTC clock
+			uint32_t                    RTCPRE      : 5; // [20:16] rw : HSE division factor for RTC clock
 			MicrocontrollerClockOutput1 MCO1        : 2; // [22:21] rw : Microcontroller clock output 1
 			I2SClockSelection           I2SSCR      : 1; // [23]    rw : I2S clock selection
 			McoPrescaler                MCO1PRE     : 3; // [26:24] rw : MCO1 prescaler
@@ -78,7 +78,7 @@ namespace stm32::rcc
 			ReadyFlag                        HSERDYF     : 1; // [3]     r  : 
 			ReadyFlag                        PLLRDYF     : 1; // [4]     r  : 
 			ReadyFlag                        PLLI2SRDYF  : 1; // [5]     r  : 
-			uint8_t                          Reserved1   : 1; // [6]        : 
+			uint32_t                         Reserved1   : 1; // [6]        : 
 			ClockSecuritySystemInterruptFlag CSSF        : 1; // [7]     r  : 
 			EnableFlag                       LSIRDYIE    : 1; // [8]     rw : 
 			EnableFlag                       LSERDYIE    : 1; // [9]     rw : 
@@ -86,14 +86,14 @@ namespace stm32::rcc
 			EnableFlag                       HSERDYIE    : 1; // [11]    rw : 
 			EnableFlag                       PLLRDYIE    : 1; // [12]    rw : 
 			EnableFlag                       PLLI2SRDYIE : 1; // [13]    rw : 
-			uint8_t                          Reserved2   : 2; // [15:14]    : 
+			uint32_t                         Reserved2   : 2; // [15:14]    : 
 			ClearFlag                        LSIRDYC     : 1; // [16]    w  : 
 			ClearFlag                        LSERDYC     : 1; // [17]    w  : 
 			ClearFlag                        HSIRDYC     : 1; // [18]    w  : 
 			ClearFlag                        HSERDYC     : 1; // [19]    w  : 
 			ClearFlag                        PLLRDYC     : 1; // [20]    w  : 
 			ClearFlag                        PLLI2SRDYC  : 1; // [21]    w  : 
-			uint8_t                          Reserved3   : 1; // [22]       : 
+			uint32_t                         Reserved3   : 1; // [22]       : 
 			ClearFlag                        CSSC        : 1; // [23]    w  : 
 			uint32_t                         Reserved4   : 8; // Pad to 32 bits 
 		} Fields;
@@ -113,14 +113,14 @@ namespace stm32::rcc
 			ResetFlag GPIOGRST    : 1; // [6]     rw : 
 			ResetFlag GPIOHRST    : 1; // [7]     rw : 
 			ResetFlag GPIOIRST    : 1; // [8]     rw : 
-			uint8_t   Reserved1   : 3; // [11:9]     : 
+			uint32_t  Reserved1   : 3; // [11:9]     : 
 			ResetFlag CRCRST      : 1; // [12]    rw : 
-			uint8_t   Reserved2   : 8; // [20:13]    : 
+			uint32_t  Reserved2   : 8; // [20:13]    : 
 			ResetFlag DMA1RST     : 1; // [21]    rw : 
 			ResetFlag DMA2RST     : 1; // [22]    rw : 
-			uint8_t   Reserved3   : 2; // [24:23]    : 
+			uint32_t  Reserved3   : 2; // [24:23]    : 
 			ResetFlag ETHMACRST   : 1; // [25]    rw : 
-			uint8_t   Reserved4   : 3; // [28:26]    : 
+			uint32_t  Reserved4   : 3; // [28:26]    : 
 			ResetFlag OTGHSRST    : 1; // [29]    rw : 
 			uint32_t  Reserved5   : 2; // Pad to 32 bits 
 		} Fields;
@@ -132,7 +132,7 @@ namespace stm32::rcc
 		volatile struct
 		{
 			ResetFlag DCMIRST     : 1; // [0]     rw : 
-			uint8_t   Reserved1   : 3; // [3:1]      : 
+			uint32_t  Reserved1   : 3; // [3:1]      : 
 			ResetFlag CRYPRST     : 1; // [4]     rw : 
 			ResetFlag HASHRST     : 1; // [5]     rw : 
 			ResetFlag RNGRST      : 1; // [6]     rw : 
@@ -165,12 +165,12 @@ namespace stm32::rcc
 			ResetFlag TIM12RST    : 1; // [6]     rw : 
 			ResetFlag TIM13RST    : 1; // [7]     rw : 
 			ResetFlag TIM14RST    : 1; // [8]     rw : 
-			uint8_t   Reserved1   : 2; // [10:9]     : 
+			uint32_t  Reserved1   : 2; // [10:9]     : 
 			ResetFlag WWDGRST     : 1; // [11]    rw : 
-			uint8_t   Reserved2   : 2; // [13:12]    : 
+			uint32_t  Reserved2   : 2; // [13:12]    : 
 			ResetFlag SPI2RST     : 1; // [14]    rw : 
 			ResetFlag SPI3RST     : 1; // [15]    rw : 
-			uint8_t   Reserved3   : 1; // [16]       : 
+			uint32_t  Reserved3   : 1; // [16]       : 
 			ResetFlag UART2RST    : 1; // [17]    rw : 
 			ResetFlag UART3RST    : 1; // [18]    rw : 
 			ResetFlag UART4RST    : 1; // [19]    rw : 
@@ -178,10 +178,10 @@ namespace stm32::rcc
 			ResetFlag I2C1RST     : 1; // [21]    rw : 
 			ResetFlag I2C2RST     : 1; // [22]    rw : 
 			ResetFlag I2C3RST     : 1; // [23]    rw : 
-			uint8_t   Reserved4   : 1; // [24]       : 
+			uint32_t  Reserved4   : 1; // [24]       : 
 			ResetFlag CAN1RST     : 1; // [25]    rw : 
 			ResetFlag CAN2RST     : 1; // [26]    rw : 
-			uint8_t   Reserved5   : 1; // [27]       : 
+			uint32_t  Reserved5   : 1; // [27]       : 
 			ResetFlag PWRRST      : 1; // [28]    rw : 
 			ResetFlag DACRST      : 1; // [29]    rw : 
 			uint32_t  Reserved6   : 2; // Pad to 32 bits 
@@ -195,17 +195,17 @@ namespace stm32::rcc
 		{
 			ResetFlag TIM1RST     : 1; // [0]     rw : 
 			ResetFlag TIM8RST     : 1; // [1]     rw : 
-			uint8_t   Reserved1   : 2; // [3:2]      : 
+			uint32_t  Reserved1   : 2; // [3:2]      : 
 			ResetFlag USART1RST   : 1; // [4]     rw : 
 			ResetFlag USART6RST   : 1; // [5]     rw : 
-			uint8_t   Reserved2   : 2; // [7:6]      : 
+			uint32_t  Reserved2   : 2; // [7:6]      : 
 			ResetFlag ADCRST      : 1; // [8]     rw : 
-			uint8_t   Reserved3   : 2; // [10:9]     : 
+			uint32_t  Reserved3   : 2; // [10:9]     : 
 			ResetFlag SDIORST     : 1; // [11]    rw : 
 			ResetFlag SPI1RST     : 1; // [12]    rw : 
-			uint8_t   Reserved4   : 1; // [13]       : 
+			uint32_t  Reserved4   : 1; // [13]       : 
 			ResetFlag SYSCFGRST   : 1; // [14]    rw : 
-			uint8_t   Reserved5   : 1; // [15]       : 
+			uint32_t  Reserved5   : 1; // [15]       : 
 			ResetFlag TIM9RST     : 1; // [16]    rw : 
 			ResetFlag TIM10RST    : 1; // [17]    rw : 
 			ResetFlag TIM11RST    : 1; // [18]    rw : 
@@ -227,15 +227,15 @@ namespace stm32::rcc
 			EnableFlag GPIOGEN     : 1; // [6]     rw : 
 			EnableFlag GPIOHEN     : 1; // [7]     rw : 
 			EnableFlag GPIOIEN     : 1; // [8]     rw : 
-			uint8_t    Reserved1   : 3; // [11:9]     : 
+			uint32_t   Reserved1   : 3; // [11:9]     : 
 			EnableFlag CRCEN       : 1; // [12]    rw : 
-			uint8_t    Reserved2   : 5; // [17:13]    : 
+			uint32_t   Reserved2   : 5; // [17:13]    : 
 			EnableFlag BKPSRAMEN   : 1; // [18]    rw : 
-			uint8_t    Reserved3   : 1; // [19]       : 
+			uint32_t   Reserved3   : 1; // [19]       : 
 			EnableFlag CCMDATARAMEN : 1; // [20]    rw : 
 			EnableFlag DMA1EN      : 1; // [21]    rw : 
 			EnableFlag DMA2EN      : 1; // [22]    rw : 
-			uint8_t    Reserved4   : 2; // [24:23]    : 
+			uint32_t   Reserved4   : 2; // [24:23]    : 
 			EnableFlag ETHMACEN    : 1; // [25]    rw : 
 			EnableFlag ETHMACTXEN  : 1; // [26]    rw : 
 			EnableFlag ETHMACRXEN  : 1; // [27]    rw : 
@@ -252,7 +252,7 @@ namespace stm32::rcc
 		volatile struct
 		{
 			EnableFlag DCMIEN      : 1; // [0]     rw : 
-			uint8_t    Reserved1   : 3; // [3:1]      : 
+			uint32_t   Reserved1   : 3; // [3:1]      : 
 			EnableFlag CRYPEN      : 1; // [4]     rw : 
 			EnableFlag HASHEN      : 1; // [5]     rw : 
 			EnableFlag RNGEN       : 1; // [6]     rw : 
@@ -285,12 +285,12 @@ namespace stm32::rcc
 			EnableFlag TIM12EN     : 1; // [6]     rw : 
 			EnableFlag TIM13EN     : 1; // [7]     rw : 
 			EnableFlag TIM14EN     : 1; // [8]     rw : 
-			uint8_t    Reserved1   : 2; // [10:9]     : 
+			uint32_t   Reserved1   : 2; // [10:9]     : 
 			EnableFlag WWDGEN      : 1; // [11]    rw : 
 			EnableFlag Reserved2   : 2; // [13:12]    : 
 			EnableFlag SPI2EN      : 1; // [14]    rw : 
 			EnableFlag SPI3EN      : 1; // [15]    rw : 
-			uint8_t    Reserved3   : 1; // [16]       : 
+			uint32_t   Reserved3   : 1; // [16]       : 
 			EnableFlag USART2EN    : 1; // [17]    rw : 
 			EnableFlag USART3EN    : 1; // [18]    rw : 
 			EnableFlag UART4EN     : 1; // [19]    rw : 
@@ -298,10 +298,10 @@ namespace stm32::rcc
 			EnableFlag I2C1EN      : 1; // [21]    rw : 
 			EnableFlag I2C2EN      : 1; // [22]    rw : 
 			EnableFlag I2C3EN      : 1; // [23]    rw : 
-			uint8_t    Reserved4   : 1; // [24]       : 
+			uint32_t   Reserved4   : 1; // [24]       : 
 			EnableFlag CAN1EN      : 1; // [25]    rw : 
 			EnableFlag CAN2EN      : 1; // [26]    rw : 
-			uint8_t    Reserved5   : 1; // [27]       : 
+			uint32_t   Reserved5   : 1; // [27]       : 
 			EnableFlag PWREN       : 1; // [28]    rw : 
 			EnableFlag DACEN       : 1; // [29]    rw : 
 			uint32_t   Reserved6   : 2; // Pad to 32 bits 
@@ -315,18 +315,18 @@ namespace stm32::rcc
 		{
 			EnableFlag TIM1EN      : 1; // [0]     rw : 
 			EnableFlag TIM8EN      : 1; // [1]     rw : 
-			uint8_t    Reserved1   : 2; // [3:2]      : 
+			uint32_t   Reserved1   : 2; // [3:2]      : 
 			EnableFlag USART1EN    : 1; // [4]     rw : 
 			EnableFlag USART6EN    : 1; // [5]     rw : 
-			uint8_t    Reserved2   : 2; // [7:6]      : 
+			uint32_t   Reserved2   : 2; // [7:6]      : 
 			EnableFlag ADC1EN      : 1; // [8]     rw : 
 			EnableFlag ADC2EN      : 1; // [9]     rw : 
 			EnableFlag ADC3EN      : 1; // [10]    rw : 
 			EnableFlag SDIOEN      : 1; // [11]    rw : 
 			EnableFlag SPI1EN      : 1; // [12]    rw : 
-			uint8_t    Reserved3   : 1; // [13]       : 
+			uint32_t   Reserved3   : 1; // [13]       : 
 			EnableFlag SYSCFGEN    : 1; // [14]    rw : 
-			uint8_t    Reserved4   : 1; // [15]       : 
+			uint32_t   Reserved4   : 1; // [15]       : 
 			EnableFlag TIM9EN      : 1; // [16]    rw : 
 			EnableFlag TIM10EN     : 1; // [17]    rw : 
 			EnableFlag TIM11EN     : 1; // [18]    rw : 
@@ -348,17 +348,17 @@ namespace stm32::rcc
 			EnableFlag GPIOGLPEN   : 1; // [6]     rw : 
 			EnableFlag GPIOHLPEN   : 1; // [7]     rw : 
 			EnableFlag GPIOILPEN   : 1; // [8]     rw : 
-			uint8_t    Reserved1   : 3; // [11:9]     : 
+			uint32_t   Reserved1   : 3; // [11:9]     : 
 			EnableFlag CRCLPEN     : 1; // [12]    rw : 
-			uint8_t    Reserved2   : 2; // [14:13]    : 
+			uint32_t   Reserved2   : 2; // [14:13]    : 
 			EnableFlag FLITFLPEN   : 1; // [15]    rw : 
 			EnableFlag SRAM1LPEN   : 1; // [16]    rw : 
 			EnableFlag SRAM2LPEN   : 1; // [17]    rw : 
 			EnableFlag BKPSRAMLPEN : 1; // [18]    rw : 
-			uint8_t    Reserved3   : 2; // [20:19]    : 
+			uint32_t   Reserved3   : 2; // [20:19]    : 
 			EnableFlag DMA1LPEN    : 1; // [21]    rw : 
 			EnableFlag DMA2LPEN    : 1; // [22]    rw : 
-			uint8_t    Reserved4   : 2; // [24:23]    : 
+			uint32_t   Reserved4   : 2; // [24:23]    : 
 			EnableFlag ETHMACLPEN  : 1; // [25]    rw : 
 			EnableFlag ETHMACTXLPEN : 1; // [26]    rw : 
 			EnableFlag ETHMACRXLPEN : 1; // [27]    rw : 
@@ -375,7 +375,7 @@ namespace stm32::rcc
 		volatile struct
 		{
 			EnableFlag DCMILPEN    : 1; // [0]     rw : 
-			uint8_t    Reserved1   : 3; // [3:1]      : 
+			uint32_t   Reserved1   : 3; // [3:1]      : 
 			EnableFlag CRYPLPEN    : 1; // [4]     rw : 
 			EnableFlag HASHLPEN    : 1; // [5]     rw : 
 			EnableFlag RNGLPEN     : 1; // [6]     rw : 
@@ -408,12 +408,12 @@ namespace stm32::rcc
 			EnableFlag TIM12LPEN   : 1; // [6]     rw : 
 			EnableFlag TIM13LPEN   : 1; // [7]     rw : 
 			EnableFlag TIM14LPEN   : 1; // [8]     rw : 
-			uint8_t    Reserved1   : 2; // [10:9]     : 
+			uint32_t   Reserved1   : 2; // [10:9]     : 
 			EnableFlag WWDGLPEN    : 1; // [11]    rw : 
-			uint8_t    Reserved2   : 2; // [13:12]    : 
+			uint32_t   Reserved2   : 2; // [13:12]    : 
 			EnableFlag SPI2LPEN    : 1; // [14]    rw : 
 			EnableFlag SPI3LPEN    : 1; // [15]    rw : 
-			uint8_t    Reserved3   : 1; // [16]       : 
+			uint32_t   Reserved3   : 1; // [16]       : 
 			EnableFlag USART2LPEN  : 1; // [17]    rw : 
 			EnableFlag USART3LPEN  : 1; // [18]    rw : 
 			EnableFlag UART4LPEN   : 1; // [19]    rw : 
@@ -421,10 +421,10 @@ namespace stm32::rcc
 			EnableFlag I2C1LPEN    : 1; // [21]    rw : 
 			EnableFlag I2C2LPEN    : 1; // [22]    rw : 
 			EnableFlag I2C3LPEN    : 1; // [23]    rw : 
-			uint8_t    Reserved4   : 1; // [24]       : 
+			uint32_t   Reserved4   : 1; // [24]       : 
 			EnableFlag CAN1LPEN    : 1; // [25]    rw : 
 			EnableFlag CAN2LPEN    : 1; // [26]    rw : 
-			uint8_t    Reserved5   : 1; // [27]       : 
+			uint32_t   Reserved5   : 1; // [27]       : 
 			EnableFlag PWRLPEN     : 1; // [28]    rw : 
 			EnableFlag DACLPEN     : 1; // [29]    rw : 
 			uint32_t   Reserved6   : 2; // Pad to 32 bits 
@@ -438,18 +438,18 @@ namespace stm32::rcc
 		{
 			EnableFlag TIM1LPEN    : 1; // [0]     rw : 
 			EnableFlag TIM8LPEN    : 1; // [1]     rw : 
-			uint8_t    Reserved1   : 2; // [3:2]      : 
-			uint8_t    Reserved2   : 2; // [3:2]      : 
+			uint32_t   Reserved1   : 2; // [3:2]      : 
 			EnableFlag USART1LPEN  : 1; // [4]     rw : 
 			EnableFlag USART6LPEN  : 1; // [5]     rw : 
+			uint32_t   Reserved2   : 2; // [7:6]      : 
 			EnableFlag ADC1LPEN    : 1; // [8]     rw : 
 			EnableFlag ADC2LPEN    : 1; // [9]     rw : 
 			EnableFlag ADC3LPEN    : 1; // [10]    rw : 
 			EnableFlag SDIOLPEN    : 1; // [11]    rw : 
 			EnableFlag SPI1LPEN    : 1; // [12]    rw : 
-			uint8_t    Reserved3   : 1; // [13]       : 
+			uint32_t   Reserved3   : 1; // [13]       : 
 			EnableFlag SYSCFGLPEN  : 1; // [14]    rw : 
-			uint8_t    Reserved4   : 1; // [15]       : 
+			uint32_t   Reserved4   : 1; // [15]       : 
 			EnableFlag TIM9LPEN    : 1; // [16]    rw : 
 			EnableFlag TIM10LPEN   : 1; // [17]    rw : 
 			EnableFlag TIM11LPEN   : 1; // [18]    rw : 
@@ -465,9 +465,9 @@ namespace stm32::rcc
 			EnableFlag                       LSEON       : 1; // [0]     rw : 
 			ReadyFlag                        LSERDY      : 1; // [1]     r  : 
 			ExternalLowSpeedOscillatorBypass LSEBYP      : 1; // [2]     rw : 
-			uint8_t                          Reserved1   : 5; // [7:3]      : 
+			uint32_t                         Reserved1   : 5; // [7:3]      : 
 			RtcClockSourceSelection          RTCSEL      : 2; // [9:8]   rw : 
-			uint8_t                          Reserved2   : 5; // [14:10]    : 
+			uint32_t                         Reserved2   : 5; // [14:10]    : 
 			EnableFlag                       RTCEN       : 1; // [15]    rw : 
 			ResetFlag                        BDRST       : 1; // [16]    rw : 
 			uint32_t                         Reserved3   : 15; // Pad to 32 bits 
@@ -498,9 +498,9 @@ namespace stm32::rcc
 	{
 		volatile struct
 		{
-			uint16_t     MODPER      : 13; // [12:0]  rw : Modulation period
-			uint16_t     INCSTEP     : 15; // [27:13] rw : Incrementation step
-			uint8_t      Reserved1   : 2; // [29:28]    : 
+			uint32_t     MODPER      : 13; // [12:0]  rw : Modulation period
+			uint32_t     INCSTEP     : 15; // [27:13] rw : Incrementation step
+			uint32_t     Reserved1   : 2; // [29:28]    : 
 			SpreadSelect SPREADSEL   : 1; // [30]    rw : Spread Select
 			EnableFlag   SSCGEN      : 1; // [31]    rw : Spread spectrum modulation enable
 		} Fields;
@@ -511,10 +511,10 @@ namespace stm32::rcc
 	{
 		volatile struct
 		{
-			uint8_t  Reserved1   : 6; // [5:0]      : 
-			uint16_t PLLI2SN     : 9; // [14:6]  rw : PLLI2S multiplication factor for VCO
-			uint16_t Reserved2   : 13; // [27:15]    : 
-			uint8_t  PLLI2SR     : 3; // [30:28] rw : PLLI2S division factor for I2S clocks
+			uint32_t Reserved1   : 6; // [5:0]      : 
+			uint32_t PLLI2SN     : 9; // [14:6]  rw : PLLI2S multiplication factor for VCO
+			uint32_t Reserved2   : 13; // [27:15]    : 
+			uint32_t PLLI2SR     : 3; // [30:28] rw : PLLI2S division factor for I2S clocks
 			uint32_t Reserved3   : 1; // Pad to 32 bits 
 		} Fields;
 		volatile uint32_t Value;
@@ -527,8 +527,8 @@ namespace stm32::rcc
 		// CR Fields
 		virtual EnableFlag get_CR_HSION() const = 0;
 		virtual ReadyFlag get_CR_HSIRDY() const = 0;
-		virtual uint8_t get_CR_HSITRIM() const = 0;
-		virtual uint8_t get_CR_HSICAL() const = 0;
+		virtual uint32_t get_CR_HSITRIM() const = 0;
+		virtual uint32_t get_CR_HSICAL() const = 0;
 		virtual EnableFlag get_CR_HSEON() const = 0;
 		virtual ReadyFlag get_CR_HSERDY() const = 0;
 		virtual HseClockBypass get_CR_HSEBYP() const = 0;
@@ -538,7 +538,7 @@ namespace stm32::rcc
 		virtual EnableFlag get_CR_PLLI2SON() const = 0;
 		virtual ReadyFlag get_CR_PLLI2SRDY() const = 0;
 		virtual void set_CR_HSION(EnableFlag value) = 0;
-		virtual void set_CR_HSITRIM(uint8_t value) = 0;
+		virtual void set_CR_HSITRIM(uint32_t value) = 0;
 		virtual void set_CR_HSEON(EnableFlag value) = 0;
 		virtual void set_CR_HSEBYP(HseClockBypass value) = 0;
 		virtual void set_CR_CSSON(EnableFlag value) = 0;
@@ -546,16 +546,16 @@ namespace stm32::rcc
 		virtual void set_CR_PLLI2SON(EnableFlag value) = 0;
 
 		// PLLCFGR Fields
-		virtual uint8_t get_PLLCFGR_PLLM() const = 0;
-		virtual uint16_t get_PLLCFGR_PLLN() const = 0;
+		virtual uint32_t get_PLLCFGR_PLLM() const = 0;
+		virtual uint32_t get_PLLCFGR_PLLN() const = 0;
 		virtual MainPllDivisionFactor get_PLLCFGR_PLLP() const = 0;
 		virtual MainPllAndAudioPllEntryClockSource get_PLLCFGR_PLLSRC() const = 0;
-		virtual uint8_t get_PLLCFGR_PLLQ() const = 0;
-		virtual void set_PLLCFGR_PLLM(uint8_t value) = 0;
-		virtual void set_PLLCFGR_PLLN(uint16_t value) = 0;
+		virtual uint32_t get_PLLCFGR_PLLQ() const = 0;
+		virtual void set_PLLCFGR_PLLM(uint32_t value) = 0;
+		virtual void set_PLLCFGR_PLLN(uint32_t value) = 0;
 		virtual void set_PLLCFGR_PLLP(MainPllDivisionFactor value) = 0;
 		virtual void set_PLLCFGR_PLLSRC(MainPllAndAudioPllEntryClockSource value) = 0;
-		virtual void set_PLLCFGR_PLLQ(uint8_t value) = 0;
+		virtual void set_PLLCFGR_PLLQ(uint32_t value) = 0;
 
 		// CFGR Fields
 		virtual SystemClock get_CFGR_SW() const = 0;
@@ -563,7 +563,7 @@ namespace stm32::rcc
 		virtual AhbPrescaler get_CFGR_HPRE() const = 0;
 		virtual ApbPrescaler get_CFGR_PPRE1() const = 0;
 		virtual ApbPrescaler get_CFGR_PPRE2() const = 0;
-		virtual uint8_t get_CFGR_RTCPRE() const = 0;
+		virtual uint32_t get_CFGR_RTCPRE() const = 0;
 		virtual MicrocontrollerClockOutput1 get_CFGR_MCO1() const = 0;
 		virtual I2SClockSelection get_CFGR_I2SSCR() const = 0;
 		virtual McoPrescaler get_CFGR_MCO1PRE() const = 0;
@@ -573,7 +573,7 @@ namespace stm32::rcc
 		virtual void set_CFGR_HPRE(AhbPrescaler value) = 0;
 		virtual void set_CFGR_PPRE1(ApbPrescaler value) = 0;
 		virtual void set_CFGR_PPRE2(ApbPrescaler value) = 0;
-		virtual void set_CFGR_RTCPRE(uint8_t value) = 0;
+		virtual void set_CFGR_RTCPRE(uint32_t value) = 0;
 		virtual void set_CFGR_MCO1(MicrocontrollerClockOutput1 value) = 0;
 		virtual void set_CFGR_I2SSCR(I2SClockSelection value) = 0;
 		virtual void set_CFGR_MCO1PRE(McoPrescaler value) = 0;
@@ -1026,20 +1026,20 @@ namespace stm32::rcc
 		virtual void set_CSR_RMVF(ClearFlag value) = 0;
 
 		// SSCGR Fields
-		virtual uint16_t get_SSCGR_MODPER() const = 0;
-		virtual uint16_t get_SSCGR_INCSTEP() const = 0;
+		virtual uint32_t get_SSCGR_MODPER() const = 0;
+		virtual uint32_t get_SSCGR_INCSTEP() const = 0;
 		virtual SpreadSelect get_SSCGR_SPREADSEL() const = 0;
 		virtual EnableFlag get_SSCGR_SSCGEN() const = 0;
-		virtual void set_SSCGR_MODPER(uint16_t value) = 0;
-		virtual void set_SSCGR_INCSTEP(uint16_t value) = 0;
+		virtual void set_SSCGR_MODPER(uint32_t value) = 0;
+		virtual void set_SSCGR_INCSTEP(uint32_t value) = 0;
 		virtual void set_SSCGR_SPREADSEL(SpreadSelect value) = 0;
 		virtual void set_SSCGR_SSCGEN(EnableFlag value) = 0;
 
 		// PLLI2SCFGR Fields
-		virtual uint16_t get_PLLI2SCFGR_PLLI2SN() const = 0;
-		virtual uint8_t get_PLLI2SCFGR_PLLI2SR() const = 0;
-		virtual void set_PLLI2SCFGR_PLLI2SN(uint16_t value) = 0;
-		virtual void set_PLLI2SCFGR_PLLI2SR(uint8_t value) = 0;
+		virtual uint32_t get_PLLI2SCFGR_PLLI2SN() const = 0;
+		virtual uint32_t get_PLLI2SCFGR_PLLI2SR() const = 0;
+		virtual void set_PLLI2SCFGR_PLLI2SN(uint32_t value) = 0;
+		virtual void set_PLLI2SCFGR_PLLI2SR(uint32_t value) = 0;
 	};
 
 	class RccRegisterMap : public IRccRegisterMap
@@ -1049,8 +1049,8 @@ namespace stm32::rcc
 		// CR Fields
 		EnableFlag get_CR_HSION() const override { return CR.Fields.HSION; }
 		ReadyFlag get_CR_HSIRDY() const override { return CR.Fields.HSIRDY; }
-		uint8_t get_CR_HSITRIM() const override { return CR.Fields.HSITRIM; }
-		uint8_t get_CR_HSICAL() const override { return CR.Fields.HSICAL; }
+		uint32_t get_CR_HSITRIM() const override { return CR.Fields.HSITRIM; }
+		uint32_t get_CR_HSICAL() const override { return CR.Fields.HSICAL; }
 		EnableFlag get_CR_HSEON() const override { return CR.Fields.HSEON; }
 		ReadyFlag get_CR_HSERDY() const override { return CR.Fields.HSERDY; }
 		HseClockBypass get_CR_HSEBYP() const override { return CR.Fields.HSEBYP; }
@@ -1060,7 +1060,7 @@ namespace stm32::rcc
 		EnableFlag get_CR_PLLI2SON() const override { return CR.Fields.PLLI2SON; }
 		ReadyFlag get_CR_PLLI2SRDY() const override { return CR.Fields.PLLI2SRDY; }
 		void set_CR_HSION(EnableFlag value) override { CR.Fields.HSION = value; }
-		void set_CR_HSITRIM(uint8_t value) override { CR.Fields.HSITRIM = value; }
+		void set_CR_HSITRIM(uint32_t value) override { CR.Fields.HSITRIM = value; }
 		void set_CR_HSEON(EnableFlag value) override { CR.Fields.HSEON = value; }
 		void set_CR_HSEBYP(HseClockBypass value) override { CR.Fields.HSEBYP = value; }
 		void set_CR_CSSON(EnableFlag value) override { CR.Fields.CSSON = value; }
@@ -1068,16 +1068,16 @@ namespace stm32::rcc
 		void set_CR_PLLI2SON(EnableFlag value) override { CR.Fields.PLLI2SON = value; }
 
 		// PLLCFGR Fields
-		uint8_t get_PLLCFGR_PLLM() const override { return PLLCFGR.Fields.PLLM; }
-		uint16_t get_PLLCFGR_PLLN() const override { return PLLCFGR.Fields.PLLN; }
+		uint32_t get_PLLCFGR_PLLM() const override { return PLLCFGR.Fields.PLLM; }
+		uint32_t get_PLLCFGR_PLLN() const override { return PLLCFGR.Fields.PLLN; }
 		MainPllDivisionFactor get_PLLCFGR_PLLP() const override { return PLLCFGR.Fields.PLLP; }
 		MainPllAndAudioPllEntryClockSource get_PLLCFGR_PLLSRC() const override { return PLLCFGR.Fields.PLLSRC; }
-		uint8_t get_PLLCFGR_PLLQ() const override { return PLLCFGR.Fields.PLLQ; }
-		void set_PLLCFGR_PLLM(uint8_t value) override { PLLCFGR.Fields.PLLM = value; }
-		void set_PLLCFGR_PLLN(uint16_t value) override { PLLCFGR.Fields.PLLN = value; }
+		uint32_t get_PLLCFGR_PLLQ() const override { return PLLCFGR.Fields.PLLQ; }
+		void set_PLLCFGR_PLLM(uint32_t value) override { PLLCFGR.Fields.PLLM = value; }
+		void set_PLLCFGR_PLLN(uint32_t value) override { PLLCFGR.Fields.PLLN = value; }
 		void set_PLLCFGR_PLLP(MainPllDivisionFactor value) override { PLLCFGR.Fields.PLLP = value; }
 		void set_PLLCFGR_PLLSRC(MainPllAndAudioPllEntryClockSource value) override { PLLCFGR.Fields.PLLSRC = value; }
-		void set_PLLCFGR_PLLQ(uint8_t value) override { PLLCFGR.Fields.PLLQ = value; }
+		void set_PLLCFGR_PLLQ(uint32_t value) override { PLLCFGR.Fields.PLLQ = value; }
 
 		// CFGR Fields
 		SystemClock get_CFGR_SW() const override { return CFGR.Fields.SW; }
@@ -1085,7 +1085,7 @@ namespace stm32::rcc
 		AhbPrescaler get_CFGR_HPRE() const override { return CFGR.Fields.HPRE; }
 		ApbPrescaler get_CFGR_PPRE1() const override { return CFGR.Fields.PPRE1; }
 		ApbPrescaler get_CFGR_PPRE2() const override { return CFGR.Fields.PPRE2; }
-		uint8_t get_CFGR_RTCPRE() const override { return CFGR.Fields.RTCPRE; }
+		uint32_t get_CFGR_RTCPRE() const override { return CFGR.Fields.RTCPRE; }
 		MicrocontrollerClockOutput1 get_CFGR_MCO1() const override { return CFGR.Fields.MCO1; }
 		I2SClockSelection get_CFGR_I2SSCR() const override { return CFGR.Fields.I2SSCR; }
 		McoPrescaler get_CFGR_MCO1PRE() const override { return CFGR.Fields.MCO1PRE; }
@@ -1095,7 +1095,7 @@ namespace stm32::rcc
 		void set_CFGR_HPRE(AhbPrescaler value) override { CFGR.Fields.HPRE = value; }
 		void set_CFGR_PPRE1(ApbPrescaler value) override { CFGR.Fields.PPRE1 = value; }
 		void set_CFGR_PPRE2(ApbPrescaler value) override { CFGR.Fields.PPRE2 = value; }
-		void set_CFGR_RTCPRE(uint8_t value) override { CFGR.Fields.RTCPRE = value; }
+		void set_CFGR_RTCPRE(uint32_t value) override { CFGR.Fields.RTCPRE = value; }
 		void set_CFGR_MCO1(MicrocontrollerClockOutput1 value) override { CFGR.Fields.MCO1 = value; }
 		void set_CFGR_I2SSCR(I2SClockSelection value) override { CFGR.Fields.I2SSCR = value; }
 		void set_CFGR_MCO1PRE(McoPrescaler value) override { CFGR.Fields.MCO1PRE = value; }
@@ -1548,20 +1548,20 @@ namespace stm32::rcc
 		void set_CSR_RMVF(ClearFlag value) override { CSR.Fields.RMVF = value; }
 
 		// SSCGR Fields
-		uint16_t get_SSCGR_MODPER() const override { return SSCGR.Fields.MODPER; }
-		uint16_t get_SSCGR_INCSTEP() const override { return SSCGR.Fields.INCSTEP; }
+		uint32_t get_SSCGR_MODPER() const override { return SSCGR.Fields.MODPER; }
+		uint32_t get_SSCGR_INCSTEP() const override { return SSCGR.Fields.INCSTEP; }
 		SpreadSelect get_SSCGR_SPREADSEL() const override { return SSCGR.Fields.SPREADSEL; }
 		EnableFlag get_SSCGR_SSCGEN() const override { return SSCGR.Fields.SSCGEN; }
-		void set_SSCGR_MODPER(uint16_t value) override { SSCGR.Fields.MODPER = value; }
-		void set_SSCGR_INCSTEP(uint16_t value) override { SSCGR.Fields.INCSTEP = value; }
+		void set_SSCGR_MODPER(uint32_t value) override { SSCGR.Fields.MODPER = value; }
+		void set_SSCGR_INCSTEP(uint32_t value) override { SSCGR.Fields.INCSTEP = value; }
 		void set_SSCGR_SPREADSEL(SpreadSelect value) override { SSCGR.Fields.SPREADSEL = value; }
 		void set_SSCGR_SSCGEN(EnableFlag value) override { SSCGR.Fields.SSCGEN = value; }
 
 		// PLLI2SCFGR Fields
-		uint16_t get_PLLI2SCFGR_PLLI2SN() const override { return PLLI2SCFGR.Fields.PLLI2SN; }
-		uint8_t get_PLLI2SCFGR_PLLI2SR() const override { return PLLI2SCFGR.Fields.PLLI2SR; }
-		void set_PLLI2SCFGR_PLLI2SN(uint16_t value) override { PLLI2SCFGR.Fields.PLLI2SN = value; }
-		void set_PLLI2SCFGR_PLLI2SR(uint8_t value) override { PLLI2SCFGR.Fields.PLLI2SR = value; }
+		uint32_t get_PLLI2SCFGR_PLLI2SN() const override { return PLLI2SCFGR.Fields.PLLI2SN; }
+		uint32_t get_PLLI2SCFGR_PLLI2SR() const override { return PLLI2SCFGR.Fields.PLLI2SR; }
+		void set_PLLI2SCFGR_PLLI2SN(uint32_t value) override { PLLI2SCFGR.Fields.PLLI2SN = value; }
+		void set_PLLI2SCFGR_PLLI2SR(uint32_t value) override { PLLI2SCFGR.Fields.PLLI2SR = value; }
 
 	private:
 

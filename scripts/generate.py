@@ -44,7 +44,7 @@ class EnumType:
 
     def generate(self):
 
-        output = f"enum class {self.name} : uint8_t\n{{\n"
+        output = f"enum class {self.name}\n{{\n"
 
         for enum_value in self.enum_values:
             output += f"\t{to_camel_case(enum_value.description)} = {enum_value.value}U,\n"
@@ -74,12 +74,7 @@ class RegisterField:
         if self.type is not None and self.type != "":
             return self.type
         else:
-            if self.width <= 8:
-                return "uint8_t"
-            elif self.width > 8 and self.width <= 16:
-                return "uint16_t"
-            else:
-                return "uint32_t"
+            return "uint32_t"
 
     def generate_getter(self):
         return f"{self.generate_data_type()} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"

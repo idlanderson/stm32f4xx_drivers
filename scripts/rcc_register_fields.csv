@@ -12,7 +12,7 @@ CR,EnableFlag,Main PLL (PLL) enable,PLLON,24,1,rw
 CR,ReadyFlag,Main PLL (PLL) clock ready flag,PLLRDY,25,1,r
 CR,EnableFlag,PLLI2S enable,PLLI2SON,26,1,rw
 CR,ReadyFlag,PLLI2S clock ready flag,PLLI2SRDY,27,1,r
-PLLCFGR,,Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock,PLLM,0,5,rw
+PLLCFGR,,Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock,PLLM,0,6,rw
 PLLCFGR,,Main PLL (PLL) multiplication factor for VCO,PLLN,6,9,rw
 PLLCFGR,,,RESERVED1,15,1,
 PLLCFGR,MainPllDivisionFactor,Main PLL (PLL) division factor for main system clock,PLLP,16,2,rw
@@ -200,8 +200,6 @@ APB2ENR,,,Reserved,15,1,
 APB2ENR,EnableFlag,,TIM9EN,16,1,rw
 APB2ENR,EnableFlag,,TIM10EN,17,1,rw
 APB2ENR,EnableFlag,,TIM11EN,18,1,rw
-,,,,,,
-,,,,,,
 AHB1LPENR,EnableFlag,,GPIOALPEN,0,1,rw
 AHB1LPENR,EnableFlag,,GPIOBLPEN,1,1,rw
 AHB1LPENR,EnableFlag,,GPIOCLPEN,2,1,rw
@@ -268,7 +266,7 @@ APB2LPENR,EnableFlag,,TIM8LPEN,1,1,rw
 APB2LPENR,,,Reserved,2,2,
 APB2LPENR,EnableFlag,,USART1LPEN,4,1,rw
 APB2LPENR,EnableFlag,,USART6LPEN,5,1,rw
-APB2LPENR,,,Reserved,2,2,
+APB2LPENR,,,Reserved,6,2,
 APB2LPENR,EnableFlag,,ADC1LPEN,8,1,rw
 APB2LPENR,EnableFlag,,ADC2LPEN,9,1,rw
 APB2LPENR,EnableFlag,,ADC3LPEN,10,1,rw

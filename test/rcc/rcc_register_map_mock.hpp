@@ -12,8 +12,8 @@ public:
 	// CR Fields
 	MOCK_CONST_METHOD0(get_CR_HSION, EnableFlag());
 	MOCK_CONST_METHOD0(get_CR_HSIRDY, ReadyFlag());
-	MOCK_CONST_METHOD0(get_CR_HSITRIM, uint8_t());
-	MOCK_CONST_METHOD0(get_CR_HSICAL, uint8_t());
+	MOCK_CONST_METHOD0(get_CR_HSITRIM, uint32_t());
+	MOCK_CONST_METHOD0(get_CR_HSICAL, uint32_t());
 	MOCK_CONST_METHOD0(get_CR_HSEON, EnableFlag());
 	MOCK_CONST_METHOD0(get_CR_HSERDY, ReadyFlag());
 	MOCK_CONST_METHOD0(get_CR_HSEBYP, HseClockBypass());
@@ -23,7 +23,7 @@ public:
 	MOCK_CONST_METHOD0(get_CR_PLLI2SON, EnableFlag());
 	MOCK_CONST_METHOD0(get_CR_PLLI2SRDY, ReadyFlag());
 	MOCK_METHOD1(set_CR_HSION, void(EnableFlag value));
-	MOCK_METHOD1(set_CR_HSITRIM, void(uint8_t value));
+	MOCK_METHOD1(set_CR_HSITRIM, void(uint32_t value));
 	MOCK_METHOD1(set_CR_HSEON, void(EnableFlag value));
 	MOCK_METHOD1(set_CR_HSEBYP, void(HseClockBypass value));
 	MOCK_METHOD1(set_CR_CSSON, void(EnableFlag value));
@@ -31,16 +31,16 @@ public:
 	MOCK_METHOD1(set_CR_PLLI2SON, void(EnableFlag value));
 
 	// PLLCFGR Fields
-	MOCK_CONST_METHOD0(get_PLLCFGR_PLLM, uint8_t());
-	MOCK_CONST_METHOD0(get_PLLCFGR_PLLN, uint16_t());
+	MOCK_CONST_METHOD0(get_PLLCFGR_PLLM, uint32_t());
+	MOCK_CONST_METHOD0(get_PLLCFGR_PLLN, uint32_t());
 	MOCK_CONST_METHOD0(get_PLLCFGR_PLLP, MainPllDivisionFactor());
 	MOCK_CONST_METHOD0(get_PLLCFGR_PLLSRC, MainPllAndAudioPllEntryClockSource());
-	MOCK_CONST_METHOD0(get_PLLCFGR_PLLQ, uint8_t());
-	MOCK_METHOD1(set_PLLCFGR_PLLM, void(uint8_t value));
-	MOCK_METHOD1(set_PLLCFGR_PLLN, void(uint16_t value));
+	MOCK_CONST_METHOD0(get_PLLCFGR_PLLQ, uint32_t());
+	MOCK_METHOD1(set_PLLCFGR_PLLM, void(uint32_t value));
+	MOCK_METHOD1(set_PLLCFGR_PLLN, void(uint32_t value));
 	MOCK_METHOD1(set_PLLCFGR_PLLP, void(MainPllDivisionFactor value));
 	MOCK_METHOD1(set_PLLCFGR_PLLSRC, void(MainPllAndAudioPllEntryClockSource value));
-	MOCK_METHOD1(set_PLLCFGR_PLLQ, void(uint8_t value));
+	MOCK_METHOD1(set_PLLCFGR_PLLQ, void(uint32_t value));
 
 	// CFGR Fields
 	MOCK_CONST_METHOD0(get_CFGR_SW, SystemClock());
@@ -48,7 +48,7 @@ public:
 	MOCK_CONST_METHOD0(get_CFGR_HPRE, AhbPrescaler());
 	MOCK_CONST_METHOD0(get_CFGR_PPRE1, ApbPrescaler());
 	MOCK_CONST_METHOD0(get_CFGR_PPRE2, ApbPrescaler());
-	MOCK_CONST_METHOD0(get_CFGR_RTCPRE, uint8_t());
+	MOCK_CONST_METHOD0(get_CFGR_RTCPRE, uint32_t());
 	MOCK_CONST_METHOD0(get_CFGR_MCO1, MicrocontrollerClockOutput1());
 	MOCK_CONST_METHOD0(get_CFGR_I2SSCR, I2SClockSelection());
 	MOCK_CONST_METHOD0(get_CFGR_MCO1PRE, McoPrescaler());
@@ -58,7 +58,7 @@ public:
 	MOCK_METHOD1(set_CFGR_HPRE, void(AhbPrescaler value));
 	MOCK_METHOD1(set_CFGR_PPRE1, void(ApbPrescaler value));
 	MOCK_METHOD1(set_CFGR_PPRE2, void(ApbPrescaler value));
-	MOCK_METHOD1(set_CFGR_RTCPRE, void(uint8_t value));
+	MOCK_METHOD1(set_CFGR_RTCPRE, void(uint32_t value));
 	MOCK_METHOD1(set_CFGR_MCO1, void(MicrocontrollerClockOutput1 value));
 	MOCK_METHOD1(set_CFGR_I2SSCR, void(I2SClockSelection value));
 	MOCK_METHOD1(set_CFGR_MCO1PRE, void(McoPrescaler value));
@@ -511,19 +511,19 @@ public:
 	MOCK_METHOD1(set_CSR_RMVF, void(ClearFlag value));
 
 	// SSCGR Fields
-	MOCK_CONST_METHOD0(get_SSCGR_MODPER, uint16_t());
-	MOCK_CONST_METHOD0(get_SSCGR_INCSTEP, uint16_t());
+	MOCK_CONST_METHOD0(get_SSCGR_MODPER, uint32_t());
+	MOCK_CONST_METHOD0(get_SSCGR_INCSTEP, uint32_t());
 	MOCK_CONST_METHOD0(get_SSCGR_SPREADSEL, SpreadSelect());
 	MOCK_CONST_METHOD0(get_SSCGR_SSCGEN, EnableFlag());
-	MOCK_METHOD1(set_SSCGR_MODPER, void(uint16_t value));
-	MOCK_METHOD1(set_SSCGR_INCSTEP, void(uint16_t value));
+	MOCK_METHOD1(set_SSCGR_MODPER, void(uint32_t value));
+	MOCK_METHOD1(set_SSCGR_INCSTEP, void(uint32_t value));
 	MOCK_METHOD1(set_SSCGR_SPREADSEL, void(SpreadSelect value));
 	MOCK_METHOD1(set_SSCGR_SSCGEN, void(EnableFlag value));
 
 	// PLLI2SCFGR Fields
-	MOCK_CONST_METHOD0(get_PLLI2SCFGR_PLLI2SN, uint16_t());
-	MOCK_CONST_METHOD0(get_PLLI2SCFGR_PLLI2SR, uint8_t());
-	MOCK_METHOD1(set_PLLI2SCFGR_PLLI2SN, void(uint16_t value));
-	MOCK_METHOD1(set_PLLI2SCFGR_PLLI2SR, void(uint8_t value));
+	MOCK_CONST_METHOD0(get_PLLI2SCFGR_PLLI2SN, uint32_t());
+	MOCK_CONST_METHOD0(get_PLLI2SCFGR_PLLI2SR, uint32_t());
+	MOCK_METHOD1(set_PLLI2SCFGR_PLLI2SN, void(uint32_t value));
+	MOCK_METHOD1(set_PLLI2SCFGR_PLLI2SR, void(uint32_t value));
 };
 

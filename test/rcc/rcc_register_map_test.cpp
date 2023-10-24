@@ -24,7 +24,7 @@ TEST(CR, Reserved1)
 {
 	CR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)1U;
+	reg.Fields.Reserved1 = (uint32_t)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
@@ -32,7 +32,7 @@ TEST(CR, HSITRIM)
 {
 	CR reg;
 	reg.Value = 0U;
-	reg.Fields.HSITRIM = (uint8_t)31U;
+	reg.Fields.HSITRIM = (uint32_t)31U;
 	EXPECT_EQ(0x000000F8U, reg.Value);
 }
 
@@ -40,7 +40,7 @@ TEST(CR, HSICAL)
 {
 	CR reg;
 	reg.Value = 0U;
-	reg.Fields.HSICAL = (uint8_t)255U;
+	reg.Fields.HSICAL = (uint32_t)255U;
 	EXPECT_EQ(0x0000FF00U, reg.Value);
 }
 
@@ -80,7 +80,7 @@ TEST(CR, Reserved2)
 {
 	CR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)15U;
+	reg.Fields.Reserved2 = (uint32_t)15U;
 	EXPECT_EQ(0x00F00000U, reg.Value);
 }
 
@@ -120,15 +120,15 @@ TEST(PLLCFGR, PLLM)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.PLLM = (uint8_t)31U;
-	EXPECT_EQ(0x0000001FU, reg.Value);
+	reg.Fields.PLLM = (uint32_t)63U;
+	EXPECT_EQ(0x0000003FU, reg.Value);
 }
 
 TEST(PLLCFGR, PLLN)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.PLLN = (uint16_t)511U;
+	reg.Fields.PLLN = (uint32_t)511U;
 	EXPECT_EQ(0x00007FC0U, reg.Value);
 }
 
@@ -136,7 +136,7 @@ TEST(PLLCFGR, Reserved1)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)1U;
+	reg.Fields.Reserved1 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -152,7 +152,7 @@ TEST(PLLCFGR, Reserved2)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)15U;
+	reg.Fields.Reserved2 = (uint32_t)15U;
 	EXPECT_EQ(0x003C0000U, reg.Value);
 }
 
@@ -168,7 +168,7 @@ TEST(PLLCFGR, Reserved3)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
@@ -176,7 +176,7 @@ TEST(PLLCFGR, PLLQ)
 {
 	PLLCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.PLLQ = (uint8_t)15U;
+	reg.Fields.PLLQ = (uint32_t)15U;
 	EXPECT_EQ(0x0F000000U, reg.Value);
 }
 
@@ -208,7 +208,7 @@ TEST(CFGR, Reserved1)
 {
 	CFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x00000300U, reg.Value);
 }
 
@@ -232,7 +232,7 @@ TEST(CFGR, RTCPRE)
 {
 	CFGR reg;
 	reg.Value = 0U;
-	reg.Fields.RTCPRE = (uint8_t)31U;
+	reg.Fields.RTCPRE = (uint32_t)31U;
 	EXPECT_EQ(0x001F0000U, reg.Value);
 }
 
@@ -328,7 +328,7 @@ TEST(CIR, Reserved1)
 {
 	CIR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)1U;
+	reg.Fields.Reserved1 = (uint32_t)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
@@ -392,7 +392,7 @@ TEST(CIR, Reserved2)
 {
 	CIR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x0000C000U, reg.Value);
 }
 
@@ -448,7 +448,7 @@ TEST(CIR, Reserved3)
 {
 	CIR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
@@ -536,7 +536,7 @@ TEST(AHB1RSTR, Reserved1)
 {
 	AHB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
@@ -552,7 +552,7 @@ TEST(AHB1RSTR, Reserved2)
 {
 	AHB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)255U;
+	reg.Fields.Reserved2 = (uint32_t)255U;
 	EXPECT_EQ(0x001FE000U, reg.Value);
 }
 
@@ -576,7 +576,7 @@ TEST(AHB1RSTR, Reserved3)
 {
 	AHB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)3U;
+	reg.Fields.Reserved3 = (uint32_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
@@ -592,7 +592,7 @@ TEST(AHB1RSTR, Reserved4)
 {
 	AHB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)7U;
+	reg.Fields.Reserved4 = (uint32_t)7U;
 	EXPECT_EQ(0x1C000000U, reg.Value);
 }
 
@@ -616,7 +616,7 @@ TEST(AHB2RSTR, Reserved1)
 {
 	AHB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
@@ -736,7 +736,7 @@ TEST(APB1RSTR, Reserved1)
 {
 	APB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
@@ -752,7 +752,7 @@ TEST(APB1RSTR, Reserved2)
 {
 	APB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x00003000U, reg.Value);
 }
 
@@ -776,7 +776,7 @@ TEST(APB1RSTR, Reserved3)
 {
 	APB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
@@ -840,7 +840,7 @@ TEST(APB1RSTR, Reserved4)
 {
 	APB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
@@ -864,7 +864,7 @@ TEST(APB1RSTR, Reserved5)
 {
 	APB1RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved5 = (uint8_t)1U;
+	reg.Fields.Reserved5 = (uint32_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
@@ -904,7 +904,7 @@ TEST(APB2RSTR, Reserved1)
 {
 	APB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
@@ -928,7 +928,7 @@ TEST(APB2RSTR, Reserved2)
 {
 	APB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x000000C0U, reg.Value);
 }
 
@@ -944,7 +944,7 @@ TEST(APB2RSTR, Reserved3)
 {
 	APB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)3U;
+	reg.Fields.Reserved3 = (uint32_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
@@ -968,7 +968,7 @@ TEST(APB2RSTR, Reserved4)
 {
 	APB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -984,7 +984,7 @@ TEST(APB2RSTR, Reserved5)
 {
 	APB2RSTR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved5 = (uint8_t)1U;
+	reg.Fields.Reserved5 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -1088,7 +1088,7 @@ TEST(AHB1ENR, Reserved1)
 {
 	AHB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
@@ -1104,7 +1104,7 @@ TEST(AHB1ENR, Reserved2)
 {
 	AHB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)31U;
+	reg.Fields.Reserved2 = (uint32_t)31U;
 	EXPECT_EQ(0x0003E000U, reg.Value);
 }
 
@@ -1120,7 +1120,7 @@ TEST(AHB1ENR, Reserved3)
 {
 	AHB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
@@ -1152,7 +1152,7 @@ TEST(AHB1ENR, Reserved4)
 {
 	AHB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)3U;
+	reg.Fields.Reserved4 = (uint32_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
@@ -1216,7 +1216,7 @@ TEST(AHB2ENR, Reserved1)
 {
 	AHB2ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
@@ -1336,7 +1336,7 @@ TEST(APB1ENR, Reserved1)
 {
 	APB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
@@ -1376,7 +1376,7 @@ TEST(APB1ENR, Reserved3)
 {
 	APB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
@@ -1440,7 +1440,7 @@ TEST(APB1ENR, Reserved4)
 {
 	APB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
@@ -1464,7 +1464,7 @@ TEST(APB1ENR, Reserved5)
 {
 	APB1ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved5 = (uint8_t)1U;
+	reg.Fields.Reserved5 = (uint32_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
@@ -1504,7 +1504,7 @@ TEST(APB2ENR, Reserved1)
 {
 	APB2ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
@@ -1528,7 +1528,7 @@ TEST(APB2ENR, Reserved2)
 {
 	APB2ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x000000C0U, reg.Value);
 }
 
@@ -1576,7 +1576,7 @@ TEST(APB2ENR, Reserved3)
 {
 	APB2ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -1592,7 +1592,7 @@ TEST(APB2ENR, Reserved4)
 {
 	APB2ENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -1696,7 +1696,7 @@ TEST(AHB1LPENR, Reserved1)
 {
 	AHB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
@@ -1712,7 +1712,7 @@ TEST(AHB1LPENR, Reserved2)
 {
 	AHB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x00006000U, reg.Value);
 }
 
@@ -1752,7 +1752,7 @@ TEST(AHB1LPENR, Reserved3)
 {
 	AHB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)3U;
+	reg.Fields.Reserved3 = (uint32_t)3U;
 	EXPECT_EQ(0x00180000U, reg.Value);
 }
 
@@ -1776,7 +1776,7 @@ TEST(AHB1LPENR, Reserved4)
 {
 	AHB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)3U;
+	reg.Fields.Reserved4 = (uint32_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
@@ -1840,7 +1840,7 @@ TEST(AHB2LPENR, Reserved1)
 {
 	AHB2LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)7U;
+	reg.Fields.Reserved1 = (uint32_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
@@ -1960,7 +1960,7 @@ TEST(APB1LPENR, Reserved1)
 {
 	APB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
@@ -1976,7 +1976,7 @@ TEST(APB1LPENR, Reserved2)
 {
 	APB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
 	EXPECT_EQ(0x00003000U, reg.Value);
 }
 
@@ -2000,7 +2000,7 @@ TEST(APB1LPENR, Reserved3)
 {
 	APB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
@@ -2064,7 +2064,7 @@ TEST(APB1LPENR, Reserved4)
 {
 	APB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
@@ -2088,7 +2088,7 @@ TEST(APB1LPENR, Reserved5)
 {
 	APB1LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved5 = (uint8_t)1U;
+	reg.Fields.Reserved5 = (uint32_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
@@ -2128,15 +2128,7 @@ TEST(APB2LPENR, Reserved1)
 {
 	APB2LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
-	EXPECT_EQ(0x0000000CU, reg.Value);
-}
-
-TEST(APB2LPENR, Reserved2)
-{
-	APB2LPENR reg;
-	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
@@ -2154,6 +2146,14 @@ TEST(APB2LPENR, USART6LPEN)
 	reg.Value = 0U;
 	reg.Fields.USART6LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
+}
+
+TEST(APB2LPENR, Reserved2)
+{
+	APB2LPENR reg;
+	reg.Value = 0U;
+	reg.Fields.Reserved2 = (uint32_t)3U;
+	EXPECT_EQ(0x000000C0U, reg.Value);
 }
 
 TEST(APB2LPENR, ADC1LPEN)
@@ -2200,7 +2200,7 @@ TEST(APB2LPENR, Reserved3)
 {
 	APB2LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved3 = (uint8_t)1U;
+	reg.Fields.Reserved3 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -2216,7 +2216,7 @@ TEST(APB2LPENR, Reserved4)
 {
 	APB2LPENR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved4 = (uint8_t)1U;
+	reg.Fields.Reserved4 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -2272,7 +2272,7 @@ TEST(BDCR, Reserved1)
 {
 	BDCR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)31U;
+	reg.Fields.Reserved1 = (uint32_t)31U;
 	EXPECT_EQ(0x000000F8U, reg.Value);
 }
 
@@ -2288,7 +2288,7 @@ TEST(BDCR, Reserved2)
 {
 	BDCR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint8_t)31U;
+	reg.Fields.Reserved2 = (uint32_t)31U;
 	EXPECT_EQ(0x00007C00U, reg.Value);
 }
 
@@ -2400,7 +2400,7 @@ TEST(SSCGR, MODPER)
 {
 	SSCGR reg;
 	reg.Value = 0U;
-	reg.Fields.MODPER = (uint16_t)8191U;
+	reg.Fields.MODPER = (uint32_t)8191U;
 	EXPECT_EQ(0x00001FFFU, reg.Value);
 }
 
@@ -2408,7 +2408,7 @@ TEST(SSCGR, INCSTEP)
 {
 	SSCGR reg;
 	reg.Value = 0U;
-	reg.Fields.INCSTEP = (uint16_t)32767U;
+	reg.Fields.INCSTEP = (uint32_t)32767U;
 	EXPECT_EQ(0x0FFFE000U, reg.Value);
 }
 
@@ -2416,7 +2416,7 @@ TEST(SSCGR, Reserved1)
 {
 	SSCGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)3U;
+	reg.Fields.Reserved1 = (uint32_t)3U;
 	EXPECT_EQ(0x30000000U, reg.Value);
 }
 
@@ -2440,7 +2440,7 @@ TEST(PLLI2SCFGR, Reserved1)
 {
 	PLLI2SCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved1 = (uint8_t)63U;
+	reg.Fields.Reserved1 = (uint32_t)63U;
 	EXPECT_EQ(0x0000003FU, reg.Value);
 }
 
@@ -2448,7 +2448,7 @@ TEST(PLLI2SCFGR, PLLI2SN)
 {
 	PLLI2SCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.PLLI2SN = (uint16_t)511U;
+	reg.Fields.PLLI2SN = (uint32_t)511U;
 	EXPECT_EQ(0x00007FC0U, reg.Value);
 }
 
@@ -2456,7 +2456,7 @@ TEST(PLLI2SCFGR, Reserved2)
 {
 	PLLI2SCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.Reserved2 = (uint16_t)8191U;
+	reg.Fields.Reserved2 = (uint32_t)8191U;
 	EXPECT_EQ(0x0FFF8000U, reg.Value);
 }
 
@@ -2464,7 +2464,7 @@ TEST(PLLI2SCFGR, PLLI2SR)
 {
 	PLLI2SCFGR reg;
 	reg.Value = 0U;
-	reg.Fields.PLLI2SR = (uint8_t)7U;
+	reg.Fields.PLLI2SR = (uint32_t)7U;
 	EXPECT_EQ(0x70000000U, reg.Value);
 }
 

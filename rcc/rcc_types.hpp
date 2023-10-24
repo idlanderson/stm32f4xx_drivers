@@ -7,25 +7,25 @@ using namespace std;
 
 namespace stm32::rcc
 {
-	enum class EnableFlag : uint8_t
+	enum class EnableFlag
 	{
 		Disable = 0U,
 		Enable = 1U,
 	};
 
-	enum class ReadyFlag : uint8_t
+	enum class ReadyFlag
 	{
 		NotReady = 0U,
 		Ready = 1U,
 	};
 
-	enum class HseClockBypass : uint8_t
+	enum class HseClockBypass
 	{
 		NotBypassed = 0U,
 		Bypassed = 1U,
 	};
 
-	enum class MainPllDivisionFactor : uint8_t
+	enum class MainPllDivisionFactor
 	{
 		PllpEquals2 = 0U,
 		PllpEquals4 = 1U,
@@ -33,20 +33,20 @@ namespace stm32::rcc
 		PllpEquals8 = 3U,
 	};
 
-	enum class MainPllAndAudioPllEntryClockSource : uint8_t
+	enum class MainPllAndAudioPllEntryClockSource
 	{
 		HsiClock = 0U,
 		HseOscillator = 1U,
 	};
 
-	enum class SystemClock : uint8_t
+	enum class SystemClock
 	{
 		HsiOscillator = 0U,
 		HseOscillator = 1U,
 		Pll = 2U,
 	};
 
-	enum class AhbPrescaler : uint8_t
+	enum class AhbPrescaler
 	{
 		SystemClockDividedBy2 = 8U,
 		SystemClockDividedBy4 = 9U,
@@ -58,7 +58,7 @@ namespace stm32::rcc
 		SystemClockDividedBy512 = 15U,
 	};
 
-	enum class ApbPrescaler : uint8_t
+	enum class ApbPrescaler
 	{
 		AhbClockDividedBy2 = 4U,
 		AhbClockDividedBy4 = 5U,
@@ -66,7 +66,7 @@ namespace stm32::rcc
 		AhbClockDividedBy16 = 7U,
 	};
 
-	enum class MicrocontrollerClockOutput1 : uint8_t
+	enum class MicrocontrollerClockOutput1
 	{
 		HsiClock = 0U,
 		LseOscillator = 1U,
@@ -74,13 +74,13 @@ namespace stm32::rcc
 		PllClock = 3U,
 	};
 
-	enum class I2SClockSelection : uint8_t
+	enum class I2SClockSelection
 	{
 		Plli2SClock = 0U,
 		ExternalClock = 1U,
 	};
 
-	enum class McoPrescaler : uint8_t
+	enum class McoPrescaler
 	{
 		DivisionBy2 = 4U,
 		DivisionBy3 = 5U,
@@ -88,7 +88,7 @@ namespace stm32::rcc
 		DivisionBy5 = 7U,
 	};
 
-	enum class MicrocontrollerClockOutput2 : uint8_t
+	enum class MicrocontrollerClockOutput2
 	{
 		SystemClock = 0U,
 		Plli2SClock = 1U,
@@ -96,31 +96,31 @@ namespace stm32::rcc
 		PllClock = 3U,
 	};
 
-	enum class ClockSecuritySystemInterruptFlag : uint8_t
+	enum class ClockSecuritySystemInterruptFlag
 	{
 		NoClockSecurityInterrupt = 0U,
 		ClockSecurityInterrupt = 1U,
 	};
 
-	enum class ClearFlag : uint8_t
+	enum class ClearFlag
 	{
 		NoEffect = 0U,
 		Clear = 1U,
 	};
 
-	enum class ResetFlag : uint8_t
+	enum class ResetFlag
 	{
 		DoNotReset = 0U,
 		Reset = 1U,
 	};
 
-	enum class ExternalLowSpeedOscillatorBypass : uint8_t
+	enum class ExternalLowSpeedOscillatorBypass
 	{
 		NotBypassed = 0U,
 		Bypassed = 1U,
 	};
 
-	enum class RtcClockSourceSelection : uint8_t
+	enum class RtcClockSourceSelection
 	{
 		NoClock = 0U,
 		LseOscillator = 1U,
@@ -128,13 +128,13 @@ namespace stm32::rcc
 		HseOscillator = 3U,
 	};
 
-	enum class ResetOccurredFlag : uint8_t
+	enum class ResetOccurredFlag
 	{
 		NoResetOccurred = 0U,
 		ResetOccurred = 1U,
 	};
 
-	enum class SpreadSelect : uint8_t
+	enum class SpreadSelect
 	{
 		CenterSpread = 0U,
 		DownSpread = 1U,
