@@ -139,8 +139,6 @@ public:
 	MOCK_CONST_METHOD0(get_AHB3RSTR_FSMCRST, ResetFlag());
 	MOCK_METHOD1(set_AHB3RSTR_FSMCRST, void(ResetFlag value));
 
-	// Reserved1 Fields
-
 	// APB1RSTR Fields
 	MOCK_CONST_METHOD0(get_APB1RSTR_TIM2RST, ResetFlag());
 	MOCK_CONST_METHOD0(get_APB1RSTR_TIM3RST, ResetFlag());
@@ -213,10 +211,6 @@ public:
 	MOCK_METHOD1(set_APB2RSTR_TIM10RST, void(ResetFlag value));
 	MOCK_METHOD1(set_APB2RSTR_TIM11RST, void(ResetFlag value));
 
-	// Reserved2 Fields
-
-	// Reserved3 Fields
-
 	// AHB1ENR Fields
 	MOCK_CONST_METHOD0(get_AHB1ENR_GPIOAEN, EnableFlag());
 	MOCK_CONST_METHOD0(get_AHB1ENR_GPIOBEN, EnableFlag());
@@ -274,8 +268,6 @@ public:
 	// AHB3ENR Fields
 	MOCK_CONST_METHOD0(get_AHB3ENR_FSMCEN, EnableFlag());
 	MOCK_METHOD1(set_AHB3ENR_FSMCEN, void(EnableFlag value));
-
-	// Reserved4 Fields
 
 	// APB1ENR Fields
 	MOCK_CONST_METHOD0(get_APB1ENR_TIM2EN, EnableFlag());
@@ -353,10 +345,6 @@ public:
 	MOCK_METHOD1(set_APB2ENR_TIM10EN, void(EnableFlag value));
 	MOCK_METHOD1(set_APB2ENR_TIM11EN, void(EnableFlag value));
 
-	// Reserved5 Fields
-
-	// Reserved6 Fields
-
 	// AHB1LPENR Fields
 	MOCK_CONST_METHOD0(get_AHB1LPENR_GPIOALPEN, EnableFlag());
 	MOCK_CONST_METHOD0(get_AHB1LPENR_GPIOBLPEN, EnableFlag());
@@ -418,8 +406,6 @@ public:
 	// AHB3LPENR Fields
 	MOCK_CONST_METHOD0(get_AHB3LPENR_FSMCLPEN, EnableFlag());
 	MOCK_METHOD1(set_AHB3LPENR_FSMCLPEN, void(EnableFlag value));
-
-	// Reserved7 Fields
 
 	// APB1LPENR Fields
 	MOCK_CONST_METHOD0(get_APB1LPENR_TIM2LPEN, EnableFlag());
@@ -497,10 +483,6 @@ public:
 	MOCK_METHOD1(set_APB2LPENR_TIM10LPEN, void(EnableFlag value));
 	MOCK_METHOD1(set_APB2LPENR_TIM11LPEN, void(EnableFlag value));
 
-	// Reserved8 Fields
-
-	// Reserved9 Fields
-
 	// BDCR Fields
 	MOCK_CONST_METHOD0(get_BDCR_LSEON, EnableFlag());
 	MOCK_CONST_METHOD0(get_BDCR_LSERDY, ReadyFlag());
@@ -527,10 +509,6 @@ public:
 	MOCK_CONST_METHOD0(get_CSR_LPWRRSTF, ResetOccurredFlag());
 	MOCK_METHOD1(set_CSR_LSION, void(EnableFlag value));
 	MOCK_METHOD1(set_CSR_RMVF, void(ClearFlag value));
-
-	// Reserved10 Fields
-
-	// Reserved11 Fields
 
 	// SSCGR Fields
 	MOCK_CONST_METHOD0(get_SSCGR_MODPER, uint16_t());

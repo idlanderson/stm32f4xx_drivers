@@ -8,7 +8,7 @@ using namespace std;
 
 namespace stm32::rcc
 {
-	union ClockControlRegister
+	union CR
 	{
 		volatile struct
 		{
@@ -31,7 +31,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union PllConfigurationRegiser
+	union PLLCFGR
 	{
 		volatile struct
 		{
@@ -48,7 +48,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union ClockConfigurationRegister
+	union CFGR
 	{
 		volatile struct
 		{
@@ -68,7 +68,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union ClockInterruptRegister
+	union CIR
 	{
 		volatile struct
 		{
@@ -100,7 +100,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb1PeripheralResetRegister
+	union AHB1RSTR
 	{
 		volatile struct
 		{
@@ -127,7 +127,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb2PeripheralResetRegister
+	union AHB2RSTR
 	{
 		volatile struct
 		{
@@ -142,7 +142,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb3PeripheralResetRegister
+	union AHB3RSTR
 	{
 		volatile struct
 		{
@@ -152,16 +152,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union Apb1PeripheralResetRegister
+	union APB1RSTR
 	{
 		volatile struct
 		{
@@ -198,7 +189,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Apb2PeripheralResetRegister
+	union APB2RSTR
 	{
 		volatile struct
 		{
@@ -223,25 +214,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union Ahb1PeripheralClockEnableRegister
+	union AHB1ENR
 	{
 		volatile struct
 		{
@@ -274,7 +247,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb2PeripheralClockEnableRegister
+	union AHB2ENR
 	{
 		volatile struct
 		{
@@ -289,7 +262,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb3PeripheralClockEnableRegister
+	union AHB3ENR
 	{
 		volatile struct
 		{
@@ -299,16 +272,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union Apb1PeripheralClockEnableRegister
+	union APB1ENR
 	{
 		volatile struct
 		{
@@ -345,7 +309,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Apb2PeripheralClockEnableRegister
+	union APB2ENR
 	{
 		volatile struct
 		{
@@ -371,25 +335,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union Ahb1PeripheralClockEnableInLowPowerModeRegister
+	union AHB1LPENR
 	{
 		volatile struct
 		{
@@ -424,7 +370,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb2PeripheralClockEnableInLowPowerModeRegister
+	union AHB2LPENR
 	{
 		volatile struct
 		{
@@ -439,7 +385,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Ahb3PeripheralClockEnableInLowPowerModeRegister
+	union AHB3LPENR
 	{
 		volatile struct
 		{
@@ -449,16 +395,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union Apb1PeripheralClockEnableInLowPowerModeRegister
+	union APB1LPENR
 	{
 		volatile struct
 		{
@@ -495,7 +432,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union Apb2PeripheralClockEnableInLowPowerModeRegister
+	union APB2LPENR
 	{
 		volatile struct
 		{
@@ -521,25 +458,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union BackupDomainControlRegister
+	union BDCR
 	{
 		volatile struct
 		{
@@ -556,7 +475,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union ClockControlAndStatusRegister
+	union CSR
 	{
 		volatile struct
 		{
@@ -575,25 +494,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union uint32_t
-	{
-		volatile struct
-		{
-			uint32_t Reserved1   : 32; // Pad to 32 bits 
-		} Fields;
-		volatile uint32_t Value;
-	};
-
-	union SpreadSpectrumClockGenerationRegister
+	union SSCGR
 	{
 		volatile struct
 		{
@@ -606,7 +507,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union PLLI2SConfigurationRegister
+	union PLLI2SCFGR
 	{
 		volatile struct
 		{
@@ -753,8 +654,6 @@ namespace stm32::rcc
 		virtual ResetFlag get_AHB3RSTR_FSMCRST() const = 0;
 		virtual void set_AHB3RSTR_FSMCRST(ResetFlag value) = 0;
 
-		// Reserved1 Fields
-
 		// APB1RSTR Fields
 		virtual ResetFlag get_APB1RSTR_TIM2RST() const = 0;
 		virtual ResetFlag get_APB1RSTR_TIM3RST() const = 0;
@@ -827,10 +726,6 @@ namespace stm32::rcc
 		virtual void set_APB2RSTR_TIM10RST(ResetFlag value) = 0;
 		virtual void set_APB2RSTR_TIM11RST(ResetFlag value) = 0;
 
-		// Reserved2 Fields
-
-		// Reserved3 Fields
-
 		// AHB1ENR Fields
 		virtual EnableFlag get_AHB1ENR_GPIOAEN() const = 0;
 		virtual EnableFlag get_AHB1ENR_GPIOBEN() const = 0;
@@ -888,8 +783,6 @@ namespace stm32::rcc
 		// AHB3ENR Fields
 		virtual EnableFlag get_AHB3ENR_FSMCEN() const = 0;
 		virtual void set_AHB3ENR_FSMCEN(EnableFlag value) = 0;
-
-		// Reserved4 Fields
 
 		// APB1ENR Fields
 		virtual EnableFlag get_APB1ENR_TIM2EN() const = 0;
@@ -967,10 +860,6 @@ namespace stm32::rcc
 		virtual void set_APB2ENR_TIM10EN(EnableFlag value) = 0;
 		virtual void set_APB2ENR_TIM11EN(EnableFlag value) = 0;
 
-		// Reserved5 Fields
-
-		// Reserved6 Fields
-
 		// AHB1LPENR Fields
 		virtual EnableFlag get_AHB1LPENR_GPIOALPEN() const = 0;
 		virtual EnableFlag get_AHB1LPENR_GPIOBLPEN() const = 0;
@@ -1032,8 +921,6 @@ namespace stm32::rcc
 		// AHB3LPENR Fields
 		virtual EnableFlag get_AHB3LPENR_FSMCLPEN() const = 0;
 		virtual void set_AHB3LPENR_FSMCLPEN(EnableFlag value) = 0;
-
-		// Reserved7 Fields
 
 		// APB1LPENR Fields
 		virtual EnableFlag get_APB1LPENR_TIM2LPEN() const = 0;
@@ -1111,10 +998,6 @@ namespace stm32::rcc
 		virtual void set_APB2LPENR_TIM10LPEN(EnableFlag value) = 0;
 		virtual void set_APB2LPENR_TIM11LPEN(EnableFlag value) = 0;
 
-		// Reserved8 Fields
-
-		// Reserved9 Fields
-
 		// BDCR Fields
 		virtual EnableFlag get_BDCR_LSEON() const = 0;
 		virtual ReadyFlag get_BDCR_LSERDY() const = 0;
@@ -1141,10 +1024,6 @@ namespace stm32::rcc
 		virtual ResetOccurredFlag get_CSR_LPWRRSTF() const = 0;
 		virtual void set_CSR_LSION(EnableFlag value) = 0;
 		virtual void set_CSR_RMVF(ClearFlag value) = 0;
-
-		// Reserved10 Fields
-
-		// Reserved11 Fields
 
 		// SSCGR Fields
 		virtual uint16_t get_SSCGR_MODPER() const = 0;
@@ -1297,8 +1176,6 @@ namespace stm32::rcc
 		ResetFlag get_AHB3RSTR_FSMCRST() const override { return AHB3RSTR.Fields.FSMCRST; }
 		void set_AHB3RSTR_FSMCRST(ResetFlag value) override { AHB3RSTR.Fields.FSMCRST = value; }
 
-		// Reserved1 Fields
-
 		// APB1RSTR Fields
 		ResetFlag get_APB1RSTR_TIM2RST() const override { return APB1RSTR.Fields.TIM2RST; }
 		ResetFlag get_APB1RSTR_TIM3RST() const override { return APB1RSTR.Fields.TIM3RST; }
@@ -1371,10 +1248,6 @@ namespace stm32::rcc
 		void set_APB2RSTR_TIM10RST(ResetFlag value) override { APB2RSTR.Fields.TIM10RST = value; }
 		void set_APB2RSTR_TIM11RST(ResetFlag value) override { APB2RSTR.Fields.TIM11RST = value; }
 
-		// Reserved2 Fields
-
-		// Reserved3 Fields
-
 		// AHB1ENR Fields
 		EnableFlag get_AHB1ENR_GPIOAEN() const override { return AHB1ENR.Fields.GPIOAEN; }
 		EnableFlag get_AHB1ENR_GPIOBEN() const override { return AHB1ENR.Fields.GPIOBEN; }
@@ -1432,8 +1305,6 @@ namespace stm32::rcc
 		// AHB3ENR Fields
 		EnableFlag get_AHB3ENR_FSMCEN() const override { return AHB3ENR.Fields.FSMCEN; }
 		void set_AHB3ENR_FSMCEN(EnableFlag value) override { AHB3ENR.Fields.FSMCEN = value; }
-
-		// Reserved4 Fields
 
 		// APB1ENR Fields
 		EnableFlag get_APB1ENR_TIM2EN() const override { return APB1ENR.Fields.TIM2EN; }
@@ -1511,10 +1382,6 @@ namespace stm32::rcc
 		void set_APB2ENR_TIM10EN(EnableFlag value) override { APB2ENR.Fields.TIM10EN = value; }
 		void set_APB2ENR_TIM11EN(EnableFlag value) override { APB2ENR.Fields.TIM11EN = value; }
 
-		// Reserved5 Fields
-
-		// Reserved6 Fields
-
 		// AHB1LPENR Fields
 		EnableFlag get_AHB1LPENR_GPIOALPEN() const override { return AHB1LPENR.Fields.GPIOALPEN; }
 		EnableFlag get_AHB1LPENR_GPIOBLPEN() const override { return AHB1LPENR.Fields.GPIOBLPEN; }
@@ -1576,8 +1443,6 @@ namespace stm32::rcc
 		// AHB3LPENR Fields
 		EnableFlag get_AHB3LPENR_FSMCLPEN() const override { return AHB3LPENR.Fields.FSMCLPEN; }
 		void set_AHB3LPENR_FSMCLPEN(EnableFlag value) override { AHB3LPENR.Fields.FSMCLPEN = value; }
-
-		// Reserved7 Fields
 
 		// APB1LPENR Fields
 		EnableFlag get_APB1LPENR_TIM2LPEN() const override { return APB1LPENR.Fields.TIM2LPEN; }
@@ -1655,10 +1520,6 @@ namespace stm32::rcc
 		void set_APB2LPENR_TIM10LPEN(EnableFlag value) override { APB2LPENR.Fields.TIM10LPEN = value; }
 		void set_APB2LPENR_TIM11LPEN(EnableFlag value) override { APB2LPENR.Fields.TIM11LPEN = value; }
 
-		// Reserved8 Fields
-
-		// Reserved9 Fields
-
 		// BDCR Fields
 		EnableFlag get_BDCR_LSEON() const override { return BDCR.Fields.LSEON; }
 		ReadyFlag get_BDCR_LSERDY() const override { return BDCR.Fields.LSERDY; }
@@ -1686,10 +1547,6 @@ namespace stm32::rcc
 		void set_CSR_LSION(EnableFlag value) override { CSR.Fields.LSION = value; }
 		void set_CSR_RMVF(ClearFlag value) override { CSR.Fields.RMVF = value; }
 
-		// Reserved10 Fields
-
-		// Reserved11 Fields
-
 		// SSCGR Fields
 		uint16_t get_SSCGR_MODPER() const override { return SSCGR.Fields.MODPER; }
 		uint16_t get_SSCGR_INCSTEP() const override { return SSCGR.Fields.INCSTEP; }
@@ -1708,40 +1565,40 @@ namespace stm32::rcc
 
 	private:
 
-		ClockControlRegister CR; // Address Offset 0x0
-		PllConfigurationRegiser PLLCFGR; // Address Offset 0x4
-		ClockConfigurationRegister CFGR; // Address Offset 0x8
-		ClockInterruptRegister CIR; // Address Offset 0xC
-		Ahb1PeripheralResetRegister AHB1RSTR; // Address Offset 0x10
-		Ahb2PeripheralResetRegister AHB2RSTR; // Address Offset 0x14
-		Ahb3PeripheralResetRegister AHB3RSTR; // Address Offset 0x18
+		CR CR; // Address Offset 0x0
+		PLLCFGR PLLCFGR; // Address Offset 0x4
+		CFGR CFGR; // Address Offset 0x8
+		CIR CIR; // Address Offset 0xC
+		AHB1RSTR AHB1RSTR; // Address Offset 0x10
+		AHB2RSTR AHB2RSTR; // Address Offset 0x14
+		AHB3RSTR AHB3RSTR; // Address Offset 0x18
 		uint32_t Reserved1; // Address Offset 0x1C
-		Apb1PeripheralResetRegister APB1RSTR; // Address Offset 0x20
-		Apb2PeripheralResetRegister APB2RSTR; // Address Offset 0x24
+		APB1RSTR APB1RSTR; // Address Offset 0x20
+		APB2RSTR APB2RSTR; // Address Offset 0x24
 		uint32_t Reserved2; // Address Offset 0x28
 		uint32_t Reserved3; // Address Offset 0x2C
-		Ahb1PeripheralClockEnableRegister AHB1ENR; // Address Offset 0x30
-		Ahb2PeripheralClockEnableRegister AHB2ENR; // Address Offset 0x34
-		Ahb3PeripheralClockEnableRegister AHB3ENR; // Address Offset 0x38
+		AHB1ENR AHB1ENR; // Address Offset 0x30
+		AHB2ENR AHB2ENR; // Address Offset 0x34
+		AHB3ENR AHB3ENR; // Address Offset 0x38
 		uint32_t Reserved4; // Address Offset 0x3C
-		Apb1PeripheralClockEnableRegister APB1ENR; // Address Offset 0x40
-		Apb2PeripheralClockEnableRegister APB2ENR; // Address Offset 0x44
+		APB1ENR APB1ENR; // Address Offset 0x40
+		APB2ENR APB2ENR; // Address Offset 0x44
 		uint32_t Reserved5; // Address Offset 0x48
 		uint32_t Reserved6; // Address Offset 0x4C
-		Ahb1PeripheralClockEnableInLowPowerModeRegister AHB1LPENR; // Address Offset 0x50
-		Ahb2PeripheralClockEnableInLowPowerModeRegister AHB2LPENR; // Address Offset 0x54
-		Ahb3PeripheralClockEnableInLowPowerModeRegister AHB3LPENR; // Address Offset 0x58
+		AHB1LPENR AHB1LPENR; // Address Offset 0x50
+		AHB2LPENR AHB2LPENR; // Address Offset 0x54
+		AHB3LPENR AHB3LPENR; // Address Offset 0x58
 		uint32_t Reserved7; // Address Offset 0x5C
-		Apb1PeripheralClockEnableInLowPowerModeRegister APB1LPENR; // Address Offset 0x60
-		Apb2PeripheralClockEnableInLowPowerModeRegister APB2LPENR; // Address Offset 0x64
+		APB1LPENR APB1LPENR; // Address Offset 0x60
+		APB2LPENR APB2LPENR; // Address Offset 0x64
 		uint32_t Reserved8; // Address Offset 0x68
 		uint32_t Reserved9; // Address Offset 0x6C
-		BackupDomainControlRegister BDCR; // Address Offset 0x70
-		ClockControlAndStatusRegister CSR; // Address Offset 0x74
+		BDCR BDCR; // Address Offset 0x70
+		CSR CSR; // Address Offset 0x74
 		uint32_t Reserved10; // Address Offset 0x78
 		uint32_t Reserved11; // Address Offset 0x7C
-		SpreadSpectrumClockGenerationRegister SSCGR; // Address Offset 0x80
-		PLLI2SConfigurationRegister PLLI2SCFGR; // Address Offset 0x84
+		SSCGR SSCGR; // Address Offset 0x80
+		PLLI2SCFGR PLLI2SCFGR; // Address Offset 0x84
 	};
 }
 #endif // RCC_REGISTER_MAP_HPP_

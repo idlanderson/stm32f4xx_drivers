@@ -4,2465 +4,2465 @@
 
 using namespace stm32::rcc;
 
-TEST(ClockControlRegister, HSION)
+TEST(CR, HSION)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSION = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSIRDY)
+TEST(CR, HSIRDY)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSIRDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(ClockControlRegister, Reserved1)
+TEST(CR, Reserved1)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSITRIM)
+TEST(CR, HSITRIM)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSITRIM = (uint8_t)31U;
 	EXPECT_EQ(0x000000F8U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSICAL)
+TEST(CR, HSICAL)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSICAL = (uint8_t)255U;
 	EXPECT_EQ(0x0000FF00U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSEON)
+TEST(CR, HSEON)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSEON = (EnableFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSERDY)
+TEST(CR, HSERDY)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSERDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(ClockControlRegister, HSEBYP)
+TEST(CR, HSEBYP)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.HSEBYP = (HseClockBypass)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(ClockControlRegister, CSSON)
+TEST(CR, CSSON)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.CSSON = (EnableFlag)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(ClockControlRegister, Reserved2)
+TEST(CR, Reserved2)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)15U;
 	EXPECT_EQ(0x00F00000U, reg.Value);
 }
 
-TEST(ClockControlRegister, PLLON)
+TEST(CR, PLLON)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLON = (EnableFlag)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
-TEST(ClockControlRegister, PLLRDY)
+TEST(CR, PLLRDY)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLRDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(ClockControlRegister, PLLI2SON)
+TEST(CR, PLLI2SON)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SON = (EnableFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(ClockControlRegister, PLLI2SRDY)
+TEST(CR, PLLI2SRDY)
 {
-	ClockControlRegister reg;
+	CR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SRDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, PLLM)
+TEST(PLLCFGR, PLLM)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLM = (uint8_t)31U;
 	EXPECT_EQ(0x0000001FU, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, PLLN)
+TEST(PLLCFGR, PLLN)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLN = (uint16_t)511U;
 	EXPECT_EQ(0x00007FC0U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, Reserved1)
+TEST(PLLCFGR, Reserved1)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, PLLP)
+TEST(PLLCFGR, PLLP)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLP = (MainPllDivisionFactor)3U;
 	EXPECT_EQ(0x00030000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, Reserved2)
+TEST(PLLCFGR, Reserved2)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)15U;
 	EXPECT_EQ(0x003C0000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, PLLSRC)
+TEST(PLLCFGR, PLLSRC)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLSRC = (MainPllAndAudioPllEntryClockSource)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, Reserved3)
+TEST(PLLCFGR, Reserved3)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(PllConfigurationRegiser, PLLQ)
+TEST(PLLCFGR, PLLQ)
 {
-	PllConfigurationRegiser reg;
+	PLLCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLQ = (uint8_t)15U;
 	EXPECT_EQ(0x0F000000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, SW)
+TEST(CFGR, SW)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.SW = (SystemClock)3U;
 	EXPECT_EQ(0x00000003U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, SWS)
+TEST(CFGR, SWS)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.SWS = (SystemClock)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, HPRE)
+TEST(CFGR, HPRE)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.HPRE = (AhbPrescaler)15U;
 	EXPECT_EQ(0x000000F0U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, Reserved1)
+TEST(CFGR, Reserved1)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x00000300U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, PPRE1)
+TEST(CFGR, PPRE1)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PPRE1 = (ApbPrescaler)7U;
 	EXPECT_EQ(0x00001C00U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, PPRE2)
+TEST(CFGR, PPRE2)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PPRE2 = (ApbPrescaler)7U;
 	EXPECT_EQ(0x0000E000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, RTCPRE)
+TEST(CFGR, RTCPRE)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.RTCPRE = (uint8_t)31U;
 	EXPECT_EQ(0x001F0000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, MCO1)
+TEST(CFGR, MCO1)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.MCO1 = (MicrocontrollerClockOutput1)3U;
 	EXPECT_EQ(0x00600000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, I2SSCR)
+TEST(CFGR, I2SSCR)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.I2SSCR = (I2SClockSelection)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, MCO1PRE)
+TEST(CFGR, MCO1PRE)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.MCO1PRE = (McoPrescaler)7U;
 	EXPECT_EQ(0x07000000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, MCO2PRE)
+TEST(CFGR, MCO2PRE)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.MCO2PRE = (McoPrescaler)7U;
 	EXPECT_EQ(0x38000000U, reg.Value);
 }
 
-TEST(ClockConfigurationRegister, MCO2)
+TEST(CFGR, MCO2)
 {
-	ClockConfigurationRegister reg;
+	CFGR reg;
 	reg.Value = 0U;
 	reg.Fields.MCO2 = (MicrocontrollerClockOutput2)3U;
 	EXPECT_EQ(0xC0000000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSIRDYF)
+TEST(CIR, LSIRDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSIRDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSERDYF)
+TEST(CIR, LSERDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSERDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSIRDYF)
+TEST(CIR, HSIRDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSIRDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSERDYF)
+TEST(CIR, HSERDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSERDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLRDYF)
+TEST(CIR, PLLRDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLRDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLI2SRDYF)
+TEST(CIR, PLLI2SRDYF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SRDYF = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, Reserved1)
+TEST(CIR, Reserved1)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, CSSF)
+TEST(CIR, CSSF)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.CSSF = (ClockSecuritySystemInterruptFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSIRDYIE)
+TEST(CIR, LSIRDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSIRDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSERDYIE)
+TEST(CIR, LSERDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSERDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSIRDYIE)
+TEST(CIR, HSIRDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSIRDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSERDYIE)
+TEST(CIR, HSERDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSERDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLRDYIE)
+TEST(CIR, PLLRDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLRDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLI2SRDYIE)
+TEST(CIR, PLLI2SRDYIE)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SRDYIE = (EnableFlag)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, Reserved2)
+TEST(CIR, Reserved2)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x0000C000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSIRDYC)
+TEST(CIR, LSIRDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSIRDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, LSERDYC)
+TEST(CIR, LSERDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.LSERDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSIRDYC)
+TEST(CIR, HSIRDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSIRDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, HSERDYC)
+TEST(CIR, HSERDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.HSERDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLRDYC)
+TEST(CIR, PLLRDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLRDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, PLLI2SRDYC)
+TEST(CIR, PLLI2SRDYC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SRDYC = (ClearFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, Reserved3)
+TEST(CIR, Reserved3)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(ClockInterruptRegister, CSSC)
+TEST(CIR, CSSC)
 {
-	ClockInterruptRegister reg;
+	CIR reg;
 	reg.Value = 0U;
 	reg.Fields.CSSC = (ClearFlag)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOARST)
+TEST(AHB1RSTR, GPIOARST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOARST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOBRST)
+TEST(AHB1RSTR, GPIOBRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOBRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOCRST)
+TEST(AHB1RSTR, GPIOCRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOCRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIODRST)
+TEST(AHB1RSTR, GPIODRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIODRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOERST)
+TEST(AHB1RSTR, GPIOERST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOERST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOFRST)
+TEST(AHB1RSTR, GPIOFRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOFRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOGRST)
+TEST(AHB1RSTR, GPIOGRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOGRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOHRST)
+TEST(AHB1RSTR, GPIOHRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOHRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, GPIOIRST)
+TEST(AHB1RSTR, GPIOIRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOIRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, Reserved1)
+TEST(AHB1RSTR, Reserved1)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, CRCRST)
+TEST(AHB1RSTR, CRCRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.CRCRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, Reserved2)
+TEST(AHB1RSTR, Reserved2)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)255U;
 	EXPECT_EQ(0x001FE000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, DMA1RST)
+TEST(AHB1RSTR, DMA1RST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, DMA2RST)
+TEST(AHB1RSTR, DMA2RST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, Reserved3)
+TEST(AHB1RSTR, Reserved3)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, ETHMACRST)
+TEST(AHB1RSTR, ETHMACRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACRST = (ResetFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, Reserved4)
+TEST(AHB1RSTR, Reserved4)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)7U;
 	EXPECT_EQ(0x1C000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralResetRegister, OTGHSRST)
+TEST(AHB1RSTR, OTGHSRST)
 {
-	Ahb1PeripheralResetRegister reg;
+	AHB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGHSRST = (ResetFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, DCMIRST)
+TEST(AHB2RSTR, DCMIRST)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.DCMIRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, Reserved1)
+TEST(AHB2RSTR, Reserved1)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, CRYPRST)
+TEST(AHB2RSTR, CRYPRST)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.CRYPRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, HASHRST)
+TEST(AHB2RSTR, HASHRST)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.HASHRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, RNGRST)
+TEST(AHB2RSTR, RNGRST)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.RNGRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb2PeripheralResetRegister, OTGFSRST)
+TEST(AHB2RSTR, OTGFSRST)
 {
-	Ahb2PeripheralResetRegister reg;
+	AHB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGFSRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb3PeripheralResetRegister, FSMCRST)
+TEST(AHB3RSTR, FSMCRST)
 {
-	Ahb3PeripheralResetRegister reg;
+	AHB3RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.FSMCRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM2RST)
+TEST(APB1RSTR, TIM2RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM3RST)
+TEST(APB1RSTR, TIM3RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM3RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM4RST)
+TEST(APB1RSTR, TIM4RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM4RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM5RST)
+TEST(APB1RSTR, TIM5RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM5RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM6RST)
+TEST(APB1RSTR, TIM6RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM6RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM7RST)
+TEST(APB1RSTR, TIM7RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM7RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM12RST)
+TEST(APB1RSTR, TIM12RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM12RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM13RST)
+TEST(APB1RSTR, TIM13RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM13RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, TIM14RST)
+TEST(APB1RSTR, TIM14RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM14RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, Reserved1)
+TEST(APB1RSTR, Reserved1)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, WWDGRST)
+TEST(APB1RSTR, WWDGRST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.WWDGRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, Reserved2)
+TEST(APB1RSTR, Reserved2)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x00003000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, SPI2RST)
+TEST(APB1RSTR, SPI2RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, SPI3RST)
+TEST(APB1RSTR, SPI3RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI3RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, Reserved3)
+TEST(APB1RSTR, Reserved3)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, UART2RST)
+TEST(APB1RSTR, UART2RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.UART2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, UART3RST)
+TEST(APB1RSTR, UART3RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.UART3RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, UART4RST)
+TEST(APB1RSTR, UART4RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.UART4RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, UART5RST)
+TEST(APB1RSTR, UART5RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.UART5RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, I2C1RST)
+TEST(APB1RSTR, I2C1RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, I2C2RST)
+TEST(APB1RSTR, I2C2RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, I2C3RST)
+TEST(APB1RSTR, I2C3RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C3RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, Reserved4)
+TEST(APB1RSTR, Reserved4)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, CAN1RST)
+TEST(APB1RSTR, CAN1RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, CAN2RST)
+TEST(APB1RSTR, CAN2RST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN2RST = (ResetFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, Reserved5)
+TEST(APB1RSTR, Reserved5)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved5 = (uint8_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, PWRRST)
+TEST(APB1RSTR, PWRRST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.PWRRST = (ResetFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralResetRegister, DACRST)
+TEST(APB1RSTR, DACRST)
 {
-	Apb1PeripheralResetRegister reg;
+	APB1RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.DACRST = (ResetFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, TIM1RST)
+TEST(APB2RSTR, TIM1RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, TIM8RST)
+TEST(APB2RSTR, TIM8RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM8RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, Reserved1)
+TEST(APB2RSTR, Reserved1)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, USART1RST)
+TEST(APB2RSTR, USART1RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.USART1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, USART6RST)
+TEST(APB2RSTR, USART6RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.USART6RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, Reserved2)
+TEST(APB2RSTR, Reserved2)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x000000C0U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, ADCRST)
+TEST(APB2RSTR, ADCRST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.ADCRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, Reserved3)
+TEST(APB2RSTR, Reserved3)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, SDIORST)
+TEST(APB2RSTR, SDIORST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.SDIORST = (ResetFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, SPI1RST)
+TEST(APB2RSTR, SPI1RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI1RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, Reserved4)
+TEST(APB2RSTR, Reserved4)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, SYSCFGRST)
+TEST(APB2RSTR, SYSCFGRST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.SYSCFGRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, Reserved5)
+TEST(APB2RSTR, Reserved5)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved5 = (uint8_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, TIM9RST)
+TEST(APB2RSTR, TIM9RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM9RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, TIM10RST)
+TEST(APB2RSTR, TIM10RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM10RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb2PeripheralResetRegister, TIM11RST)
+TEST(APB2RSTR, TIM11RST)
 {
-	Apb2PeripheralResetRegister reg;
+	APB2RSTR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM11RST = (ResetFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOAEN)
+TEST(AHB1ENR, GPIOAEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOAEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOBEN)
+TEST(AHB1ENR, GPIOBEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOBEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOCEN)
+TEST(AHB1ENR, GPIOCEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOCEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIODEN)
+TEST(AHB1ENR, GPIODEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIODEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOEEN)
+TEST(AHB1ENR, GPIOEEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOEEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOFEN)
+TEST(AHB1ENR, GPIOFEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOFEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOGEN)
+TEST(AHB1ENR, GPIOGEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOGEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOHEN)
+TEST(AHB1ENR, GPIOHEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOHEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, GPIOIEN)
+TEST(AHB1ENR, GPIOIEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOIEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, Reserved1)
+TEST(AHB1ENR, Reserved1)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, CRCEN)
+TEST(AHB1ENR, CRCEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.CRCEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, Reserved2)
+TEST(AHB1ENR, Reserved2)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)31U;
 	EXPECT_EQ(0x0003E000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, BKPSRAMEN)
+TEST(AHB1ENR, BKPSRAMEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.BKPSRAMEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, Reserved3)
+TEST(AHB1ENR, Reserved3)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, CCMDATARAMEN)
+TEST(AHB1ENR, CCMDATARAMEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.CCMDATARAMEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, DMA1EN)
+TEST(AHB1ENR, DMA1EN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, DMA2EN)
+TEST(AHB1ENR, DMA2EN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, Reserved4)
+TEST(AHB1ENR, Reserved4)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, ETHMACEN)
+TEST(AHB1ENR, ETHMACEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACEN = (EnableFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, ETHMACTXEN)
+TEST(AHB1ENR, ETHMACTXEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACTXEN = (EnableFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, ETHMACRXEN)
+TEST(AHB1ENR, ETHMACRXEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACRXEN = (EnableFlag)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, ETHMACPTPEN)
+TEST(AHB1ENR, ETHMACPTPEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACPTPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, OTGHSEN)
+TEST(AHB1ENR, OTGHSEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGHSEN = (EnableFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableRegister, OTGHSULPIEN)
+TEST(AHB1ENR, OTGHSULPIEN)
 {
-	Ahb1PeripheralClockEnableRegister reg;
+	AHB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGHSULPIEN = (EnableFlag)1U;
 	EXPECT_EQ(0x40000000U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, DCMIEN)
+TEST(AHB2ENR, DCMIEN)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.DCMIEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, Reserved1)
+TEST(AHB2ENR, Reserved1)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, CRYPEN)
+TEST(AHB2ENR, CRYPEN)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.CRYPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, HASHEN)
+TEST(AHB2ENR, HASHEN)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.HASHEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, RNGEN)
+TEST(AHB2ENR, RNGEN)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.RNGEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableRegister, OTGFSEN)
+TEST(AHB2ENR, OTGFSEN)
 {
-	Ahb2PeripheralClockEnableRegister reg;
+	AHB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGFSEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb3PeripheralClockEnableRegister, FSMCEN)
+TEST(AHB3ENR, FSMCEN)
 {
-	Ahb3PeripheralClockEnableRegister reg;
+	AHB3ENR reg;
 	reg.Value = 0U;
 	reg.Fields.FSMCEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM2EN)
+TEST(APB1ENR, TIM2EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM3EN)
+TEST(APB1ENR, TIM3EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM3EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM4EN)
+TEST(APB1ENR, TIM4EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM4EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM5EN)
+TEST(APB1ENR, TIM5EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM5EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM6EN)
+TEST(APB1ENR, TIM6EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM6EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM7EN)
+TEST(APB1ENR, TIM7EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM7EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM12EN)
+TEST(APB1ENR, TIM12EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM12EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM13EN)
+TEST(APB1ENR, TIM13EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM13EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, TIM14EN)
+TEST(APB1ENR, TIM14EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM14EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, Reserved1)
+TEST(APB1ENR, Reserved1)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, WWDGEN)
+TEST(APB1ENR, WWDGEN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.WWDGEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, Reserved2)
+TEST(APB1ENR, Reserved2)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (EnableFlag)3U;
 	EXPECT_EQ(0x00003000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, SPI2EN)
+TEST(APB1ENR, SPI2EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, SPI3EN)
+TEST(APB1ENR, SPI3EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI3EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, Reserved3)
+TEST(APB1ENR, Reserved3)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, USART2EN)
+TEST(APB1ENR, USART2EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, USART3EN)
+TEST(APB1ENR, USART3EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART3EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, UART4EN)
+TEST(APB1ENR, UART4EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.UART4EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, UART5EN)
+TEST(APB1ENR, UART5EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.UART5EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, I2C1EN)
+TEST(APB1ENR, I2C1EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, I2C2EN)
+TEST(APB1ENR, I2C2EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, I2C3EN)
+TEST(APB1ENR, I2C3EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C3EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, Reserved4)
+TEST(APB1ENR, Reserved4)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, CAN1EN)
+TEST(APB1ENR, CAN1EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, CAN2EN)
+TEST(APB1ENR, CAN2EN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, Reserved5)
+TEST(APB1ENR, Reserved5)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved5 = (uint8_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, PWREN)
+TEST(APB1ENR, PWREN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.PWREN = (EnableFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableRegister, DACEN)
+TEST(APB1ENR, DACEN)
 {
-	Apb1PeripheralClockEnableRegister reg;
+	APB1ENR reg;
 	reg.Value = 0U;
 	reg.Fields.DACEN = (EnableFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, TIM1EN)
+TEST(APB2ENR, TIM1EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, TIM8EN)
+TEST(APB2ENR, TIM8EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM8EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, Reserved1)
+TEST(APB2ENR, Reserved1)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, USART1EN)
+TEST(APB2ENR, USART1EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, USART6EN)
+TEST(APB2ENR, USART6EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART6EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, Reserved2)
+TEST(APB2ENR, Reserved2)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x000000C0U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, ADC1EN)
+TEST(APB2ENR, ADC1EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, ADC2EN)
+TEST(APB2ENR, ADC2EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC2EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, ADC3EN)
+TEST(APB2ENR, ADC3EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC3EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, SDIOEN)
+TEST(APB2ENR, SDIOEN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.SDIOEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, SPI1EN)
+TEST(APB2ENR, SPI1EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI1EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, Reserved3)
+TEST(APB2ENR, Reserved3)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, SYSCFGEN)
+TEST(APB2ENR, SYSCFGEN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.SYSCFGEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, Reserved4)
+TEST(APB2ENR, Reserved4)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, TIM9EN)
+TEST(APB2ENR, TIM9EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM9EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, TIM10EN)
+TEST(APB2ENR, TIM10EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM10EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableRegister, TIM11EN)
+TEST(APB2ENR, TIM11EN)
 {
-	Apb2PeripheralClockEnableRegister reg;
+	APB2ENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM11EN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOALPEN)
+TEST(AHB1LPENR, GPIOALPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOALPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOBLPEN)
+TEST(AHB1LPENR, GPIOBLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOBLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOCLPEN)
+TEST(AHB1LPENR, GPIOCLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOCLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIODLPEN)
+TEST(AHB1LPENR, GPIODLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIODLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOELPEN)
+TEST(AHB1LPENR, GPIOELPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOELPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOFLPEN)
+TEST(AHB1LPENR, GPIOFLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOFLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOGLPEN)
+TEST(AHB1LPENR, GPIOGLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOGLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOHLPEN)
+TEST(AHB1LPENR, GPIOHLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOHLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, GPIOILPEN)
+TEST(AHB1LPENR, GPIOILPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.GPIOILPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, Reserved1)
+TEST(AHB1LPENR, Reserved1)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x00000E00U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, CRCLPEN)
+TEST(AHB1LPENR, CRCLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.CRCLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, Reserved2)
+TEST(AHB1LPENR, Reserved2)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x00006000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, FLITFLPEN)
+TEST(AHB1LPENR, FLITFLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.FLITFLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, SRAM1LPEN)
+TEST(AHB1LPENR, SRAM1LPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SRAM1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, SRAM2LPEN)
+TEST(AHB1LPENR, SRAM2LPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SRAM2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, BKPSRAMLPEN)
+TEST(AHB1LPENR, BKPSRAMLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.BKPSRAMLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, Reserved3)
+TEST(AHB1LPENR, Reserved3)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)3U;
 	EXPECT_EQ(0x00180000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, DMA1LPEN)
+TEST(AHB1LPENR, DMA1LPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, DMA2LPEN)
+TEST(AHB1LPENR, DMA2LPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.DMA2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, Reserved4)
+TEST(AHB1LPENR, Reserved4)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)3U;
 	EXPECT_EQ(0x01800000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, ETHMACLPEN)
+TEST(AHB1LPENR, ETHMACLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, ETHMACTXLPEN)
+TEST(AHB1LPENR, ETHMACTXLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACTXLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, ETHMACRXLPEN)
+TEST(AHB1LPENR, ETHMACRXLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACRXLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, ETHMACPTPLPEN)
+TEST(AHB1LPENR, ETHMACPTPLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ETHMACPTPLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, OTGHSLPEN)
+TEST(AHB1LPENR, OTGHSLPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGHSLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Ahb1PeripheralClockEnableInLowPowerModeRegister, OTGHSULPILPEN)
+TEST(AHB1LPENR, OTGHSULPILPEN)
 {
-	Ahb1PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGHSULPILPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x40000000U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, DCMILPEN)
+TEST(AHB2LPENR, DCMILPEN)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.DCMILPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, Reserved1)
+TEST(AHB2LPENR, Reserved1)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)7U;
 	EXPECT_EQ(0x0000000EU, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, CRYPLPEN)
+TEST(AHB2LPENR, CRYPLPEN)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.CRYPLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, HASHLPEN)
+TEST(AHB2LPENR, HASHLPEN)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.HASHLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, RNGLPEN)
+TEST(AHB2LPENR, RNGLPEN)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.RNGLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Ahb2PeripheralClockEnableInLowPowerModeRegister, OTGFSLPEN)
+TEST(AHB2LPENR, OTGFSLPEN)
 {
-	Ahb2PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.OTGFSLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Ahb3PeripheralClockEnableInLowPowerModeRegister, FSMCLPEN)
+TEST(AHB3LPENR, FSMCLPEN)
 {
-	Ahb3PeripheralClockEnableInLowPowerModeRegister reg;
+	AHB3LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.FSMCLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM2LPEN)
+TEST(APB1LPENR, TIM2LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM3LPEN)
+TEST(APB1LPENR, TIM3LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM3LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM4LPEN)
+TEST(APB1LPENR, TIM4LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM4LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM5LPEN)
+TEST(APB1LPENR, TIM5LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM5LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM6LPEN)
+TEST(APB1LPENR, TIM6LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM6LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM7LPEN)
+TEST(APB1LPENR, TIM7LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM7LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM12LPEN)
+TEST(APB1LPENR, TIM12LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM12LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM13LPEN)
+TEST(APB1LPENR, TIM13LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM13LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, TIM14LPEN)
+TEST(APB1LPENR, TIM14LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM14LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, Reserved1)
+TEST(APB1LPENR, Reserved1)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x00000600U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, WWDGLPEN)
+TEST(APB1LPENR, WWDGLPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.WWDGLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, Reserved2)
+TEST(APB1LPENR, Reserved2)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x00003000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, SPI2LPEN)
+TEST(APB1LPENR, SPI2LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, SPI3LPEN)
+TEST(APB1LPENR, SPI3LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI3LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, Reserved3)
+TEST(APB1LPENR, Reserved3)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, USART2LPEN)
+TEST(APB1LPENR, USART2LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, USART3LPEN)
+TEST(APB1LPENR, USART3LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART3LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, UART4LPEN)
+TEST(APB1LPENR, UART4LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.UART4LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, UART5LPEN)
+TEST(APB1LPENR, UART5LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.UART5LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, I2C1LPEN)
+TEST(APB1LPENR, I2C1LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, I2C2LPEN)
+TEST(APB1LPENR, I2C2LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, I2C3LPEN)
+TEST(APB1LPENR, I2C3LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.I2C3LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, Reserved4)
+TEST(APB1LPENR, Reserved4)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, CAN1LPEN)
+TEST(APB1LPENR, CAN1LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, CAN2LPEN)
+TEST(APB1LPENR, CAN2LPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.CAN2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, Reserved5)
+TEST(APB1LPENR, Reserved5)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved5 = (uint8_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, PWRLPEN)
+TEST(APB1LPENR, PWRLPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.PWRLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(Apb1PeripheralClockEnableInLowPowerModeRegister, DACLPEN)
+TEST(APB1LPENR, DACLPEN)
 {
-	Apb1PeripheralClockEnableInLowPowerModeRegister reg;
+	APB1LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.DACLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, TIM1LPEN)
+TEST(APB2LPENR, TIM1LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, TIM8LPEN)
+TEST(APB2LPENR, TIM8LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM8LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, Reserved1)
+TEST(APB2LPENR, Reserved1)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, Reserved2)
+TEST(APB2LPENR, Reserved2)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)3U;
 	EXPECT_EQ(0x0000000CU, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, USART1LPEN)
+TEST(APB2LPENR, USART1LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, USART6LPEN)
+TEST(APB2LPENR, USART6LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.USART6LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, ADC1LPEN)
+TEST(APB2LPENR, ADC1LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, ADC2LPEN)
+TEST(APB2LPENR, ADC2LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC2LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, ADC3LPEN)
+TEST(APB2LPENR, ADC3LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.ADC3LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, SDIOLPEN)
+TEST(APB2LPENR, SDIOLPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SDIOLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, SPI1LPEN)
+TEST(APB2LPENR, SPI1LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SPI1LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, Reserved3)
+TEST(APB2LPENR, Reserved3)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved3 = (uint8_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, SYSCFGLPEN)
+TEST(APB2LPENR, SYSCFGLPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.SYSCFGLPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, Reserved4)
+TEST(APB2LPENR, Reserved4)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved4 = (uint8_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, TIM9LPEN)
+TEST(APB2LPENR, TIM9LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM9LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, TIM10LPEN)
+TEST(APB2LPENR, TIM10LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM10LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
-TEST(Apb2PeripheralClockEnableInLowPowerModeRegister, TIM11LPEN)
+TEST(APB2LPENR, TIM11LPEN)
 {
-	Apb2PeripheralClockEnableInLowPowerModeRegister reg;
+	APB2LPENR reg;
 	reg.Value = 0U;
 	reg.Fields.TIM11LPEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, LSEON)
+TEST(BDCR, LSEON)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.LSEON = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, LSERDY)
+TEST(BDCR, LSERDY)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.LSERDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, LSEBYP)
+TEST(BDCR, LSEBYP)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.LSEBYP = (ExternalLowSpeedOscillatorBypass)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, Reserved1)
+TEST(BDCR, Reserved1)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)31U;
 	EXPECT_EQ(0x000000F8U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, RTCSEL)
+TEST(BDCR, RTCSEL)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.RTCSEL = (RtcClockSourceSelection)3U;
 	EXPECT_EQ(0x00000300U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, Reserved2)
+TEST(BDCR, Reserved2)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint8_t)31U;
 	EXPECT_EQ(0x00007C00U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, RTCEN)
+TEST(BDCR, RTCEN)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.RTCEN = (EnableFlag)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(BackupDomainControlRegister, BDRST)
+TEST(BDCR, BDRST)
 {
-	BackupDomainControlRegister reg;
+	BDCR reg;
 	reg.Value = 0U;
 	reg.Fields.BDRST = (ResetFlag)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, LSION)
+TEST(CSR, LSION)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.LSION = (EnableFlag)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, LSIRDY)
+TEST(CSR, LSIRDY)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.LSIRDY = (ReadyFlag)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, Reserved1)
+TEST(CSR, Reserved1)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint32_t)4194303U;
 	EXPECT_EQ(0x00FFFFFCU, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, RMVF)
+TEST(CSR, RMVF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.RMVF = (ClearFlag)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, BORRSTF)
+TEST(CSR, BORRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.BORRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, PINRSTF)
+TEST(CSR, PINRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.PINRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, PORRSTF)
+TEST(CSR, PORRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.PORRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, SFTRSTF)
+TEST(CSR, SFTRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.SFTRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, IWDGRSTF)
+TEST(CSR, IWDGRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.IWDGRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, WWDGRSTF)
+TEST(CSR, WWDGRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.WWDGRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x40000000U, reg.Value);
 }
 
-TEST(ClockControlAndStatusRegister, LPWRRSTF)
+TEST(CSR, LPWRRSTF)
 {
-	ClockControlAndStatusRegister reg;
+	CSR reg;
 	reg.Value = 0U;
 	reg.Fields.LPWRRSTF = (ResetOccurredFlag)1U;
 	EXPECT_EQ(0x80000000U, reg.Value);
 }
 
-TEST(SpreadSpectrumClockGenerationRegister, MODPER)
+TEST(SSCGR, MODPER)
 {
-	SpreadSpectrumClockGenerationRegister reg;
+	SSCGR reg;
 	reg.Value = 0U;
 	reg.Fields.MODPER = (uint16_t)8191U;
 	EXPECT_EQ(0x00001FFFU, reg.Value);
 }
 
-TEST(SpreadSpectrumClockGenerationRegister, INCSTEP)
+TEST(SSCGR, INCSTEP)
 {
-	SpreadSpectrumClockGenerationRegister reg;
+	SSCGR reg;
 	reg.Value = 0U;
 	reg.Fields.INCSTEP = (uint16_t)32767U;
 	EXPECT_EQ(0x0FFFE000U, reg.Value);
 }
 
-TEST(SpreadSpectrumClockGenerationRegister, Reserved1)
+TEST(SSCGR, Reserved1)
 {
-	SpreadSpectrumClockGenerationRegister reg;
+	SSCGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)3U;
 	EXPECT_EQ(0x30000000U, reg.Value);
 }
 
-TEST(SpreadSpectrumClockGenerationRegister, SPREADSEL)
+TEST(SSCGR, SPREADSEL)
 {
-	SpreadSpectrumClockGenerationRegister reg;
+	SSCGR reg;
 	reg.Value = 0U;
 	reg.Fields.SPREADSEL = (SpreadSelect)1U;
 	EXPECT_EQ(0x40000000U, reg.Value);
 }
 
-TEST(SpreadSpectrumClockGenerationRegister, SSCGEN)
+TEST(SSCGR, SSCGEN)
 {
-	SpreadSpectrumClockGenerationRegister reg;
+	SSCGR reg;
 	reg.Value = 0U;
 	reg.Fields.SSCGEN = (EnableFlag)1U;
 	EXPECT_EQ(0x80000000U, reg.Value);
 }
 
-TEST(PLLI2SConfigurationRegister, Reserved1)
+TEST(PLLI2SCFGR, Reserved1)
 {
-	PLLI2SConfigurationRegister reg;
+	PLLI2SCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved1 = (uint8_t)63U;
 	EXPECT_EQ(0x0000003FU, reg.Value);
 }
 
-TEST(PLLI2SConfigurationRegister, PLLI2SN)
+TEST(PLLI2SCFGR, PLLI2SN)
 {
-	PLLI2SConfigurationRegister reg;
+	PLLI2SCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SN = (uint16_t)511U;
 	EXPECT_EQ(0x00007FC0U, reg.Value);
 }
 
-TEST(PLLI2SConfigurationRegister, Reserved2)
+TEST(PLLI2SCFGR, Reserved2)
 {
-	PLLI2SConfigurationRegister reg;
+	PLLI2SCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.Reserved2 = (uint16_t)8191U;
 	EXPECT_EQ(0x0FFF8000U, reg.Value);
 }
 
-TEST(PLLI2SConfigurationRegister, PLLI2SR)
+TEST(PLLI2SCFGR, PLLI2SR)
 {
-	PLLI2SConfigurationRegister reg;
+	PLLI2SCFGR reg;
 	reg.Value = 0U;
 	reg.Fields.PLLI2SR = (uint8_t)7U;
 	EXPECT_EQ(0x70000000U, reg.Value);

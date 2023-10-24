@@ -6,6 +6,7 @@ from typing import List
 
 top_level_namespace = "stm32"
 reverse_bit_field_order = False
+register_size_in_bytes = 4
 
 def to_camel_case(string):
 
@@ -54,16 +55,16 @@ class EnumType:
 
 class RegisterField:
 
-    def __init__(self, reg_long_name, reg_short_name, name, description, bit_position, width, access, type):
-        self.reg_long_name = reg_long_name
-        self.reg_short_name = reg_short_name
+    def __init__(self, reg_name, name, description, bit_position, width, access, type):
+        self.reg_long_name = reg_name
+        self.reg_short_name = reg_name
         self.type = type
         self.name = name
         self.description = description
         self.bit_position = bit_position
         self.width = width
         self.access = access
-        print(f" - [{reg_short_name}] New Field: Name={name}, Description={description}, Bit Position={str(bit_position)}, Width={width}, Access={access}, Type={type}")
+        print(f" - [{reg_name}] New Field: Name={name}, Description={description}, Bit Position={str(bit_position)}, Width={width}, Access={access}, Type={type}")
 
     def generate_method_name(self, prefix):
         return f"{prefix}_{self.reg_short_name}_{self.name}"
@@ -115,29 +116,31 @@ class RegisterField:
 
 class Register:
 
+    name : str
+    offset : int
     fields : List[RegisterField]
 
-    def __init__(self, long_name, short_name):
-        self.long_name = long_name
-        self.short_name = short_name
+    def __init__(self, name, offset):
+        self.name = name
+        self.offset = offset
         self.fields = []
-        print(f"New Register: Long Name={self.long_name}, Short Name={self.short_name}")
+        print(f"New Register: Name={self.name}, Offset=0x{self.offset:X}")
 
     def add_field(self, name, description, bit_position, width, access, type):
-        self.fields.append(RegisterField(self.long_name, self.short_name, name, description, bit_position, width, access, type))
+        self.fields.append(RegisterField(self.name, name, description, bit_position, width, access, type))
 
     def generate_class_member_variable(self):
-        return f"{self.long_name} {self.short_name};"
+        return f"{self.name} {self.name}; // Address Offset 0x{self.offset:X}\n"
 
     def generate_union(self):
 
         bits_used = 0
         number_of_reserved = 0
 
-        print(f"Generating union: {self.long_name}")
+        print(f"Generating union: {self.name}")
 
         output = (
-            f"union {self.long_name}\n"
+            f"union {self.name}\n"
             f"{{\n"
             f"\tvolatile struct\n"
             f"\t{{\n"
@@ -182,7 +185,7 @@ class Register:
 
     def generate_getters_and_setters(self):
         
-        output = f"// {self.short_name} Fields\n"
+        output = f"// {self.name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -196,7 +199,7 @@ class Register:
     
     def generate_virtual_getters_and_setters(self):
         
-        output = f"// {self.short_name} Fields\n"
+        output = f"// {self.name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -210,7 +213,7 @@ class Register:
     
     def generate_mock_methods(self):
 
-        output = f"\n// {self.short_name} Fields\n"
+        output = f"\n// {self.name} Fields\n"
 
         for field in self.fields:
             if "r" in field.access:
@@ -242,42 +245,57 @@ class Peripheral:
         self.registers = []
         self.types = []
 
+    def lookup_register(self, register_name):
+        
+        matching_register = [register for register in self.registers if register.name == register_name]
+
+        if matching_register:
+            return matching_register[0]
+        else:
+            return None
+
     def parse_registers_csv(self, file_name):
         
-        print(f"Parsing CSV File: {file_name}")
+        print(f"Parsing Registers CSV File: {file_name}")
+
+        with open(file_name, 'r', encoding='utf-8-sig') as file:
+
+            csv_reader = csv.reader(file)
+
+            register = None
+            name = ""
+
+            for row in csv_reader:
+
+                name = row[0]
+                offset = int(row[1], 16)
+
+                register = Register(name, offset)
+                self.registers.append(register)
+
+    def parse_register_fields_csv(self, file_name):
+        
+        print(f"Parsing Register Fields CSV File: {file_name}")
 
         with open(file_name, 'r', encoding='utf-8-sig') as file:
             
             csv_reader = csv.reader(file)
 
-            register = None
-            register_long_name = ""
-            register_short_name = ""
-            number_of_reserved = 0
-
             for row in csv_reader:
-                
-                if row[0] != register_long_name:
+            
+                register_name = row[0]
 
-                    register_long_name = row[0]
+                register = self.lookup_register(register_name)
 
-                    if "reserved" in register_long_name.lower():
-                        number_of_reserved += 1
-                        register_long_name += str(number_of_reserved)
-                        register = Register("uint32_t", register_long_name)
-                        self.registers.append(register)
-                        continue
-                    else:
-                        register_short_name = row[1]
-                        register = Register(register_long_name, register_short_name)
-                        self.registers.append(register)
+                if register is None:
+                    continue
 
-                field_type = row[2]
-                field_description = row[3]
-                field_name = row[4]
-                bit_position = int(row[5])
-                width = int(row[6])
-                access = row[7]
+                field_type = row[1]
+                field_description = row[2]
+                field_name = row[3]
+                bit_position = int(row[4])
+                width = int(row[5])
+                access = row[6]
 
                 register.add_field(field_name, field_description, bit_position, width, access, field_type)
 
@@ -349,13 +367,22 @@ class Peripheral:
         for register in self.registers:
             output += "\n" + textwrap.indent(register.generate_getters_and_setters(), "\t")
         
+        # Output the private member variables which are mapped to the memory locations
+        # of the peripheral device registers.
+
         output += "\nprivate:\n\n"
 
-        address_offset = 0x0
+        highest_register = max(self.registers, key=lambda register: register.offset)
+        number_of_reserved = 0
 
-        for register in self.registers:
-            output += textwrap.indent(register.generate_class_member_variable(), "\t") + f" // Address Offset 0x{address_offset:X}\n"
-            address_offset += 0x4
+        for offset in range(0, highest_register.offset + register_size_in_bytes, register_size_in_bytes):
+            matching_register = [register for register in self.registers if register.offset == offset]
+
+            if matching_register:
+                output += textwrap.indent(matching_register[0].generate_class_member_variable(), "\t")
+            else:
+                number_of_reserved += 1
+                output += f"\tuint32_t Reserved{number_of_reserved}; // Address Offset 0x{offset:X}\n"
 
         output += "};\n"
 
@@ -461,8 +488,9 @@ peripheral_name = "rcc"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 
-peripheral.parse_types_csv(f"{peripheral_name}_types.csv")
 peripheral.parse_registers_csv(f"{peripheral_name}_registers.csv")
+peripheral.parse_register_fields_csv(f"{peripheral_name}_register_fields.csv")
+peripheral.parse_types_csv(f"{peripheral_name}_types.csv")
 
 peripheral.generate_types_header(f"../{peripheral_name}/{peripheral_name}_types.hpp")
 peripheral.generate_header(f"../{peripheral_name}/{peripheral_name}_register_map.hpp")
