@@ -1,0 +1,57 @@
+EnableFlag,0,Disable
+EnableFlag,1,Enable
+ReadyFlag,0,Not Ready
+ReadyFlag,1,Ready
+HseClockBypass,0,not bypassed
+HseClockBypass,1,bypassed
+MainPllDivisionFactor,0,PLLP Equals 2
+MainPllDivisionFactor,1,PLLP Equals 4
+MainPllDivisionFactor,2,PLLP Equals 6
+MainPllDivisionFactor,3,PLLP Equals 8
+MainPllAndAudioPllEntryClockSource,0,HSI Clock
+MainPllAndAudioPllEntryClockSource,1,HSE Oscillator
+SystemClock,0,HSI Oscillator
+SystemClock,1,HSE Oscillator
+SystemClock,2,PLL
+AhbPrescaler,8,System Clock Divided by 2
+AhbPrescaler,9,System Clock Divided by 4
+AhbPrescaler,10,System Clock Divided by 8
+AhbPrescaler,11,System Clock Divided by 16
+AhbPrescaler,12,System Clock Divided by 64
+AhbPrescaler,13,System Clock Divided by 128
+AhbPrescaler,14,System Clock Divided by 256
+AhbPrescaler,15,System Clock Divided by 512
+ApbPrescaler,4,AHB Clock Divided by 2
+ApbPrescaler,5,AHB Clock Divided by 4
+ApbPrescaler,6,AHB Clock Divided by 8
+ApbPrescaler,7,AHB Clock Divided by 16
+MicrocontrollerClockOutput1,0,HSI Clock
+MicrocontrollerClockOutput1,1,LSE Oscillator
+MicrocontrollerClockOutput1,2,HSE Oscillator
+MicrocontrollerClockOutput1,3,PLL Clock
+I2SClockSelection,0,PLLI2S Clock
+I2SClockSelection,1,External Clock
+McoPrescaler,4,Division by 2
+McoPrescaler,5,Division by 3
+McoPrescaler,6,Division by 4
+McoPrescaler,7,Division by 5
+MicrocontrollerClockOutput2,0,System Clock
+MicrocontrollerClockOutput2,1,PLLI2S Clock
+MicrocontrollerClockOutput2,2,HSE Oscillator
+MicrocontrollerClockOutput2,3,PLL Clock
+ClockSecuritySystemInterruptFlag,0,No Clock Security Interrupt
+ClockSecuritySystemInterruptFlag,1,Clock Security Interrupt
+ClearFlag,0,No Effect
+ClearFlag,1,Clear
+ResetFlag,0,Do Not Reset
+ResetFlag,1,Reset
+ExternalLowSpeedOscillatorBypass,0,Not Bypassed
+ExternalLowSpeedOscillatorBypass,1,Bypassed
+RtcClockSourceSelection,0,No Clock
+RtcClockSourceSelection,1,LSE Oscillator
+RtcClockSourceSelection,2,LSI Oscillator
+RtcClockSourceSelection,3,HSE Oscillator
+ResetOccurredFlag,0,No Reset Occurred
+ResetOccurredFlag,1,Reset Occurred
+SpreadSelect,0,Center Spread
+SpreadSelect,1,Down Spread

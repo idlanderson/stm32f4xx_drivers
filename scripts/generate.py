@@ -73,7 +73,12 @@ class RegisterField:
         if self.type is not None and self.type != "":
             return self.type
         else:
-            return to_camel_case(self.description)
+            if self.width <= 8:
+                return "uint8_t"
+            elif self.width > 8 and self.width <= 16:
+                return "uint16_t"
+            else:
+                return "uint32_t"
 
     def generate_getter(self):
         return f"{self.generate_data_type()} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
@@ -122,12 +127,14 @@ class Register:
         self.fields.append(RegisterField(self.long_name, self.short_name, name, description, bit_position, width, access, type))
 
     def generate_class_member_variable(self):
-        return f"{self.long_name} {self.short_name};\n"
+        return f"{self.long_name} {self.short_name};"
 
     def generate_union(self):
 
         bits_used = 0
         number_of_reserved = 0
+
+        print(f"Generating union: {self.long_name}")
 
         output = (
             f"union {self.long_name}\n"
@@ -148,21 +155,22 @@ class Register:
 
             bit_comment = ""
 
+            if "reserved" in field.name.lower():
+                number_of_reserved += 1
+                field.name = "Reserved" + str(number_of_reserved)
+
             if field.width == 1:
-                bit_comment = f"{f'[{field.bit_position}]':6} {field.access:<3}: {field.description}"
+                bit_comment = f"{f'[{field.bit_position}]':7} {field.access:<3}: {field.description}"
             else:
                 first_bit = field.bit_position
                 last_bit = field.bit_position + field.width - 1
-                bit_comment = f"{f'[{last_bit}:{first_bit}]':6} {field.access:<3}: {field.description}"
+                bit_comment = f"{f'[{last_bit}:{first_bit}]':7} {field.access:<3}: {field.description}"
 
-            output += f"\t\t{field.generate_data_type():<{data_type_length}} {field.name:<9} : {str(field.width)}; // {bit_comment}\n"
+            output += f"\t\t{field.generate_data_type():<{data_type_length}} {field.name:<11} : {str(field.width)}; // {bit_comment}\n"
             bits_used += field.width
 
-            if "RESERVED" in field.name:
-                number_of_reserved += 1
-
         if bits_used < 32:
-            output += f"\t\t{'uint32_t':<{data_type_length}} RESERVED{str(number_of_reserved + 1):<1} : {str(32 - bits_used)};\n"
+            output += f"\t\t{'uint32_t':<{data_type_length}} Reserved{str(number_of_reserved + 1):<3} : {str(32 - bits_used)}; // Pad to 32 bits \n"
 
         output += (
             f"\t}} Fields;\n"
@@ -245,15 +253,24 @@ class Peripheral:
             register = None
             register_long_name = ""
             register_short_name = ""
+            number_of_reserved = 0
 
             for row in csv_reader:
                 
                 if row[0] != register_long_name:
 
                     register_long_name = row[0]
-                    register_short_name = row[1]
-                    register = Register(register_long_name, register_short_name)
-                    self.registers.append(register)
+
+                    if "reserved" in register_long_name.lower():
+                        number_of_reserved += 1
+                        register_long_name += str(number_of_reserved)
+                        register = Register("uint32_t", register_long_name)
+                        self.registers.append(register)
+                        continue
+                    else:
+                        register_short_name = row[1]
+                        register = Register(register_long_name, register_short_name)
+                        self.registers.append(register)
 
                 field_type = row[2]
                 field_description = row[3]
@@ -263,15 +280,6 @@ class Peripheral:
                 access = row[7]
 
                 register.add_field(field_name, field_description, bit_position, width, access, field_type)
-
-    def lookup_register(self, register_name):
-        
-        matching_register = [register for register in self.registers if register.short_name == register_name]
-
-        if matching_register:
-            return matching_register[0]
-        else:
-            return None
 
     def parse_types_csv(self, file_name):
 
@@ -343,8 +351,11 @@ class Peripheral:
         
         output += "\nprivate:\n\n"
 
+        address_offset = 0x0
+
         for register in self.registers:
-            output += textwrap.indent(register.generate_class_member_variable(), "\t")
+            output += textwrap.indent(register.generate_class_member_variable(), "\t") + f" // Address Offset 0x{address_offset:X}\n"
+            address_offset += 0x4
 
         output += "};\n"
 
@@ -378,8 +389,8 @@ class Peripheral:
 
         with open(file_name, 'w') as file:
 
-            header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
-            enums           = textwrap.indent(self.generate_enums(), "\t")
+            header_guard = os.path.basename(file_name).replace(".", "_").upper() + "_"
+            enums        = textwrap.indent(self.generate_enums(), "\t")
 
             file.write(
                 f"#ifndef {header_guard}\n"
@@ -446,12 +457,14 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-spi = Peripheral("Spi")
+peripheral_name = "rcc"
 
-spi.parse_types_csv("spi_types.csv")
-spi.parse_registers_csv("spi_registers.csv")
+peripheral = Peripheral(to_camel_case(peripheral_name))
 
-spi.generate_types_header("../spi/spi_types.hpp")
-spi.generate_header("../spi/spi_register_map.hpp")
-spi.generate_unit_test_file("../test/spi/spi_register_map_test.cpp", "spi_register_map.hpp")
-spi.generate_mock_file("../test/spi/spi_register_map_mock.hpp", "spi_register_map.hpp")
+peripheral.parse_types_csv(f"{peripheral_name}_types.csv")
+peripheral.parse_registers_csv(f"{peripheral_name}_registers.csv")
+
+peripheral.generate_types_header(f"../{peripheral_name}/{peripheral_name}_types.hpp")
+peripheral.generate_header(f"../{peripheral_name}/{peripheral_name}_register_map.hpp")
+peripheral.generate_unit_test_file(f"../test/{peripheral_name}/{peripheral_name}_register_map_test.cpp", f"{peripheral_name}_register_map.hpp")
+peripheral.generate_mock_file(f"../test/{peripheral_name}/{peripheral_name}_register_map_mock.hpp", f"{peripheral_name}_register_map.hpp")
