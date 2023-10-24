@@ -3,11 +3,12 @@
 #include "spi_def.hpp"
 #include <type_traits>
 
+using namespace stm32::rcc;
+
 using Pin = GPIO::PinNumber;
 using PinSpeed = GPIO::PinSpeed;
 using PullUpPullDown = GPIO::PullUpPullDown;
 using OutputType = GPIO::OutputType;
-using AHB1 = RCC::AHB1_Peripheral;
 
 void delay(void)
 {
@@ -30,8 +31,8 @@ void WaitForButtonPress(void)
 int main()
 {
 
-    RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOA, true);
-    RCC_.SetAHB1PeripheralClockEnabled(AHB1::GPIOD, true);
+    RCC_.SetAHB1PeripheralClockEnabled(RccPeripheral::AHB1_Peripheral::GPIOA, true);
+    RCC_.SetAHB1PeripheralClockEnabled(RccPeripheral::AHB1_Peripheral::GPIOD, true);
 
     GPIOA.ConfigureInputPin(Pin::Pin0, PinSpeed::VeryHighSpeed);
 

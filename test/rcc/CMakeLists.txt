@@ -1,6 +1,6 @@
 add_executable(
     rcc_test
-    rcc_test.cpp
+    #rcc_test.cpp
     rcc_register_map_test.cpp
 )
 

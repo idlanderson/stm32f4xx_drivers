@@ -8,7 +8,7 @@ using namespace std;
 
 namespace stm32::rcc
 {
-	union CR
+	union CR_Reg
 	{
 		volatile struct
 		{
@@ -31,7 +31,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union PLLCFGR
+	union PLLCFGR_Reg
 	{
 		volatile struct
 		{
@@ -48,7 +48,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union CFGR
+	union CFGR_Reg
 	{
 		volatile struct
 		{
@@ -68,7 +68,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union CIR
+	union CIR_Reg
 	{
 		volatile struct
 		{
@@ -100,7 +100,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB1RSTR
+	union AHB1RSTR_Reg
 	{
 		volatile struct
 		{
@@ -127,7 +127,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB2RSTR
+	union AHB2RSTR_Reg
 	{
 		volatile struct
 		{
@@ -142,7 +142,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB3RSTR
+	union AHB3RSTR_Reg
 	{
 		volatile struct
 		{
@@ -152,7 +152,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB1RSTR
+	union APB1RSTR_Reg
 	{
 		volatile struct
 		{
@@ -189,7 +189,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB2RSTR
+	union APB2RSTR_Reg
 	{
 		volatile struct
 		{
@@ -214,7 +214,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB1ENR
+	union AHB1ENR_Reg
 	{
 		volatile struct
 		{
@@ -247,7 +247,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB2ENR
+	union AHB2ENR_Reg
 	{
 		volatile struct
 		{
@@ -262,7 +262,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB3ENR
+	union AHB3ENR_Reg
 	{
 		volatile struct
 		{
@@ -272,7 +272,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB1ENR
+	union APB1ENR_Reg
 	{
 		volatile struct
 		{
@@ -309,7 +309,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB2ENR
+	union APB2ENR_Reg
 	{
 		volatile struct
 		{
@@ -335,7 +335,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB1LPENR
+	union AHB1LPENR_Reg
 	{
 		volatile struct
 		{
@@ -370,7 +370,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB2LPENR
+	union AHB2LPENR_Reg
 	{
 		volatile struct
 		{
@@ -385,7 +385,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union AHB3LPENR
+	union AHB3LPENR_Reg
 	{
 		volatile struct
 		{
@@ -395,7 +395,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB1LPENR
+	union APB1LPENR_Reg
 	{
 		volatile struct
 		{
@@ -432,7 +432,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union APB2LPENR
+	union APB2LPENR_Reg
 	{
 		volatile struct
 		{
@@ -458,7 +458,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union BDCR
+	union BDCR_Reg
 	{
 		volatile struct
 		{
@@ -475,7 +475,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union CSR
+	union CSR_Reg
 	{
 		volatile struct
 		{
@@ -494,7 +494,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union SSCGR
+	union SSCGR_Reg
 	{
 		volatile struct
 		{
@@ -507,7 +507,7 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union PLLI2SCFGR
+	union PLLI2SCFGR_Reg
 	{
 		volatile struct
 		{
@@ -1565,40 +1565,40 @@ namespace stm32::rcc
 
 	private:
 
-		CR CR; // Address Offset 0x0
-		PLLCFGR PLLCFGR; // Address Offset 0x4
-		CFGR CFGR; // Address Offset 0x8
-		CIR CIR; // Address Offset 0xC
-		AHB1RSTR AHB1RSTR; // Address Offset 0x10
-		AHB2RSTR AHB2RSTR; // Address Offset 0x14
-		AHB3RSTR AHB3RSTR; // Address Offset 0x18
+		CR_Reg CR; // Address Offset 0x0
+		PLLCFGR_Reg PLLCFGR; // Address Offset 0x4
+		CFGR_Reg CFGR; // Address Offset 0x8
+		CIR_Reg CIR; // Address Offset 0xC
+		AHB1RSTR_Reg AHB1RSTR; // Address Offset 0x10
+		AHB2RSTR_Reg AHB2RSTR; // Address Offset 0x14
+		AHB3RSTR_Reg AHB3RSTR; // Address Offset 0x18
 		uint32_t Reserved1; // Address Offset 0x1C
-		APB1RSTR APB1RSTR; // Address Offset 0x20
-		APB2RSTR APB2RSTR; // Address Offset 0x24
+		APB1RSTR_Reg APB1RSTR; // Address Offset 0x20
+		APB2RSTR_Reg APB2RSTR; // Address Offset 0x24
 		uint32_t Reserved2; // Address Offset 0x28
 		uint32_t Reserved3; // Address Offset 0x2C
-		AHB1ENR AHB1ENR; // Address Offset 0x30
-		AHB2ENR AHB2ENR; // Address Offset 0x34
-		AHB3ENR AHB3ENR; // Address Offset 0x38
+		AHB1ENR_Reg AHB1ENR; // Address Offset 0x30
+		AHB2ENR_Reg AHB2ENR; // Address Offset 0x34
+		AHB3ENR_Reg AHB3ENR; // Address Offset 0x38
 		uint32_t Reserved4; // Address Offset 0x3C
-		APB1ENR APB1ENR; // Address Offset 0x40
-		APB2ENR APB2ENR; // Address Offset 0x44
+		APB1ENR_Reg APB1ENR; // Address Offset 0x40
+		APB2ENR_Reg APB2ENR; // Address Offset 0x44
 		uint32_t Reserved5; // Address Offset 0x48
 		uint32_t Reserved6; // Address Offset 0x4C
-		AHB1LPENR AHB1LPENR; // Address Offset 0x50
-		AHB2LPENR AHB2LPENR; // Address Offset 0x54
-		AHB3LPENR AHB3LPENR; // Address Offset 0x58
+		AHB1LPENR_Reg AHB1LPENR; // Address Offset 0x50
+		AHB2LPENR_Reg AHB2LPENR; // Address Offset 0x54
+		AHB3LPENR_Reg AHB3LPENR; // Address Offset 0x58
 		uint32_t Reserved7; // Address Offset 0x5C
-		APB1LPENR APB1LPENR; // Address Offset 0x60
-		APB2LPENR APB2LPENR; // Address Offset 0x64
+		APB1LPENR_Reg APB1LPENR; // Address Offset 0x60
+		APB2LPENR_Reg APB2LPENR; // Address Offset 0x64
 		uint32_t Reserved8; // Address Offset 0x68
 		uint32_t Reserved9; // Address Offset 0x6C
-		BDCR BDCR; // Address Offset 0x70
-		CSR CSR; // Address Offset 0x74
+		BDCR_Reg BDCR; // Address Offset 0x70
+		CSR_Reg CSR; // Address Offset 0x74
 		uint32_t Reserved10; // Address Offset 0x78
 		uint32_t Reserved11; // Address Offset 0x7C
-		SSCGR SSCGR; // Address Offset 0x80
-		PLLI2SCFGR PLLI2SCFGR; // Address Offset 0x84
+		SSCGR_Reg SSCGR; // Address Offset 0x80
+		PLLI2SCFGR_Reg PLLI2SCFGR; // Address Offset 0x84
 	};
 }
 #endif // RCC_REGISTER_MAP_HPP_

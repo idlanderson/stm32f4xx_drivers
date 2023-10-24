@@ -3,6 +3,8 @@
 
 #include "rcc.hpp"
 
-RCC &RCC_ = *reinterpret_cast<RCC*>(RCC_BASEADDR);
+using namespace stm32::rcc;
+
+RccPeripheral &RCC_ = *reinterpret_cast<RccPeripheral*>(RCC_BASEADDR);
 
 #endif // RCC_DEF_HPP_

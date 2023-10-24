@@ -102,7 +102,7 @@ class RegisterField:
         return (
             f"TEST({self.reg_long_name}, {self.name})\n"
             f"{{\n"
-            f"\t{self.reg_long_name} reg;\n"
+            f"\t{self.reg_long_name}_Reg reg;\n"
             f"\treg.Value = 0U;\n"
             f"\treg.Fields.{self.name} = ({self.generate_data_type()}){assigned_value}U;\n"
             f"\tEXPECT_EQ(0x{format(expected_value, '08X')}U, reg.Value);\n"
@@ -125,17 +125,17 @@ class Register:
         self.fields.append(RegisterField(self.name, name, description, bit_position, width, access, type))
 
     def generate_class_member_variable(self):
-        return f"{self.name} {self.name}; // Address Offset 0x{self.offset:X}\n"
+        return f"{self.name}_Reg {self.name}; // Address Offset 0x{self.offset:X}\n"
 
     def generate_union(self):
 
         bits_used = 0
         number_of_reserved = 0
 
-        print(f"Generating union: {self.name}")
+        print(f"Generating union for {self.name}")
 
         output = (
-            f"union {self.name}\n"
+            f"union {self.name}_Reg\n"
             f"{{\n"
             f"\tvolatile struct\n"
             f"\t{{\n"
