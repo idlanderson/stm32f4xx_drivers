@@ -8,67 +8,67 @@ using namespace std;
 
 namespace stm32::rcc
 {
-	union CR_Reg
+	union CR_t
 	{
 		volatile struct
 		{
 			EnableFlag     HSION       : 1; // [0]     rw : Internal high-speed clock enable
 			ReadyFlag      HSIRDY      : 1; // [1]     r  : Internal high-speed clock ready flag
-			uint32_t       Reserved1   : 1; // [2]        : Reserved, must be kept at reset value
-			uint32_t       HSITRIM     : 5; // [7:3]   rw : Internal high-speed clock trimming
-			uint32_t       HSICAL      : 8; // [15:8]  r  : Internal high-speed clock calibration
+			Reserved       Reserved1   : 1; // [2]        : RESERVED FIELD.
+			uint32_t       HSITRIM     : 5; // [3:7]   rw : Internal high-speed clock trimming
+			uint32_t       HSICAL      : 8; // [8:15]  r  : Internal high-speed clock calibration
 			EnableFlag     HSEON       : 1; // [16]    rw : HSE clock enable
 			ReadyFlag      HSERDY      : 1; // [17]    r  : HSE clock ready flag
 			HseClockBypass HSEBYP      : 1; // [18]    rw : HSE clock bypass
 			EnableFlag     CSSON       : 1; // [19]    rw : Clock security system enable
-			uint32_t       Reserved2   : 4; // [23:20]    : Reserved, must be kept at reset value.
+			Reserved       Reserved2   : 4; // [20:23]    : RESERVED FIELD.
 			EnableFlag     PLLON       : 1; // [24]    rw : Main PLL (PLL) enable
 			ReadyFlag      PLLRDY      : 1; // [25]    r  : Main PLL (PLL) clock ready flag
 			EnableFlag     PLLI2SON    : 1; // [26]    rw : PLLI2S enable
 			ReadyFlag      PLLI2SRDY   : 1; // [27]    r  : PLLI2S clock ready flag
-			uint32_t       Reserved3   : 4; // Pad to 32 bits 
+			Reserved       Reserved3   : 4; // [28:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PLLCFGR_Reg
+	union PLLCFGR_t
 	{
 		volatile struct
 		{
-			uint32_t                           PLLM        : 6; // [5:0]   rw : Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-			uint32_t                           PLLN        : 9; // [14:6]  rw : Main PLL (PLL) multiplication factor for VCO
-			uint32_t                           Reserved1   : 1; // [15]       : 
-			MainPllDivisionFactor              PLLP        : 2; // [17:16] rw : Main PLL (PLL) division factor for main system clock
-			uint32_t                           Reserved2   : 4; // [21:18]    : 
+			uint32_t                           PLLM        : 6; // [0:5]   rw : Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
+			uint32_t                           PLLN        : 9; // [6:14]  rw : Main PLL (PLL) multiplication factor for VCO
+			Reserved                           Reserved1   : 1; // [15]       : RESERVED FIELD.
+			MainPllDivisionFactor              PLLP        : 2; // [16:17] rw : Main PLL (PLL) division factor for main system clock
+			Reserved                           Reserved2   : 4; // [18:21]    : RESERVED FIELD.
 			MainPllAndAudioPllEntryClockSource PLLSRC      : 1; // [22]    rw : Main PLL(PLL) and audio PLL (PLLI2S) entry clock source
-			uint32_t                           Reserved3   : 1; // [23]       : 
-			uint32_t                           PLLQ        : 4; // [27:24] rw : Main PLL (PLL) division factor for USB OTG FS SDIO and random number generator clocks
-			uint32_t                           Reserved4   : 4; // Pad to 32 bits 
+			Reserved                           Reserved3   : 1; // [23]       : RESERVED FIELD.
+			uint32_t                           PLLQ        : 4; // [24:27] rw : Main PLL (PLL) division factor for USB OTG FS SDIO and random number generator clocks
+			Reserved                           Reserved4   : 4; // [28:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union CFGR_Reg
+	union CFGR_t
 	{
 		volatile struct
 		{
-			SystemClock                 SW          : 2; // [1:0]   rw : System clock switch
-			SystemClock                 SWS         : 2; // [3:2]   r  : System clock switch status
-			AhbPrescaler                HPRE        : 4; // [7:4]   rw : AHB prescaler
-			uint32_t                    Reserved1   : 2; // [9:8]      : 
-			ApbPrescaler                PPRE1       : 3; // [12:10] rw : APB Low speed prescaler (APB1)
-			ApbPrescaler                PPRE2       : 3; // [15:13] rw : APB high-speed prescaler (APB2)
-			uint32_t                    RTCPRE      : 5; // [20:16] rw : HSE division factor for RTC clock
-			MicrocontrollerClockOutput1 MCO1        : 2; // [22:21] rw : Microcontroller clock output 1
+			SystemClock                 SW          : 2; // [0:1]   rw : System clock switch
+			SystemClock                 SWS         : 2; // [2:3]   r  : System clock switch status
+			AhbPrescaler                HPRE        : 4; // [4:7]   rw : AHB prescaler
+			Reserved                    Reserved1   : 2; // [8:9]      : RESERVED FIELD.
+			ApbPrescaler                PPRE1       : 3; // [10:12] rw : APB Low speed prescaler (APB1)
+			ApbPrescaler                PPRE2       : 3; // [13:15] rw : APB high-speed prescaler (APB2)
+			uint32_t                    RTCPRE      : 5; // [16:20] rw : HSE division factor for RTC clock
+			MicrocontrollerClockOutput1 MCO1        : 2; // [21:22] rw : Microcontroller clock output 1
 			I2SClockSelection           I2SSCR      : 1; // [23]    rw : I2S clock selection
-			McoPrescaler                MCO1PRE     : 3; // [26:24] rw : MCO1 prescaler
-			McoPrescaler                MCO2PRE     : 3; // [29:27] rw : MCO2 prescaler
-			MicrocontrollerClockOutput2 MCO2        : 2; // [31:30] rw : Microcontroller clock output 2
+			McoPrescaler                MCO1PRE     : 3; // [24:26] rw : MCO1 prescaler
+			McoPrescaler                MCO2PRE     : 3; // [27:29] rw : MCO2 prescaler
+			MicrocontrollerClockOutput2 MCO2        : 2; // [30:31] rw : Microcontroller clock output 2
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union CIR_Reg
+	union CIR_t
 	{
 		volatile struct
 		{
@@ -78,7 +78,7 @@ namespace stm32::rcc
 			ReadyFlag                        HSERDYF     : 1; // [3]     r  : 
 			ReadyFlag                        PLLRDYF     : 1; // [4]     r  : 
 			ReadyFlag                        PLLI2SRDYF  : 1; // [5]     r  : 
-			uint32_t                         Reserved1   : 1; // [6]        : 
+			Reserved                         Reserved1   : 1; // [6]        : RESERVED FIELD.
 			ClockSecuritySystemInterruptFlag CSSF        : 1; // [7]     r  : 
 			EnableFlag                       LSIRDYIE    : 1; // [8]     rw : 
 			EnableFlag                       LSERDYIE    : 1; // [9]     rw : 
@@ -86,21 +86,21 @@ namespace stm32::rcc
 			EnableFlag                       HSERDYIE    : 1; // [11]    rw : 
 			EnableFlag                       PLLRDYIE    : 1; // [12]    rw : 
 			EnableFlag                       PLLI2SRDYIE : 1; // [13]    rw : 
-			uint32_t                         Reserved2   : 2; // [15:14]    : 
+			Reserved                         Reserved2   : 2; // [14:15]    : RESERVED FIELD.
 			ClearFlag                        LSIRDYC     : 1; // [16]    w  : 
 			ClearFlag                        LSERDYC     : 1; // [17]    w  : 
 			ClearFlag                        HSIRDYC     : 1; // [18]    w  : 
 			ClearFlag                        HSERDYC     : 1; // [19]    w  : 
 			ClearFlag                        PLLRDYC     : 1; // [20]    w  : 
 			ClearFlag                        PLLI2SRDYC  : 1; // [21]    w  : 
-			uint32_t                         Reserved3   : 1; // [22]       : 
+			Reserved                         Reserved3   : 1; // [22]       : RESERVED FIELD.
 			ClearFlag                        CSSC        : 1; // [23]    w  : 
-			uint32_t                         Reserved4   : 8; // Pad to 32 bits 
+			Reserved                         Reserved4   : 8; // [24:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB1RSTR_Reg
+	union AHB1RSTR_t
 	{
 		volatile struct
 		{
@@ -113,46 +113,46 @@ namespace stm32::rcc
 			ResetFlag GPIOGRST    : 1; // [6]     rw : 
 			ResetFlag GPIOHRST    : 1; // [7]     rw : 
 			ResetFlag GPIOIRST    : 1; // [8]     rw : 
-			uint32_t  Reserved1   : 3; // [11:9]     : 
+			Reserved  Reserved1   : 3; // [9:11]     : RESERVED FIELD.
 			ResetFlag CRCRST      : 1; // [12]    rw : 
-			uint32_t  Reserved2   : 8; // [20:13]    : 
+			Reserved  Reserved2   : 8; // [13:20]    : RESERVED FIELD.
 			ResetFlag DMA1RST     : 1; // [21]    rw : 
 			ResetFlag DMA2RST     : 1; // [22]    rw : 
-			uint32_t  Reserved3   : 2; // [24:23]    : 
+			Reserved  Reserved3   : 2; // [23:24]    : RESERVED FIELD.
 			ResetFlag ETHMACRST   : 1; // [25]    rw : 
-			uint32_t  Reserved4   : 3; // [28:26]    : 
+			Reserved  Reserved4   : 3; // [26:28]    : RESERVED FIELD.
 			ResetFlag OTGHSRST    : 1; // [29]    rw : 
-			uint32_t  Reserved5   : 2; // Pad to 32 bits 
+			Reserved  Reserved5   : 2; // [30:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB2RSTR_Reg
+	union AHB2RSTR_t
 	{
 		volatile struct
 		{
 			ResetFlag DCMIRST     : 1; // [0]     rw : 
-			uint32_t  Reserved1   : 3; // [3:1]      : 
+			Reserved  Reserved1   : 3; // [1:3]      : RESERVED FIELD.
 			ResetFlag CRYPRST     : 1; // [4]     rw : 
 			ResetFlag HASHRST     : 1; // [5]     rw : 
 			ResetFlag RNGRST      : 1; // [6]     rw : 
 			ResetFlag OTGFSRST    : 1; // [7]     rw : 
-			uint32_t  Reserved2   : 24; // Pad to 32 bits 
+			Reserved  Reserved2   : 24; // [8:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB3RSTR_Reg
+	union AHB3RSTR_t
 	{
 		volatile struct
 		{
 			ResetFlag FSMCRST     : 1; // [0]     rw : 
-			uint32_t  Reserved1   : 31; // Pad to 32 bits 
+			Reserved  Reserved1   : 31; // [1:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB1RSTR_Reg
+	union APB1RSTR_t
 	{
 		volatile struct
 		{
@@ -165,12 +165,12 @@ namespace stm32::rcc
 			ResetFlag TIM12RST    : 1; // [6]     rw : 
 			ResetFlag TIM13RST    : 1; // [7]     rw : 
 			ResetFlag TIM14RST    : 1; // [8]     rw : 
-			uint32_t  Reserved1   : 2; // [10:9]     : 
+			Reserved  Reserved1   : 2; // [9:10]     : RESERVED FIELD.
 			ResetFlag WWDGRST     : 1; // [11]    rw : 
-			uint32_t  Reserved2   : 2; // [13:12]    : 
+			Reserved  Reserved2   : 2; // [12:13]    : RESERVED FIELD.
 			ResetFlag SPI2RST     : 1; // [14]    rw : 
 			ResetFlag SPI3RST     : 1; // [15]    rw : 
-			uint32_t  Reserved3   : 1; // [16]       : 
+			Reserved  Reserved3   : 1; // [16]       : RESERVED FIELD.
 			ResetFlag UART2RST    : 1; // [17]    rw : 
 			ResetFlag UART3RST    : 1; // [18]    rw : 
 			ResetFlag UART4RST    : 1; // [19]    rw : 
@@ -178,43 +178,43 @@ namespace stm32::rcc
 			ResetFlag I2C1RST     : 1; // [21]    rw : 
 			ResetFlag I2C2RST     : 1; // [22]    rw : 
 			ResetFlag I2C3RST     : 1; // [23]    rw : 
-			uint32_t  Reserved4   : 1; // [24]       : 
+			Reserved  Reserved4   : 1; // [24]       : RESERVED FIELD.
 			ResetFlag CAN1RST     : 1; // [25]    rw : 
 			ResetFlag CAN2RST     : 1; // [26]    rw : 
-			uint32_t  Reserved5   : 1; // [27]       : 
+			Reserved  Reserved5   : 1; // [27]       : RESERVED FIELD.
 			ResetFlag PWRRST      : 1; // [28]    rw : 
 			ResetFlag DACRST      : 1; // [29]    rw : 
-			uint32_t  Reserved6   : 2; // Pad to 32 bits 
+			Reserved  Reserved6   : 2; // [30:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB2RSTR_Reg
+	union APB2RSTR_t
 	{
 		volatile struct
 		{
 			ResetFlag TIM1RST     : 1; // [0]     rw : 
 			ResetFlag TIM8RST     : 1; // [1]     rw : 
-			uint32_t  Reserved1   : 2; // [3:2]      : 
+			Reserved  Reserved1   : 2; // [2:3]      : RESERVED FIELD.
 			ResetFlag USART1RST   : 1; // [4]     rw : 
 			ResetFlag USART6RST   : 1; // [5]     rw : 
-			uint32_t  Reserved2   : 2; // [7:6]      : 
+			Reserved  Reserved2   : 2; // [6:7]      : RESERVED FIELD.
 			ResetFlag ADCRST      : 1; // [8]     rw : 
-			uint32_t  Reserved3   : 2; // [10:9]     : 
+			Reserved  Reserved3   : 2; // [9:10]     : RESERVED FIELD.
 			ResetFlag SDIORST     : 1; // [11]    rw : 
 			ResetFlag SPI1RST     : 1; // [12]    rw : 
-			uint32_t  Reserved4   : 1; // [13]       : 
+			Reserved  Reserved4   : 1; // [13]       : RESERVED FIELD.
 			ResetFlag SYSCFGRST   : 1; // [14]    rw : 
-			uint32_t  Reserved5   : 1; // [15]       : 
+			Reserved  Reserved5   : 1; // [15]       : RESERVED FIELD.
 			ResetFlag TIM9RST     : 1; // [16]    rw : 
 			ResetFlag TIM10RST    : 1; // [17]    rw : 
 			ResetFlag TIM11RST    : 1; // [18]    rw : 
-			uint32_t  Reserved6   : 13; // Pad to 32 bits 
+			Reserved  Reserved6   : 13; // [19:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB1ENR_Reg
+	union AHB1ENR_t
 	{
 		volatile struct
 		{
@@ -227,52 +227,52 @@ namespace stm32::rcc
 			EnableFlag GPIOGEN     : 1; // [6]     rw : 
 			EnableFlag GPIOHEN     : 1; // [7]     rw : 
 			EnableFlag GPIOIEN     : 1; // [8]     rw : 
-			uint32_t   Reserved1   : 3; // [11:9]     : 
+			Reserved   Reserved1   : 3; // [9:11]     : RESERVED FIELD.
 			EnableFlag CRCEN       : 1; // [12]    rw : 
-			uint32_t   Reserved2   : 5; // [17:13]    : 
+			Reserved   Reserved2   : 5; // [13:17]    : RESERVED FIELD.
 			EnableFlag BKPSRAMEN   : 1; // [18]    rw : 
-			uint32_t   Reserved3   : 1; // [19]       : 
+			Reserved   Reserved3   : 1; // [19]       : RESERVED FIELD.
 			EnableFlag CCMDATARAMEN : 1; // [20]    rw : 
 			EnableFlag DMA1EN      : 1; // [21]    rw : 
 			EnableFlag DMA2EN      : 1; // [22]    rw : 
-			uint32_t   Reserved4   : 2; // [24:23]    : 
+			Reserved   Reserved4   : 2; // [23:24]    : RESERVED FIELD.
 			EnableFlag ETHMACEN    : 1; // [25]    rw : 
 			EnableFlag ETHMACTXEN  : 1; // [26]    rw : 
 			EnableFlag ETHMACRXEN  : 1; // [27]    rw : 
 			EnableFlag ETHMACPTPEN : 1; // [28]    rw : 
 			EnableFlag OTGHSEN     : 1; // [29]    rw : 
 			EnableFlag OTGHSULPIEN : 1; // [30]    rw : 
-			uint32_t   Reserved5   : 1; // Pad to 32 bits 
+			Reserved   Reserved5   : 1; // [31]       : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB2ENR_Reg
+	union AHB2ENR_t
 	{
 		volatile struct
 		{
 			EnableFlag DCMIEN      : 1; // [0]     rw : 
-			uint32_t   Reserved1   : 3; // [3:1]      : 
+			Reserved   Reserved1   : 3; // [1:3]      : RESERVED FIELD.
 			EnableFlag CRYPEN      : 1; // [4]     rw : 
 			EnableFlag HASHEN      : 1; // [5]     rw : 
 			EnableFlag RNGEN       : 1; // [6]     rw : 
 			EnableFlag OTGFSEN     : 1; // [7]     rw : 
-			uint32_t   Reserved2   : 24; // Pad to 32 bits 
+			Reserved   Reserved2   : 24; // [8:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB3ENR_Reg
+	union AHB3ENR_t
 	{
 		volatile struct
 		{
 			EnableFlag FSMCEN      : 1; // [0]     rw : 
-			uint32_t   Reserved1   : 31; // Pad to 32 bits 
+			Reserved   Reserved1   : 31; // [1:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB1ENR_Reg
+	union APB1ENR_t
 	{
 		volatile struct
 		{
@@ -285,12 +285,12 @@ namespace stm32::rcc
 			EnableFlag TIM12EN     : 1; // [6]     rw : 
 			EnableFlag TIM13EN     : 1; // [7]     rw : 
 			EnableFlag TIM14EN     : 1; // [8]     rw : 
-			uint32_t   Reserved1   : 2; // [10:9]     : 
+			Reserved   Reserved1   : 2; // [9:10]     : RESERVED FIELD.
 			EnableFlag WWDGEN      : 1; // [11]    rw : 
-			EnableFlag Reserved2   : 2; // [13:12]    : 
+			Reserved   Reserved2   : 2; // [12:13]    : RESERVED FIELD.
 			EnableFlag SPI2EN      : 1; // [14]    rw : 
 			EnableFlag SPI3EN      : 1; // [15]    rw : 
-			uint32_t   Reserved3   : 1; // [16]       : 
+			Reserved   Reserved3   : 1; // [16]       : RESERVED FIELD.
 			EnableFlag USART2EN    : 1; // [17]    rw : 
 			EnableFlag USART3EN    : 1; // [18]    rw : 
 			EnableFlag UART4EN     : 1; // [19]    rw : 
@@ -298,44 +298,44 @@ namespace stm32::rcc
 			EnableFlag I2C1EN      : 1; // [21]    rw : 
 			EnableFlag I2C2EN      : 1; // [22]    rw : 
 			EnableFlag I2C3EN      : 1; // [23]    rw : 
-			uint32_t   Reserved4   : 1; // [24]       : 
+			Reserved   Reserved4   : 1; // [24]       : RESERVED FIELD.
 			EnableFlag CAN1EN      : 1; // [25]    rw : 
 			EnableFlag CAN2EN      : 1; // [26]    rw : 
-			uint32_t   Reserved5   : 1; // [27]       : 
+			Reserved   Reserved5   : 1; // [27]       : RESERVED FIELD.
 			EnableFlag PWREN       : 1; // [28]    rw : 
 			EnableFlag DACEN       : 1; // [29]    rw : 
-			uint32_t   Reserved6   : 2; // Pad to 32 bits 
+			Reserved   Reserved6   : 2; // [30:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB2ENR_Reg
+	union APB2ENR_t
 	{
 		volatile struct
 		{
 			EnableFlag TIM1EN      : 1; // [0]     rw : 
 			EnableFlag TIM8EN      : 1; // [1]     rw : 
-			uint32_t   Reserved1   : 2; // [3:2]      : 
+			Reserved   Reserved1   : 2; // [2:3]      : RESERVED FIELD.
 			EnableFlag USART1EN    : 1; // [4]     rw : 
 			EnableFlag USART6EN    : 1; // [5]     rw : 
-			uint32_t   Reserved2   : 2; // [7:6]      : 
+			Reserved   Reserved2   : 2; // [6:7]      : RESERVED FIELD.
 			EnableFlag ADC1EN      : 1; // [8]     rw : 
 			EnableFlag ADC2EN      : 1; // [9]     rw : 
 			EnableFlag ADC3EN      : 1; // [10]    rw : 
 			EnableFlag SDIOEN      : 1; // [11]    rw : 
 			EnableFlag SPI1EN      : 1; // [12]    rw : 
-			uint32_t   Reserved3   : 1; // [13]       : 
+			Reserved   Reserved3   : 1; // [13]       : RESERVED FIELD.
 			EnableFlag SYSCFGEN    : 1; // [14]    rw : 
-			uint32_t   Reserved4   : 1; // [15]       : 
+			Reserved   Reserved4   : 1; // [15]       : RESERVED FIELD.
 			EnableFlag TIM9EN      : 1; // [16]    rw : 
 			EnableFlag TIM10EN     : 1; // [17]    rw : 
 			EnableFlag TIM11EN     : 1; // [18]    rw : 
-			uint32_t   Reserved5   : 13; // Pad to 32 bits 
+			Reserved   Reserved5   : 13; // [19:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB1LPENR_Reg
+	union AHB1LPENR_t
 	{
 		volatile struct
 		{
@@ -348,54 +348,54 @@ namespace stm32::rcc
 			EnableFlag GPIOGLPEN   : 1; // [6]     rw : 
 			EnableFlag GPIOHLPEN   : 1; // [7]     rw : 
 			EnableFlag GPIOILPEN   : 1; // [8]     rw : 
-			uint32_t   Reserved1   : 3; // [11:9]     : 
+			Reserved   Reserved1   : 3; // [9:11]     : RESERVED FIELD.
 			EnableFlag CRCLPEN     : 1; // [12]    rw : 
-			uint32_t   Reserved2   : 2; // [14:13]    : 
+			Reserved   Reserved2   : 2; // [13:14]    : RESERVED FIELD.
 			EnableFlag FLITFLPEN   : 1; // [15]    rw : 
 			EnableFlag SRAM1LPEN   : 1; // [16]    rw : 
 			EnableFlag SRAM2LPEN   : 1; // [17]    rw : 
 			EnableFlag BKPSRAMLPEN : 1; // [18]    rw : 
-			uint32_t   Reserved3   : 2; // [20:19]    : 
+			Reserved   Reserved3   : 2; // [19:20]    : RESERVED FIELD.
 			EnableFlag DMA1LPEN    : 1; // [21]    rw : 
 			EnableFlag DMA2LPEN    : 1; // [22]    rw : 
-			uint32_t   Reserved4   : 2; // [24:23]    : 
+			Reserved   Reserved4   : 2; // [23:24]    : RESERVED FIELD.
 			EnableFlag ETHMACLPEN  : 1; // [25]    rw : 
 			EnableFlag ETHMACTXLPEN : 1; // [26]    rw : 
 			EnableFlag ETHMACRXLPEN : 1; // [27]    rw : 
 			EnableFlag ETHMACPTPLPEN : 1; // [28]    rw : 
 			EnableFlag OTGHSLPEN   : 1; // [29]    rw : 
 			EnableFlag OTGHSULPILPEN : 1; // [30]    rw : 
-			uint32_t   Reserved5   : 1; // Pad to 32 bits 
+			Reserved   Reserved5   : 1; // [31]       : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB2LPENR_Reg
+	union AHB2LPENR_t
 	{
 		volatile struct
 		{
 			EnableFlag DCMILPEN    : 1; // [0]     rw : 
-			uint32_t   Reserved1   : 3; // [3:1]      : 
+			Reserved   Reserved1   : 3; // [1:3]      : RESERVED FIELD.
 			EnableFlag CRYPLPEN    : 1; // [4]     rw : 
 			EnableFlag HASHLPEN    : 1; // [5]     rw : 
 			EnableFlag RNGLPEN     : 1; // [6]     rw : 
 			EnableFlag OTGFSLPEN   : 1; // [7]     rw : 
-			uint32_t   Reserved2   : 24; // Pad to 32 bits 
+			Reserved   Reserved2   : 24; // [8:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AHB3LPENR_Reg
+	union AHB3LPENR_t
 	{
 		volatile struct
 		{
 			EnableFlag FSMCLPEN    : 1; // [0]     rw : 
-			uint32_t   Reserved1   : 31; // Pad to 32 bits 
+			Reserved   Reserved1   : 31; // [1:31]     : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB1LPENR_Reg
+	union APB1LPENR_t
 	{
 		volatile struct
 		{
@@ -408,12 +408,12 @@ namespace stm32::rcc
 			EnableFlag TIM12LPEN   : 1; // [6]     rw : 
 			EnableFlag TIM13LPEN   : 1; // [7]     rw : 
 			EnableFlag TIM14LPEN   : 1; // [8]     rw : 
-			uint32_t   Reserved1   : 2; // [10:9]     : 
+			Reserved   Reserved1   : 2; // [9:10]     : RESERVED FIELD.
 			EnableFlag WWDGLPEN    : 1; // [11]    rw : 
-			uint32_t   Reserved2   : 2; // [13:12]    : 
+			Reserved   Reserved2   : 2; // [12:13]    : RESERVED FIELD.
 			EnableFlag SPI2LPEN    : 1; // [14]    rw : 
 			EnableFlag SPI3LPEN    : 1; // [15]    rw : 
-			uint32_t   Reserved3   : 1; // [16]       : 
+			Reserved   Reserved3   : 1; // [16]       : RESERVED FIELD.
 			EnableFlag USART2LPEN  : 1; // [17]    rw : 
 			EnableFlag USART3LPEN  : 1; // [18]    rw : 
 			EnableFlag UART4LPEN   : 1; // [19]    rw : 
@@ -421,67 +421,67 @@ namespace stm32::rcc
 			EnableFlag I2C1LPEN    : 1; // [21]    rw : 
 			EnableFlag I2C2LPEN    : 1; // [22]    rw : 
 			EnableFlag I2C3LPEN    : 1; // [23]    rw : 
-			uint32_t   Reserved4   : 1; // [24]       : 
+			Reserved   Reserved4   : 1; // [24]       : RESERVED FIELD.
 			EnableFlag CAN1LPEN    : 1; // [25]    rw : 
 			EnableFlag CAN2LPEN    : 1; // [26]    rw : 
-			uint32_t   Reserved5   : 1; // [27]       : 
+			Reserved   Reserved5   : 1; // [27]       : RESERVED FIELD.
 			EnableFlag PWRLPEN     : 1; // [28]    rw : 
 			EnableFlag DACLPEN     : 1; // [29]    rw : 
-			uint32_t   Reserved6   : 2; // Pad to 32 bits 
+			Reserved   Reserved6   : 2; // [30:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union APB2LPENR_Reg
+	union APB2LPENR_t
 	{
 		volatile struct
 		{
 			EnableFlag TIM1LPEN    : 1; // [0]     rw : 
 			EnableFlag TIM8LPEN    : 1; // [1]     rw : 
-			uint32_t   Reserved1   : 2; // [3:2]      : 
+			Reserved   Reserved1   : 2; // [2:3]      : RESERVED FIELD.
 			EnableFlag USART1LPEN  : 1; // [4]     rw : 
 			EnableFlag USART6LPEN  : 1; // [5]     rw : 
-			uint32_t   Reserved2   : 2; // [7:6]      : 
+			Reserved   Reserved2   : 2; // [6:7]      : RESERVED FIELD.
 			EnableFlag ADC1LPEN    : 1; // [8]     rw : 
 			EnableFlag ADC2LPEN    : 1; // [9]     rw : 
 			EnableFlag ADC3LPEN    : 1; // [10]    rw : 
 			EnableFlag SDIOLPEN    : 1; // [11]    rw : 
 			EnableFlag SPI1LPEN    : 1; // [12]    rw : 
-			uint32_t   Reserved3   : 1; // [13]       : 
+			Reserved   Reserved3   : 1; // [13]       : RESERVED FIELD.
 			EnableFlag SYSCFGLPEN  : 1; // [14]    rw : 
-			uint32_t   Reserved4   : 1; // [15]       : 
+			Reserved   Reserved4   : 1; // [15]       : RESERVED FIELD.
 			EnableFlag TIM9LPEN    : 1; // [16]    rw : 
 			EnableFlag TIM10LPEN   : 1; // [17]    rw : 
 			EnableFlag TIM11LPEN   : 1; // [18]    rw : 
-			uint32_t   Reserved5   : 13; // Pad to 32 bits 
+			Reserved   Reserved5   : 13; // [19:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union BDCR_Reg
+	union BDCR_t
 	{
 		volatile struct
 		{
 			EnableFlag                       LSEON       : 1; // [0]     rw : 
 			ReadyFlag                        LSERDY      : 1; // [1]     r  : 
 			ExternalLowSpeedOscillatorBypass LSEBYP      : 1; // [2]     rw : 
-			uint32_t                         Reserved1   : 5; // [7:3]      : 
-			RtcClockSourceSelection          RTCSEL      : 2; // [9:8]   rw : 
-			uint32_t                         Reserved2   : 5; // [14:10]    : 
+			Reserved                         Reserved1   : 5; // [3:7]      : RESERVED FIELD.
+			RtcClockSourceSelection          RTCSEL      : 2; // [8:9]   rw : 
+			Reserved                         Reserved2   : 5; // [10:14]    : RESERVED FIELD.
 			EnableFlag                       RTCEN       : 1; // [15]    rw : 
 			ResetFlag                        BDRST       : 1; // [16]    rw : 
-			uint32_t                         Reserved3   : 15; // Pad to 32 bits 
+			Reserved                         Reserved3   : 15; // [17:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union CSR_Reg
+	union CSR_t
 	{
 		volatile struct
 		{
 			EnableFlag        LSION       : 1; // [0]     rw : 
 			ReadyFlag         LSIRDY      : 1; // [1]     r  : 
-			uint32_t          Reserved1   : 22; // [23:2]     : 
+			Reserved          Reserved1   : 22; // [2:23]     : RESERVED FIELD.
 			ClearFlag         RMVF        : 1; // [24]    rw : 
 			ResetOccurredFlag BORRSTF     : 1; // [25]    r  : 
 			ResetOccurredFlag PINRSTF     : 1; // [26]    r  : 
@@ -494,28 +494,28 @@ namespace stm32::rcc
 		volatile uint32_t Value;
 	};
 
-	union SSCGR_Reg
+	union SSCGR_t
 	{
 		volatile struct
 		{
-			uint32_t     MODPER      : 13; // [12:0]  rw : Modulation period
-			uint32_t     INCSTEP     : 15; // [27:13] rw : Incrementation step
-			uint32_t     Reserved1   : 2; // [29:28]    : 
+			uint32_t     MODPER      : 13; // [0:12]  rw : Modulation period
+			uint32_t     INCSTEP     : 15; // [13:27] rw : Incrementation step
+			Reserved     Reserved1   : 2; // [28:29]    : RESERVED FIELD.
 			SpreadSelect SPREADSEL   : 1; // [30]    rw : Spread Select
 			EnableFlag   SSCGEN      : 1; // [31]    rw : Spread spectrum modulation enable
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PLLI2SCFGR_Reg
+	union PLLI2SCFGR_t
 	{
 		volatile struct
 		{
-			uint32_t Reserved1   : 6; // [5:0]      : 
-			uint32_t PLLI2SN     : 9; // [14:6]  rw : PLLI2S multiplication factor for VCO
-			uint32_t Reserved2   : 13; // [27:15]    : 
-			uint32_t PLLI2SR     : 3; // [30:28] rw : PLLI2S division factor for I2S clocks
-			uint32_t Reserved3   : 1; // Pad to 32 bits 
+			Reserved Reserved1   : 6; // [0:5]      : RESERVED FIELD.
+			uint32_t PLLI2SN     : 9; // [6:14]  rw : PLLI2S multiplication factor for VCO
+			Reserved Reserved2   : 13; // [15:27]    : RESERVED FIELD.
+			uint32_t PLLI2SR     : 3; // [28:30] rw : PLLI2S division factor for I2S clocks
+			Reserved Reserved3   : 1; // [31]       : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -1565,40 +1565,40 @@ namespace stm32::rcc
 
 	private:
 
-		CR_Reg CR; // Address Offset 0x0
-		PLLCFGR_Reg PLLCFGR; // Address Offset 0x4
-		CFGR_Reg CFGR; // Address Offset 0x8
-		CIR_Reg CIR; // Address Offset 0xC
-		AHB1RSTR_Reg AHB1RSTR; // Address Offset 0x10
-		AHB2RSTR_Reg AHB2RSTR; // Address Offset 0x14
-		AHB3RSTR_Reg AHB3RSTR; // Address Offset 0x18
-		uint32_t Reserved1; // Address Offset 0x1C
-		APB1RSTR_Reg APB1RSTR; // Address Offset 0x20
-		APB2RSTR_Reg APB2RSTR; // Address Offset 0x24
-		uint32_t Reserved2; // Address Offset 0x28
-		uint32_t Reserved3; // Address Offset 0x2C
-		AHB1ENR_Reg AHB1ENR; // Address Offset 0x30
-		AHB2ENR_Reg AHB2ENR; // Address Offset 0x34
-		AHB3ENR_Reg AHB3ENR; // Address Offset 0x38
-		uint32_t Reserved4; // Address Offset 0x3C
-		APB1ENR_Reg APB1ENR; // Address Offset 0x40
-		APB2ENR_Reg APB2ENR; // Address Offset 0x44
-		uint32_t Reserved5; // Address Offset 0x48
-		uint32_t Reserved6; // Address Offset 0x4C
-		AHB1LPENR_Reg AHB1LPENR; // Address Offset 0x50
-		AHB2LPENR_Reg AHB2LPENR; // Address Offset 0x54
-		AHB3LPENR_Reg AHB3LPENR; // Address Offset 0x58
-		uint32_t Reserved7; // Address Offset 0x5C
-		APB1LPENR_Reg APB1LPENR; // Address Offset 0x60
-		APB2LPENR_Reg APB2LPENR; // Address Offset 0x64
-		uint32_t Reserved8; // Address Offset 0x68
-		uint32_t Reserved9; // Address Offset 0x6C
-		BDCR_Reg BDCR; // Address Offset 0x70
-		CSR_Reg CSR; // Address Offset 0x74
-		uint32_t Reserved10; // Address Offset 0x78
-		uint32_t Reserved11; // Address Offset 0x7C
-		SSCGR_Reg SSCGR; // Address Offset 0x80
-		PLLI2SCFGR_Reg PLLI2SCFGR; // Address Offset 0x84
+		CR_t CR; // Address Offset 0x0
+		PLLCFGR_t PLLCFGR; // Address Offset 0x4
+		CFGR_t CFGR; // Address Offset 0x8
+		CIR_t CIR; // Address Offset 0xC
+		AHB1RSTR_t AHB1RSTR; // Address Offset 0x10
+		AHB2RSTR_t AHB2RSTR; // Address Offset 0x14
+		AHB3RSTR_t AHB3RSTR; // Address Offset 0x18
+		Reserved Reserved1; // Address Offset 0x1C
+		APB1RSTR_t APB1RSTR; // Address Offset 0x20
+		APB2RSTR_t APB2RSTR; // Address Offset 0x24
+		Reserved Reserved2; // Address Offset 0x28
+		Reserved Reserved3; // Address Offset 0x2C
+		AHB1ENR_t AHB1ENR; // Address Offset 0x30
+		AHB2ENR_t AHB2ENR; // Address Offset 0x34
+		AHB3ENR_t AHB3ENR; // Address Offset 0x38
+		Reserved Reserved4; // Address Offset 0x3C
+		APB1ENR_t APB1ENR; // Address Offset 0x40
+		APB2ENR_t APB2ENR; // Address Offset 0x44
+		Reserved Reserved5; // Address Offset 0x48
+		Reserved Reserved6; // Address Offset 0x4C
+		AHB1LPENR_t AHB1LPENR; // Address Offset 0x50
+		AHB2LPENR_t AHB2LPENR; // Address Offset 0x54
+		AHB3LPENR_t AHB3LPENR; // Address Offset 0x58
+		Reserved Reserved7; // Address Offset 0x5C
+		APB1LPENR_t APB1LPENR; // Address Offset 0x60
+		APB2LPENR_t APB2LPENR; // Address Offset 0x64
+		Reserved Reserved8; // Address Offset 0x68
+		Reserved Reserved9; // Address Offset 0x6C
+		BDCR_t BDCR; // Address Offset 0x70
+		CSR_t CSR; // Address Offset 0x74
+		Reserved Reserved10; // Address Offset 0x78
+		Reserved Reserved11; // Address Offset 0x7C
+		SSCGR_t SSCGR; // Address Offset 0x80
+		PLLI2SCFGR_t PLLI2SCFGR; // Address Offset 0x84
 	};
 }
 #endif // RCC_REGISTER_MAP_HPP_

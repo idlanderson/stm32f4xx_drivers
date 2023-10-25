@@ -102,7 +102,7 @@ class RegisterField:
         return (
             f"TEST({self.reg_long_name}, {self.name})\n"
             f"{{\n"
-            f"\t{self.reg_long_name}_Reg reg;\n"
+            f"\t{self.reg_long_name}_t reg;\n"
             f"\treg.Value = 0U;\n"
             f"\treg.Fields.{self.name} = ({self.generate_data_type()}){assigned_value}U;\n"
             f"\tEXPECT_EQ(0x{format(expected_value, '08X')}U, reg.Value);\n"
@@ -125,7 +125,18 @@ class Register:
         self.fields.append(RegisterField(self.name, name, description, bit_position, width, access, type))
 
     def generate_class_member_variable(self):
-        return f"{self.name}_Reg {self.name}; // Address Offset 0x{self.offset:X}\n"
+        return f"{self.name}_t {self.name}; // Address Offset 0x{self.offset:X}\n"
+
+    def generate_reserved_field(self, start_bit, width, index, padding):
+
+        comment = ""
+
+        if width == 1:
+            comment = f"{f'[{start_bit}]':10} : RESERVED FIELD."
+        else:
+            comment = f"{f'[{start_bit}:{start_bit + width - 1}]':10} : RESERVED FIELD."
+
+        return f"\t\t{'Reserved':<{padding}} Reserved{index:<3} : {width}; // {comment}\n"
 
     def generate_union(self):
 
@@ -135,7 +146,7 @@ class Register:
         print(f"Generating union for {self.name}")
 
         output = (
-            f"union {self.name}_Reg\n"
+            f"union {self.name}_t\n"
             f"{{\n"
             f"\tvolatile struct\n"
             f"\t{{\n"
@@ -149,26 +160,49 @@ class Register:
             if len(field.generate_data_type()) > data_type_length:
                 data_type_length = len(field.generate_data_type())
 
+        next_bit_position = 0
+
         for field in self.fields:
 
-            bit_comment = ""
+            if bits_used >= 32:
+                print(f"ERROR: Cannot generate any more bit-fields for {self.name}. Maximum size of 32 bits has been exceeded.")
+                break
 
-            if "reserved" in field.name.lower():
+            # Check to see if a Reserved bit-field needs to be inserted first.
+
+            if field.bit_position > next_bit_position:
+
+                # Insert a Reserved bit-field in the 'gaps' between fields.
+                
                 number_of_reserved += 1
-                field.name = "Reserved" + str(number_of_reserved)
+                reserved_width = field.bit_position - next_bit_position
+                bits_used += reserved_width
+
+                output += self.generate_reserved_field(
+                    next_bit_position, 
+                    reserved_width, 
+                    number_of_reserved, 
+                    data_type_length)
+
+            next_bit_position = field.bit_position + field.width
+            bit_comment = ""
 
             if field.width == 1:
                 bit_comment = f"{f'[{field.bit_position}]':7} {field.access:<3}: {field.description}"
             else:
                 first_bit = field.bit_position
                 last_bit = field.bit_position + field.width - 1
-                bit_comment = f"{f'[{last_bit}:{first_bit}]':7} {field.access:<3}: {field.description}"
+                bit_comment = f"{f'[{first_bit}:{last_bit}]':7} {field.access:<3}: {field.description}"
 
             output += f"\t\t{field.generate_data_type():<{data_type_length}} {field.name:<11} : {str(field.width)}; // {bit_comment}\n"
             bits_used += field.width
 
+        # If required, add one last reserved field to pad the bit-field to 32 bits
         if bits_used < 32:
-            output += f"\t\t{'uint32_t':<{data_type_length}} Reserved{str(number_of_reserved + 1):<3} : {str(32 - bits_used)}; // Pad to 32 bits \n"
+            number_of_reserved += 1
+            width = 32 - bits_used
+            start_bit = 32 - width
+            output += self.generate_reserved_field(start_bit, width, number_of_reserved, data_type_length)
 
         output += (
             f"\t}} Fields;\n"
@@ -377,7 +411,7 @@ class Peripheral:
                 output += textwrap.indent(matching_register[0].generate_class_member_variable(), "\t")
             else:
                 number_of_reserved += 1
-                output += f"\tuint32_t Reserved{number_of_reserved}; // Address Offset 0x{offset:X}\n"
+                output += f"\tReserved Reserved{number_of_reserved}; // Address Offset 0x{offset:X}\n"
 
         output += "};\n"
 
@@ -421,6 +455,7 @@ class Peripheral:
                 f"using namespace std;\n\n"
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
                 f"{{\n"
+                f"\tusing Reserved = uint32_t;\n\n"
                 f"{enums}"
                 f"}}\n"
                 f"#endif // {header_guard}"

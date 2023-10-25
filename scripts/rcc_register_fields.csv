@@ -1,29 +1,23 @@
 CR,EnableFlag,Internal high-speed clock enable,HSION,0,1,rw
 CR,ReadyFlag,Internal high-speed clock ready flag,HSIRDY,1,1,r
-CR,,"Reserved, must be kept at reset value",Reserved,2,1,
 CR,,Internal high-speed clock trimming,HSITRIM,3,5,rw
 CR,,Internal high-speed clock calibration,HSICAL,8,8,r
 CR,EnableFlag,HSE clock enable,HSEON,16,1,rw
 CR,ReadyFlag,HSE clock ready flag,HSERDY,17,1,r
 CR,HseClockBypass,HSE clock bypass,HSEBYP,18,1,rw
 CR,EnableFlag,Clock security system enable,CSSON,19,1,rw
-CR,,"Reserved, must be kept at reset value.",Reserved,20,4,
 CR,EnableFlag,Main PLL (PLL) enable,PLLON,24,1,rw
 CR,ReadyFlag,Main PLL (PLL) clock ready flag,PLLRDY,25,1,r
 CR,EnableFlag,PLLI2S enable,PLLI2SON,26,1,rw
 CR,ReadyFlag,PLLI2S clock ready flag,PLLI2SRDY,27,1,r
 PLLCFGR,,Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock,PLLM,0,6,rw
 PLLCFGR,,Main PLL (PLL) multiplication factor for VCO,PLLN,6,9,rw
-PLLCFGR,,,RESERVED1,15,1,
 PLLCFGR,MainPllDivisionFactor,Main PLL (PLL) division factor for main system clock,PLLP,16,2,rw
-PLLCFGR,,,RESERVED2,18,4,
 PLLCFGR,MainPllAndAudioPllEntryClockSource,Main PLL(PLL) and audio PLL (PLLI2S) entry clock source,PLLSRC,22,1,rw
-PLLCFGR,,,RESERVED3,23,1,
 PLLCFGR,,Main PLL (PLL) division factor for USB OTG FS SDIO and random number generator clocks,PLLQ,24,4,rw
 CFGR,SystemClock,System clock switch,SW,0,2,rw
 CFGR,SystemClock,System clock switch status,SWS,2,2,r
 CFGR,AhbPrescaler,AHB prescaler,HPRE,4,4,rw
-CFGR,,,Reserved,8,2,
 CFGR,ApbPrescaler,APB Low speed prescaler (APB1),PPRE1,10,3,rw
 CFGR,ApbPrescaler,APB high-speed prescaler (APB2),PPRE2,13,3,rw
 CFGR,,HSE division factor for RTC clock,RTCPRE,16,5,rw
@@ -38,7 +32,6 @@ CIR,ReadyFlag,,HSIRDYF,2,1,r
 CIR,ReadyFlag,,HSERDYF,3,1,r
 CIR,ReadyFlag,,PLLRDYF,4,1,r
 CIR,ReadyFlag,,PLLI2SRDYF,5,1,r
-CIR,,,Reserved1,6,1,
 CIR,ClockSecuritySystemInterruptFlag,,CSSF,7,1,r
 CIR,EnableFlag,,LSIRDYIE,8,1,rw
 CIR,EnableFlag,,LSERDYIE,9,1,rw
@@ -46,14 +39,12 @@ CIR,EnableFlag,,HSIRDYIE,10,1,rw
 CIR,EnableFlag,,HSERDYIE,11,1,rw
 CIR,EnableFlag,,PLLRDYIE,12,1,rw
 CIR,EnableFlag,,PLLI2SRDYIE,13,1,rw
-CIR,,,Reserved2,14,2,
 CIR,ClearFlag,,LSIRDYC,16,1,w
 CIR,ClearFlag,,LSERDYC,17,1,w
 CIR,ClearFlag,,HSIRDYC,18,1,w
 CIR,ClearFlag,,HSERDYC,19,1,w
 CIR,ClearFlag,,PLLRDYC,20,1,w
 CIR,ClearFlag,,PLLI2SRDYC,21,1,w
-CIR,,,Reserved3,22,1,
 CIR,ClearFlag,,CSSC,23,1,w
 AHB1RSTR,ResetFlag,,GPIOARST,0,1,rw
 AHB1RSTR,ResetFlag,,GPIOBRST,1,1,rw
@@ -64,17 +55,12 @@ AHB1RSTR,ResetFlag,,GPIOFRST,5,1,rw
 AHB1RSTR,ResetFlag,,GPIOGRST,6,1,rw
 AHB1RSTR,ResetFlag,,GPIOHRST,7,1,rw
 AHB1RSTR,ResetFlag,,GPIOIRST,8,1,rw
-AHB1RSTR,,,Reserved,9,3,
 AHB1RSTR,ResetFlag,,CRCRST,12,1,rw
-AHB1RSTR,,,Reserved,13,8,
 AHB1RSTR,ResetFlag,,DMA1RST,21,1,rw
 AHB1RSTR,ResetFlag,,DMA2RST,22,1,rw
-AHB1RSTR,,,Reserved,23,2,
 AHB1RSTR,ResetFlag,,ETHMACRST,25,1,rw
-AHB1RSTR,,,Reserved,26,3,
 AHB1RSTR,ResetFlag,,OTGHSRST,29,1,rw
 AHB2RSTR,ResetFlag,,DCMIRST,0,1,rw
-AHB2RSTR,,,Reserved,1,3,
 AHB2RSTR,ResetFlag,,CRYPRST,4,1,rw
 AHB2RSTR,ResetFlag,,HASHRST,5,1,rw
 AHB2RSTR,ResetFlag,,RNGRST,6,1,rw
@@ -89,12 +75,9 @@ APB1RSTR,ResetFlag,,TIM7RST,5,1,rw
 APB1RSTR,ResetFlag,,TIM12RST,6,1,rw
 APB1RSTR,ResetFlag,,TIM13RST,7,1,rw
 APB1RSTR,ResetFlag,,TIM14RST,8,1,rw
-APB1RSTR,,,Reserved,9,2,
 APB1RSTR,ResetFlag,,WWDGRST,11,1,rw
-APB1RSTR,,,Reserved,12,2,
 APB1RSTR,ResetFlag,,SPI2RST,14,1,rw
 APB1RSTR,ResetFlag,,SPI3RST,15,1,rw
-APB1RSTR,,,Reserved,16,1,
 APB1RSTR,ResetFlag,,UART2RST,17,1,rw
 APB1RSTR,ResetFlag,,UART3RST,18,1,rw
 APB1RSTR,ResetFlag,,UART4RST,19,1,rw
@@ -102,25 +85,18 @@ APB1RSTR,ResetFlag,,UART5RST,20,1,rw
 APB1RSTR,ResetFlag,,I2C1RST,21,1,rw
 APB1RSTR,ResetFlag,,I2C2RST,22,1,rw
 APB1RSTR,ResetFlag,,I2C3RST,23,1,rw
-APB1RSTR,,,Reserved,24,1,
 APB1RSTR,ResetFlag,,CAN1RST,25,1,rw
 APB1RSTR,ResetFlag,,CAN2RST,26,1,rw
-APB1RSTR,,,Reserved,27,1,
 APB1RSTR,ResetFlag,,PWRRST,28,1,rw
 APB1RSTR,ResetFlag,,DACRST,29,1,rw
 APB2RSTR,ResetFlag,,TIM1RST,0,1,rw
 APB2RSTR,ResetFlag,,TIM8RST,1,1,rw
-APB2RSTR,,,Reserved,2,2,
 APB2RSTR,ResetFlag,,USART1RST,4,1,rw
 APB2RSTR,ResetFlag,,USART6RST,5,1,rw
-APB2RSTR,,,Reserved,6,2,
 APB2RSTR,ResetFlag,,ADCRST,8,1,rw
-APB2RSTR,,,Reserved,9,2,
 APB2RSTR,ResetFlag,,SDIORST,11,1,rw
 APB2RSTR,ResetFlag,,SPI1RST,12,1,rw
-APB2RSTR,,,Reserved,13,1,
 APB2RSTR,ResetFlag,,SYSCFGRST,14,1,rw
-APB2RSTR,,,Reserved,15,1,
 APB2RSTR,ResetFlag,,TIM9RST,16,1,rw
 APB2RSTR,ResetFlag,,TIM10RST,17,1,rw
 APB2RSTR,ResetFlag,,TIM11RST,18,1,rw
@@ -133,15 +109,11 @@ AHB1ENR,EnableFlag,,GPIOFEN,5,1,rw
 AHB1ENR,EnableFlag,,GPIOGEN,6,1,rw
 AHB1ENR,EnableFlag,,GPIOHEN,7,1,rw
 AHB1ENR,EnableFlag,,GPIOIEN,8,1,rw
-AHB1ENR,,,Reserved,9,3,
 AHB1ENR,EnableFlag,,CRCEN,12,1,rw
-AHB1ENR,,,Reserved,13,5,
 AHB1ENR,EnableFlag,,BKPSRAMEN,18,1,rw
-AHB1ENR,,,Reserved,19,1,
 AHB1ENR,EnableFlag,,CCMDATARAMEN,20,1,rw
 AHB1ENR,EnableFlag,,DMA1EN,21,1,rw
 AHB1ENR,EnableFlag,,DMA2EN,22,1,rw
-AHB1ENR,,,Reserved,23,2,
 AHB1ENR,EnableFlag,,ETHMACEN,25,1,rw
 AHB1ENR,EnableFlag,,ETHMACTXEN,26,1,rw
 AHB1ENR,EnableFlag,,ETHMACRXEN,27,1,rw
@@ -149,7 +121,6 @@ AHB1ENR,EnableFlag,,ETHMACPTPEN,28,1,rw
 AHB1ENR,EnableFlag,,OTGHSEN,29,1,rw
 AHB1ENR,EnableFlag,,OTGHSULPIEN,30,1,rw
 AHB2ENR,EnableFlag,,DCMIEN,0,1,rw
-AHB2ENR,,,Reserved,1,3,
 AHB2ENR,EnableFlag,,CRYPEN,4,1,rw
 AHB2ENR,EnableFlag,,HASHEN,5,1,rw
 AHB2ENR,EnableFlag,,RNGEN,6,1,rw
@@ -164,12 +135,9 @@ APB1ENR,EnableFlag,,TIM7EN,5,1,rw
 APB1ENR,EnableFlag,,TIM12EN,6,1,rw
 APB1ENR,EnableFlag,,TIM13EN,7,1,rw
 APB1ENR,EnableFlag,,TIM14EN,8,1,rw
-APB1ENR,,,Reserved,9,2,
 APB1ENR,EnableFlag,,WWDGEN,11,1,rw
-APB1ENR,EnableFlag,,Reserved,12,2,
 APB1ENR,EnableFlag,,SPI2EN,14,1,rw
 APB1ENR,EnableFlag,,SPI3EN,15,1,rw
-APB1ENR,,,Reserved,16,1,
 APB1ENR,EnableFlag,,USART2EN,17,1,rw
 APB1ENR,EnableFlag,,USART3EN,18,1,rw
 APB1ENR,EnableFlag,,UART4EN,19,1,rw
@@ -177,26 +145,20 @@ APB1ENR,EnableFlag,,UART5EN,20,1,rw
 APB1ENR,EnableFlag,,I2C1EN,21,1,rw
 APB1ENR,EnableFlag,,I2C2EN,22,1,rw
 APB1ENR,EnableFlag,,I2C3EN,23,1,rw
-APB1ENR,,,Reserved,24,1,
 APB1ENR,EnableFlag,,CAN1EN,25,1,rw
 APB1ENR,EnableFlag,,CAN2EN,26,1,rw
-APB1ENR,,,Reserved,27,1,
 APB1ENR,EnableFlag,,PWREN,28,1,rw
 APB1ENR,EnableFlag,,DACEN,29,1,rw
 APB2ENR,EnableFlag,,TIM1EN,0,1,rw
 APB2ENR,EnableFlag,,TIM8EN,1,1,rw
-APB2ENR,,,Reserved,2,2,
 APB2ENR,EnableFlag,,USART1EN,4,1,rw
 APB2ENR,EnableFlag,,USART6EN,5,1,rw
-APB2ENR,,,Reserved,6,2,
 APB2ENR,EnableFlag,,ADC1EN,8,1,rw
 APB2ENR,EnableFlag,,ADC2EN,9,1,rw
 APB2ENR,EnableFlag,,ADC3EN,10,1,rw
 APB2ENR,EnableFlag,,SDIOEN,11,1,rw
 APB2ENR,EnableFlag,,SPI1EN,12,1,rw
-APB2ENR,,,Reserved,13,1,
 APB2ENR,EnableFlag,,SYSCFGEN,14,1,rw
-APB2ENR,,,Reserved,15,1,
 APB2ENR,EnableFlag,,TIM9EN,16,1,rw
 APB2ENR,EnableFlag,,TIM10EN,17,1,rw
 APB2ENR,EnableFlag,,TIM11EN,18,1,rw
@@ -209,17 +171,13 @@ AHB1LPENR,EnableFlag,,GPIOFLPEN,5,1,rw
 AHB1LPENR,EnableFlag,,GPIOGLPEN,6,1,rw
 AHB1LPENR,EnableFlag,,GPIOHLPEN,7,1,rw
 AHB1LPENR,EnableFlag,,GPIOILPEN,8,1,rw
-AHB1LPENR,,,Reserved,9,3,
 AHB1LPENR,EnableFlag,,CRCLPEN,12,1,rw
-AHB1LPENR,,,Reserved,13,2,
 AHB1LPENR,EnableFlag,,FLITFLPEN,15,1,rw
 AHB1LPENR,EnableFlag,,SRAM1LPEN,16,1,rw
 AHB1LPENR,EnableFlag,,SRAM2LPEN,17,1,rw
 AHB1LPENR,EnableFlag,,BKPSRAMLPEN,18,1,rw
-AHB1LPENR,,,Reserved,19,2,
 AHB1LPENR,EnableFlag,,DMA1LPEN,21,1,rw
 AHB1LPENR,EnableFlag,,DMA2LPEN,22,1,rw
-AHB1LPENR,,,Reserved,23,2,
 AHB1LPENR,EnableFlag,,ETHMACLPEN,25,1,rw
 AHB1LPENR,EnableFlag,,ETHMACTXLPEN,26,1,rw
 AHB1LPENR,EnableFlag,,ETHMACRXLPEN,27,1,rw
@@ -227,7 +185,6 @@ AHB1LPENR,EnableFlag,,ETHMACPTPLPEN,28,1,rw
 AHB1LPENR,EnableFlag,,OTGHSLPEN,29,1,rw
 AHB1LPENR,EnableFlag,,OTGHSULPILPEN,30,1,rw
 AHB2LPENR,EnableFlag,,DCMILPEN,0,1,rw
-AHB2LPENR,,,Reserved,1,3,
 AHB2LPENR,EnableFlag,,CRYPLPEN,4,1,rw
 AHB2LPENR,EnableFlag,,HASHLPEN,5,1,rw
 AHB2LPENR,EnableFlag,,RNGLPEN,6,1,rw
@@ -242,12 +199,9 @@ APB1LPENR,EnableFlag,,TIM7LPEN,5,1,rw
 APB1LPENR,EnableFlag,,TIM12LPEN,6,1,rw
 APB1LPENR,EnableFlag,,TIM13LPEN,7,1,rw
 APB1LPENR,EnableFlag,,TIM14LPEN,8,1,rw
-APB1LPENR,,,Reserved,9,2,
 APB1LPENR,EnableFlag,,WWDGLPEN,11,1,rw
-APB1LPENR,,,Reserved,12,2,
 APB1LPENR,EnableFlag,,SPI2LPEN,14,1,rw
 APB1LPENR,EnableFlag,,SPI3LPEN,15,1,rw
-APB1LPENR,,,Reserved,16,1,
 APB1LPENR,EnableFlag,,USART2LPEN,17,1,rw
 APB1LPENR,EnableFlag,,USART3LPEN,18,1,rw
 APB1LPENR,EnableFlag,,UART4LPEN,19,1,rw
@@ -255,40 +209,31 @@ APB1LPENR,EnableFlag,,UART5LPEN,20,1,rw
 APB1LPENR,EnableFlag,,I2C1LPEN,21,1,rw
 APB1LPENR,EnableFlag,,I2C2LPEN,22,1,rw
 APB1LPENR,EnableFlag,,I2C3LPEN,23,1,rw
-APB1LPENR,,,Reserved,24,1,
 APB1LPENR,EnableFlag,,CAN1LPEN,25,1,rw
 APB1LPENR,EnableFlag,,CAN2LPEN,26,1,rw
-APB1LPENR,,,Reserved,27,1,
 APB1LPENR,EnableFlag,,PWRLPEN,28,1,rw
 APB1LPENR,EnableFlag,,DACLPEN,29,1,rw
 APB2LPENR,EnableFlag,,TIM1LPEN,0,1,rw
 APB2LPENR,EnableFlag,,TIM8LPEN,1,1,rw
-APB2LPENR,,,Reserved,2,2,
 APB2LPENR,EnableFlag,,USART1LPEN,4,1,rw
 APB2LPENR,EnableFlag,,USART6LPEN,5,1,rw
-APB2LPENR,,,Reserved,6,2,
 APB2LPENR,EnableFlag,,ADC1LPEN,8,1,rw
 APB2LPENR,EnableFlag,,ADC2LPEN,9,1,rw
 APB2LPENR,EnableFlag,,ADC3LPEN,10,1,rw
 APB2LPENR,EnableFlag,,SDIOLPEN,11,1,rw
 APB2LPENR,EnableFlag,,SPI1LPEN,12,1,rw
-APB2LPENR,,,Reserved,13,1,
 APB2LPENR,EnableFlag,,SYSCFGLPEN,14,1,rw
-APB2LPENR,,,Reserved,15,1,
 APB2LPENR,EnableFlag,,TIM9LPEN,16,1,rw
 APB2LPENR,EnableFlag,,TIM10LPEN,17,1,rw
 APB2LPENR,EnableFlag,,TIM11LPEN,18,1,rw
 BDCR,EnableFlag,,LSEON,0,1,rw
 BDCR,ReadyFlag,,LSERDY,1,1,r
 BDCR,ExternalLowSpeedOscillatorBypass,,LSEBYP,2,1,rw
-BDCR,,,Reserved,3,5,
 BDCR,RtcClockSourceSelection,,RTCSEL,8,2,rw
-BDCR,,,Reserved,10,5,
 BDCR,EnableFlag,,RTCEN,15,1,rw
 BDCR,ResetFlag,,BDRST,16,1,rw
 CSR,EnableFlag,,LSION,0,1,rw
 CSR,ReadyFlag,,LSIRDY,1,1,r
-CSR,,,Reserved,2,22,
 CSR,ClearFlag,,RMVF,24,1,rw
 CSR,ResetOccurredFlag,,BORRSTF,25,1,r
 CSR,ResetOccurredFlag,,PINRSTF,26,1,r
@@ -299,10 +244,7 @@ CSR,ResetOccurredFlag,,WWDGRSTF,30,1,r
 CSR,ResetOccurredFlag,,LPWRRSTF,31,1,r
 SSCGR,,Modulation period,MODPER,0,13,rw
 SSCGR,,Incrementation step,INCSTEP,13,15,rw
-SSCGR,,,Reserved,28,2,
 SSCGR,SpreadSelect,Spread Select,SPREADSEL,30,1,rw
 SSCGR,EnableFlag,Spread spectrum modulation enable,SSCGEN,31,1,rw
-PLLI2SCFGR,,,Reserved,0,6,
 PLLI2SCFGR,,PLLI2S multiplication factor for VCO,PLLI2SN,6,9,rw
-PLLI2SCFGR,,,Reserved,15,13,
 PLLI2SCFGR,,PLLI2S division factor for I2S clocks,PLLI2SR,28,3,rw

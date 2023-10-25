@@ -7,6 +7,8 @@ using namespace std;
 
 namespace stm32::rcc
 {
+	using Reserved = uint32_t;
+
 	enum class EnableFlag
 	{
 		Disable = 0U,
