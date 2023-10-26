@@ -1,13 +1,13 @@
-PortMode,0,Input
-PortMode,1,General Purpose Output
-PortMode,2,Alternate function
-PortMode,3,Analog
+Mode,0,Input
+Mode,1,General Purpose Output
+Mode,2,Alternate function
+Mode,3,Analog
 OutputType,0,Push-Pull
 OutputType,1,Open-Drain
-OutputSpeed,0,Low Speed
-OutputSpeed,1,Medium Speed
-OutputSpeed,2,High Speed
-OutputSpeed,3,Very High Speed
+Speed,0,Low Speed
+Speed,1,Medium Speed
+Speed,2,High Speed
+Speed,3,Very High Speed
 PullUpPullDown,0,"No Pull-Up, Pull-Down"
 PullUpPullDown,1,Pull-Up
 PullUpPullDown,2,Pull-Down

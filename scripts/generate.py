@@ -514,7 +514,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "rcc"
+peripheral_name = "gpio"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

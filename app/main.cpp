@@ -3,12 +3,13 @@
 #include "spi_def.hpp"
 #include <type_traits>
 
+using namespace stm32::gpio;
 using namespace stm32::rcc;
 
-using Pin = GPIO::PinNumber;
-using PinSpeed = GPIO::PinSpeed;
-using PullUpPullDown = GPIO::PullUpPullDown;
-using OutputType = GPIO::OutputType;
+using Pin = stm32::gpio::PinNumber;
+using PinSpeed = stm32::gpio::Speed;
+using PullUpPullDown = stm32::gpio::PullUpPullDown;
+using OutputType = stm32::gpio::OutputType;
 
 void delay(void)
 {
@@ -30,34 +31,33 @@ void WaitForButtonPress(void)
 
 int main()
 {
-
-    RCC_.SetAHB1PeripheralClockEnabled(RccPeripheral::AHB1_Peripheral::GPIOA, true);
-    RCC_.SetAHB1PeripheralClockEnabled(RccPeripheral::AHB1_Peripheral::GPIOD, true);
+    RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
+    RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);
 
     GPIOA.ConfigureInputPin(Pin::Pin0, PinSpeed::VeryHighSpeed);
 
     GPIOD.ConfigureOutputPin(
         Pin::Pin12, 
         PinSpeed::VeryHighSpeed, 
-        PullUpPullDown::None, 
+        PullUpPullDown::NoPullUpPullDown, 
         OutputType::PushPull);
 
     GPIOD.ConfigureOutputPin(
         Pin::Pin13, 
         PinSpeed::VeryHighSpeed, 
-        PullUpPullDown::None, 
+        PullUpPullDown::NoPullUpPullDown, 
         OutputType::PushPull);
 
     GPIOD.ConfigureOutputPin(
         Pin::Pin14, 
         PinSpeed::VeryHighSpeed, 
-        PullUpPullDown::None, 
+        PullUpPullDown::NoPullUpPullDown, 
         OutputType::PushPull);
 
     GPIOD.ConfigureOutputPin(
         Pin::Pin15, 
         PinSpeed::VeryHighSpeed, 
-        PullUpPullDown::None, 
+        PullUpPullDown::NoPullUpPullDown, 
         OutputType::PushPull);
 
     GPIOD.WritePin(Pin::Pin12, 1U);

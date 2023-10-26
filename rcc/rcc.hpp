@@ -11,33 +11,33 @@ namespace stm32::rcc
 	{
 	public:
 
-		enum class AHB1_Peripheral
+		enum class Ahb1Peripheral
 		{
-			GPIOA = 0U,
-			GPIOB = 1U,
-			GPIOC = 2U,
-			GPIOD = 3U,
-			GPIOE = 4U,
-			GPIOF = 5U,
-			GPIOG = 6U,
-			GPIOH = 7U,
-			GPIOI = 8U,
-			CRC   = 12U,
-			BKPSRAM = 18U,
-			CCMDATARAM = 20U,
-			DMA1 = 21U,
-			DMA2 = 22U,
-			ETHMAC = 25U,
-			ETHMACTX = 26U,
-			ETHMACRX = 27U,
-			ETHMACPTP = 28U,
-			OTGHS = 29U,
-			OTGHSULPI = 30U
+			GPIOA,
+			GPIOB,
+			GPIOC,
+			GPIOD,
+			GPIOE,
+			GPIOF,
+			GPIOG,
+			GPIOH,
+			GPIOI,
+			CRC,
+			BKPSRAM,
+			CCMDATARAM,
+			DMA1,
+			DMA2,
+			ETHMAC,
+			ETHMACTX,
+			ETHMACRX,
+			ETHMACPTP,
+			OTGHS,
+			OTGHSULPI,
 		};
 
-		void SetAHB1PeripheralClockEnabled(AHB1_Peripheral peripheral, bool isEnabled);
+		void SetAHB1PeripheralClockEnabled(Ahb1Peripheral peripheral, bool isEnabled);
 	
-		RccPeripheral(IRccRegisterMap & device) : device(device) {}
+		RccPeripheral(IRccRegisterMap & dev) : device(dev) {}
 
 	private:
 

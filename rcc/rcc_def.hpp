@@ -3,8 +3,11 @@
 
 #include "rcc.hpp"
 
-using namespace stm32::rcc;
+namespace stm32::rcc
+{
+    RccRegisterMap &RCCReg = *reinterpret_cast<RccRegisterMap*>(RCC_BASEADDR);
 
-RccPeripheral &RCC_ = *reinterpret_cast<RccPeripheral*>(RCC_BASEADDR);
+    RccPeripheral RCC(RCCReg);
+}
 
 #endif // RCC_DEF_HPP_

@@ -8,247 +8,247 @@ using namespace std;
 
 namespace stm32::gpio
 {
-	union PortModeRegister
+	union MODER_t
 	{
 		volatile struct
 		{
-			PortMode MODER0    : 2; // [1:0]  rw : Port Mode for Pin 0
-			PortMode MODER1    : 2; // [3:2]  rw : Port Mode for Pin 1
-			PortMode MODER2    : 2; // [5:4]  rw : Port Mode for Pin 2
-			PortMode MODER3    : 2; // [7:6]  rw : Port Mode for Pin 3
-			PortMode MODER4    : 2; // [9:8]  rw : Port Mode for Pin 4
-			PortMode MODER5    : 2; // [11:10] rw : Port Mode for Pin 5
-			PortMode MODER6    : 2; // [13:12] rw : Port Mode for Pin 6
-			PortMode MODER7    : 2; // [15:14] rw : Port Mode for Pin 7
-			PortMode MODER8    : 2; // [17:16] rw : Port Mode for Pin 8
-			PortMode MODER9    : 2; // [19:18] rw : Port Mode for Pin 9
-			PortMode MODER10   : 2; // [21:20] rw : Port Mode for Pin 10
-			PortMode MODER11   : 2; // [23:22] rw : Port Mode for Pin 11
-			PortMode MODER12   : 2; // [25:24] rw : Port Mode for Pin 12
-			PortMode MODER13   : 2; // [27:26] rw : Port Mode for Pin 13
-			PortMode MODER14   : 2; // [29:28] rw : Port Mode for Pin 14
-			PortMode MODER15   : 2; // [31:30] rw : Port Mode for Pin 15
+			Mode MODER0      : 2; // [0:1]   rw : Port Mode for Pin 0
+			Mode MODER1      : 2; // [2:3]   rw : Port Mode for Pin 1
+			Mode MODER2      : 2; // [4:5]   rw : Port Mode for Pin 2
+			Mode MODER3      : 2; // [6:7]   rw : Port Mode for Pin 3
+			Mode MODER4      : 2; // [8:9]   rw : Port Mode for Pin 4
+			Mode MODER5      : 2; // [10:11] rw : Port Mode for Pin 5
+			Mode MODER6      : 2; // [12:13] rw : Port Mode for Pin 6
+			Mode MODER7      : 2; // [14:15] rw : Port Mode for Pin 7
+			Mode MODER8      : 2; // [16:17] rw : Port Mode for Pin 8
+			Mode MODER9      : 2; // [18:19] rw : Port Mode for Pin 9
+			Mode MODER10     : 2; // [20:21] rw : Port Mode for Pin 10
+			Mode MODER11     : 2; // [22:23] rw : Port Mode for Pin 11
+			Mode MODER12     : 2; // [24:25] rw : Port Mode for Pin 12
+			Mode MODER13     : 2; // [26:27] rw : Port Mode for Pin 13
+			Mode MODER14     : 2; // [28:29] rw : Port Mode for Pin 14
+			Mode MODER15     : 2; // [30:31] rw : Port Mode for Pin 15
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortOutputTypeRegister
+	union OTYPER_t
 	{
 		volatile struct
 		{
-			OutputType OT0       : 1; // [0]    rw : Output Type for Pin 0
-			OutputType OT1       : 1; // [1]    rw : Output Type for Pin 1
-			OutputType OT2       : 1; // [2]    rw : Output Type for Pin 2
-			OutputType OT3       : 1; // [3]    rw : Output Type for Pin 3
-			OutputType OT4       : 1; // [4]    rw : Output Type for Pin 4
-			OutputType OT5       : 1; // [5]    rw : Output Type for Pin 5
-			OutputType OT6       : 1; // [6]    rw : Output Type for Pin 6
-			OutputType OT7       : 1; // [7]    rw : Output Type for Pin 7
-			OutputType OT8       : 1; // [8]    rw : Output Type for Pin 8
-			OutputType OT9       : 1; // [9]    rw : Output Type for Pin 9
-			OutputType OT10      : 1; // [10]   rw : Output Type for Pin 10
-			OutputType OT11      : 1; // [11]   rw : Output Type for Pin 11
-			OutputType OT12      : 1; // [12]   rw : Output Type for Pin 12
-			OutputType OT13      : 1; // [13]   rw : Output Type for Pin 13
-			OutputType OT14      : 1; // [14]   rw : Output Type for Pin 14
-			OutputType OT15      : 1; // [15]   rw : Output Type for Pin 15
-			uint32_t   RESERVED1 : 16;
+			OutputType OT0         : 1; // [0]     rw : Output Type for Pin 0
+			OutputType OT1         : 1; // [1]     rw : Output Type for Pin 1
+			OutputType OT2         : 1; // [2]     rw : Output Type for Pin 2
+			OutputType OT3         : 1; // [3]     rw : Output Type for Pin 3
+			OutputType OT4         : 1; // [4]     rw : Output Type for Pin 4
+			OutputType OT5         : 1; // [5]     rw : Output Type for Pin 5
+			OutputType OT6         : 1; // [6]     rw : Output Type for Pin 6
+			OutputType OT7         : 1; // [7]     rw : Output Type for Pin 7
+			OutputType OT8         : 1; // [8]     rw : Output Type for Pin 8
+			OutputType OT9         : 1; // [9]     rw : Output Type for Pin 9
+			OutputType OT10        : 1; // [10]    rw : Output Type for Pin 10
+			OutputType OT11        : 1; // [11]    rw : Output Type for Pin 11
+			OutputType OT12        : 1; // [12]    rw : Output Type for Pin 12
+			OutputType OT13        : 1; // [13]    rw : Output Type for Pin 13
+			OutputType OT14        : 1; // [14]    rw : Output Type for Pin 14
+			OutputType OT15        : 1; // [15]    rw : Output Type for Pin 15
+			Reserved   Reserved1   : 16; // [16:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortOutputSpeedRegister
+	union OSPEEDR_t
 	{
 		volatile struct
 		{
-			OutputSpeed OSPEEDR0  : 2; // [1:0]  rw : Output Speed for Pin 0
-			OutputSpeed OSPEEDR1  : 2; // [3:2]  rw : Output Speed for Pin 1
-			OutputSpeed OSPEEDR2  : 2; // [5:4]  rw : Output Speed for Pin 2
-			OutputSpeed OSPEEDR3  : 2; // [7:6]  rw : Output Speed for Pin 3
-			OutputSpeed OSPEEDR4  : 2; // [9:8]  rw : Output Speed for Pin 4
-			OutputSpeed OSPEEDR5  : 2; // [11:10] rw : Output Speed for Pin 5
-			OutputSpeed OSPEEDR6  : 2; // [13:12] rw : Output Speed for Pin 6
-			OutputSpeed OSPEEDR7  : 2; // [15:14] rw : Output Speed for Pin 7
-			OutputSpeed OSPEEDR8  : 2; // [17:16] rw : Output Speed for Pin 8
-			OutputSpeed OSPEEDR9  : 2; // [19:18] rw : Output Speed for Pin 9
-			OutputSpeed OSPEEDR10 : 2; // [21:20] rw : Output Speed for Pin 10
-			OutputSpeed OSPEEDR11 : 2; // [23:22] rw : Output Speed for Pin 11
-			OutputSpeed OSPEEDR12 : 2; // [25:24] rw : Output Speed for Pin 12
-			OutputSpeed OSPEEDR13 : 2; // [27:26] rw : Output Speed for Pin 13
-			OutputSpeed OSPEEDR14 : 2; // [29:28] rw : Output Speed for Pin 14
-			OutputSpeed OSPEEDR15 : 2; // [31:30] rw : Output Speed for Pin 15
+			Speed OSPEEDR0    : 2; // [0:1]   rw : Output Speed for Pin 0
+			Speed OSPEEDR1    : 2; // [2:3]   rw : Output Speed for Pin 1
+			Speed OSPEEDR2    : 2; // [4:5]   rw : Output Speed for Pin 2
+			Speed OSPEEDR3    : 2; // [6:7]   rw : Output Speed for Pin 3
+			Speed OSPEEDR4    : 2; // [8:9]   rw : Output Speed for Pin 4
+			Speed OSPEEDR5    : 2; // [10:11] rw : Output Speed for Pin 5
+			Speed OSPEEDR6    : 2; // [12:13] rw : Output Speed for Pin 6
+			Speed OSPEEDR7    : 2; // [14:15] rw : Output Speed for Pin 7
+			Speed OSPEEDR8    : 2; // [16:17] rw : Output Speed for Pin 8
+			Speed OSPEEDR9    : 2; // [18:19] rw : Output Speed for Pin 9
+			Speed OSPEEDR10   : 2; // [20:21] rw : Output Speed for Pin 10
+			Speed OSPEEDR11   : 2; // [22:23] rw : Output Speed for Pin 11
+			Speed OSPEEDR12   : 2; // [24:25] rw : Output Speed for Pin 12
+			Speed OSPEEDR13   : 2; // [26:27] rw : Output Speed for Pin 13
+			Speed OSPEEDR14   : 2; // [28:29] rw : Output Speed for Pin 14
+			Speed OSPEEDR15   : 2; // [30:31] rw : Output Speed for Pin 15
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortPullUpPullDownRegister
+	union PUPDR_t
 	{
 		volatile struct
 		{
-			PullUpPullDown PUPDR0    : 2; // [1:0]  rw : Pull-Up/Pull Down for Pin 0
-			PullUpPullDown PUPDR1    : 2; // [3:2]  rw : Pull-Up/Pull Down for Pin 1
-			PullUpPullDown PUPDR2    : 2; // [5:4]  rw : Pull-Up/Pull Down for Pin 2
-			PullUpPullDown PUPDR3    : 2; // [7:6]  rw : Pull-Up/Pull Down for Pin 3
-			PullUpPullDown PUPDR4    : 2; // [9:8]  rw : Pull-Up/Pull Down for Pin 4
-			PullUpPullDown PUPDR5    : 2; // [11:10] rw : Pull-Up/Pull Down for Pin 5
-			PullUpPullDown PUPDR6    : 2; // [13:12] rw : Pull-Up/Pull Down for Pin 6
-			PullUpPullDown PUPDR7    : 2; // [15:14] rw : Pull-Up/Pull Down for Pin 7
-			PullUpPullDown PUPDR8    : 2; // [17:16] rw : Pull-Up/Pull Down for Pin 8
-			PullUpPullDown PUPDR9    : 2; // [19:18] rw : Pull-Up/Pull Down for Pin 9
-			PullUpPullDown PUPDR10   : 2; // [21:20] rw : Pull-Up/Pull Down for Pin 10
-			PullUpPullDown PUPDR11   : 2; // [23:22] rw : Pull-Up/Pull Down for Pin 11
-			PullUpPullDown PUPDR12   : 2; // [25:24] rw : Pull-Up/Pull Down for Pin 12
-			PullUpPullDown PUPDR13   : 2; // [27:26] rw : Pull-Up/Pull Down for Pin 13
-			PullUpPullDown PUPDR14   : 2; // [29:28] rw : Pull-Up/Pull Down for Pin 14
-			PullUpPullDown PUPDR15   : 2; // [31:30] rw : Pull-Up/Pull Down for Pin 15
+			PullUpPullDown PUPDR0      : 2; // [0:1]   rw : Pull-Up/Pull Down for Pin 0
+			PullUpPullDown PUPDR1      : 2; // [2:3]   rw : Pull-Up/Pull Down for Pin 1
+			PullUpPullDown PUPDR2      : 2; // [4:5]   rw : Pull-Up/Pull Down for Pin 2
+			PullUpPullDown PUPDR3      : 2; // [6:7]   rw : Pull-Up/Pull Down for Pin 3
+			PullUpPullDown PUPDR4      : 2; // [8:9]   rw : Pull-Up/Pull Down for Pin 4
+			PullUpPullDown PUPDR5      : 2; // [10:11] rw : Pull-Up/Pull Down for Pin 5
+			PullUpPullDown PUPDR6      : 2; // [12:13] rw : Pull-Up/Pull Down for Pin 6
+			PullUpPullDown PUPDR7      : 2; // [14:15] rw : Pull-Up/Pull Down for Pin 7
+			PullUpPullDown PUPDR8      : 2; // [16:17] rw : Pull-Up/Pull Down for Pin 8
+			PullUpPullDown PUPDR9      : 2; // [18:19] rw : Pull-Up/Pull Down for Pin 9
+			PullUpPullDown PUPDR10     : 2; // [20:21] rw : Pull-Up/Pull Down for Pin 10
+			PullUpPullDown PUPDR11     : 2; // [22:23] rw : Pull-Up/Pull Down for Pin 11
+			PullUpPullDown PUPDR12     : 2; // [24:25] rw : Pull-Up/Pull Down for Pin 12
+			PullUpPullDown PUPDR13     : 2; // [26:27] rw : Pull-Up/Pull Down for Pin 13
+			PullUpPullDown PUPDR14     : 2; // [28:29] rw : Pull-Up/Pull Down for Pin 14
+			PullUpPullDown PUPDR15     : 2; // [30:31] rw : Pull-Up/Pull Down for Pin 15
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortInputDataRegister
+	union IDR_t
 	{
 		volatile struct
 		{
-			uint8_t IDR0      : 1; // [0]    r  : Input Data for Pin 0
-			uint8_t IDR1      : 1; // [1]    r  : Input Data for Pin 1
-			uint8_t IDR2      : 1; // [2]    r  : Input Data for Pin 2
-			uint8_t IDR3      : 1; // [3]    r  : Input Data for Pin 3
-			uint8_t IDR4      : 1; // [4]    r  : Input Data for Pin 4
-			uint8_t IDR5      : 1; // [5]    r  : Input Data for Pin 5
-			uint8_t IDR6      : 1; // [6]    r  : Input Data for Pin 6
-			uint8_t IDR7      : 1; // [7]    r  : Input Data for Pin 7
-			uint8_t IDR8      : 1; // [8]    r  : Input Data for Pin 8
-			uint8_t IDR9      : 1; // [9]    r  : Input Data for Pin 9
-			uint8_t IDR10     : 1; // [10]   r  : Input Data for Pin 10
-			uint8_t IDR11     : 1; // [11]   r  : Input Data for Pin 11
-			uint8_t IDR12     : 1; // [12]   r  : Input Data for Pin 12
-			uint8_t IDR13     : 1; // [13]   r  : Input Data for Pin 13
-			uint8_t IDR14     : 1; // [14]   r  : Input Data for Pin 14
-			uint8_t IDR15     : 1; // [15]   r  : Input Data for Pin 15
-			uint32_t RESERVED1 : 16;
+			uint8_t IDR0        : 1; // [0]     r  : Input Data for Pin 0
+			uint8_t IDR1        : 1; // [1]     r  : Input Data for Pin 1
+			uint8_t IDR2        : 1; // [2]     r  : Input Data for Pin 2
+			uint8_t IDR3        : 1; // [3]     r  : Input Data for Pin 3
+			uint8_t IDR4        : 1; // [4]     r  : Input Data for Pin 4
+			uint8_t IDR5        : 1; // [5]     r  : Input Data for Pin 5
+			uint8_t IDR6        : 1; // [6]     r  : Input Data for Pin 6
+			uint8_t IDR7        : 1; // [7]     r  : Input Data for Pin 7
+			uint8_t IDR8        : 1; // [8]     r  : Input Data for Pin 8
+			uint8_t IDR9        : 1; // [9]     r  : Input Data for Pin 9
+			uint8_t IDR10       : 1; // [10]    r  : Input Data for Pin 10
+			uint8_t IDR11       : 1; // [11]    r  : Input Data for Pin 11
+			uint8_t IDR12       : 1; // [12]    r  : Input Data for Pin 12
+			uint8_t IDR13       : 1; // [13]    r  : Input Data for Pin 13
+			uint8_t IDR14       : 1; // [14]    r  : Input Data for Pin 14
+			uint8_t IDR15       : 1; // [15]    r  : Input Data for Pin 15
+			Reserved Reserved1   : 16; // [16:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortOutputDataRegister
+	union ODR_t
 	{
 		volatile struct
 		{
-			uint8_t ODR0      : 1; // [0]    rw : Output Data for Pin 0
-			uint8_t ODR1      : 1; // [1]    rw : Output Data for Pin 1
-			uint8_t ODR2      : 1; // [2]    rw : Output Data for Pin 2
-			uint8_t ODR3      : 1; // [3]    rw : Output Data for Pin 3
-			uint8_t ODR4      : 1; // [4]    rw : Output Data for Pin 4
-			uint8_t ODR5      : 1; // [5]    rw : Output Data for Pin 5
-			uint8_t ODR6      : 1; // [6]    rw : Output Data for Pin 6
-			uint8_t ODR7      : 1; // [7]    rw : Output Data for Pin 7
-			uint8_t ODR8      : 1; // [8]    rw : Output Data for Pin 8
-			uint8_t ODR9      : 1; // [9]    rw : Output Data for Pin 9
-			uint8_t ODR10     : 1; // [10]   rw : Output Data for Pin 10
-			uint8_t ODR11     : 1; // [11]   rw : Output Data for Pin 11
-			uint8_t ODR12     : 1; // [12]   rw : Output Data for Pin 12
-			uint8_t ODR13     : 1; // [13]   rw : Output Data for Pin 13
-			uint8_t ODR14     : 1; // [14]   rw : Output Data for Pin 14
-			uint8_t ODR15     : 1; // [15]   rw : Output Data for Pin 15
-			uint32_t RESERVED1 : 16;
+			uint8_t ODR0        : 1; // [0]     rw : Output Data for Pin 0
+			uint8_t ODR1        : 1; // [1]     rw : Output Data for Pin 1
+			uint8_t ODR2        : 1; // [2]     rw : Output Data for Pin 2
+			uint8_t ODR3        : 1; // [3]     rw : Output Data for Pin 3
+			uint8_t ODR4        : 1; // [4]     rw : Output Data for Pin 4
+			uint8_t ODR5        : 1; // [5]     rw : Output Data for Pin 5
+			uint8_t ODR6        : 1; // [6]     rw : Output Data for Pin 6
+			uint8_t ODR7        : 1; // [7]     rw : Output Data for Pin 7
+			uint8_t ODR8        : 1; // [8]     rw : Output Data for Pin 8
+			uint8_t ODR9        : 1; // [9]     rw : Output Data for Pin 9
+			uint8_t ODR10       : 1; // [10]    rw : Output Data for Pin 10
+			uint8_t ODR11       : 1; // [11]    rw : Output Data for Pin 11
+			uint8_t ODR12       : 1; // [12]    rw : Output Data for Pin 12
+			uint8_t ODR13       : 1; // [13]    rw : Output Data for Pin 13
+			uint8_t ODR14       : 1; // [14]    rw : Output Data for Pin 14
+			uint8_t ODR15       : 1; // [15]    rw : Output Data for Pin 15
+			Reserved Reserved1   : 16; // [16:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortBitSetResetRegister
+	union BSRR_t
 	{
 		volatile struct
 		{
-			uint8_t BS0       : 1; // [0]    w  : Port Set Bit 0
-			uint8_t BS1       : 1; // [1]    w  : Port Set Bit 1
-			uint8_t BS2       : 1; // [2]    w  : Port Set Bit 2
-			uint8_t BS3       : 1; // [3]    w  : Port Set Bit 3
-			uint8_t BS4       : 1; // [4]    w  : Port Set Bit 4
-			uint8_t BS5       : 1; // [5]    w  : Port Set Bit 5
-			uint8_t BS6       : 1; // [6]    w  : Port Set Bit 6
-			uint8_t BS7       : 1; // [7]    w  : Port Set Bit 7
-			uint8_t BS8       : 1; // [8]    w  : Port Set Bit 8
-			uint8_t BS9       : 1; // [9]    w  : Port Set Bit 9
-			uint8_t BS10      : 1; // [10]   w  : Port Set Bit 10
-			uint8_t BS11      : 1; // [11]   w  : Port Set Bit 11
-			uint8_t BS12      : 1; // [12]   w  : Port Set Bit 12
-			uint8_t BS13      : 1; // [13]   w  : Port Set Bit 13
-			uint8_t BS14      : 1; // [14]   w  : Port Set Bit 14
-			uint8_t BS15      : 1; // [15]   w  : Port Set Bit 15
-			uint8_t BR0       : 1; // [16]   w  : Port Reset Bit 0
-			uint8_t BR1       : 1; // [17]   w  : Port Reset Bit 1
-			uint8_t BR2       : 1; // [18]   w  : Port Reset Bit 2
-			uint8_t BR3       : 1; // [19]   w  : Port Reset Bit 3
-			uint8_t BR4       : 1; // [20]   w  : Port Reset Bit 4
-			uint8_t BR5       : 1; // [21]   w  : Port Reset Bit 5
-			uint8_t BR6       : 1; // [22]   w  : Port Reset Bit 6
-			uint8_t BR7       : 1; // [23]   w  : Port Reset Bit 7
-			uint8_t BR8       : 1; // [24]   w  : Port Reset Bit 8
-			uint8_t BR9       : 1; // [25]   w  : Port Reset Bit 9
-			uint8_t BR10      : 1; // [26]   w  : Port Reset Bit 10
-			uint8_t BR11      : 1; // [27]   w  : Port Reset Bit 11
-			uint8_t BR12      : 1; // [28]   w  : Port Reset Bit 12
-			uint8_t BR13      : 1; // [29]   w  : Port Reset Bit 13
-			uint8_t BR14      : 1; // [30]   w  : Port Reset Bit 14
-			uint8_t BR15      : 1; // [31]   w  : Port Reset Bit 15
+			uint8_t BS0         : 1; // [0]     w  : Port Set Bit 0
+			uint8_t BS1         : 1; // [1]     w  : Port Set Bit 1
+			uint8_t BS2         : 1; // [2]     w  : Port Set Bit 2
+			uint8_t BS3         : 1; // [3]     w  : Port Set Bit 3
+			uint8_t BS4         : 1; // [4]     w  : Port Set Bit 4
+			uint8_t BS5         : 1; // [5]     w  : Port Set Bit 5
+			uint8_t BS6         : 1; // [6]     w  : Port Set Bit 6
+			uint8_t BS7         : 1; // [7]     w  : Port Set Bit 7
+			uint8_t BS8         : 1; // [8]     w  : Port Set Bit 8
+			uint8_t BS9         : 1; // [9]     w  : Port Set Bit 9
+			uint8_t BS10        : 1; // [10]    w  : Port Set Bit 10
+			uint8_t BS11        : 1; // [11]    w  : Port Set Bit 11
+			uint8_t BS12        : 1; // [12]    w  : Port Set Bit 12
+			uint8_t BS13        : 1; // [13]    w  : Port Set Bit 13
+			uint8_t BS14        : 1; // [14]    w  : Port Set Bit 14
+			uint8_t BS15        : 1; // [15]    w  : Port Set Bit 15
+			uint8_t BR0         : 1; // [16]    w  : Port Reset Bit 0
+			uint8_t BR1         : 1; // [17]    w  : Port Reset Bit 1
+			uint8_t BR2         : 1; // [18]    w  : Port Reset Bit 2
+			uint8_t BR3         : 1; // [19]    w  : Port Reset Bit 3
+			uint8_t BR4         : 1; // [20]    w  : Port Reset Bit 4
+			uint8_t BR5         : 1; // [21]    w  : Port Reset Bit 5
+			uint8_t BR6         : 1; // [22]    w  : Port Reset Bit 6
+			uint8_t BR7         : 1; // [23]    w  : Port Reset Bit 7
+			uint8_t BR8         : 1; // [24]    w  : Port Reset Bit 8
+			uint8_t BR9         : 1; // [25]    w  : Port Reset Bit 9
+			uint8_t BR10        : 1; // [26]    w  : Port Reset Bit 10
+			uint8_t BR11        : 1; // [27]    w  : Port Reset Bit 11
+			uint8_t BR12        : 1; // [28]    w  : Port Reset Bit 12
+			uint8_t BR13        : 1; // [29]    w  : Port Reset Bit 13
+			uint8_t BR14        : 1; // [30]    w  : Port Reset Bit 14
+			uint8_t BR15        : 1; // [31]    w  : Port Reset Bit 15
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union PortConfigurationLockRegister
+	union LCKR_t
 	{
 		volatile struct
 		{
-			PortConfigurationLock    LCK0      : 1; // [0]    rw : Port Configuration Lock for Bit 0
-			PortConfigurationLock    LCK1      : 1; // [1]    rw : Port Configuration Lock for Bit 1
-			PortConfigurationLock    LCK2      : 1; // [2]    rw : Port Configuration Lock for Bit 2
-			PortConfigurationLock    LCK3      : 1; // [3]    rw : Port Configuration Lock for Bit 3
-			PortConfigurationLock    LCK4      : 1; // [4]    rw : Port Configuration Lock for Bit 4
-			PortConfigurationLock    LCK5      : 1; // [5]    rw : Port Configuration Lock for Bit 5
-			PortConfigurationLock    LCK6      : 1; // [6]    rw : Port Configuration Lock for Bit 6
-			PortConfigurationLock    LCK7      : 1; // [7]    rw : Port Configuration Lock for Bit 7
-			PortConfigurationLock    LCK8      : 1; // [8]    rw : Port Configuration Lock for Bit 8
-			PortConfigurationLock    LCK9      : 1; // [9]    rw : Port Configuration Lock for Bit 9
-			PortConfigurationLock    LCK10     : 1; // [10]   rw : Port Configuration Lock for Bit 10
-			PortConfigurationLock    LCK11     : 1; // [11]   rw : Port Configuration Lock for Bit 11
-			PortConfigurationLock    LCK12     : 1; // [12]   rw : Port Configuration Lock for Bit 12
-			PortConfigurationLock    LCK13     : 1; // [13]   rw : Port Configuration Lock for Bit 13
-			PortConfigurationLock    LCK14     : 1; // [14]   rw : Port Configuration Lock for Bit 14
-			PortConfigurationLock    LCK15     : 1; // [15]   rw : Port Configuration Lock for Bit 15
-			PortConfigurationLockKey LCKK      : 1; // [16]   rw : Port Configuration Lock Key
-			uint32_t                 RESERVED1 : 15;
+			PortConfigurationLock    LCK0        : 1; // [0]     rw : Port Configuration Lock for Bit 0
+			PortConfigurationLock    LCK1        : 1; // [1]     rw : Port Configuration Lock for Bit 1
+			PortConfigurationLock    LCK2        : 1; // [2]     rw : Port Configuration Lock for Bit 2
+			PortConfigurationLock    LCK3        : 1; // [3]     rw : Port Configuration Lock for Bit 3
+			PortConfigurationLock    LCK4        : 1; // [4]     rw : Port Configuration Lock for Bit 4
+			PortConfigurationLock    LCK5        : 1; // [5]     rw : Port Configuration Lock for Bit 5
+			PortConfigurationLock    LCK6        : 1; // [6]     rw : Port Configuration Lock for Bit 6
+			PortConfigurationLock    LCK7        : 1; // [7]     rw : Port Configuration Lock for Bit 7
+			PortConfigurationLock    LCK8        : 1; // [8]     rw : Port Configuration Lock for Bit 8
+			PortConfigurationLock    LCK9        : 1; // [9]     rw : Port Configuration Lock for Bit 9
+			PortConfigurationLock    LCK10       : 1; // [10]    rw : Port Configuration Lock for Bit 10
+			PortConfigurationLock    LCK11       : 1; // [11]    rw : Port Configuration Lock for Bit 11
+			PortConfigurationLock    LCK12       : 1; // [12]    rw : Port Configuration Lock for Bit 12
+			PortConfigurationLock    LCK13       : 1; // [13]    rw : Port Configuration Lock for Bit 13
+			PortConfigurationLock    LCK14       : 1; // [14]    rw : Port Configuration Lock for Bit 14
+			PortConfigurationLock    LCK15       : 1; // [15]    rw : Port Configuration Lock for Bit 15
+			PortConfigurationLockKey LCKK        : 1; // [16]    rw : Port Configuration Lock Key
+			Reserved                 Reserved1   : 15; // [17:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AlternateFunctionLowRegister
+	union AFRL_t
 	{
 		volatile struct
 		{
-			AlternateFunction AFRL0     : 4; // [3:0]  rw : Alternate Function for Pin 0
-			AlternateFunction AFRL1     : 4; // [7:4]  rw : Alternate Function for Pin 1
-			AlternateFunction AFRL2     : 4; // [11:8] rw : Alternate Function for Pin 2
-			AlternateFunction AFRL3     : 4; // [15:12] rw : Alternate Function for Pin 3
-			AlternateFunction AFRL4     : 4; // [19:16] rw : Alternate Function for Pin 4
-			AlternateFunction AFRL5     : 4; // [23:20] rw : Alternate Function for Pin 5
-			AlternateFunction AFRL6     : 4; // [27:24] rw : Alternate Function for Pin 6
-			AlternateFunction AFRL7     : 4; // [31:28] rw : Alternate Function for Pin 7
+			AlternateFunction AFRL0       : 4; // [0:3]   rw : Alternate Function for Pin 0
+			AlternateFunction AFRL1       : 4; // [4:7]   rw : Alternate Function for Pin 1
+			AlternateFunction AFRL2       : 4; // [8:11]  rw : Alternate Function for Pin 2
+			AlternateFunction AFRL3       : 4; // [12:15] rw : Alternate Function for Pin 3
+			AlternateFunction AFRL4       : 4; // [16:19] rw : Alternate Function for Pin 4
+			AlternateFunction AFRL5       : 4; // [20:23] rw : Alternate Function for Pin 5
+			AlternateFunction AFRL6       : 4; // [24:27] rw : Alternate Function for Pin 6
+			AlternateFunction AFRL7       : 4; // [28:31] rw : Alternate Function for Pin 7
 		} Fields;
 		volatile uint32_t Value;
 	};
 
-	union AlternateFunctionHighRegister
+	union AFRH_t
 	{
 		volatile struct
 		{
-			AlternateFunction AFRH8     : 4; // [3:0]  rw : Alternate Function for Pin 8
-			AlternateFunction AFRH9     : 4; // [7:4]  rw : Alternate Function for Pin 9
-			AlternateFunction AFRH10    : 4; // [11:8] rw : Alternate Function for Pin 10
-			AlternateFunction AFRH11    : 4; // [15:12] rw : Alternate Function for Pin 11
-			AlternateFunction AFRH12    : 4; // [19:16] rw : Alternate Function for Pin 12
-			AlternateFunction AFRH13    : 4; // [23:20] rw : Alternate Function for Pin 13
-			AlternateFunction AFRH14    : 4; // [27:24] rw : Alternate Function for Pin 14
-			AlternateFunction AFRH15    : 4; // [31:28] rw : Alternate Function for Pin 15
+			AlternateFunction AFRH8       : 4; // [0:3]   rw : Alternate Function for Pin 8
+			AlternateFunction AFRH9       : 4; // [4:7]   rw : Alternate Function for Pin 9
+			AlternateFunction AFRH10      : 4; // [8:11]  rw : Alternate Function for Pin 10
+			AlternateFunction AFRH11      : 4; // [12:15] rw : Alternate Function for Pin 11
+			AlternateFunction AFRH12      : 4; // [16:19] rw : Alternate Function for Pin 12
+			AlternateFunction AFRH13      : 4; // [20:23] rw : Alternate Function for Pin 13
+			AlternateFunction AFRH14      : 4; // [24:27] rw : Alternate Function for Pin 14
+			AlternateFunction AFRH15      : 4; // [28:31] rw : Alternate Function for Pin 15
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -258,38 +258,38 @@ namespace stm32::gpio
 	public:
 
 		// MODER Fields
-		virtual PortMode get_MODER_MODER0() const = 0;
-		virtual PortMode get_MODER_MODER1() const = 0;
-		virtual PortMode get_MODER_MODER2() const = 0;
-		virtual PortMode get_MODER_MODER3() const = 0;
-		virtual PortMode get_MODER_MODER4() const = 0;
-		virtual PortMode get_MODER_MODER5() const = 0;
-		virtual PortMode get_MODER_MODER6() const = 0;
-		virtual PortMode get_MODER_MODER7() const = 0;
-		virtual PortMode get_MODER_MODER8() const = 0;
-		virtual PortMode get_MODER_MODER9() const = 0;
-		virtual PortMode get_MODER_MODER10() const = 0;
-		virtual PortMode get_MODER_MODER11() const = 0;
-		virtual PortMode get_MODER_MODER12() const = 0;
-		virtual PortMode get_MODER_MODER13() const = 0;
-		virtual PortMode get_MODER_MODER14() const = 0;
-		virtual PortMode get_MODER_MODER15() const = 0;
-		virtual void set_MODER_MODER0(PortMode value) = 0;
-		virtual void set_MODER_MODER1(PortMode value) = 0;
-		virtual void set_MODER_MODER2(PortMode value) = 0;
-		virtual void set_MODER_MODER3(PortMode value) = 0;
-		virtual void set_MODER_MODER4(PortMode value) = 0;
-		virtual void set_MODER_MODER5(PortMode value) = 0;
-		virtual void set_MODER_MODER6(PortMode value) = 0;
-		virtual void set_MODER_MODER7(PortMode value) = 0;
-		virtual void set_MODER_MODER8(PortMode value) = 0;
-		virtual void set_MODER_MODER9(PortMode value) = 0;
-		virtual void set_MODER_MODER10(PortMode value) = 0;
-		virtual void set_MODER_MODER11(PortMode value) = 0;
-		virtual void set_MODER_MODER12(PortMode value) = 0;
-		virtual void set_MODER_MODER13(PortMode value) = 0;
-		virtual void set_MODER_MODER14(PortMode value) = 0;
-		virtual void set_MODER_MODER15(PortMode value) = 0;
+		virtual Mode get_MODER_MODER0() const = 0;
+		virtual Mode get_MODER_MODER1() const = 0;
+		virtual Mode get_MODER_MODER2() const = 0;
+		virtual Mode get_MODER_MODER3() const = 0;
+		virtual Mode get_MODER_MODER4() const = 0;
+		virtual Mode get_MODER_MODER5() const = 0;
+		virtual Mode get_MODER_MODER6() const = 0;
+		virtual Mode get_MODER_MODER7() const = 0;
+		virtual Mode get_MODER_MODER8() const = 0;
+		virtual Mode get_MODER_MODER9() const = 0;
+		virtual Mode get_MODER_MODER10() const = 0;
+		virtual Mode get_MODER_MODER11() const = 0;
+		virtual Mode get_MODER_MODER12() const = 0;
+		virtual Mode get_MODER_MODER13() const = 0;
+		virtual Mode get_MODER_MODER14() const = 0;
+		virtual Mode get_MODER_MODER15() const = 0;
+		virtual void set_MODER_MODER0(Mode value) = 0;
+		virtual void set_MODER_MODER1(Mode value) = 0;
+		virtual void set_MODER_MODER2(Mode value) = 0;
+		virtual void set_MODER_MODER3(Mode value) = 0;
+		virtual void set_MODER_MODER4(Mode value) = 0;
+		virtual void set_MODER_MODER5(Mode value) = 0;
+		virtual void set_MODER_MODER6(Mode value) = 0;
+		virtual void set_MODER_MODER7(Mode value) = 0;
+		virtual void set_MODER_MODER8(Mode value) = 0;
+		virtual void set_MODER_MODER9(Mode value) = 0;
+		virtual void set_MODER_MODER10(Mode value) = 0;
+		virtual void set_MODER_MODER11(Mode value) = 0;
+		virtual void set_MODER_MODER12(Mode value) = 0;
+		virtual void set_MODER_MODER13(Mode value) = 0;
+		virtual void set_MODER_MODER14(Mode value) = 0;
+		virtual void set_MODER_MODER15(Mode value) = 0;
 
 		// OTYPER Fields
 		virtual OutputType get_OTYPER_OT0() const = 0;
@@ -326,38 +326,38 @@ namespace stm32::gpio
 		virtual void set_OTYPER_OT15(OutputType value) = 0;
 
 		// OSPEEDR Fields
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR0() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR1() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR2() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR3() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR4() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR5() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR6() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR7() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR8() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR9() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR10() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR11() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR12() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR13() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR14() const = 0;
-		virtual OutputSpeed get_OSPEEDR_OSPEEDR15() const = 0;
-		virtual void set_OSPEEDR_OSPEEDR0(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR1(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR2(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR3(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR4(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR5(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR6(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR7(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR8(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR9(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR10(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR11(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR12(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR13(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR14(OutputSpeed value) = 0;
-		virtual void set_OSPEEDR_OSPEEDR15(OutputSpeed value) = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR0() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR1() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR2() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR3() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR4() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR5() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR6() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR7() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR8() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR9() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR10() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR11() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR12() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR13() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR14() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR15() const = 0;
+		virtual void set_OSPEEDR_OSPEEDR0(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR1(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR2(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR3(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR4(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR5(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR6(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR7(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR8(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR9(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR10(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR11(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR12(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR13(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR14(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR15(Speed value) = 0;
 
 		// PUPDR Fields
 		virtual PullUpPullDown get_PUPDR_PUPDR0() const = 0;
@@ -557,38 +557,38 @@ namespace stm32::gpio
 	public:
 
 		// MODER Fields
-		PortMode get_MODER_MODER0() const override { return MODER.Fields.MODER0; }
-		PortMode get_MODER_MODER1() const override { return MODER.Fields.MODER1; }
-		PortMode get_MODER_MODER2() const override { return MODER.Fields.MODER2; }
-		PortMode get_MODER_MODER3() const override { return MODER.Fields.MODER3; }
-		PortMode get_MODER_MODER4() const override { return MODER.Fields.MODER4; }
-		PortMode get_MODER_MODER5() const override { return MODER.Fields.MODER5; }
-		PortMode get_MODER_MODER6() const override { return MODER.Fields.MODER6; }
-		PortMode get_MODER_MODER7() const override { return MODER.Fields.MODER7; }
-		PortMode get_MODER_MODER8() const override { return MODER.Fields.MODER8; }
-		PortMode get_MODER_MODER9() const override { return MODER.Fields.MODER9; }
-		PortMode get_MODER_MODER10() const override { return MODER.Fields.MODER10; }
-		PortMode get_MODER_MODER11() const override { return MODER.Fields.MODER11; }
-		PortMode get_MODER_MODER12() const override { return MODER.Fields.MODER12; }
-		PortMode get_MODER_MODER13() const override { return MODER.Fields.MODER13; }
-		PortMode get_MODER_MODER14() const override { return MODER.Fields.MODER14; }
-		PortMode get_MODER_MODER15() const override { return MODER.Fields.MODER15; }
-		void set_MODER_MODER0(PortMode value) override { MODER.Fields.MODER0 = value; }
-		void set_MODER_MODER1(PortMode value) override { MODER.Fields.MODER1 = value; }
-		void set_MODER_MODER2(PortMode value) override { MODER.Fields.MODER2 = value; }
-		void set_MODER_MODER3(PortMode value) override { MODER.Fields.MODER3 = value; }
-		void set_MODER_MODER4(PortMode value) override { MODER.Fields.MODER4 = value; }
-		void set_MODER_MODER5(PortMode value) override { MODER.Fields.MODER5 = value; }
-		void set_MODER_MODER6(PortMode value) override { MODER.Fields.MODER6 = value; }
-		void set_MODER_MODER7(PortMode value) override { MODER.Fields.MODER7 = value; }
-		void set_MODER_MODER8(PortMode value) override { MODER.Fields.MODER8 = value; }
-		void set_MODER_MODER9(PortMode value) override { MODER.Fields.MODER9 = value; }
-		void set_MODER_MODER10(PortMode value) override { MODER.Fields.MODER10 = value; }
-		void set_MODER_MODER11(PortMode value) override { MODER.Fields.MODER11 = value; }
-		void set_MODER_MODER12(PortMode value) override { MODER.Fields.MODER12 = value; }
-		void set_MODER_MODER13(PortMode value) override { MODER.Fields.MODER13 = value; }
-		void set_MODER_MODER14(PortMode value) override { MODER.Fields.MODER14 = value; }
-		void set_MODER_MODER15(PortMode value) override { MODER.Fields.MODER15 = value; }
+		Mode get_MODER_MODER0() const override { return MODER.Fields.MODER0; }
+		Mode get_MODER_MODER1() const override { return MODER.Fields.MODER1; }
+		Mode get_MODER_MODER2() const override { return MODER.Fields.MODER2; }
+		Mode get_MODER_MODER3() const override { return MODER.Fields.MODER3; }
+		Mode get_MODER_MODER4() const override { return MODER.Fields.MODER4; }
+		Mode get_MODER_MODER5() const override { return MODER.Fields.MODER5; }
+		Mode get_MODER_MODER6() const override { return MODER.Fields.MODER6; }
+		Mode get_MODER_MODER7() const override { return MODER.Fields.MODER7; }
+		Mode get_MODER_MODER8() const override { return MODER.Fields.MODER8; }
+		Mode get_MODER_MODER9() const override { return MODER.Fields.MODER9; }
+		Mode get_MODER_MODER10() const override { return MODER.Fields.MODER10; }
+		Mode get_MODER_MODER11() const override { return MODER.Fields.MODER11; }
+		Mode get_MODER_MODER12() const override { return MODER.Fields.MODER12; }
+		Mode get_MODER_MODER13() const override { return MODER.Fields.MODER13; }
+		Mode get_MODER_MODER14() const override { return MODER.Fields.MODER14; }
+		Mode get_MODER_MODER15() const override { return MODER.Fields.MODER15; }
+		void set_MODER_MODER0(Mode value) override { MODER.Fields.MODER0 = value; }
+		void set_MODER_MODER1(Mode value) override { MODER.Fields.MODER1 = value; }
+		void set_MODER_MODER2(Mode value) override { MODER.Fields.MODER2 = value; }
+		void set_MODER_MODER3(Mode value) override { MODER.Fields.MODER3 = value; }
+		void set_MODER_MODER4(Mode value) override { MODER.Fields.MODER4 = value; }
+		void set_MODER_MODER5(Mode value) override { MODER.Fields.MODER5 = value; }
+		void set_MODER_MODER6(Mode value) override { MODER.Fields.MODER6 = value; }
+		void set_MODER_MODER7(Mode value) override { MODER.Fields.MODER7 = value; }
+		void set_MODER_MODER8(Mode value) override { MODER.Fields.MODER8 = value; }
+		void set_MODER_MODER9(Mode value) override { MODER.Fields.MODER9 = value; }
+		void set_MODER_MODER10(Mode value) override { MODER.Fields.MODER10 = value; }
+		void set_MODER_MODER11(Mode value) override { MODER.Fields.MODER11 = value; }
+		void set_MODER_MODER12(Mode value) override { MODER.Fields.MODER12 = value; }
+		void set_MODER_MODER13(Mode value) override { MODER.Fields.MODER13 = value; }
+		void set_MODER_MODER14(Mode value) override { MODER.Fields.MODER14 = value; }
+		void set_MODER_MODER15(Mode value) override { MODER.Fields.MODER15 = value; }
 
 		// OTYPER Fields
 		OutputType get_OTYPER_OT0() const override { return OTYPER.Fields.OT0; }
@@ -625,38 +625,38 @@ namespace stm32::gpio
 		void set_OTYPER_OT15(OutputType value) override { OTYPER.Fields.OT15 = value; }
 
 		// OSPEEDR Fields
-		OutputSpeed get_OSPEEDR_OSPEEDR0() const override { return OSPEEDR.Fields.OSPEEDR0; }
-		OutputSpeed get_OSPEEDR_OSPEEDR1() const override { return OSPEEDR.Fields.OSPEEDR1; }
-		OutputSpeed get_OSPEEDR_OSPEEDR2() const override { return OSPEEDR.Fields.OSPEEDR2; }
-		OutputSpeed get_OSPEEDR_OSPEEDR3() const override { return OSPEEDR.Fields.OSPEEDR3; }
-		OutputSpeed get_OSPEEDR_OSPEEDR4() const override { return OSPEEDR.Fields.OSPEEDR4; }
-		OutputSpeed get_OSPEEDR_OSPEEDR5() const override { return OSPEEDR.Fields.OSPEEDR5; }
-		OutputSpeed get_OSPEEDR_OSPEEDR6() const override { return OSPEEDR.Fields.OSPEEDR6; }
-		OutputSpeed get_OSPEEDR_OSPEEDR7() const override { return OSPEEDR.Fields.OSPEEDR7; }
-		OutputSpeed get_OSPEEDR_OSPEEDR8() const override { return OSPEEDR.Fields.OSPEEDR8; }
-		OutputSpeed get_OSPEEDR_OSPEEDR9() const override { return OSPEEDR.Fields.OSPEEDR9; }
-		OutputSpeed get_OSPEEDR_OSPEEDR10() const override { return OSPEEDR.Fields.OSPEEDR10; }
-		OutputSpeed get_OSPEEDR_OSPEEDR11() const override { return OSPEEDR.Fields.OSPEEDR11; }
-		OutputSpeed get_OSPEEDR_OSPEEDR12() const override { return OSPEEDR.Fields.OSPEEDR12; }
-		OutputSpeed get_OSPEEDR_OSPEEDR13() const override { return OSPEEDR.Fields.OSPEEDR13; }
-		OutputSpeed get_OSPEEDR_OSPEEDR14() const override { return OSPEEDR.Fields.OSPEEDR14; }
-		OutputSpeed get_OSPEEDR_OSPEEDR15() const override { return OSPEEDR.Fields.OSPEEDR15; }
-		void set_OSPEEDR_OSPEEDR0(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR0 = value; }
-		void set_OSPEEDR_OSPEEDR1(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR1 = value; }
-		void set_OSPEEDR_OSPEEDR2(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR2 = value; }
-		void set_OSPEEDR_OSPEEDR3(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR3 = value; }
-		void set_OSPEEDR_OSPEEDR4(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR4 = value; }
-		void set_OSPEEDR_OSPEEDR5(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR5 = value; }
-		void set_OSPEEDR_OSPEEDR6(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR6 = value; }
-		void set_OSPEEDR_OSPEEDR7(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR7 = value; }
-		void set_OSPEEDR_OSPEEDR8(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR8 = value; }
-		void set_OSPEEDR_OSPEEDR9(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR9 = value; }
-		void set_OSPEEDR_OSPEEDR10(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR10 = value; }
-		void set_OSPEEDR_OSPEEDR11(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR11 = value; }
-		void set_OSPEEDR_OSPEEDR12(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR12 = value; }
-		void set_OSPEEDR_OSPEEDR13(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR13 = value; }
-		void set_OSPEEDR_OSPEEDR14(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR14 = value; }
-		void set_OSPEEDR_OSPEEDR15(OutputSpeed value) override { OSPEEDR.Fields.OSPEEDR15 = value; }
+		Speed get_OSPEEDR_OSPEEDR0() const override { return OSPEEDR.Fields.OSPEEDR0; }
+		Speed get_OSPEEDR_OSPEEDR1() const override { return OSPEEDR.Fields.OSPEEDR1; }
+		Speed get_OSPEEDR_OSPEEDR2() const override { return OSPEEDR.Fields.OSPEEDR2; }
+		Speed get_OSPEEDR_OSPEEDR3() const override { return OSPEEDR.Fields.OSPEEDR3; }
+		Speed get_OSPEEDR_OSPEEDR4() const override { return OSPEEDR.Fields.OSPEEDR4; }
+		Speed get_OSPEEDR_OSPEEDR5() const override { return OSPEEDR.Fields.OSPEEDR5; }
+		Speed get_OSPEEDR_OSPEEDR6() const override { return OSPEEDR.Fields.OSPEEDR6; }
+		Speed get_OSPEEDR_OSPEEDR7() const override { return OSPEEDR.Fields.OSPEEDR7; }
+		Speed get_OSPEEDR_OSPEEDR8() const override { return OSPEEDR.Fields.OSPEEDR8; }
+		Speed get_OSPEEDR_OSPEEDR9() const override { return OSPEEDR.Fields.OSPEEDR9; }
+		Speed get_OSPEEDR_OSPEEDR10() const override { return OSPEEDR.Fields.OSPEEDR10; }
+		Speed get_OSPEEDR_OSPEEDR11() const override { return OSPEEDR.Fields.OSPEEDR11; }
+		Speed get_OSPEEDR_OSPEEDR12() const override { return OSPEEDR.Fields.OSPEEDR12; }
+		Speed get_OSPEEDR_OSPEEDR13() const override { return OSPEEDR.Fields.OSPEEDR13; }
+		Speed get_OSPEEDR_OSPEEDR14() const override { return OSPEEDR.Fields.OSPEEDR14; }
+		Speed get_OSPEEDR_OSPEEDR15() const override { return OSPEEDR.Fields.OSPEEDR15; }
+		void set_OSPEEDR_OSPEEDR0(Speed value) override { OSPEEDR.Fields.OSPEEDR0 = value; }
+		void set_OSPEEDR_OSPEEDR1(Speed value) override { OSPEEDR.Fields.OSPEEDR1 = value; }
+		void set_OSPEEDR_OSPEEDR2(Speed value) override { OSPEEDR.Fields.OSPEEDR2 = value; }
+		void set_OSPEEDR_OSPEEDR3(Speed value) override { OSPEEDR.Fields.OSPEEDR3 = value; }
+		void set_OSPEEDR_OSPEEDR4(Speed value) override { OSPEEDR.Fields.OSPEEDR4 = value; }
+		void set_OSPEEDR_OSPEEDR5(Speed value) override { OSPEEDR.Fields.OSPEEDR5 = value; }
+		void set_OSPEEDR_OSPEEDR6(Speed value) override { OSPEEDR.Fields.OSPEEDR6 = value; }
+		void set_OSPEEDR_OSPEEDR7(Speed value) override { OSPEEDR.Fields.OSPEEDR7 = value; }
+		void set_OSPEEDR_OSPEEDR8(Speed value) override { OSPEEDR.Fields.OSPEEDR8 = value; }
+		void set_OSPEEDR_OSPEEDR9(Speed value) override { OSPEEDR.Fields.OSPEEDR9 = value; }
+		void set_OSPEEDR_OSPEEDR10(Speed value) override { OSPEEDR.Fields.OSPEEDR10 = value; }
+		void set_OSPEEDR_OSPEEDR11(Speed value) override { OSPEEDR.Fields.OSPEEDR11 = value; }
+		void set_OSPEEDR_OSPEEDR12(Speed value) override { OSPEEDR.Fields.OSPEEDR12 = value; }
+		void set_OSPEEDR_OSPEEDR13(Speed value) override { OSPEEDR.Fields.OSPEEDR13 = value; }
+		void set_OSPEEDR_OSPEEDR14(Speed value) override { OSPEEDR.Fields.OSPEEDR14 = value; }
+		void set_OSPEEDR_OSPEEDR15(Speed value) override { OSPEEDR.Fields.OSPEEDR15 = value; }
 
 		// PUPDR Fields
 		PullUpPullDown get_PUPDR_PUPDR0() const override { return PUPDR.Fields.PUPDR0; }
@@ -852,16 +852,16 @@ namespace stm32::gpio
 
 	private:
 
-		PortModeRegister MODER;
-		PortOutputTypeRegister OTYPER;
-		PortOutputSpeedRegister OSPEEDR;
-		PortPullUpPullDownRegister PUPDR;
-		PortInputDataRegister IDR;
-		PortOutputDataRegister ODR;
-		PortBitSetResetRegister BSRR;
-		PortConfigurationLockRegister LCKR;
-		AlternateFunctionLowRegister AFRL;
-		AlternateFunctionHighRegister AFRH;
+		MODER_t MODER; // Address Offset 0x0
+		OTYPER_t OTYPER; // Address Offset 0x4
+		OSPEEDR_t OSPEEDR; // Address Offset 0x8
+		PUPDR_t PUPDR; // Address Offset 0xC
+		IDR_t IDR; // Address Offset 0x10
+		ODR_t ODR; // Address Offset 0x14
+		BSRR_t BSRR; // Address Offset 0x18
+		LCKR_t LCKR; // Address Offset 0x1C
+		AFRL_t AFRL; // Address Offset 0x20
+		AFRH_t AFRH; // Address Offset 0x24
 	};
 }
 #endif // GPIO_REGISTER_MAP_HPP_
