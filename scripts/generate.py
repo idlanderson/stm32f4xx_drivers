@@ -77,10 +77,10 @@ class RegisterField:
             return "uint32_t"
 
     def generate_getter(self):
-        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const override {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
+        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
 
     def generate_setter(self):
-        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) override {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
+        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
 
     def generate_virtual_getter(self):
         return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
@@ -370,25 +370,10 @@ class Peripheral:
 
         return output
 
-    def generate_interface_class(self):
-
-        output = (
-            f"class I{self.name}RegisterMap\n"
-            "{\n"
-            "public:\n"
-        )
-        
-        for register in self.registers:
-            output += "\n" + textwrap.indent(register.generate_virtual_getters_and_setters(), "\t")
-        
-        output += "};\n\n"
-
-        return output
-
     def generate_concrete_class(self):
 
         output = (
-            f"class {self.name}RegisterMap : public I{self.name}RegisterMap\n"
+            f"class {self.name}RegisterMap\n"
             f"{{\n"
             f"public:\n"
         )
@@ -420,7 +405,7 @@ class Peripheral:
     def generate_mock_class(self):
 
         output = (
-            f"class Mock{self.name}RegisterMap : public I{self.name}RegisterMap\n"
+            f"class Mock{self.name}RegisterMap : public {self.name}RegisterMap\n"
             f"{{\n"
             f"public:\n"
         )
@@ -467,7 +452,6 @@ class Peripheral:
         
             header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
             unions          = textwrap.indent(self.generate_unions(), "\t")
-            interface_class = textwrap.indent(self.generate_interface_class(), "\t")
             concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
 
             file.write(
@@ -479,7 +463,6 @@ class Peripheral:
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
                 f"{{\n"
                 f"{unions}"
-                f"{interface_class}"
                 f"{concrete_class}"
                 f"}}\n"
                 f"#endif // {header_guard}"
@@ -514,7 +497,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "gpio"
+peripheral_name = "rcc"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

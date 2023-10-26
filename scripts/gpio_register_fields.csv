@@ -62,70 +62,70 @@ PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 12,PUPDR12,24,2,rw
 PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 13,PUPDR13,26,2,rw
 PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 14,PUPDR14,28,2,rw
 PUPDR,PullUpPullDown,Pull-Up/Pull Down for Pin 15,PUPDR15,30,2,rw
-IDR,uint8_t,Input Data for Pin 0,IDR0,0,1,r
-IDR,uint8_t,Input Data for Pin 1,IDR1,1,1,r
-IDR,uint8_t,Input Data for Pin 2,IDR2,2,1,r
-IDR,uint8_t,Input Data for Pin 3,IDR3,3,1,r
-IDR,uint8_t,Input Data for Pin 4,IDR4,4,1,r
-IDR,uint8_t,Input Data for Pin 5,IDR5,5,1,r
-IDR,uint8_t,Input Data for Pin 6,IDR6,6,1,r
-IDR,uint8_t,Input Data for Pin 7,IDR7,7,1,r
-IDR,uint8_t,Input Data for Pin 8,IDR8,8,1,r
-IDR,uint8_t,Input Data for Pin 9,IDR9,9,1,r
-IDR,uint8_t,Input Data for Pin 10,IDR10,10,1,r
-IDR,uint8_t,Input Data for Pin 11,IDR11,11,1,r
-IDR,uint8_t,Input Data for Pin 12,IDR12,12,1,r
-IDR,uint8_t,Input Data for Pin 13,IDR13,13,1,r
-IDR,uint8_t,Input Data for Pin 14,IDR14,14,1,r
-IDR,uint8_t,Input Data for Pin 15,IDR15,15,1,r
-ODR,uint8_t,Output Data for Pin 0,ODR0,0,1,rw
-ODR,uint8_t,Output Data for Pin 1,ODR1,1,1,rw
-ODR,uint8_t,Output Data for Pin 2,ODR2,2,1,rw
-ODR,uint8_t,Output Data for Pin 3,ODR3,3,1,rw
-ODR,uint8_t,Output Data for Pin 4,ODR4,4,1,rw
-ODR,uint8_t,Output Data for Pin 5,ODR5,5,1,rw
-ODR,uint8_t,Output Data for Pin 6,ODR6,6,1,rw
-ODR,uint8_t,Output Data for Pin 7,ODR7,7,1,rw
-ODR,uint8_t,Output Data for Pin 8,ODR8,8,1,rw
-ODR,uint8_t,Output Data for Pin 9,ODR9,9,1,rw
-ODR,uint8_t,Output Data for Pin 10,ODR10,10,1,rw
-ODR,uint8_t,Output Data for Pin 11,ODR11,11,1,rw
-ODR,uint8_t,Output Data for Pin 12,ODR12,12,1,rw
-ODR,uint8_t,Output Data for Pin 13,ODR13,13,1,rw
-ODR,uint8_t,Output Data for Pin 14,ODR14,14,1,rw
-ODR,uint8_t,Output Data for Pin 15,ODR15,15,1,rw
-BSRR,uint8_t,Port Set Bit 0,BS0,0,1,w
-BSRR,uint8_t,Port Set Bit 1,BS1,1,1,w
-BSRR,uint8_t,Port Set Bit 2,BS2,2,1,w
-BSRR,uint8_t,Port Set Bit 3,BS3,3,1,w
-BSRR,uint8_t,Port Set Bit 4,BS4,4,1,w
-BSRR,uint8_t,Port Set Bit 5,BS5,5,1,w
-BSRR,uint8_t,Port Set Bit 6,BS6,6,1,w
-BSRR,uint8_t,Port Set Bit 7,BS7,7,1,w
-BSRR,uint8_t,Port Set Bit 8,BS8,8,1,w
-BSRR,uint8_t,Port Set Bit 9,BS9,9,1,w
-BSRR,uint8_t,Port Set Bit 10,BS10,10,1,w
-BSRR,uint8_t,Port Set Bit 11,BS11,11,1,w
-BSRR,uint8_t,Port Set Bit 12,BS12,12,1,w
-BSRR,uint8_t,Port Set Bit 13,BS13,13,1,w
-BSRR,uint8_t,Port Set Bit 14,BS14,14,1,w
-BSRR,uint8_t,Port Set Bit 15,BS15,15,1,w
-BSRR,uint8_t,Port Reset Bit 0,BR0,16,1,w
-BSRR,uint8_t,Port Reset Bit 1,BR1,17,1,w
-BSRR,uint8_t,Port Reset Bit 2,BR2,18,1,w
-BSRR,uint8_t,Port Reset Bit 3,BR3,19,1,w
-BSRR,uint8_t,Port Reset Bit 4,BR4,20,1,w
-BSRR,uint8_t,Port Reset Bit 5,BR5,21,1,w
-BSRR,uint8_t,Port Reset Bit 6,BR6,22,1,w
-BSRR,uint8_t,Port Reset Bit 7,BR7,23,1,w
-BSRR,uint8_t,Port Reset Bit 8,BR8,24,1,w
-BSRR,uint8_t,Port Reset Bit 9,BR9,25,1,w
-BSRR,uint8_t,Port Reset Bit 10,BR10,26,1,w
-BSRR,uint8_t,Port Reset Bit 11,BR11,27,1,w
-BSRR,uint8_t,Port Reset Bit 12,BR12,28,1,w
-BSRR,uint8_t,Port Reset Bit 13,BR13,29,1,w
-BSRR,uint8_t,Port Reset Bit 14,BR14,30,1,w
-BSRR,uint8_t,Port Reset Bit 15,BR15,31,1,w
+IDR,,Input Data for Pin 0,IDR0,0,1,r
+IDR,,Input Data for Pin 1,IDR1,1,1,r
+IDR,,Input Data for Pin 2,IDR2,2,1,r
+IDR,,Input Data for Pin 3,IDR3,3,1,r
+IDR,,Input Data for Pin 4,IDR4,4,1,r
+IDR,,Input Data for Pin 5,IDR5,5,1,r
+IDR,,Input Data for Pin 6,IDR6,6,1,r
+IDR,,Input Data for Pin 7,IDR7,7,1,r
+IDR,,Input Data for Pin 8,IDR8,8,1,r
+IDR,,Input Data for Pin 9,IDR9,9,1,r
+IDR,,Input Data for Pin 10,IDR10,10,1,r
+IDR,,Input Data for Pin 11,IDR11,11,1,r
+IDR,,Input Data for Pin 12,IDR12,12,1,r
+IDR,,Input Data for Pin 13,IDR13,13,1,r
+IDR,,Input Data for Pin 14,IDR14,14,1,r
+IDR,,Input Data for Pin 15,IDR15,15,1,r
+ODR,,Output Data for Pin 0,ODR0,0,1,rw
+ODR,,Output Data for Pin 1,ODR1,1,1,rw
+ODR,,Output Data for Pin 2,ODR2,2,1,rw
+ODR,,Output Data for Pin 3,ODR3,3,1,rw
+ODR,,Output Data for Pin 4,ODR4,4,1,rw
+ODR,,Output Data for Pin 5,ODR5,5,1,rw
+ODR,,Output Data for Pin 6,ODR6,6,1,rw
+ODR,,Output Data for Pin 7,ODR7,7,1,rw
+ODR,,Output Data for Pin 8,ODR8,8,1,rw
+ODR,,Output Data for Pin 9,ODR9,9,1,rw
+ODR,,Output Data for Pin 10,ODR10,10,1,rw
+ODR,,Output Data for Pin 11,ODR11,11,1,rw
+ODR,,Output Data for Pin 12,ODR12,12,1,rw
+ODR,,Output Data for Pin 13,ODR13,13,1,rw
+ODR,,Output Data for Pin 14,ODR14,14,1,rw
+ODR,,Output Data for Pin 15,ODR15,15,1,rw
+BSRR,,Port Set Bit 0,BS0,0,1,w
+BSRR,,Port Set Bit 1,BS1,1,1,w
+BSRR,,Port Set Bit 2,BS2,2,1,w
+BSRR,,Port Set Bit 3,BS3,3,1,w
+BSRR,,Port Set Bit 4,BS4,4,1,w
+BSRR,,Port Set Bit 5,BS5,5,1,w
+BSRR,,Port Set Bit 6,BS6,6,1,w
+BSRR,,Port Set Bit 7,BS7,7,1,w
+BSRR,,Port Set Bit 8,BS8,8,1,w
+BSRR,,Port Set Bit 9,BS9,9,1,w
+BSRR,,Port Set Bit 10,BS10,10,1,w
+BSRR,,Port Set Bit 11,BS11,11,1,w
+BSRR,,Port Set Bit 12,BS12,12,1,w
+BSRR,,Port Set Bit 13,BS13,13,1,w
+BSRR,,Port Set Bit 14,BS14,14,1,w
+BSRR,,Port Set Bit 15,BS15,15,1,w
+BSRR,,Port Reset Bit 0,BR0,16,1,w
+BSRR,,Port Reset Bit 1,BR1,17,1,w
+BSRR,,Port Reset Bit 2,BR2,18,1,w
+BSRR,,Port Reset Bit 3,BR3,19,1,w
+BSRR,,Port Reset Bit 4,BR4,20,1,w
+BSRR,,Port Reset Bit 5,BR5,21,1,w
+BSRR,,Port Reset Bit 6,BR6,22,1,w
+BSRR,,Port Reset Bit 7,BR7,23,1,w
+BSRR,,Port Reset Bit 8,BR8,24,1,w
+BSRR,,Port Reset Bit 9,BR9,25,1,w
+BSRR,,Port Reset Bit 10,BR10,26,1,w
+BSRR,,Port Reset Bit 11,BR11,27,1,w
+BSRR,,Port Reset Bit 12,BR12,28,1,w
+BSRR,,Port Reset Bit 13,BR13,29,1,w
+BSRR,,Port Reset Bit 14,BR14,30,1,w
+BSRR,,Port Reset Bit 15,BR15,31,1,w
 LCKR,PortConfigurationLock,Port Configuration Lock for Bit 0,LCK0,0,1,rw
 LCKR,PortConfigurationLock,Port Configuration Lock for Bit 1,LCK1,1,1,rw
 LCKR,PortConfigurationLock,Port Configuration Lock for Bit 2,LCK2,2,1,rw

@@ -5,7 +5,7 @@
 using namespace stm32::rcc;
 using namespace testing;
 
-class MockRccRegisterMap : public IRccRegisterMap
+class MockRccRegisterMap : public RccRegisterMap
 {
 public:
 

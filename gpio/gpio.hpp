@@ -29,7 +29,7 @@ namespace stm32::gpio
     {
     public:
 
-        GpioPeripheral(IGpioRegisterMap & device) : device(device) { }
+        GpioPeripheral(GpioRegisterMap & device) : device(device) { }
 
         void SetPinMode(PinNumber pin, Mode mode);
         void SetPinSpeed(PinNumber pin, Speed speed);
@@ -50,7 +50,7 @@ namespace stm32::gpio
 
     private:
 
-        IGpioRegisterMap & device;
+        GpioRegisterMap & device;
     };
 }
 

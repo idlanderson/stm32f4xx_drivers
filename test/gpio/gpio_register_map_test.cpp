@@ -520,7 +520,7 @@ TEST(IDR, IDR0)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR0 = (uint8_t)1U;
+	reg.Fields.IDR0 = (uint32_t)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
@@ -528,7 +528,7 @@ TEST(IDR, IDR1)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR1 = (uint8_t)1U;
+	reg.Fields.IDR1 = (uint32_t)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
@@ -536,7 +536,7 @@ TEST(IDR, IDR2)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR2 = (uint8_t)1U;
+	reg.Fields.IDR2 = (uint32_t)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
@@ -544,7 +544,7 @@ TEST(IDR, IDR3)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR3 = (uint8_t)1U;
+	reg.Fields.IDR3 = (uint32_t)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
@@ -552,7 +552,7 @@ TEST(IDR, IDR4)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR4 = (uint8_t)1U;
+	reg.Fields.IDR4 = (uint32_t)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
@@ -560,7 +560,7 @@ TEST(IDR, IDR5)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR5 = (uint8_t)1U;
+	reg.Fields.IDR5 = (uint32_t)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
@@ -568,7 +568,7 @@ TEST(IDR, IDR6)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR6 = (uint8_t)1U;
+	reg.Fields.IDR6 = (uint32_t)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
@@ -576,7 +576,7 @@ TEST(IDR, IDR7)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR7 = (uint8_t)1U;
+	reg.Fields.IDR7 = (uint32_t)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
@@ -584,7 +584,7 @@ TEST(IDR, IDR8)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR8 = (uint8_t)1U;
+	reg.Fields.IDR8 = (uint32_t)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
@@ -592,7 +592,7 @@ TEST(IDR, IDR9)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR9 = (uint8_t)1U;
+	reg.Fields.IDR9 = (uint32_t)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
@@ -600,7 +600,7 @@ TEST(IDR, IDR10)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR10 = (uint8_t)1U;
+	reg.Fields.IDR10 = (uint32_t)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
@@ -608,7 +608,7 @@ TEST(IDR, IDR11)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR11 = (uint8_t)1U;
+	reg.Fields.IDR11 = (uint32_t)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
@@ -616,7 +616,7 @@ TEST(IDR, IDR12)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR12 = (uint8_t)1U;
+	reg.Fields.IDR12 = (uint32_t)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
@@ -624,7 +624,7 @@ TEST(IDR, IDR13)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR13 = (uint8_t)1U;
+	reg.Fields.IDR13 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -632,7 +632,7 @@ TEST(IDR, IDR14)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR14 = (uint8_t)1U;
+	reg.Fields.IDR14 = (uint32_t)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
@@ -640,7 +640,7 @@ TEST(IDR, IDR15)
 {
 	IDR_t reg;
 	reg.Value = 0U;
-	reg.Fields.IDR15 = (uint8_t)1U;
+	reg.Fields.IDR15 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -648,7 +648,7 @@ TEST(ODR, ODR0)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR0 = (uint8_t)1U;
+	reg.Fields.ODR0 = (uint32_t)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
@@ -656,7 +656,7 @@ TEST(ODR, ODR1)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR1 = (uint8_t)1U;
+	reg.Fields.ODR1 = (uint32_t)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
@@ -664,7 +664,7 @@ TEST(ODR, ODR2)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR2 = (uint8_t)1U;
+	reg.Fields.ODR2 = (uint32_t)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
@@ -672,7 +672,7 @@ TEST(ODR, ODR3)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR3 = (uint8_t)1U;
+	reg.Fields.ODR3 = (uint32_t)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
@@ -680,7 +680,7 @@ TEST(ODR, ODR4)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR4 = (uint8_t)1U;
+	reg.Fields.ODR4 = (uint32_t)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
@@ -688,7 +688,7 @@ TEST(ODR, ODR5)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR5 = (uint8_t)1U;
+	reg.Fields.ODR5 = (uint32_t)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
@@ -696,7 +696,7 @@ TEST(ODR, ODR6)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR6 = (uint8_t)1U;
+	reg.Fields.ODR6 = (uint32_t)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
@@ -704,7 +704,7 @@ TEST(ODR, ODR7)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR7 = (uint8_t)1U;
+	reg.Fields.ODR7 = (uint32_t)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
@@ -712,7 +712,7 @@ TEST(ODR, ODR8)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR8 = (uint8_t)1U;
+	reg.Fields.ODR8 = (uint32_t)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
@@ -720,7 +720,7 @@ TEST(ODR, ODR9)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR9 = (uint8_t)1U;
+	reg.Fields.ODR9 = (uint32_t)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
@@ -728,7 +728,7 @@ TEST(ODR, ODR10)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR10 = (uint8_t)1U;
+	reg.Fields.ODR10 = (uint32_t)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
@@ -736,7 +736,7 @@ TEST(ODR, ODR11)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR11 = (uint8_t)1U;
+	reg.Fields.ODR11 = (uint32_t)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
@@ -744,7 +744,7 @@ TEST(ODR, ODR12)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR12 = (uint8_t)1U;
+	reg.Fields.ODR12 = (uint32_t)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
@@ -752,7 +752,7 @@ TEST(ODR, ODR13)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR13 = (uint8_t)1U;
+	reg.Fields.ODR13 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -760,7 +760,7 @@ TEST(ODR, ODR14)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR14 = (uint8_t)1U;
+	reg.Fields.ODR14 = (uint32_t)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
@@ -768,7 +768,7 @@ TEST(ODR, ODR15)
 {
 	ODR_t reg;
 	reg.Value = 0U;
-	reg.Fields.ODR15 = (uint8_t)1U;
+	reg.Fields.ODR15 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -776,7 +776,7 @@ TEST(BSRR, BS0)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS0 = (uint8_t)1U;
+	reg.Fields.BS0 = (uint32_t)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
@@ -784,7 +784,7 @@ TEST(BSRR, BS1)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS1 = (uint8_t)1U;
+	reg.Fields.BS1 = (uint32_t)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
@@ -792,7 +792,7 @@ TEST(BSRR, BS2)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS2 = (uint8_t)1U;
+	reg.Fields.BS2 = (uint32_t)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
@@ -800,7 +800,7 @@ TEST(BSRR, BS3)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS3 = (uint8_t)1U;
+	reg.Fields.BS3 = (uint32_t)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
@@ -808,7 +808,7 @@ TEST(BSRR, BS4)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS4 = (uint8_t)1U;
+	reg.Fields.BS4 = (uint32_t)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
@@ -816,7 +816,7 @@ TEST(BSRR, BS5)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS5 = (uint8_t)1U;
+	reg.Fields.BS5 = (uint32_t)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
@@ -824,7 +824,7 @@ TEST(BSRR, BS6)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS6 = (uint8_t)1U;
+	reg.Fields.BS6 = (uint32_t)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
@@ -832,7 +832,7 @@ TEST(BSRR, BS7)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS7 = (uint8_t)1U;
+	reg.Fields.BS7 = (uint32_t)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
@@ -840,7 +840,7 @@ TEST(BSRR, BS8)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS8 = (uint8_t)1U;
+	reg.Fields.BS8 = (uint32_t)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
@@ -848,7 +848,7 @@ TEST(BSRR, BS9)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS9 = (uint8_t)1U;
+	reg.Fields.BS9 = (uint32_t)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
@@ -856,7 +856,7 @@ TEST(BSRR, BS10)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS10 = (uint8_t)1U;
+	reg.Fields.BS10 = (uint32_t)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
@@ -864,7 +864,7 @@ TEST(BSRR, BS11)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS11 = (uint8_t)1U;
+	reg.Fields.BS11 = (uint32_t)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
@@ -872,7 +872,7 @@ TEST(BSRR, BS12)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS12 = (uint8_t)1U;
+	reg.Fields.BS12 = (uint32_t)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
@@ -880,7 +880,7 @@ TEST(BSRR, BS13)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS13 = (uint8_t)1U;
+	reg.Fields.BS13 = (uint32_t)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
@@ -888,7 +888,7 @@ TEST(BSRR, BS14)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS14 = (uint8_t)1U;
+	reg.Fields.BS14 = (uint32_t)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
@@ -896,7 +896,7 @@ TEST(BSRR, BS15)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BS15 = (uint8_t)1U;
+	reg.Fields.BS15 = (uint32_t)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
@@ -904,7 +904,7 @@ TEST(BSRR, BR0)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR0 = (uint8_t)1U;
+	reg.Fields.BR0 = (uint32_t)1U;
 	EXPECT_EQ(0x00010000U, reg.Value);
 }
 
@@ -912,7 +912,7 @@ TEST(BSRR, BR1)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR1 = (uint8_t)1U;
+	reg.Fields.BR1 = (uint32_t)1U;
 	EXPECT_EQ(0x00020000U, reg.Value);
 }
 
@@ -920,7 +920,7 @@ TEST(BSRR, BR2)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR2 = (uint8_t)1U;
+	reg.Fields.BR2 = (uint32_t)1U;
 	EXPECT_EQ(0x00040000U, reg.Value);
 }
 
@@ -928,7 +928,7 @@ TEST(BSRR, BR3)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR3 = (uint8_t)1U;
+	reg.Fields.BR3 = (uint32_t)1U;
 	EXPECT_EQ(0x00080000U, reg.Value);
 }
 
@@ -936,7 +936,7 @@ TEST(BSRR, BR4)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR4 = (uint8_t)1U;
+	reg.Fields.BR4 = (uint32_t)1U;
 	EXPECT_EQ(0x00100000U, reg.Value);
 }
 
@@ -944,7 +944,7 @@ TEST(BSRR, BR5)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR5 = (uint8_t)1U;
+	reg.Fields.BR5 = (uint32_t)1U;
 	EXPECT_EQ(0x00200000U, reg.Value);
 }
 
@@ -952,7 +952,7 @@ TEST(BSRR, BR6)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR6 = (uint8_t)1U;
+	reg.Fields.BR6 = (uint32_t)1U;
 	EXPECT_EQ(0x00400000U, reg.Value);
 }
 
@@ -960,7 +960,7 @@ TEST(BSRR, BR7)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR7 = (uint8_t)1U;
+	reg.Fields.BR7 = (uint32_t)1U;
 	EXPECT_EQ(0x00800000U, reg.Value);
 }
 
@@ -968,7 +968,7 @@ TEST(BSRR, BR8)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR8 = (uint8_t)1U;
+	reg.Fields.BR8 = (uint32_t)1U;
 	EXPECT_EQ(0x01000000U, reg.Value);
 }
 
@@ -976,7 +976,7 @@ TEST(BSRR, BR9)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR9 = (uint8_t)1U;
+	reg.Fields.BR9 = (uint32_t)1U;
 	EXPECT_EQ(0x02000000U, reg.Value);
 }
 
@@ -984,7 +984,7 @@ TEST(BSRR, BR10)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR10 = (uint8_t)1U;
+	reg.Fields.BR10 = (uint32_t)1U;
 	EXPECT_EQ(0x04000000U, reg.Value);
 }
 
@@ -992,7 +992,7 @@ TEST(BSRR, BR11)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR11 = (uint8_t)1U;
+	reg.Fields.BR11 = (uint32_t)1U;
 	EXPECT_EQ(0x08000000U, reg.Value);
 }
 
@@ -1000,7 +1000,7 @@ TEST(BSRR, BR12)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR12 = (uint8_t)1U;
+	reg.Fields.BR12 = (uint32_t)1U;
 	EXPECT_EQ(0x10000000U, reg.Value);
 }
 
@@ -1008,7 +1008,7 @@ TEST(BSRR, BR13)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR13 = (uint8_t)1U;
+	reg.Fields.BR13 = (uint32_t)1U;
 	EXPECT_EQ(0x20000000U, reg.Value);
 }
 
@@ -1016,7 +1016,7 @@ TEST(BSRR, BR14)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR14 = (uint8_t)1U;
+	reg.Fields.BR14 = (uint32_t)1U;
 	EXPECT_EQ(0x40000000U, reg.Value);
 }
 
@@ -1024,7 +1024,7 @@ TEST(BSRR, BR15)
 {
 	BSRR_t reg;
 	reg.Value = 0U;
-	reg.Fields.BR15 = (uint8_t)1U;
+	reg.Fields.BR15 = (uint32_t)1U;
 	EXPECT_EQ(0x80000000U, reg.Value);
 }
 

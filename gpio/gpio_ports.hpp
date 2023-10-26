@@ -16,6 +16,7 @@ namespace stm32::gpio
     static GpioRegisterMap &GPIOHReg = *reinterpret_cast<GpioRegisterMap*>(GPIOH_BASEADDR);
     static GpioRegisterMap &GPIOIReg = *reinterpret_cast<GpioRegisterMap*>(GPIOI_BASEADDR);
 
+/*
     GpioPeripheral GPIOA(GPIOAReg);
     GpioPeripheral GPIOB(GPIOBReg);
     GpioPeripheral GPIOC(GPIOCReg);
@@ -25,6 +26,7 @@ namespace stm32::gpio
     GpioPeripheral GPIOG(GPIOGReg);
     GpioPeripheral GPIOH(GPIOHReg);
     GpioPeripheral GPIOI(GPIOIReg);
+    */
 }
 
 #endif /* GPIO_PORTS_H_ */
