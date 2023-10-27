@@ -18,7 +18,7 @@ void delay(void)
 
 bool IsUserButtonB1Pressed(void)
 {
-    return 0U;// (bool)(GPIOA.ReadPin(Pin::Pin0) == 1U);
+    return (GPIOA.ReadPin(Pin::Pin0) == 1U);
 }
 
 void WaitForButtonPress(void)
@@ -31,9 +31,8 @@ void WaitForButtonPress(void)
 
 int main()
 {
-    RccPeripheral RCC(RCCReg);
-    GpioPeripheral GPIOA(GPIOAReg);
-    GpioPeripheral GPIOD(GPIODReg);
+    stm32::rcc::Init();
+    stm32::gpio::Init();
 
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);

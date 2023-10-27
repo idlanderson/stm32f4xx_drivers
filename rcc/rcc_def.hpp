@@ -5,9 +5,12 @@
 
 namespace stm32::rcc
 {
-    RccRegisterMap &RCCReg = *reinterpret_cast<RccRegisterMap*>(RCC_BASEADDR);
+    RccPeripheral RCC;
 
-    //RccPeripheral RCC(RCCReg);
+    void Init()
+    {
+        RCC.Init(RCC_BASEADDR);
+    }
 }
 
 #endif // RCC_DEF_HPP_
