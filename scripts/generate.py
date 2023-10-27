@@ -82,17 +82,11 @@ class RegisterField:
     def generate_setter(self):
         return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
 
-    def generate_virtual_getter(self):
-        return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
-
-    def generate_virtual_setter(self):
-        return f"virtual void {self.generate_method_name('set')}({self.generate_data_type()} value) = 0;\n"
-
     def generate_mock_getter(self):
-        return f"MOCK_CONST_METHOD0({self.generate_method_name('get')}, {self.generate_data_type()}());\n"
+        return f"MOCK_METHOD({self.generate_data_type()}, {self.generate_method_name('get')}, (), (const, override));\n"
 
     def generate_mock_setter(self):
-        return f"MOCK_METHOD1({self.generate_method_name('set')}, void({self.generate_data_type()} value));\n"
+        return f"MOCK_METHOD(void, {self.generate_method_name('set')}, ({self.generate_data_type()}), (override));\n"
 
     def generate_unit_test(self):
 
@@ -223,20 +217,6 @@ class Register:
         for field in self.fields:
             if "w" in field.access:
                 output += field.generate_setter()
-
-        return output
-    
-    def generate_virtual_getters_and_setters(self):
-        
-        output = f"// {self.name} Fields\n"
-
-        for field in self.fields:
-            if "r" in field.access:
-                output += field.generate_virtual_getter()
-        
-        for field in self.fields:
-            if "w" in field.access:
-                output += field.generate_virtual_setter()
 
         return output
     
@@ -497,7 +477,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "rcc"
+peripheral_name = "gpio"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

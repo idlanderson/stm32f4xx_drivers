@@ -10,7 +10,10 @@ using ::testing::Return;
 class SpiPeripheralTest : public ::testing::Test
 {
 public:
-    SpiPeripheralTest() : spi(spiRegisters) {}
+    SpiPeripheralTest()
+    {
+        spi.Init(&spiRegisters);
+    }
 protected:
     MockSpiRegisterMap spiRegisters;
     SpiPeripheral spi;

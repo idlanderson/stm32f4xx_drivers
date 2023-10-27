@@ -5,19 +5,22 @@
 
 namespace stm32::spi
 {
-    static SpiRegisterMap &SPI1Reg = *reinterpret_cast<SpiRegisterMap*>(SPI1_BASEADDR);
-    static SpiRegisterMap &SPI2Reg = *reinterpret_cast<SpiRegisterMap*>(SPI2_BASEADDR);
-    static SpiRegisterMap &SPI3Reg = *reinterpret_cast<SpiRegisterMap*>(SPI3_BASEADDR);
-    static SpiRegisterMap &SPI4Reg = *reinterpret_cast<SpiRegisterMap*>(SPI4_BASEADDR);
-    static SpiRegisterMap &SPI5Reg = *reinterpret_cast<SpiRegisterMap*>(SPI5_BASEADDR);
-    static SpiRegisterMap &SPI6Reg = *reinterpret_cast<SpiRegisterMap*>(SPI6_BASEADDR);
+    SpiPeripheral SPI1;
+    SpiPeripheral SPI2;
+    SpiPeripheral SPI3;
+    SpiPeripheral SPI4;
+    SpiPeripheral SPI5;
+    SpiPeripheral SPI6;
 
-    SpiPeripheral SPI1(SPI1Reg);
-    SpiPeripheral SPI2(SPI2Reg);
-    SpiPeripheral SPI3(SPI3Reg);
-    SpiPeripheral SPI4(SPI4Reg);
-    SpiPeripheral SPI5(SPI5Reg);
-    SpiPeripheral SPI6(SPI6Reg);
+    void Init()
+    {
+        SPI1.Init(reinterpret_cast<SpiRegisterMap*>(SPI1_BASEADDR));
+        SPI2.Init(reinterpret_cast<SpiRegisterMap*>(SPI2_BASEADDR));
+        SPI3.Init(reinterpret_cast<SpiRegisterMap*>(SPI3_BASEADDR));
+        SPI4.Init(reinterpret_cast<SpiRegisterMap*>(SPI4_BASEADDR));
+        SPI5.Init(reinterpret_cast<SpiRegisterMap*>(SPI5_BASEADDR));
+        SPI6.Init(reinterpret_cast<SpiRegisterMap*>(SPI6_BASEADDR));
+    }
 }
 
 #endif // SPI_DEF_HPP_H_

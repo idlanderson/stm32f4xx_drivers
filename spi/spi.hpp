@@ -1,24 +1,36 @@
 #ifndef SPI_HPP_H_
 #define SPI_HPP_H_
 
+#include "stm32f4xx.hpp"
 #include "spi_register_map.hpp"
 #include <cstdint>
 #include <vector>
 
 namespace stm32::spi
 {
+    enum class BusConfig
+    {
+        FullDuplex,
+        HalfDuplex,
+        SimplexRxOnly
+    };
+
     class SpiPeripheral
     {
     public:
 
-        SpiPeripheral(ISpiRegisterMap & device) : device(device) { }
+		void Init(SpiRegisterMap * addr)
+		{
+			//device = reinterpret_cast<SpiRegisterMap*>(addr);
+            device = addr;
+		}
 
         DataFrameFormat GetDataFrameFormat() const;
 
         void SetDeviceMode(MasterSelection deviceMode);
         void SetBidirectionalMode(BidirectionalDataModeEnable mode);
         void SetRxOnly(ReceiveOnly rxOnly);
-        //void SetBusConfig(BusConfig busConfig);
+        void SetBusConfig(BusConfig busConfig);
         void SetOutputEnableInBidirectionalMode(OutputEnableInBidirectionalMode isEnabled);
         void SetDataFrameFormat(DataFrameFormat format);
         void SetClockPolarity(ClockPolarity polarity);
@@ -41,7 +53,7 @@ namespace stm32::spi
 
     private:
 
-        ISpiRegisterMap & device;
+        SpiRegisterMap * device;
     };
 }
 

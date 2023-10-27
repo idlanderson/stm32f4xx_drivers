@@ -162,12 +162,6 @@ namespace stm32::gpio
         }
     }
 
-    uint16_t GpioPeripheral::Read()
-    {
-        //return ((uint16_t)this->IDR & 0x0000FFFFU);
-        return 0U;
-    }
-
     void GpioPeripheral::WritePin(PinNumber pin, uint8_t value)
     {
         switch (pin)
@@ -190,11 +184,6 @@ namespace stm32::gpio
         case PinNumber::Pin15 : device->set_ODR_ODR15(value); break;
         default               : break;
         }
-    }
-
-    void GpioPeripheral::Write(uint16_t value)
-    {
-        //this->ODR = (uint32_t)value;
     }
 
     void GpioPeripheral::TogglePin(PinNumber pin)

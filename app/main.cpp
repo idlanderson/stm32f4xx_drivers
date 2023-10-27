@@ -5,6 +5,7 @@
 
 using namespace stm32::gpio;
 using namespace stm32::rcc;
+using namespace stm32::spi;
 
 using Pin = stm32::gpio::PinNumber;
 using PinSpeed = stm32::gpio::Speed;
@@ -33,6 +34,7 @@ int main()
 {
     stm32::rcc::Init();
     stm32::gpio::Init();
+    stm32::spi::Init();
 
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);

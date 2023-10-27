@@ -1,0 +1,45 @@
+﻿CR1,ClockPhase,Clock phase,CPHA,0,1,rw
+CR1,ClockPolarity,Clock polarity,CPOL,1,1,rw
+CR1,MasterSelection,Master selection,MSTR,2,1,rw
+CR1,BaudRateControl,Baud rate control,BR,3,3,rw
+CR1,SpiEnable,SPI enable,SPE,6,1,rw
+CR1,LsbFirst,LSB First,LSBFIRST,7,1,rw
+CR1,InternalSlaveSelect,Internal slave select,SSI,8,1,rw
+CR1,SoftwareSlaveManagement,Software slave management,SSM,9,1,rw
+CR1,ReceiveOnly,Receive only,RXONLY,10,1,rw
+CR1,DataFrameFormat,Data frame format,DFF,11,1,rw
+CR1,CrcTransferNext,CRC transfer next,CRCNEXT,12,1,rw
+CR1,HardwareCrcCalculationEnable,Hardware CRC calculation enable,CRCEN,13,1,rw
+CR1,OutputEnableInBidirectionalMode,Output enable in bidirectional mode,BIDIOE,14,1,rw
+CR1,BidirectionalDataModeEnable,Bidirectional data mode enable,BIDIMODE,15,1,rw
+CR2,RxBufferDmaEnable,Rx buffer DMA enable,RXDMAEN,0,1,rw
+CR2,TxBufferDmaEnable,Tx buffer DMA enable,TXDMAEN,1,1,rw
+CR2,SsOutputEnable,SS output enable,SSOE,2,1,rw
+CR2,FrameFormat,Frame format,FRF,4,1,rw
+CR2,ErrorInterruptEnable,Error interrupt enable,ERRIE,5,1,rw
+CR2,RxBufferNotEmptyInterruptEnable,RX buffer not empty interrupt enable,RXNEIE,6,1,rw
+CR2,TxBufferEmptyInterruptEnable,Tx buffer empty interrupt enable,TXEIE,7,1,rw
+SR,ReceiveBufferNotEmpty,Receive buffer not empty,RXNE,0,1,r
+SR,TransmitBufferEmpty,Transmit buffer empty,TXE,1,1,r
+SR,ChannelSide,Channel side,CHSIDE,2,1,r
+SR,UnderrunFlag,Underrun flag,UDR,3,1,r
+SR,CrcErrorFlag,CRC error flag,CRCERR,4,1,rw
+SR,ModeFault,Mode fault,MODF,5,1,r
+SR,OverrunFlag,Overrun flag,OVR,6,1,r
+SR,BusyFlag,Busy flag,BSY,7,1,r
+SR,FrameFormatError,Frame format error,FRE,8,1,r
+DR,,Data register,DR,0,16,rw
+CRCPR,,CRC polynomial register,CRCPOLY,0,16,rw
+RXCRCR,,Rx CRC register,RXCRC,0,16,r
+TXCRCR,,Tx CRC register,TXCRC,0,16,r
+I2SCFGR,ChannelLength,Channel length,CHLEN,0,1,rw
+I2SCFGR,DataLengthToBeTransferred,Data length to be transferred,DATLEN,1,2,rw
+I2SCFGR,SteadyStateClockPolarity,Steady state clock polarity,CKPOL,3,1,rw
+I2SCFGR,I2SStandardSelection,I2S standard selection,I2SSTD,4,2,rw
+I2SCFGR,PcmFrameSynchronization,PCM frame synchronization,PCMSYNC,7,1,rw
+I2SCFGR,I2SConfigurationMode,I2S configuration mode,I2SCFG,8,2,rw
+I2SCFGR,I2SEnable,I2S Enable,I2SE,10,1,rw
+I2SCFGR,I2SModeSelection,I2S mode selection,I2SMOD,11,1,rw
+I2SPR,,I2S Linear prescaler,I2SDIV,0,8,rw
+I2SPR,OddFactorForThePrescaler,Odd factor for the prescaler,ODD,8,1,rw
+I2SPR,MasterClockOutputEnable,Master clock output enable,MCKOE,9,1,rw

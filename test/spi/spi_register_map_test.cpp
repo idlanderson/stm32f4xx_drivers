@@ -4,377 +4,361 @@
 
 using namespace stm32::spi;
 
-TEST(ControlRegister1, CPHA)
+TEST(CR1, CPHA)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.CPHA = (ClockPhase)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(ControlRegister1, CPOL)
+TEST(CR1, CPOL)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.CPOL = (ClockPolarity)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(ControlRegister1, MSTR)
+TEST(CR1, MSTR)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.MSTR = (MasterSelection)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(ControlRegister1, BR)
+TEST(CR1, BR)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.BR = (BaudRateControl)7U;
 	EXPECT_EQ(0x00000038U, reg.Value);
 }
 
-TEST(ControlRegister1, SPE)
+TEST(CR1, SPE)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.SPE = (SpiEnable)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(ControlRegister1, LSBFIRST)
+TEST(CR1, LSBFIRST)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.LSBFIRST = (LsbFirst)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(ControlRegister1, SSI)
+TEST(CR1, SSI)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.SSI = (InternalSlaveSelect)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(ControlRegister1, SSM)
+TEST(CR1, SSM)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.SSM = (SoftwareSlaveManagement)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
 }
 
-TEST(ControlRegister1, RXONLY)
+TEST(CR1, RXONLY)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.RXONLY = (ReceiveOnly)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
-TEST(ControlRegister1, DFF)
+TEST(CR1, DFF)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.DFF = (DataFrameFormat)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(ControlRegister1, CRCNEXT)
+TEST(CR1, CRCNEXT)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.CRCNEXT = (CrcTransferNext)1U;
 	EXPECT_EQ(0x00001000U, reg.Value);
 }
 
-TEST(ControlRegister1, CRCEN)
+TEST(CR1, CRCEN)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.CRCEN = (HardwareCrcCalculationEnable)1U;
 	EXPECT_EQ(0x00002000U, reg.Value);
 }
 
-TEST(ControlRegister1, BIDIOE)
+TEST(CR1, BIDIOE)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.BIDIOE = (OutputEnableInBidirectionalMode)1U;
 	EXPECT_EQ(0x00004000U, reg.Value);
 }
 
-TEST(ControlRegister1, BIDIMODE)
+TEST(CR1, BIDIMODE)
 {
-	ControlRegister1 reg;
+	CR1_t reg;
 	reg.Value = 0U;
 	reg.Fields.BIDIMODE = (BidirectionalDataModeEnable)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
 }
 
-TEST(ControlRegister2, RXDMAEN)
+TEST(CR2, RXDMAEN)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.RXDMAEN = (RxBufferDmaEnable)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(ControlRegister2, TXDMAEN)
+TEST(CR2, TXDMAEN)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.TXDMAEN = (TxBufferDmaEnable)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(ControlRegister2, SSOE)
+TEST(CR2, SSOE)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.SSOE = (SsOutputEnable)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(ControlRegister2, RESERVED1)
+TEST(CR2, FRF)
 {
-	ControlRegister2 reg;
-	reg.Value = 0U;
-	reg.Fields.RESERVED1 = (uint8_t)1U;
-	EXPECT_EQ(0x00000008U, reg.Value);
-}
-
-TEST(ControlRegister2, FRF)
-{
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.FRF = (FrameFormat)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(ControlRegister2, ERRIE)
+TEST(CR2, ERRIE)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.ERRIE = (ErrorInterruptEnable)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(ControlRegister2, RXNEIE)
+TEST(CR2, RXNEIE)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.RXNEIE = (RxBufferNotEmptyInterruptEnable)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(ControlRegister2, TXEIE)
+TEST(CR2, TXEIE)
 {
-	ControlRegister2 reg;
+	CR2_t reg;
 	reg.Value = 0U;
 	reg.Fields.TXEIE = (TxBufferEmptyInterruptEnable)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(StatusRegister, RXNE)
+TEST(SR, RXNE)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.RXNE = (ReceiveBufferNotEmpty)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(StatusRegister, TXE)
+TEST(SR, TXE)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.TXE = (TransmitBufferEmpty)1U;
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
-TEST(StatusRegister, CHSIDE)
+TEST(SR, CHSIDE)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.CHSIDE = (ChannelSide)1U;
 	EXPECT_EQ(0x00000004U, reg.Value);
 }
 
-TEST(StatusRegister, UDR)
+TEST(SR, UDR)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.UDR = (UnderrunFlag)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(StatusRegister, CRCERR)
+TEST(SR, CRCERR)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.CRCERR = (CrcErrorFlag)1U;
 	EXPECT_EQ(0x00000010U, reg.Value);
 }
 
-TEST(StatusRegister, MODF)
+TEST(SR, MODF)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.MODF = (ModeFault)1U;
 	EXPECT_EQ(0x00000020U, reg.Value);
 }
 
-TEST(StatusRegister, OVR)
+TEST(SR, OVR)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.OVR = (OverrunFlag)1U;
 	EXPECT_EQ(0x00000040U, reg.Value);
 }
 
-TEST(StatusRegister, BSY)
+TEST(SR, BSY)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.BSY = (BusyFlag)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(StatusRegister, FRE)
+TEST(SR, FRE)
 {
-	StatusRegister reg;
+	SR_t reg;
 	reg.Value = 0U;
 	reg.Fields.FRE = (FrameFormatError)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(DataRegister, DR)
+TEST(DR, DR)
 {
-	DataRegister reg;
+	DR_t reg;
 	reg.Value = 0U;
-	reg.Fields.DR = (uint16_t)65535U;
+	reg.Fields.DR = (uint32_t)65535U;
 	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
-TEST(CrcPolynomialRegister, CRCPOLY)
+TEST(CRCPR, CRCPOLY)
 {
-	CrcPolynomialRegister reg;
+	CRCPR_t reg;
 	reg.Value = 0U;
-	reg.Fields.CRCPOLY = (uint16_t)65535U;
+	reg.Fields.CRCPOLY = (uint32_t)65535U;
 	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
-TEST(RxCrcRegister, RXCRC)
+TEST(RXCRCR, RXCRC)
 {
-	RxCrcRegister reg;
+	RXCRCR_t reg;
 	reg.Value = 0U;
-	reg.Fields.RXCRC = (uint16_t)65535U;
+	reg.Fields.RXCRC = (uint32_t)65535U;
 	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
-TEST(TxCrcRegister, TXCRC)
+TEST(TXCRCR, TXCRC)
 {
-	TxCrcRegister reg;
+	TXCRCR_t reg;
 	reg.Value = 0U;
-	reg.Fields.TXCRC = (uint16_t)65535U;
+	reg.Fields.TXCRC = (uint32_t)65535U;
 	EXPECT_EQ(0x0000FFFFU, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, CHLEN)
+TEST(I2SCFGR, CHLEN)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.CHLEN = (ChannelLength)1U;
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, DATLEN)
+TEST(I2SCFGR, DATLEN)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.DATLEN = (DataLengthToBeTransferred)3U;
 	EXPECT_EQ(0x00000006U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, CKPOL)
+TEST(I2SCFGR, CKPOL)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.CKPOL = (SteadyStateClockPolarity)1U;
 	EXPECT_EQ(0x00000008U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, I2SSTD)
+TEST(I2SCFGR, I2SSTD)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.I2SSTD = (I2SStandardSelection)3U;
 	EXPECT_EQ(0x00000030U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, RESERVED1)
+TEST(I2SCFGR, PCMSYNC)
 {
-	I2SConfigurationRegister reg;
-	reg.Value = 0U;
-	reg.Fields.RESERVED1 = (uint8_t)1U;
-	EXPECT_EQ(0x00000040U, reg.Value);
-}
-
-TEST(I2SConfigurationRegister, PCMSYNC)
-{
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.PCMSYNC = (PcmFrameSynchronization)1U;
 	EXPECT_EQ(0x00000080U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, I2SCFG)
+TEST(I2SCFGR, I2SCFG)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.I2SCFG = (I2SConfigurationMode)3U;
 	EXPECT_EQ(0x00000300U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, I2SE)
+TEST(I2SCFGR, I2SE)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.I2SE = (I2SEnable)1U;
 	EXPECT_EQ(0x00000400U, reg.Value);
 }
 
-TEST(I2SConfigurationRegister, I2SMOD)
+TEST(I2SCFGR, I2SMOD)
 {
-	I2SConfigurationRegister reg;
+	I2SCFGR_t reg;
 	reg.Value = 0U;
 	reg.Fields.I2SMOD = (I2SModeSelection)1U;
 	EXPECT_EQ(0x00000800U, reg.Value);
 }
 
-TEST(I2SPrescalarRegister, I2SDIV)
+TEST(I2SPR, I2SDIV)
 {
-	I2SPrescalarRegister reg;
+	I2SPR_t reg;
 	reg.Value = 0U;
-	reg.Fields.I2SDIV = (uint8_t)255U;
+	reg.Fields.I2SDIV = (uint32_t)255U;
 	EXPECT_EQ(0x000000FFU, reg.Value);
 }
 
-TEST(I2SPrescalarRegister, ODD)
+TEST(I2SPR, ODD)
 {
-	I2SPrescalarRegister reg;
+	I2SPR_t reg;
 	reg.Value = 0U;
 	reg.Fields.ODD = (OddFactorForThePrescaler)1U;
 	EXPECT_EQ(0x00000100U, reg.Value);
 }
 
-TEST(I2SPrescalarRegister, MCKOE)
+TEST(I2SPR, MCKOE)
 {
-	I2SPrescalarRegister reg;
+	I2SPR_t reg;
 	reg.Value = 0U;
 	reg.Fields.MCKOE = (MasterClockOutputEnable)1U;
 	EXPECT_EQ(0x00000200U, reg.Value);
