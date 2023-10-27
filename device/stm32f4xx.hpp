@@ -59,35 +59,4 @@
 #define USART6_BASEADDR		(APB2PERIPH_BASE + 0x1400U)
 #define SYSCFG_BASEADDR		(APB2PERIPH_BASE + 0x3800U)
 
-namespace stm32
-{
-    using DeviceRegister = volatile uint32_t;
-
-    class RegisterMap
-    {
-    protected:
-
-        uint8_t GetField_1Bit(const DeviceRegister & reg, uint8_t bitPosition) const;
-        uint8_t GetField_2Bit(const DeviceRegister & reg, uint8_t bitPosition) const;
-        uint8_t GetField_3Bit(const DeviceRegister & reg, uint8_t bitPosition) const;
-        uint8_t GetField_8Bit(const DeviceRegister & reg, uint8_t bitPosition) const;
-
-        void SetField_1Bit(DeviceRegister & reg, uint8_t bitPosition, uint8_t value);
-        void SetField_2Bit(DeviceRegister & reg, uint8_t bitPosition, uint8_t value);
-        void SetField_3Bit(DeviceRegister & reg, uint8_t bitPosition, uint8_t value);
-        void SetField_8Bit(DeviceRegister & reg, uint8_t bitPosition, uint8_t value);
-
-    private:
-
-        const uint8_t MaxPositionFor1BitField = 31U;
-        const uint8_t MaxValueFor1BitField    = 1U;
-        const uint8_t MaxPositionFor2BitField = 30U;
-        const uint8_t MaxValueFor2BitField    = 3U;
-        const uint8_t MaxPositionFor3BitField = 29U;
-        const uint8_t MaxValueFor3BitField    = 7U;
-        const uint8_t MaxPositionFor8BitField = 24U;
-        const uint8_t MaxValueFor8BitField    = 255U;
-    };
-}
-
 #endif /* STM32F4XX_H_ */

@@ -17,7 +17,6 @@ project(drivers_cpp
     DESCRIPTION "STM32F4xx Drivers (C++)"
     LANGUAGES C CXX)
 
-add_subdirectory(device)
 add_subdirectory(rcc)
 add_subdirectory(gpio)
 add_subdirectory(spi)
