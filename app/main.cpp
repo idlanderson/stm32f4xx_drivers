@@ -32,10 +32,6 @@ void WaitForButtonPress(void)
 
 int main()
 {
-    stm32::rcc::Init();
-    stm32::gpio::Init();
-    stm32::spi::Init();
-
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);
 

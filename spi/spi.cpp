@@ -4,22 +4,22 @@ namespace stm32::spi
 {
     void SpiPeripheral::SetDeviceMode(MasterSelection deviceMode)
     {
-        device->set_CR1_MSTR(deviceMode);
+        device.set_CR1_MSTR(deviceMode);
     }
 
     void SpiPeripheral::SetBidirectionalMode(BidirectionalDataModeEnable mode)
     {
-        device->set_CR1_BIDIMODE(mode);
+        device.set_CR1_BIDIMODE(mode);
     }
 
     void SpiPeripheral::SetOutputEnableInBidirectionalMode(OutputEnableInBidirectionalMode isEnabled)
     {
-        device->set_CR1_BIDIOE(isEnabled);
+        device.set_CR1_BIDIOE(isEnabled);
     }
 
     void SpiPeripheral::SetRxOnly(ReceiveOnly rxOnly)
     {
-        device->set_CR1_RXONLY(rxOnly);
+        device.set_CR1_RXONLY(rxOnly);
     }
 
     void SpiPeripheral::SetBusConfig(BusConfig busConfig)
@@ -43,77 +43,77 @@ namespace stm32::spi
 
     DataFrameFormat SpiPeripheral::GetDataFrameFormat() const
     {
-        return device->get_CR1_DFF();
+        return device.get_CR1_DFF();
     }
 
     void SpiPeripheral::SetDataFrameFormat(DataFrameFormat format)
     {
-        device->set_CR1_DFF(format);
+        device.set_CR1_DFF(format);
     }
 
     void SpiPeripheral::SetClockPolarity(ClockPolarity polarity)
     {
-        device->set_CR1_CPOL(polarity);
+        device.set_CR1_CPOL(polarity);
     }
 
     void SpiPeripheral::SetClockPhase(ClockPhase phase)
     {
-        device->set_CR1_CPHA(phase);
+        device.set_CR1_CPHA(phase);
     }
 
     void SpiPeripheral::SetBaudRate(BaudRateControl baudRate)
     {
-        device->set_CR1_BR(baudRate);
+        device.set_CR1_BR(baudRate);
     }
 
     void SpiPeripheral::SetSlaveManagement(SoftwareSlaveManagement slaveManagement)
     {
-        device->set_CR1_SSM(slaveManagement);
+        device.set_CR1_SSM(slaveManagement);
     }
 
     void SpiPeripheral::SetInternalSlaveSelect(InternalSlaveSelect isEnabled)
     {
-        device->set_CR1_SSI(isEnabled);
+        device.set_CR1_SSI(isEnabled);
     }
 
     void SpiPeripheral::SetSlaveSelectOutputEnabled(SsOutputEnable isEnabled)
     {
-        device->set_CR2_SSOE(isEnabled);
+        device.set_CR2_SSOE(isEnabled);
     }
 
     void SpiPeripheral::SetEnabled(SpiEnable isEnabled)
     {
-        device->set_CR1_SPE(isEnabled);
+        device.set_CR1_SPE(isEnabled);
     }
 
     bool SpiPeripheral::IsReceiveBufferNotEmpty() const
     {
-        return (bool)device->get_SR_RXNE();
+        return (bool)device.get_SR_RXNE();
     }
 
     bool SpiPeripheral::IsTransmitBufferEmpty() const
     {
-        return (bool)device->get_SR_TXE();
+        return (bool)device.get_SR_TXE();
     }
 
     bool SpiPeripheral::HasCrcErrorOccurred() const
     {
-        return (bool)device->get_SR_CRCERR();
+        return (bool)device.get_SR_CRCERR();
     }
 
     bool SpiPeripheral::HasModeFaultOccurred() const
     {
-        return (bool)device->get_SR_MODF();
+        return (bool)device.get_SR_MODF();
     }
 
     bool SpiPeripheral::HasOverrunOccurred() const
     {
-        return (bool)device->get_SR_OVR();
+        return (bool)device.get_SR_OVR();
     }
 
     bool SpiPeripheral::IsBusy() const
     {
-        return (bool)device->get_SR_BSY();
+        return (bool)device.get_SR_BSY();
     }
 
     void SpiPeripheral::SendData(std::vector<uint8_t> data)
@@ -128,13 +128,13 @@ namespace stm32::spi
 
             if (dataFrameFormat == DataFrameFormat::_8Bit)
             {
-                device->set_DR_DR(0x0000U | data[currentIndex]);
+                device.set_DR_DR(0x0000U | data[currentIndex]);
                 remainingLengthToSend--;
                 currentIndex++;
             }
             else if (dataFrameFormat == DataFrameFormat::_16Bit)
             {
-                device->set_DR_DR((data[currentIndex] << 8U) | data[currentIndex + 1U]);
+                device.set_DR_DR((data[currentIndex] << 8U) | data[currentIndex + 1U]);
                 remainingLengthToSend -= 2U;
                 currentIndex += 2U;
             }
@@ -153,17 +153,17 @@ namespace stm32::spi
 
         while (remainingLengthToReceive > 0U)
         {
-            while (!IsReceiveBufferNotEmpty()); // While the RxBuffer is NOT NOT empty (i->e-> while it's empty)->
+            while (!IsReceiveBufferNotEmpty()); // While the RxBuffer is NOT NOT empty (i.e. while it's empty).
 
             if (dataFrameFormat == DataFrameFormat::_8Bit)
             {
-                uint8_t data = (uint8_t)device->get_DR_DR();
+                uint8_t data = (uint8_t)device.get_DR_DR();
                 dataReceived.push_back(data);
                 remainingLengthToReceive--;
             }
             else if (dataFrameFormat == DataFrameFormat::_16Bit)
             {
-                uint16_t data = (uint16_t)device->get_DR_DR();
+                uint16_t data = (uint16_t)device.get_DR_DR();
                 dataReceived.push_back((uint8_t)(0x000000FFU & (data >> 8U)));
                 dataReceived.push_back((uint8_t)(0x000000FFU & data));
                 remainingLengthToReceive -= 2U;

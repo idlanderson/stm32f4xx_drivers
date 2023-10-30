@@ -16,6 +16,15 @@ extern uint32_t _sbss;
 extern uint32_t _ebss;
 extern uint32_t _la_data;
 
+typedef void (*FuncPtr)();
+
+extern FuncPtr __preinit_array_start[];
+extern FuncPtr __preinit_array_end[];
+extern FuncPtr __init_array_start[];
+extern FuncPtr __init_array_end[];
+extern FuncPtr __fini_array_start[];
+extern FuncPtr __fini_array_end[];
+
 int main(void);
 void __libc_init_array(void);
 
@@ -220,12 +229,37 @@ void Default_Handler(void)
     while(1);
 }
 
-void Reset_Handler(void)
+// Credit for this code: https://github.com/cortexm/baremetal/blob/master/src/startup/startup.cpp
+void call_init_array(void) 
 {
-    // Copy .data section to SRAM
+    FuncPtr * array = __preinit_array_start;
+    while (array < __preinit_array_end) 
+    {
+        (*array)();
+        array++;
+    }
 
+    array = __init_array_start;
+    while (array < __init_array_end) 
+    {
+        (*array)();
+        array++;
+    }
+}
+
+// Credit for this code: https://github.com/cortexm/baremetal/blob/master/src/startup/startup.cpp
+void call_fini_array(void) 
+{
+    FuncPtr * array = __fini_array_start;
+    while (array < __fini_array_end) {
+        (*array)();
+        array++;
+    }
+}
+
+void copy_data_section(void)
+{
     uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata;
-
     uint8_t * dest = (uint8_t *)&_sdata;    // SRAM
     uint8_t * src  = (uint8_t *)&_la_data;  // FLASH
 
@@ -233,24 +267,38 @@ void Reset_Handler(void)
     {
         *dest++ = *src++;
     }
+}
 
-    // Initialize .bss section to 0 in SRAM
-
-    size = (uint32_t)&_ebss - (uint32_t)&_sbss;
-    dest = (uint8_t *)&_sbss;
+void init_bss(void)
+{
+    uint32_t size = (uint32_t)&_ebss - (uint32_t)&_sbss;
+    uint8_t * dest = (uint8_t *)&_sbss;
 
     for (uint32_t i = 0U; i < size; i++)
     {
         *dest++ = 0U;
     }
+}
+
+void Reset_Handler(void)
+{
+    // Copy .data section to SRAM
+    copy_data_section();
+
+    // Initialize .bss section to 0 in SRAM
+    init_bss();
 
     // Call init function of std library (needed if you are using std libraries)
-
     __libc_init_array();
 
-    // Call main()
+    // Call constructors
+    call_init_array();
 
+    // Invoke main()
     main();
+
+    // Call destructors
+    call_fini_array();
 }
 
 #ifdef __cplusplus
