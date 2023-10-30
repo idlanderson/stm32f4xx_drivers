@@ -1,0 +1,8 @@
+InterruptMask,0,Masked
+InterruptMask,1,Not Masked
+EnableFlag,0,Disabled
+EnableFlag,1,Disabled
+SoftwareInterrupt,0,No Interrupt
+SoftwareInterrupt,1,Trigger Interrupt
+PendingBit,0,No Trigger Request Occurred
+PendingBit,1,Trigger Request Occurred

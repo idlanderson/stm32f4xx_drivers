@@ -1,0 +1,138 @@
+IMR,InterruptMask,Interrupt mask on line 0,MR0,0,1,rw
+IMR,InterruptMask,Interrupt mask on line 1,MR1,1,1,rw
+IMR,InterruptMask,Interrupt mask on line 2,MR2,2,1,rw
+IMR,InterruptMask,Interrupt mask on line 3,MR3,3,1,rw
+IMR,InterruptMask,Interrupt mask on line 4,MR4,4,1,rw
+IMR,InterruptMask,Interrupt mask on line 5,MR5,5,1,rw
+IMR,InterruptMask,Interrupt mask on line 6,MR6,6,1,rw
+IMR,InterruptMask,Interrupt mask on line 7,MR7,7,1,rw
+IMR,InterruptMask,Interrupt mask on line 8,MR8,8,1,rw
+IMR,InterruptMask,Interrupt mask on line 9,MR9,9,1,rw
+IMR,InterruptMask,Interrupt mask on line 10,MR10,10,1,rw
+IMR,InterruptMask,Interrupt mask on line 11,MR11,11,1,rw
+IMR,InterruptMask,Interrupt mask on line 12,MR12,12,1,rw
+IMR,InterruptMask,Interrupt mask on line 13,MR13,13,1,rw
+IMR,InterruptMask,Interrupt mask on line 14,MR14,14,1,rw
+IMR,InterruptMask,Interrupt mask on line 15,MR15,15,1,rw
+IMR,InterruptMask,Interrupt mask on line 16,MR16,16,1,rw
+IMR,InterruptMask,Interrupt mask on line 17,MR17,17,1,rw
+IMR,InterruptMask,Interrupt mask on line 18,MR18,18,1,rw
+IMR,InterruptMask,Interrupt mask on line 19,MR19,19,1,rw
+IMR,InterruptMask,Interrupt mask on line 20,MR20,20,1,rw
+IMR,InterruptMask,Interrupt mask on line 21,MR21,21,1,rw
+IMR,InterruptMask,Interrupt mask on line 22,MR22,22,1,rw
+EMR,InterruptMask,Event mask on line 0,MR0,0,1,rw
+EMR,InterruptMask,Event mask on line 1,MR1,1,1,rw
+EMR,InterruptMask,Event mask on line 2,MR2,2,1,rw
+EMR,InterruptMask,Event mask on line 3,MR3,3,1,rw
+EMR,InterruptMask,Event mask on line 4,MR4,4,1,rw
+EMR,InterruptMask,Event mask on line 5,MR5,5,1,rw
+EMR,InterruptMask,Event mask on line 6,MR6,6,1,rw
+EMR,InterruptMask,Event mask on line 7,MR7,7,1,rw
+EMR,InterruptMask,Event mask on line 8,MR8,8,1,rw
+EMR,InterruptMask,Event mask on line 9,MR9,9,1,rw
+EMR,InterruptMask,Event mask on line 10,MR10,10,1,rw
+EMR,InterruptMask,Event mask on line 11,MR11,11,1,rw
+EMR,InterruptMask,Event mask on line 12,MR12,12,1,rw
+EMR,InterruptMask,Event mask on line 13,MR13,13,1,rw
+EMR,InterruptMask,Event mask on line 14,MR14,14,1,rw
+EMR,InterruptMask,Event mask on line 15,MR15,15,1,rw
+EMR,InterruptMask,Event mask on line 16,MR16,16,1,rw
+EMR,InterruptMask,Event mask on line 17,MR17,17,1,rw
+EMR,InterruptMask,Event mask on line 18,MR18,18,1,rw
+EMR,InterruptMask,Event mask on line 19,MR19,19,1,rw
+EMR,InterruptMask,Event mask on line 20,MR20,20,1,rw
+EMR,InterruptMask,Event mask on line 21,MR21,21,1,rw
+EMR,InterruptMask,Event mask on line 22,MR22,22,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 0,TR0,0,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 1,TR1,1,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 2,TR2,2,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 3,TR3,3,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 4,TR4,4,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 5,TR5,5,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 6,TR6,6,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 7,TR7,7,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 8,TR8,8,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 9,TR9,9,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 10,TR10,10,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 11,TR11,11,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 12,TR12,12,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 13,TR13,13,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 14,TR14,14,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 15,TR15,15,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 16,TR16,16,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 17,TR17,17,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 18,TR18,18,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 19,TR19,19,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 20,TR20,20,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 21,TR21,21,1,rw
+RTSR,EnableFlag,Rising trigger event configuration bit of line 22,TR22,22,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 0,TR0,0,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 1,TR1,1,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 2,TR2,2,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 3,TR3,3,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 4,TR4,4,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 5,TR5,5,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 6,TR6,6,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 7,TR7,7,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 8,TR8,8,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 9,TR9,9,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 10,TR10,10,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 11,TR11,11,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 12,TR12,12,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 13,TR13,13,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 14,TR14,14,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 15,TR15,15,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 16,TR16,16,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 17,TR17,17,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 18,TR18,18,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 19,TR19,19,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 20,TR20,20,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 21,TR21,21,1,rw
+FTSR,EnableFlag,Falling trigger event configuration bit of line 22,TR22,22,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 0,SWIER0,0,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 1,SWIER1,1,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 2,SWIER2,2,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 3,SWIER3,3,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 4,SWIER4,4,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 5,SWIER5,5,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 6,SWIER6,6,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 7,SWIER7,7,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 8,SWIER8,8,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 9,SWIER9,9,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 10,SWIER10,10,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 11,SWIER11,11,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 12,SWIER12,12,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 13,SWIER13,13,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 14,SWIER14,14,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 15,SWIER15,15,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 16,SWIER16,16,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 17,SWIER17,17,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 18,SWIER18,18,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 19,SWIER19,19,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 20,SWIER20,20,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 21,SWIER21,21,1,rw
+SWIER,SoftwareInterrupt,Software interrupt on line 22,SWIER22,22,1,rw
+PR,PendingBit,Pending bit on line 0,PR0,0,1,rw
+PR,PendingBit,Pending bit on line 1,PR1,1,1,rw
+PR,PendingBit,Pending bit on line 2,PR2,2,1,rw
+PR,PendingBit,Pending bit on line 3,PR3,3,1,rw
+PR,PendingBit,Pending bit on line 4,PR4,4,1,rw
+PR,PendingBit,Pending bit on line 5,PR5,5,1,rw
+PR,PendingBit,Pending bit on line 6,PR6,6,1,rw
+PR,PendingBit,Pending bit on line 7,PR7,7,1,rw
+PR,PendingBit,Pending bit on line 8,PR8,8,1,rw
+PR,PendingBit,Pending bit on line 9,PR9,9,1,rw
+PR,PendingBit,Pending bit on line 10,PR10,10,1,rw
+PR,PendingBit,Pending bit on line 11,PR11,11,1,rw
+PR,PendingBit,Pending bit on line 12,PR12,12,1,rw
+PR,PendingBit,Pending bit on line 13,PR13,13,1,rw
+PR,PendingBit,Pending bit on line 14,PR14,14,1,rw
+PR,PendingBit,Pending bit on line 15,PR15,15,1,rw
+PR,PendingBit,Pending bit on line 16,PR16,16,1,rw
+PR,PendingBit,Pending bit on line 17,PR17,17,1,rw
+PR,PendingBit,Pending bit on line 18,PR18,18,1,rw
+PR,PendingBit,Pending bit on line 19,PR19,19,1,rw
+PR,PendingBit,Pending bit on line 20,PR20,20,1,rw
+PR,PendingBit,Pending bit on line 21,PR21,21,1,rw
+PR,PendingBit,Pending bit on line 22,PR22,22,1,rw
