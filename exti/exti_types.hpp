@@ -18,7 +18,7 @@ namespace stm32::exti
 	enum class EnableFlag
 	{
 		Disabled = 0U,
-		Disabled = 1U,
+		Enabled = 1U,
 	};
 
 	enum class SoftwareInterrupt

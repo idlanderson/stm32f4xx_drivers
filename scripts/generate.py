@@ -77,10 +77,16 @@ class RegisterField:
             return "uint32_t"
 
     def generate_getter(self):
-        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const {{ return {self.reg_short_name}.Fields.{self.name}; }}\n"
+        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const {{ return registers.{self.reg_short_name}.Fields.{self.name}; }}\n"
 
     def generate_setter(self):
-        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ {self.reg_short_name}.Fields.{self.name} = value; }}\n"
+        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ registers.{self.reg_short_name}.Fields.{self.name} = value; }}\n"
+
+    def generate_virtual_getter(self):
+        return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
+
+    def generate_virtual_setter(self):
+        return f"virtual void {self.generate_method_name('set')}({self.generate_data_type()} value) = 0;\n"
 
     def generate_mock_getter(self):
         return f"MOCK_METHOD({self.generate_data_type()}, {self.generate_method_name('get')}, (), (const, override));\n"
@@ -220,6 +226,20 @@ class Register:
 
         return output
     
+    def generate_virtual_getters_and_setters(self):
+        
+        output = f"// {self.name} Fields\n"
+
+        for field in self.fields:
+            if "r" in field.access:
+                output += field.generate_virtual_getter()
+        
+        for field in self.fields:
+            if "w" in field.access:
+                output += field.generate_virtual_setter()
+
+        return output
+
     def generate_mock_methods(self):
 
         output = f"\n// {self.name} Fields\n"
@@ -350,21 +370,12 @@ class Peripheral:
 
         return output
 
-    def generate_concrete_class(self):
+    def generate_struct(self):
 
         output = (
-            f"class {self.name}RegisterMap\n"
+            f"struct {self.name}Registers\n"
             f"{{\n"
-            f"public:\n"
         )
-        
-        for register in self.registers:
-            output += "\n" + textwrap.indent(register.generate_getters_and_setters(), "\t")
-        
-        # Output the private member variables which are mapped to the memory locations
-        # of the peripheral device registers.
-
-        output += "\nprivate:\n\n"
 
         highest_register = max(self.registers, key=lambda register: register.offset)
         number_of_reserved = 0
@@ -378,6 +389,46 @@ class Peripheral:
                 number_of_reserved += 1
                 output += f"\tReserved Reserved{number_of_reserved}; // Address Offset 0x{offset:X}\n"
 
+        output += "};\n\n"
+
+        return output
+    
+    def generate_interface_class(self):
+
+        output = (
+            f"class I{self.name}RegisterMap\n"
+            "{\n"
+            "public:\n"
+        )
+        
+        for register in self.registers:
+            output += "\n" + textwrap.indent(register.generate_virtual_getters_and_setters(), "\t")
+        
+        output += "};\n\n"
+
+        return output
+    
+    def generate_concrete_class(self):
+
+        output = (
+            f"class {self.name}RegisterMap : public I{self.name}RegisterMap\n"
+            f"{{\n"
+            f"public:\n\n"
+            f"\t{self.name}RegisterMap(uint32_t addr)\n"
+            f"\t\t: registers(*reinterpret_cast<{self.name}Registers*>(addr)) {{ }}\n"
+        )
+        
+        for register in self.registers:
+            output += "\n" + textwrap.indent(register.generate_getters_and_setters(), "\t")
+        
+        # Output the private member variables which are mapped to the memory locations
+        # of the peripheral device registers.
+
+        output += (
+            f"\nprivate:\n\n"
+            f"\t{self.name}Registers & registers;\n"
+        )
+
         output += "};\n"
 
         return output
@@ -385,7 +436,7 @@ class Peripheral:
     def generate_mock_class(self):
 
         output = (
-            f"class Mock{self.name}RegisterMap : public {self.name}RegisterMap\n"
+            f"class Mock{self.name}RegisterMap : public I{self.name}RegisterMap\n"
             f"{{\n"
             f"public:\n"
         )
@@ -432,6 +483,8 @@ class Peripheral:
         
             header_guard    = os.path.basename(file_name).replace(".", "_").upper() + "_"
             unions          = textwrap.indent(self.generate_unions(), "\t")
+            struct          = textwrap.indent(self.generate_struct(), "\t")
+            interface_class = textwrap.indent(self.generate_interface_class(), "\t")
             concrete_class  = textwrap.indent(self.generate_concrete_class(), "\t")
 
             file.write(
@@ -443,6 +496,8 @@ class Peripheral:
                 f"namespace {top_level_namespace}::{self.name.lower()}\n"
                 f"{{\n"
                 f"{unions}"
+                f"{struct}"
+                f"{interface_class}"
                 f"{concrete_class}"
                 f"}}\n"
                 f"#endif // {header_guard}"

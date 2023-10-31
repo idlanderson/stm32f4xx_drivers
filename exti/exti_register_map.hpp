@@ -200,306 +200,610 @@ namespace stm32::exti
 		volatile uint32_t Value;
 	};
 
-	class ExtiRegisterMap
+	struct ExtiRegisters
 	{
-	public:
-
-		// IMR Fields
-		InterruptMask get_IMR_MR0() const { return IMR.Fields.MR0; }
-		InterruptMask get_IMR_MR1() const { return IMR.Fields.MR1; }
-		InterruptMask get_IMR_MR2() const { return IMR.Fields.MR2; }
-		InterruptMask get_IMR_MR3() const { return IMR.Fields.MR3; }
-		InterruptMask get_IMR_MR4() const { return IMR.Fields.MR4; }
-		InterruptMask get_IMR_MR5() const { return IMR.Fields.MR5; }
-		InterruptMask get_IMR_MR6() const { return IMR.Fields.MR6; }
-		InterruptMask get_IMR_MR7() const { return IMR.Fields.MR7; }
-		InterruptMask get_IMR_MR8() const { return IMR.Fields.MR8; }
-		InterruptMask get_IMR_MR9() const { return IMR.Fields.MR9; }
-		InterruptMask get_IMR_MR10() const { return IMR.Fields.MR10; }
-		InterruptMask get_IMR_MR11() const { return IMR.Fields.MR11; }
-		InterruptMask get_IMR_MR12() const { return IMR.Fields.MR12; }
-		InterruptMask get_IMR_MR13() const { return IMR.Fields.MR13; }
-		InterruptMask get_IMR_MR14() const { return IMR.Fields.MR14; }
-		InterruptMask get_IMR_MR15() const { return IMR.Fields.MR15; }
-		InterruptMask get_IMR_MR16() const { return IMR.Fields.MR16; }
-		InterruptMask get_IMR_MR17() const { return IMR.Fields.MR17; }
-		InterruptMask get_IMR_MR18() const { return IMR.Fields.MR18; }
-		InterruptMask get_IMR_MR19() const { return IMR.Fields.MR19; }
-		InterruptMask get_IMR_MR20() const { return IMR.Fields.MR20; }
-		InterruptMask get_IMR_MR21() const { return IMR.Fields.MR21; }
-		InterruptMask get_IMR_MR22() const { return IMR.Fields.MR22; }
-		void set_IMR_MR0(InterruptMask value) { IMR.Fields.MR0 = value; }
-		void set_IMR_MR1(InterruptMask value) { IMR.Fields.MR1 = value; }
-		void set_IMR_MR2(InterruptMask value) { IMR.Fields.MR2 = value; }
-		void set_IMR_MR3(InterruptMask value) { IMR.Fields.MR3 = value; }
-		void set_IMR_MR4(InterruptMask value) { IMR.Fields.MR4 = value; }
-		void set_IMR_MR5(InterruptMask value) { IMR.Fields.MR5 = value; }
-		void set_IMR_MR6(InterruptMask value) { IMR.Fields.MR6 = value; }
-		void set_IMR_MR7(InterruptMask value) { IMR.Fields.MR7 = value; }
-		void set_IMR_MR8(InterruptMask value) { IMR.Fields.MR8 = value; }
-		void set_IMR_MR9(InterruptMask value) { IMR.Fields.MR9 = value; }
-		void set_IMR_MR10(InterruptMask value) { IMR.Fields.MR10 = value; }
-		void set_IMR_MR11(InterruptMask value) { IMR.Fields.MR11 = value; }
-		void set_IMR_MR12(InterruptMask value) { IMR.Fields.MR12 = value; }
-		void set_IMR_MR13(InterruptMask value) { IMR.Fields.MR13 = value; }
-		void set_IMR_MR14(InterruptMask value) { IMR.Fields.MR14 = value; }
-		void set_IMR_MR15(InterruptMask value) { IMR.Fields.MR15 = value; }
-		void set_IMR_MR16(InterruptMask value) { IMR.Fields.MR16 = value; }
-		void set_IMR_MR17(InterruptMask value) { IMR.Fields.MR17 = value; }
-		void set_IMR_MR18(InterruptMask value) { IMR.Fields.MR18 = value; }
-		void set_IMR_MR19(InterruptMask value) { IMR.Fields.MR19 = value; }
-		void set_IMR_MR20(InterruptMask value) { IMR.Fields.MR20 = value; }
-		void set_IMR_MR21(InterruptMask value) { IMR.Fields.MR21 = value; }
-		void set_IMR_MR22(InterruptMask value) { IMR.Fields.MR22 = value; }
-
-		// EMR Fields
-		InterruptMask get_EMR_MR0() const { return EMR.Fields.MR0; }
-		InterruptMask get_EMR_MR1() const { return EMR.Fields.MR1; }
-		InterruptMask get_EMR_MR2() const { return EMR.Fields.MR2; }
-		InterruptMask get_EMR_MR3() const { return EMR.Fields.MR3; }
-		InterruptMask get_EMR_MR4() const { return EMR.Fields.MR4; }
-		InterruptMask get_EMR_MR5() const { return EMR.Fields.MR5; }
-		InterruptMask get_EMR_MR6() const { return EMR.Fields.MR6; }
-		InterruptMask get_EMR_MR7() const { return EMR.Fields.MR7; }
-		InterruptMask get_EMR_MR8() const { return EMR.Fields.MR8; }
-		InterruptMask get_EMR_MR9() const { return EMR.Fields.MR9; }
-		InterruptMask get_EMR_MR10() const { return EMR.Fields.MR10; }
-		InterruptMask get_EMR_MR11() const { return EMR.Fields.MR11; }
-		InterruptMask get_EMR_MR12() const { return EMR.Fields.MR12; }
-		InterruptMask get_EMR_MR13() const { return EMR.Fields.MR13; }
-		InterruptMask get_EMR_MR14() const { return EMR.Fields.MR14; }
-		InterruptMask get_EMR_MR15() const { return EMR.Fields.MR15; }
-		InterruptMask get_EMR_MR16() const { return EMR.Fields.MR16; }
-		InterruptMask get_EMR_MR17() const { return EMR.Fields.MR17; }
-		InterruptMask get_EMR_MR18() const { return EMR.Fields.MR18; }
-		InterruptMask get_EMR_MR19() const { return EMR.Fields.MR19; }
-		InterruptMask get_EMR_MR20() const { return EMR.Fields.MR20; }
-		InterruptMask get_EMR_MR21() const { return EMR.Fields.MR21; }
-		InterruptMask get_EMR_MR22() const { return EMR.Fields.MR22; }
-		void set_EMR_MR0(InterruptMask value) { EMR.Fields.MR0 = value; }
-		void set_EMR_MR1(InterruptMask value) { EMR.Fields.MR1 = value; }
-		void set_EMR_MR2(InterruptMask value) { EMR.Fields.MR2 = value; }
-		void set_EMR_MR3(InterruptMask value) { EMR.Fields.MR3 = value; }
-		void set_EMR_MR4(InterruptMask value) { EMR.Fields.MR4 = value; }
-		void set_EMR_MR5(InterruptMask value) { EMR.Fields.MR5 = value; }
-		void set_EMR_MR6(InterruptMask value) { EMR.Fields.MR6 = value; }
-		void set_EMR_MR7(InterruptMask value) { EMR.Fields.MR7 = value; }
-		void set_EMR_MR8(InterruptMask value) { EMR.Fields.MR8 = value; }
-		void set_EMR_MR9(InterruptMask value) { EMR.Fields.MR9 = value; }
-		void set_EMR_MR10(InterruptMask value) { EMR.Fields.MR10 = value; }
-		void set_EMR_MR11(InterruptMask value) { EMR.Fields.MR11 = value; }
-		void set_EMR_MR12(InterruptMask value) { EMR.Fields.MR12 = value; }
-		void set_EMR_MR13(InterruptMask value) { EMR.Fields.MR13 = value; }
-		void set_EMR_MR14(InterruptMask value) { EMR.Fields.MR14 = value; }
-		void set_EMR_MR15(InterruptMask value) { EMR.Fields.MR15 = value; }
-		void set_EMR_MR16(InterruptMask value) { EMR.Fields.MR16 = value; }
-		void set_EMR_MR17(InterruptMask value) { EMR.Fields.MR17 = value; }
-		void set_EMR_MR18(InterruptMask value) { EMR.Fields.MR18 = value; }
-		void set_EMR_MR19(InterruptMask value) { EMR.Fields.MR19 = value; }
-		void set_EMR_MR20(InterruptMask value) { EMR.Fields.MR20 = value; }
-		void set_EMR_MR21(InterruptMask value) { EMR.Fields.MR21 = value; }
-		void set_EMR_MR22(InterruptMask value) { EMR.Fields.MR22 = value; }
-
-		// RTSR Fields
-		EnableFlag get_RTSR_TR0() const { return RTSR.Fields.TR0; }
-		EnableFlag get_RTSR_TR1() const { return RTSR.Fields.TR1; }
-		EnableFlag get_RTSR_TR2() const { return RTSR.Fields.TR2; }
-		EnableFlag get_RTSR_TR3() const { return RTSR.Fields.TR3; }
-		EnableFlag get_RTSR_TR4() const { return RTSR.Fields.TR4; }
-		EnableFlag get_RTSR_TR5() const { return RTSR.Fields.TR5; }
-		EnableFlag get_RTSR_TR6() const { return RTSR.Fields.TR6; }
-		EnableFlag get_RTSR_TR7() const { return RTSR.Fields.TR7; }
-		EnableFlag get_RTSR_TR8() const { return RTSR.Fields.TR8; }
-		EnableFlag get_RTSR_TR9() const { return RTSR.Fields.TR9; }
-		EnableFlag get_RTSR_TR10() const { return RTSR.Fields.TR10; }
-		EnableFlag get_RTSR_TR11() const { return RTSR.Fields.TR11; }
-		EnableFlag get_RTSR_TR12() const { return RTSR.Fields.TR12; }
-		EnableFlag get_RTSR_TR13() const { return RTSR.Fields.TR13; }
-		EnableFlag get_RTSR_TR14() const { return RTSR.Fields.TR14; }
-		EnableFlag get_RTSR_TR15() const { return RTSR.Fields.TR15; }
-		EnableFlag get_RTSR_TR16() const { return RTSR.Fields.TR16; }
-		EnableFlag get_RTSR_TR17() const { return RTSR.Fields.TR17; }
-		EnableFlag get_RTSR_TR18() const { return RTSR.Fields.TR18; }
-		EnableFlag get_RTSR_TR19() const { return RTSR.Fields.TR19; }
-		EnableFlag get_RTSR_TR20() const { return RTSR.Fields.TR20; }
-		EnableFlag get_RTSR_TR21() const { return RTSR.Fields.TR21; }
-		EnableFlag get_RTSR_TR22() const { return RTSR.Fields.TR22; }
-		void set_RTSR_TR0(EnableFlag value) { RTSR.Fields.TR0 = value; }
-		void set_RTSR_TR1(EnableFlag value) { RTSR.Fields.TR1 = value; }
-		void set_RTSR_TR2(EnableFlag value) { RTSR.Fields.TR2 = value; }
-		void set_RTSR_TR3(EnableFlag value) { RTSR.Fields.TR3 = value; }
-		void set_RTSR_TR4(EnableFlag value) { RTSR.Fields.TR4 = value; }
-		void set_RTSR_TR5(EnableFlag value) { RTSR.Fields.TR5 = value; }
-		void set_RTSR_TR6(EnableFlag value) { RTSR.Fields.TR6 = value; }
-		void set_RTSR_TR7(EnableFlag value) { RTSR.Fields.TR7 = value; }
-		void set_RTSR_TR8(EnableFlag value) { RTSR.Fields.TR8 = value; }
-		void set_RTSR_TR9(EnableFlag value) { RTSR.Fields.TR9 = value; }
-		void set_RTSR_TR10(EnableFlag value) { RTSR.Fields.TR10 = value; }
-		void set_RTSR_TR11(EnableFlag value) { RTSR.Fields.TR11 = value; }
-		void set_RTSR_TR12(EnableFlag value) { RTSR.Fields.TR12 = value; }
-		void set_RTSR_TR13(EnableFlag value) { RTSR.Fields.TR13 = value; }
-		void set_RTSR_TR14(EnableFlag value) { RTSR.Fields.TR14 = value; }
-		void set_RTSR_TR15(EnableFlag value) { RTSR.Fields.TR15 = value; }
-		void set_RTSR_TR16(EnableFlag value) { RTSR.Fields.TR16 = value; }
-		void set_RTSR_TR17(EnableFlag value) { RTSR.Fields.TR17 = value; }
-		void set_RTSR_TR18(EnableFlag value) { RTSR.Fields.TR18 = value; }
-		void set_RTSR_TR19(EnableFlag value) { RTSR.Fields.TR19 = value; }
-		void set_RTSR_TR20(EnableFlag value) { RTSR.Fields.TR20 = value; }
-		void set_RTSR_TR21(EnableFlag value) { RTSR.Fields.TR21 = value; }
-		void set_RTSR_TR22(EnableFlag value) { RTSR.Fields.TR22 = value; }
-
-		// FTSR Fields
-		EnableFlag get_FTSR_TR0() const { return FTSR.Fields.TR0; }
-		EnableFlag get_FTSR_TR1() const { return FTSR.Fields.TR1; }
-		EnableFlag get_FTSR_TR2() const { return FTSR.Fields.TR2; }
-		EnableFlag get_FTSR_TR3() const { return FTSR.Fields.TR3; }
-		EnableFlag get_FTSR_TR4() const { return FTSR.Fields.TR4; }
-		EnableFlag get_FTSR_TR5() const { return FTSR.Fields.TR5; }
-		EnableFlag get_FTSR_TR6() const { return FTSR.Fields.TR6; }
-		EnableFlag get_FTSR_TR7() const { return FTSR.Fields.TR7; }
-		EnableFlag get_FTSR_TR8() const { return FTSR.Fields.TR8; }
-		EnableFlag get_FTSR_TR9() const { return FTSR.Fields.TR9; }
-		EnableFlag get_FTSR_TR10() const { return FTSR.Fields.TR10; }
-		EnableFlag get_FTSR_TR11() const { return FTSR.Fields.TR11; }
-		EnableFlag get_FTSR_TR12() const { return FTSR.Fields.TR12; }
-		EnableFlag get_FTSR_TR13() const { return FTSR.Fields.TR13; }
-		EnableFlag get_FTSR_TR14() const { return FTSR.Fields.TR14; }
-		EnableFlag get_FTSR_TR15() const { return FTSR.Fields.TR15; }
-		EnableFlag get_FTSR_TR16() const { return FTSR.Fields.TR16; }
-		EnableFlag get_FTSR_TR17() const { return FTSR.Fields.TR17; }
-		EnableFlag get_FTSR_TR18() const { return FTSR.Fields.TR18; }
-		EnableFlag get_FTSR_TR19() const { return FTSR.Fields.TR19; }
-		EnableFlag get_FTSR_TR20() const { return FTSR.Fields.TR20; }
-		EnableFlag get_FTSR_TR21() const { return FTSR.Fields.TR21; }
-		EnableFlag get_FTSR_TR22() const { return FTSR.Fields.TR22; }
-		void set_FTSR_TR0(EnableFlag value) { FTSR.Fields.TR0 = value; }
-		void set_FTSR_TR1(EnableFlag value) { FTSR.Fields.TR1 = value; }
-		void set_FTSR_TR2(EnableFlag value) { FTSR.Fields.TR2 = value; }
-		void set_FTSR_TR3(EnableFlag value) { FTSR.Fields.TR3 = value; }
-		void set_FTSR_TR4(EnableFlag value) { FTSR.Fields.TR4 = value; }
-		void set_FTSR_TR5(EnableFlag value) { FTSR.Fields.TR5 = value; }
-		void set_FTSR_TR6(EnableFlag value) { FTSR.Fields.TR6 = value; }
-		void set_FTSR_TR7(EnableFlag value) { FTSR.Fields.TR7 = value; }
-		void set_FTSR_TR8(EnableFlag value) { FTSR.Fields.TR8 = value; }
-		void set_FTSR_TR9(EnableFlag value) { FTSR.Fields.TR9 = value; }
-		void set_FTSR_TR10(EnableFlag value) { FTSR.Fields.TR10 = value; }
-		void set_FTSR_TR11(EnableFlag value) { FTSR.Fields.TR11 = value; }
-		void set_FTSR_TR12(EnableFlag value) { FTSR.Fields.TR12 = value; }
-		void set_FTSR_TR13(EnableFlag value) { FTSR.Fields.TR13 = value; }
-		void set_FTSR_TR14(EnableFlag value) { FTSR.Fields.TR14 = value; }
-		void set_FTSR_TR15(EnableFlag value) { FTSR.Fields.TR15 = value; }
-		void set_FTSR_TR16(EnableFlag value) { FTSR.Fields.TR16 = value; }
-		void set_FTSR_TR17(EnableFlag value) { FTSR.Fields.TR17 = value; }
-		void set_FTSR_TR18(EnableFlag value) { FTSR.Fields.TR18 = value; }
-		void set_FTSR_TR19(EnableFlag value) { FTSR.Fields.TR19 = value; }
-		void set_FTSR_TR20(EnableFlag value) { FTSR.Fields.TR20 = value; }
-		void set_FTSR_TR21(EnableFlag value) { FTSR.Fields.TR21 = value; }
-		void set_FTSR_TR22(EnableFlag value) { FTSR.Fields.TR22 = value; }
-
-		// SWIER Fields
-		SoftwareInterrupt get_SWIER_SWIER0() const { return SWIER.Fields.SWIER0; }
-		SoftwareInterrupt get_SWIER_SWIER1() const { return SWIER.Fields.SWIER1; }
-		SoftwareInterrupt get_SWIER_SWIER2() const { return SWIER.Fields.SWIER2; }
-		SoftwareInterrupt get_SWIER_SWIER3() const { return SWIER.Fields.SWIER3; }
-		SoftwareInterrupt get_SWIER_SWIER4() const { return SWIER.Fields.SWIER4; }
-		SoftwareInterrupt get_SWIER_SWIER5() const { return SWIER.Fields.SWIER5; }
-		SoftwareInterrupt get_SWIER_SWIER6() const { return SWIER.Fields.SWIER6; }
-		SoftwareInterrupt get_SWIER_SWIER7() const { return SWIER.Fields.SWIER7; }
-		SoftwareInterrupt get_SWIER_SWIER8() const { return SWIER.Fields.SWIER8; }
-		SoftwareInterrupt get_SWIER_SWIER9() const { return SWIER.Fields.SWIER9; }
-		SoftwareInterrupt get_SWIER_SWIER10() const { return SWIER.Fields.SWIER10; }
-		SoftwareInterrupt get_SWIER_SWIER11() const { return SWIER.Fields.SWIER11; }
-		SoftwareInterrupt get_SWIER_SWIER12() const { return SWIER.Fields.SWIER12; }
-		SoftwareInterrupt get_SWIER_SWIER13() const { return SWIER.Fields.SWIER13; }
-		SoftwareInterrupt get_SWIER_SWIER14() const { return SWIER.Fields.SWIER14; }
-		SoftwareInterrupt get_SWIER_SWIER15() const { return SWIER.Fields.SWIER15; }
-		SoftwareInterrupt get_SWIER_SWIER16() const { return SWIER.Fields.SWIER16; }
-		SoftwareInterrupt get_SWIER_SWIER17() const { return SWIER.Fields.SWIER17; }
-		SoftwareInterrupt get_SWIER_SWIER18() const { return SWIER.Fields.SWIER18; }
-		SoftwareInterrupt get_SWIER_SWIER19() const { return SWIER.Fields.SWIER19; }
-		SoftwareInterrupt get_SWIER_SWIER20() const { return SWIER.Fields.SWIER20; }
-		SoftwareInterrupt get_SWIER_SWIER21() const { return SWIER.Fields.SWIER21; }
-		SoftwareInterrupt get_SWIER_SWIER22() const { return SWIER.Fields.SWIER22; }
-		void set_SWIER_SWIER0(SoftwareInterrupt value) { SWIER.Fields.SWIER0 = value; }
-		void set_SWIER_SWIER1(SoftwareInterrupt value) { SWIER.Fields.SWIER1 = value; }
-		void set_SWIER_SWIER2(SoftwareInterrupt value) { SWIER.Fields.SWIER2 = value; }
-		void set_SWIER_SWIER3(SoftwareInterrupt value) { SWIER.Fields.SWIER3 = value; }
-		void set_SWIER_SWIER4(SoftwareInterrupt value) { SWIER.Fields.SWIER4 = value; }
-		void set_SWIER_SWIER5(SoftwareInterrupt value) { SWIER.Fields.SWIER5 = value; }
-		void set_SWIER_SWIER6(SoftwareInterrupt value) { SWIER.Fields.SWIER6 = value; }
-		void set_SWIER_SWIER7(SoftwareInterrupt value) { SWIER.Fields.SWIER7 = value; }
-		void set_SWIER_SWIER8(SoftwareInterrupt value) { SWIER.Fields.SWIER8 = value; }
-		void set_SWIER_SWIER9(SoftwareInterrupt value) { SWIER.Fields.SWIER9 = value; }
-		void set_SWIER_SWIER10(SoftwareInterrupt value) { SWIER.Fields.SWIER10 = value; }
-		void set_SWIER_SWIER11(SoftwareInterrupt value) { SWIER.Fields.SWIER11 = value; }
-		void set_SWIER_SWIER12(SoftwareInterrupt value) { SWIER.Fields.SWIER12 = value; }
-		void set_SWIER_SWIER13(SoftwareInterrupt value) { SWIER.Fields.SWIER13 = value; }
-		void set_SWIER_SWIER14(SoftwareInterrupt value) { SWIER.Fields.SWIER14 = value; }
-		void set_SWIER_SWIER15(SoftwareInterrupt value) { SWIER.Fields.SWIER15 = value; }
-		void set_SWIER_SWIER16(SoftwareInterrupt value) { SWIER.Fields.SWIER16 = value; }
-		void set_SWIER_SWIER17(SoftwareInterrupt value) { SWIER.Fields.SWIER17 = value; }
-		void set_SWIER_SWIER18(SoftwareInterrupt value) { SWIER.Fields.SWIER18 = value; }
-		void set_SWIER_SWIER19(SoftwareInterrupt value) { SWIER.Fields.SWIER19 = value; }
-		void set_SWIER_SWIER20(SoftwareInterrupt value) { SWIER.Fields.SWIER20 = value; }
-		void set_SWIER_SWIER21(SoftwareInterrupt value) { SWIER.Fields.SWIER21 = value; }
-		void set_SWIER_SWIER22(SoftwareInterrupt value) { SWIER.Fields.SWIER22 = value; }
-
-		// PR Fields
-		PendingBit get_PR_PR0() const { return PR.Fields.PR0; }
-		PendingBit get_PR_PR1() const { return PR.Fields.PR1; }
-		PendingBit get_PR_PR2() const { return PR.Fields.PR2; }
-		PendingBit get_PR_PR3() const { return PR.Fields.PR3; }
-		PendingBit get_PR_PR4() const { return PR.Fields.PR4; }
-		PendingBit get_PR_PR5() const { return PR.Fields.PR5; }
-		PendingBit get_PR_PR6() const { return PR.Fields.PR6; }
-		PendingBit get_PR_PR7() const { return PR.Fields.PR7; }
-		PendingBit get_PR_PR8() const { return PR.Fields.PR8; }
-		PendingBit get_PR_PR9() const { return PR.Fields.PR9; }
-		PendingBit get_PR_PR10() const { return PR.Fields.PR10; }
-		PendingBit get_PR_PR11() const { return PR.Fields.PR11; }
-		PendingBit get_PR_PR12() const { return PR.Fields.PR12; }
-		PendingBit get_PR_PR13() const { return PR.Fields.PR13; }
-		PendingBit get_PR_PR14() const { return PR.Fields.PR14; }
-		PendingBit get_PR_PR15() const { return PR.Fields.PR15; }
-		PendingBit get_PR_PR16() const { return PR.Fields.PR16; }
-		PendingBit get_PR_PR17() const { return PR.Fields.PR17; }
-		PendingBit get_PR_PR18() const { return PR.Fields.PR18; }
-		PendingBit get_PR_PR19() const { return PR.Fields.PR19; }
-		PendingBit get_PR_PR20() const { return PR.Fields.PR20; }
-		PendingBit get_PR_PR21() const { return PR.Fields.PR21; }
-		PendingBit get_PR_PR22() const { return PR.Fields.PR22; }
-		void set_PR_PR0(PendingBit value) { PR.Fields.PR0 = value; }
-		void set_PR_PR1(PendingBit value) { PR.Fields.PR1 = value; }
-		void set_PR_PR2(PendingBit value) { PR.Fields.PR2 = value; }
-		void set_PR_PR3(PendingBit value) { PR.Fields.PR3 = value; }
-		void set_PR_PR4(PendingBit value) { PR.Fields.PR4 = value; }
-		void set_PR_PR5(PendingBit value) { PR.Fields.PR5 = value; }
-		void set_PR_PR6(PendingBit value) { PR.Fields.PR6 = value; }
-		void set_PR_PR7(PendingBit value) { PR.Fields.PR7 = value; }
-		void set_PR_PR8(PendingBit value) { PR.Fields.PR8 = value; }
-		void set_PR_PR9(PendingBit value) { PR.Fields.PR9 = value; }
-		void set_PR_PR10(PendingBit value) { PR.Fields.PR10 = value; }
-		void set_PR_PR11(PendingBit value) { PR.Fields.PR11 = value; }
-		void set_PR_PR12(PendingBit value) { PR.Fields.PR12 = value; }
-		void set_PR_PR13(PendingBit value) { PR.Fields.PR13 = value; }
-		void set_PR_PR14(PendingBit value) { PR.Fields.PR14 = value; }
-		void set_PR_PR15(PendingBit value) { PR.Fields.PR15 = value; }
-		void set_PR_PR16(PendingBit value) { PR.Fields.PR16 = value; }
-		void set_PR_PR17(PendingBit value) { PR.Fields.PR17 = value; }
-		void set_PR_PR18(PendingBit value) { PR.Fields.PR18 = value; }
-		void set_PR_PR19(PendingBit value) { PR.Fields.PR19 = value; }
-		void set_PR_PR20(PendingBit value) { PR.Fields.PR20 = value; }
-		void set_PR_PR21(PendingBit value) { PR.Fields.PR21 = value; }
-		void set_PR_PR22(PendingBit value) { PR.Fields.PR22 = value; }
-
-	private:
-
 		IMR_t IMR; // Address Offset 0x0
 		EMR_t EMR; // Address Offset 0x4
 		RTSR_t RTSR; // Address Offset 0x8
 		FTSR_t FTSR; // Address Offset 0xC
 		SWIER_t SWIER; // Address Offset 0x10
 		PR_t PR; // Address Offset 0x14
+	};
+
+	class IExtiRegisterMap
+	{
+	public:
+
+		// IMR Fields
+		virtual InterruptMask get_IMR_MR0() const = 0;
+		virtual InterruptMask get_IMR_MR1() const = 0;
+		virtual InterruptMask get_IMR_MR2() const = 0;
+		virtual InterruptMask get_IMR_MR3() const = 0;
+		virtual InterruptMask get_IMR_MR4() const = 0;
+		virtual InterruptMask get_IMR_MR5() const = 0;
+		virtual InterruptMask get_IMR_MR6() const = 0;
+		virtual InterruptMask get_IMR_MR7() const = 0;
+		virtual InterruptMask get_IMR_MR8() const = 0;
+		virtual InterruptMask get_IMR_MR9() const = 0;
+		virtual InterruptMask get_IMR_MR10() const = 0;
+		virtual InterruptMask get_IMR_MR11() const = 0;
+		virtual InterruptMask get_IMR_MR12() const = 0;
+		virtual InterruptMask get_IMR_MR13() const = 0;
+		virtual InterruptMask get_IMR_MR14() const = 0;
+		virtual InterruptMask get_IMR_MR15() const = 0;
+		virtual InterruptMask get_IMR_MR16() const = 0;
+		virtual InterruptMask get_IMR_MR17() const = 0;
+		virtual InterruptMask get_IMR_MR18() const = 0;
+		virtual InterruptMask get_IMR_MR19() const = 0;
+		virtual InterruptMask get_IMR_MR20() const = 0;
+		virtual InterruptMask get_IMR_MR21() const = 0;
+		virtual InterruptMask get_IMR_MR22() const = 0;
+		virtual void set_IMR_MR0(InterruptMask value) = 0;
+		virtual void set_IMR_MR1(InterruptMask value) = 0;
+		virtual void set_IMR_MR2(InterruptMask value) = 0;
+		virtual void set_IMR_MR3(InterruptMask value) = 0;
+		virtual void set_IMR_MR4(InterruptMask value) = 0;
+		virtual void set_IMR_MR5(InterruptMask value) = 0;
+		virtual void set_IMR_MR6(InterruptMask value) = 0;
+		virtual void set_IMR_MR7(InterruptMask value) = 0;
+		virtual void set_IMR_MR8(InterruptMask value) = 0;
+		virtual void set_IMR_MR9(InterruptMask value) = 0;
+		virtual void set_IMR_MR10(InterruptMask value) = 0;
+		virtual void set_IMR_MR11(InterruptMask value) = 0;
+		virtual void set_IMR_MR12(InterruptMask value) = 0;
+		virtual void set_IMR_MR13(InterruptMask value) = 0;
+		virtual void set_IMR_MR14(InterruptMask value) = 0;
+		virtual void set_IMR_MR15(InterruptMask value) = 0;
+		virtual void set_IMR_MR16(InterruptMask value) = 0;
+		virtual void set_IMR_MR17(InterruptMask value) = 0;
+		virtual void set_IMR_MR18(InterruptMask value) = 0;
+		virtual void set_IMR_MR19(InterruptMask value) = 0;
+		virtual void set_IMR_MR20(InterruptMask value) = 0;
+		virtual void set_IMR_MR21(InterruptMask value) = 0;
+		virtual void set_IMR_MR22(InterruptMask value) = 0;
+
+		// EMR Fields
+		virtual InterruptMask get_EMR_MR0() const = 0;
+		virtual InterruptMask get_EMR_MR1() const = 0;
+		virtual InterruptMask get_EMR_MR2() const = 0;
+		virtual InterruptMask get_EMR_MR3() const = 0;
+		virtual InterruptMask get_EMR_MR4() const = 0;
+		virtual InterruptMask get_EMR_MR5() const = 0;
+		virtual InterruptMask get_EMR_MR6() const = 0;
+		virtual InterruptMask get_EMR_MR7() const = 0;
+		virtual InterruptMask get_EMR_MR8() const = 0;
+		virtual InterruptMask get_EMR_MR9() const = 0;
+		virtual InterruptMask get_EMR_MR10() const = 0;
+		virtual InterruptMask get_EMR_MR11() const = 0;
+		virtual InterruptMask get_EMR_MR12() const = 0;
+		virtual InterruptMask get_EMR_MR13() const = 0;
+		virtual InterruptMask get_EMR_MR14() const = 0;
+		virtual InterruptMask get_EMR_MR15() const = 0;
+		virtual InterruptMask get_EMR_MR16() const = 0;
+		virtual InterruptMask get_EMR_MR17() const = 0;
+		virtual InterruptMask get_EMR_MR18() const = 0;
+		virtual InterruptMask get_EMR_MR19() const = 0;
+		virtual InterruptMask get_EMR_MR20() const = 0;
+		virtual InterruptMask get_EMR_MR21() const = 0;
+		virtual InterruptMask get_EMR_MR22() const = 0;
+		virtual void set_EMR_MR0(InterruptMask value) = 0;
+		virtual void set_EMR_MR1(InterruptMask value) = 0;
+		virtual void set_EMR_MR2(InterruptMask value) = 0;
+		virtual void set_EMR_MR3(InterruptMask value) = 0;
+		virtual void set_EMR_MR4(InterruptMask value) = 0;
+		virtual void set_EMR_MR5(InterruptMask value) = 0;
+		virtual void set_EMR_MR6(InterruptMask value) = 0;
+		virtual void set_EMR_MR7(InterruptMask value) = 0;
+		virtual void set_EMR_MR8(InterruptMask value) = 0;
+		virtual void set_EMR_MR9(InterruptMask value) = 0;
+		virtual void set_EMR_MR10(InterruptMask value) = 0;
+		virtual void set_EMR_MR11(InterruptMask value) = 0;
+		virtual void set_EMR_MR12(InterruptMask value) = 0;
+		virtual void set_EMR_MR13(InterruptMask value) = 0;
+		virtual void set_EMR_MR14(InterruptMask value) = 0;
+		virtual void set_EMR_MR15(InterruptMask value) = 0;
+		virtual void set_EMR_MR16(InterruptMask value) = 0;
+		virtual void set_EMR_MR17(InterruptMask value) = 0;
+		virtual void set_EMR_MR18(InterruptMask value) = 0;
+		virtual void set_EMR_MR19(InterruptMask value) = 0;
+		virtual void set_EMR_MR20(InterruptMask value) = 0;
+		virtual void set_EMR_MR21(InterruptMask value) = 0;
+		virtual void set_EMR_MR22(InterruptMask value) = 0;
+
+		// RTSR Fields
+		virtual EnableFlag get_RTSR_TR0() const = 0;
+		virtual EnableFlag get_RTSR_TR1() const = 0;
+		virtual EnableFlag get_RTSR_TR2() const = 0;
+		virtual EnableFlag get_RTSR_TR3() const = 0;
+		virtual EnableFlag get_RTSR_TR4() const = 0;
+		virtual EnableFlag get_RTSR_TR5() const = 0;
+		virtual EnableFlag get_RTSR_TR6() const = 0;
+		virtual EnableFlag get_RTSR_TR7() const = 0;
+		virtual EnableFlag get_RTSR_TR8() const = 0;
+		virtual EnableFlag get_RTSR_TR9() const = 0;
+		virtual EnableFlag get_RTSR_TR10() const = 0;
+		virtual EnableFlag get_RTSR_TR11() const = 0;
+		virtual EnableFlag get_RTSR_TR12() const = 0;
+		virtual EnableFlag get_RTSR_TR13() const = 0;
+		virtual EnableFlag get_RTSR_TR14() const = 0;
+		virtual EnableFlag get_RTSR_TR15() const = 0;
+		virtual EnableFlag get_RTSR_TR16() const = 0;
+		virtual EnableFlag get_RTSR_TR17() const = 0;
+		virtual EnableFlag get_RTSR_TR18() const = 0;
+		virtual EnableFlag get_RTSR_TR19() const = 0;
+		virtual EnableFlag get_RTSR_TR20() const = 0;
+		virtual EnableFlag get_RTSR_TR21() const = 0;
+		virtual EnableFlag get_RTSR_TR22() const = 0;
+		virtual void set_RTSR_TR0(EnableFlag value) = 0;
+		virtual void set_RTSR_TR1(EnableFlag value) = 0;
+		virtual void set_RTSR_TR2(EnableFlag value) = 0;
+		virtual void set_RTSR_TR3(EnableFlag value) = 0;
+		virtual void set_RTSR_TR4(EnableFlag value) = 0;
+		virtual void set_RTSR_TR5(EnableFlag value) = 0;
+		virtual void set_RTSR_TR6(EnableFlag value) = 0;
+		virtual void set_RTSR_TR7(EnableFlag value) = 0;
+		virtual void set_RTSR_TR8(EnableFlag value) = 0;
+		virtual void set_RTSR_TR9(EnableFlag value) = 0;
+		virtual void set_RTSR_TR10(EnableFlag value) = 0;
+		virtual void set_RTSR_TR11(EnableFlag value) = 0;
+		virtual void set_RTSR_TR12(EnableFlag value) = 0;
+		virtual void set_RTSR_TR13(EnableFlag value) = 0;
+		virtual void set_RTSR_TR14(EnableFlag value) = 0;
+		virtual void set_RTSR_TR15(EnableFlag value) = 0;
+		virtual void set_RTSR_TR16(EnableFlag value) = 0;
+		virtual void set_RTSR_TR17(EnableFlag value) = 0;
+		virtual void set_RTSR_TR18(EnableFlag value) = 0;
+		virtual void set_RTSR_TR19(EnableFlag value) = 0;
+		virtual void set_RTSR_TR20(EnableFlag value) = 0;
+		virtual void set_RTSR_TR21(EnableFlag value) = 0;
+		virtual void set_RTSR_TR22(EnableFlag value) = 0;
+
+		// FTSR Fields
+		virtual EnableFlag get_FTSR_TR0() const = 0;
+		virtual EnableFlag get_FTSR_TR1() const = 0;
+		virtual EnableFlag get_FTSR_TR2() const = 0;
+		virtual EnableFlag get_FTSR_TR3() const = 0;
+		virtual EnableFlag get_FTSR_TR4() const = 0;
+		virtual EnableFlag get_FTSR_TR5() const = 0;
+		virtual EnableFlag get_FTSR_TR6() const = 0;
+		virtual EnableFlag get_FTSR_TR7() const = 0;
+		virtual EnableFlag get_FTSR_TR8() const = 0;
+		virtual EnableFlag get_FTSR_TR9() const = 0;
+		virtual EnableFlag get_FTSR_TR10() const = 0;
+		virtual EnableFlag get_FTSR_TR11() const = 0;
+		virtual EnableFlag get_FTSR_TR12() const = 0;
+		virtual EnableFlag get_FTSR_TR13() const = 0;
+		virtual EnableFlag get_FTSR_TR14() const = 0;
+		virtual EnableFlag get_FTSR_TR15() const = 0;
+		virtual EnableFlag get_FTSR_TR16() const = 0;
+		virtual EnableFlag get_FTSR_TR17() const = 0;
+		virtual EnableFlag get_FTSR_TR18() const = 0;
+		virtual EnableFlag get_FTSR_TR19() const = 0;
+		virtual EnableFlag get_FTSR_TR20() const = 0;
+		virtual EnableFlag get_FTSR_TR21() const = 0;
+		virtual EnableFlag get_FTSR_TR22() const = 0;
+		virtual void set_FTSR_TR0(EnableFlag value) = 0;
+		virtual void set_FTSR_TR1(EnableFlag value) = 0;
+		virtual void set_FTSR_TR2(EnableFlag value) = 0;
+		virtual void set_FTSR_TR3(EnableFlag value) = 0;
+		virtual void set_FTSR_TR4(EnableFlag value) = 0;
+		virtual void set_FTSR_TR5(EnableFlag value) = 0;
+		virtual void set_FTSR_TR6(EnableFlag value) = 0;
+		virtual void set_FTSR_TR7(EnableFlag value) = 0;
+		virtual void set_FTSR_TR8(EnableFlag value) = 0;
+		virtual void set_FTSR_TR9(EnableFlag value) = 0;
+		virtual void set_FTSR_TR10(EnableFlag value) = 0;
+		virtual void set_FTSR_TR11(EnableFlag value) = 0;
+		virtual void set_FTSR_TR12(EnableFlag value) = 0;
+		virtual void set_FTSR_TR13(EnableFlag value) = 0;
+		virtual void set_FTSR_TR14(EnableFlag value) = 0;
+		virtual void set_FTSR_TR15(EnableFlag value) = 0;
+		virtual void set_FTSR_TR16(EnableFlag value) = 0;
+		virtual void set_FTSR_TR17(EnableFlag value) = 0;
+		virtual void set_FTSR_TR18(EnableFlag value) = 0;
+		virtual void set_FTSR_TR19(EnableFlag value) = 0;
+		virtual void set_FTSR_TR20(EnableFlag value) = 0;
+		virtual void set_FTSR_TR21(EnableFlag value) = 0;
+		virtual void set_FTSR_TR22(EnableFlag value) = 0;
+
+		// SWIER Fields
+		virtual SoftwareInterrupt get_SWIER_SWIER0() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER1() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER2() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER3() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER4() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER5() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER6() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER7() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER8() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER9() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER10() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER11() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER12() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER13() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER14() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER15() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER16() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER17() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER18() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER19() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER20() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER21() const = 0;
+		virtual SoftwareInterrupt get_SWIER_SWIER22() const = 0;
+		virtual void set_SWIER_SWIER0(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER1(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER2(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER3(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER4(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER5(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER6(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER7(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER8(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER9(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER10(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER11(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER12(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER13(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER14(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER15(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER16(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER17(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER18(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER19(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER20(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER21(SoftwareInterrupt value) = 0;
+		virtual void set_SWIER_SWIER22(SoftwareInterrupt value) = 0;
+
+		// PR Fields
+		virtual PendingBit get_PR_PR0() const = 0;
+		virtual PendingBit get_PR_PR1() const = 0;
+		virtual PendingBit get_PR_PR2() const = 0;
+		virtual PendingBit get_PR_PR3() const = 0;
+		virtual PendingBit get_PR_PR4() const = 0;
+		virtual PendingBit get_PR_PR5() const = 0;
+		virtual PendingBit get_PR_PR6() const = 0;
+		virtual PendingBit get_PR_PR7() const = 0;
+		virtual PendingBit get_PR_PR8() const = 0;
+		virtual PendingBit get_PR_PR9() const = 0;
+		virtual PendingBit get_PR_PR10() const = 0;
+		virtual PendingBit get_PR_PR11() const = 0;
+		virtual PendingBit get_PR_PR12() const = 0;
+		virtual PendingBit get_PR_PR13() const = 0;
+		virtual PendingBit get_PR_PR14() const = 0;
+		virtual PendingBit get_PR_PR15() const = 0;
+		virtual PendingBit get_PR_PR16() const = 0;
+		virtual PendingBit get_PR_PR17() const = 0;
+		virtual PendingBit get_PR_PR18() const = 0;
+		virtual PendingBit get_PR_PR19() const = 0;
+		virtual PendingBit get_PR_PR20() const = 0;
+		virtual PendingBit get_PR_PR21() const = 0;
+		virtual PendingBit get_PR_PR22() const = 0;
+		virtual void set_PR_PR0(PendingBit value) = 0;
+		virtual void set_PR_PR1(PendingBit value) = 0;
+		virtual void set_PR_PR2(PendingBit value) = 0;
+		virtual void set_PR_PR3(PendingBit value) = 0;
+		virtual void set_PR_PR4(PendingBit value) = 0;
+		virtual void set_PR_PR5(PendingBit value) = 0;
+		virtual void set_PR_PR6(PendingBit value) = 0;
+		virtual void set_PR_PR7(PendingBit value) = 0;
+		virtual void set_PR_PR8(PendingBit value) = 0;
+		virtual void set_PR_PR9(PendingBit value) = 0;
+		virtual void set_PR_PR10(PendingBit value) = 0;
+		virtual void set_PR_PR11(PendingBit value) = 0;
+		virtual void set_PR_PR12(PendingBit value) = 0;
+		virtual void set_PR_PR13(PendingBit value) = 0;
+		virtual void set_PR_PR14(PendingBit value) = 0;
+		virtual void set_PR_PR15(PendingBit value) = 0;
+		virtual void set_PR_PR16(PendingBit value) = 0;
+		virtual void set_PR_PR17(PendingBit value) = 0;
+		virtual void set_PR_PR18(PendingBit value) = 0;
+		virtual void set_PR_PR19(PendingBit value) = 0;
+		virtual void set_PR_PR20(PendingBit value) = 0;
+		virtual void set_PR_PR21(PendingBit value) = 0;
+		virtual void set_PR_PR22(PendingBit value) = 0;
+	};
+
+	class ExtiRegisterMap : public IExtiRegisterMap
+	{
+	public:
+
+		ExtiRegisterMap(ExtiRegisters & registers)
+			: registers(registers) { }
+
+		ExtiRegisterMap(uint32_t addr)
+			: registers(*reinterpret_cast<ExtiRegisters*>(addr)) { }
+
+		// IMR Fields
+		InterruptMask get_IMR_MR0() const { return registers.IMR.Fields.MR0; }
+		InterruptMask get_IMR_MR1() const { return registers.IMR.Fields.MR1; }
+		InterruptMask get_IMR_MR2() const { return registers.IMR.Fields.MR2; }
+		InterruptMask get_IMR_MR3() const { return registers.IMR.Fields.MR3; }
+		InterruptMask get_IMR_MR4() const { return registers.IMR.Fields.MR4; }
+		InterruptMask get_IMR_MR5() const { return registers.IMR.Fields.MR5; }
+		InterruptMask get_IMR_MR6() const { return registers.IMR.Fields.MR6; }
+		InterruptMask get_IMR_MR7() const { return registers.IMR.Fields.MR7; }
+		InterruptMask get_IMR_MR8() const { return registers.IMR.Fields.MR8; }
+		InterruptMask get_IMR_MR9() const { return registers.IMR.Fields.MR9; }
+		InterruptMask get_IMR_MR10() const { return registers.IMR.Fields.MR10; }
+		InterruptMask get_IMR_MR11() const { return registers.IMR.Fields.MR11; }
+		InterruptMask get_IMR_MR12() const { return registers.IMR.Fields.MR12; }
+		InterruptMask get_IMR_MR13() const { return registers.IMR.Fields.MR13; }
+		InterruptMask get_IMR_MR14() const { return registers.IMR.Fields.MR14; }
+		InterruptMask get_IMR_MR15() const { return registers.IMR.Fields.MR15; }
+		InterruptMask get_IMR_MR16() const { return registers.IMR.Fields.MR16; }
+		InterruptMask get_IMR_MR17() const { return registers.IMR.Fields.MR17; }
+		InterruptMask get_IMR_MR18() const { return registers.IMR.Fields.MR18; }
+		InterruptMask get_IMR_MR19() const { return registers.IMR.Fields.MR19; }
+		InterruptMask get_IMR_MR20() const { return registers.IMR.Fields.MR20; }
+		InterruptMask get_IMR_MR21() const { return registers.IMR.Fields.MR21; }
+		InterruptMask get_IMR_MR22() const { return registers.IMR.Fields.MR22; }
+		void set_IMR_MR0(InterruptMask value) { registers.IMR.Fields.MR0 = value; }
+		void set_IMR_MR1(InterruptMask value) { registers.IMR.Fields.MR1 = value; }
+		void set_IMR_MR2(InterruptMask value) { registers.IMR.Fields.MR2 = value; }
+		void set_IMR_MR3(InterruptMask value) { registers.IMR.Fields.MR3 = value; }
+		void set_IMR_MR4(InterruptMask value) { registers.IMR.Fields.MR4 = value; }
+		void set_IMR_MR5(InterruptMask value) { registers.IMR.Fields.MR5 = value; }
+		void set_IMR_MR6(InterruptMask value) { registers.IMR.Fields.MR6 = value; }
+		void set_IMR_MR7(InterruptMask value) { registers.IMR.Fields.MR7 = value; }
+		void set_IMR_MR8(InterruptMask value) { registers.IMR.Fields.MR8 = value; }
+		void set_IMR_MR9(InterruptMask value) { registers.IMR.Fields.MR9 = value; }
+		void set_IMR_MR10(InterruptMask value) { registers.IMR.Fields.MR10 = value; }
+		void set_IMR_MR11(InterruptMask value) { registers.IMR.Fields.MR11 = value; }
+		void set_IMR_MR12(InterruptMask value) { registers.IMR.Fields.MR12 = value; }
+		void set_IMR_MR13(InterruptMask value) { registers.IMR.Fields.MR13 = value; }
+		void set_IMR_MR14(InterruptMask value) { registers.IMR.Fields.MR14 = value; }
+		void set_IMR_MR15(InterruptMask value) { registers.IMR.Fields.MR15 = value; }
+		void set_IMR_MR16(InterruptMask value) { registers.IMR.Fields.MR16 = value; }
+		void set_IMR_MR17(InterruptMask value) { registers.IMR.Fields.MR17 = value; }
+		void set_IMR_MR18(InterruptMask value) { registers.IMR.Fields.MR18 = value; }
+		void set_IMR_MR19(InterruptMask value) { registers.IMR.Fields.MR19 = value; }
+		void set_IMR_MR20(InterruptMask value) { registers.IMR.Fields.MR20 = value; }
+		void set_IMR_MR21(InterruptMask value) { registers.IMR.Fields.MR21 = value; }
+		void set_IMR_MR22(InterruptMask value) { registers.IMR.Fields.MR22 = value; }
+
+		// EMR Fields
+		InterruptMask get_EMR_MR0() const { return registers.EMR.Fields.MR0; }
+		InterruptMask get_EMR_MR1() const { return registers.EMR.Fields.MR1; }
+		InterruptMask get_EMR_MR2() const { return registers.EMR.Fields.MR2; }
+		InterruptMask get_EMR_MR3() const { return registers.EMR.Fields.MR3; }
+		InterruptMask get_EMR_MR4() const { return registers.EMR.Fields.MR4; }
+		InterruptMask get_EMR_MR5() const { return registers.EMR.Fields.MR5; }
+		InterruptMask get_EMR_MR6() const { return registers.EMR.Fields.MR6; }
+		InterruptMask get_EMR_MR7() const { return registers.EMR.Fields.MR7; }
+		InterruptMask get_EMR_MR8() const { return registers.EMR.Fields.MR8; }
+		InterruptMask get_EMR_MR9() const { return registers.EMR.Fields.MR9; }
+		InterruptMask get_EMR_MR10() const { return registers.EMR.Fields.MR10; }
+		InterruptMask get_EMR_MR11() const { return registers.EMR.Fields.MR11; }
+		InterruptMask get_EMR_MR12() const { return registers.EMR.Fields.MR12; }
+		InterruptMask get_EMR_MR13() const { return registers.EMR.Fields.MR13; }
+		InterruptMask get_EMR_MR14() const { return registers.EMR.Fields.MR14; }
+		InterruptMask get_EMR_MR15() const { return registers.EMR.Fields.MR15; }
+		InterruptMask get_EMR_MR16() const { return registers.EMR.Fields.MR16; }
+		InterruptMask get_EMR_MR17() const { return registers.EMR.Fields.MR17; }
+		InterruptMask get_EMR_MR18() const { return registers.EMR.Fields.MR18; }
+		InterruptMask get_EMR_MR19() const { return registers.EMR.Fields.MR19; }
+		InterruptMask get_EMR_MR20() const { return registers.EMR.Fields.MR20; }
+		InterruptMask get_EMR_MR21() const { return registers.EMR.Fields.MR21; }
+		InterruptMask get_EMR_MR22() const { return registers.EMR.Fields.MR22; }
+		void set_EMR_MR0(InterruptMask value) { registers.EMR.Fields.MR0 = value; }
+		void set_EMR_MR1(InterruptMask value) { registers.EMR.Fields.MR1 = value; }
+		void set_EMR_MR2(InterruptMask value) { registers.EMR.Fields.MR2 = value; }
+		void set_EMR_MR3(InterruptMask value) { registers.EMR.Fields.MR3 = value; }
+		void set_EMR_MR4(InterruptMask value) { registers.EMR.Fields.MR4 = value; }
+		void set_EMR_MR5(InterruptMask value) { registers.EMR.Fields.MR5 = value; }
+		void set_EMR_MR6(InterruptMask value) { registers.EMR.Fields.MR6 = value; }
+		void set_EMR_MR7(InterruptMask value) { registers.EMR.Fields.MR7 = value; }
+		void set_EMR_MR8(InterruptMask value) { registers.EMR.Fields.MR8 = value; }
+		void set_EMR_MR9(InterruptMask value) { registers.EMR.Fields.MR9 = value; }
+		void set_EMR_MR10(InterruptMask value) { registers.EMR.Fields.MR10 = value; }
+		void set_EMR_MR11(InterruptMask value) { registers.EMR.Fields.MR11 = value; }
+		void set_EMR_MR12(InterruptMask value) { registers.EMR.Fields.MR12 = value; }
+		void set_EMR_MR13(InterruptMask value) { registers.EMR.Fields.MR13 = value; }
+		void set_EMR_MR14(InterruptMask value) { registers.EMR.Fields.MR14 = value; }
+		void set_EMR_MR15(InterruptMask value) { registers.EMR.Fields.MR15 = value; }
+		void set_EMR_MR16(InterruptMask value) { registers.EMR.Fields.MR16 = value; }
+		void set_EMR_MR17(InterruptMask value) { registers.EMR.Fields.MR17 = value; }
+		void set_EMR_MR18(InterruptMask value) { registers.EMR.Fields.MR18 = value; }
+		void set_EMR_MR19(InterruptMask value) { registers.EMR.Fields.MR19 = value; }
+		void set_EMR_MR20(InterruptMask value) { registers.EMR.Fields.MR20 = value; }
+		void set_EMR_MR21(InterruptMask value) { registers.EMR.Fields.MR21 = value; }
+		void set_EMR_MR22(InterruptMask value) { registers.EMR.Fields.MR22 = value; }
+
+		// RTSR Fields
+		EnableFlag get_RTSR_TR0() const { return registers.RTSR.Fields.TR0; }
+		EnableFlag get_RTSR_TR1() const { return registers.RTSR.Fields.TR1; }
+		EnableFlag get_RTSR_TR2() const { return registers.RTSR.Fields.TR2; }
+		EnableFlag get_RTSR_TR3() const { return registers.RTSR.Fields.TR3; }
+		EnableFlag get_RTSR_TR4() const { return registers.RTSR.Fields.TR4; }
+		EnableFlag get_RTSR_TR5() const { return registers.RTSR.Fields.TR5; }
+		EnableFlag get_RTSR_TR6() const { return registers.RTSR.Fields.TR6; }
+		EnableFlag get_RTSR_TR7() const { return registers.RTSR.Fields.TR7; }
+		EnableFlag get_RTSR_TR8() const { return registers.RTSR.Fields.TR8; }
+		EnableFlag get_RTSR_TR9() const { return registers.RTSR.Fields.TR9; }
+		EnableFlag get_RTSR_TR10() const { return registers.RTSR.Fields.TR10; }
+		EnableFlag get_RTSR_TR11() const { return registers.RTSR.Fields.TR11; }
+		EnableFlag get_RTSR_TR12() const { return registers.RTSR.Fields.TR12; }
+		EnableFlag get_RTSR_TR13() const { return registers.RTSR.Fields.TR13; }
+		EnableFlag get_RTSR_TR14() const { return registers.RTSR.Fields.TR14; }
+		EnableFlag get_RTSR_TR15() const { return registers.RTSR.Fields.TR15; }
+		EnableFlag get_RTSR_TR16() const { return registers.RTSR.Fields.TR16; }
+		EnableFlag get_RTSR_TR17() const { return registers.RTSR.Fields.TR17; }
+		EnableFlag get_RTSR_TR18() const { return registers.RTSR.Fields.TR18; }
+		EnableFlag get_RTSR_TR19() const { return registers.RTSR.Fields.TR19; }
+		EnableFlag get_RTSR_TR20() const { return registers.RTSR.Fields.TR20; }
+		EnableFlag get_RTSR_TR21() const { return registers.RTSR.Fields.TR21; }
+		EnableFlag get_RTSR_TR22() const { return registers.RTSR.Fields.TR22; }
+		void set_RTSR_TR0(EnableFlag value) { registers.RTSR.Fields.TR0 = value; }
+		void set_RTSR_TR1(EnableFlag value) { registers.RTSR.Fields.TR1 = value; }
+		void set_RTSR_TR2(EnableFlag value) { registers.RTSR.Fields.TR2 = value; }
+		void set_RTSR_TR3(EnableFlag value) { registers.RTSR.Fields.TR3 = value; }
+		void set_RTSR_TR4(EnableFlag value) { registers.RTSR.Fields.TR4 = value; }
+		void set_RTSR_TR5(EnableFlag value) { registers.RTSR.Fields.TR5 = value; }
+		void set_RTSR_TR6(EnableFlag value) { registers.RTSR.Fields.TR6 = value; }
+		void set_RTSR_TR7(EnableFlag value) { registers.RTSR.Fields.TR7 = value; }
+		void set_RTSR_TR8(EnableFlag value) { registers.RTSR.Fields.TR8 = value; }
+		void set_RTSR_TR9(EnableFlag value) { registers.RTSR.Fields.TR9 = value; }
+		void set_RTSR_TR10(EnableFlag value) { registers.RTSR.Fields.TR10 = value; }
+		void set_RTSR_TR11(EnableFlag value) { registers.RTSR.Fields.TR11 = value; }
+		void set_RTSR_TR12(EnableFlag value) { registers.RTSR.Fields.TR12 = value; }
+		void set_RTSR_TR13(EnableFlag value) { registers.RTSR.Fields.TR13 = value; }
+		void set_RTSR_TR14(EnableFlag value) { registers.RTSR.Fields.TR14 = value; }
+		void set_RTSR_TR15(EnableFlag value) { registers.RTSR.Fields.TR15 = value; }
+		void set_RTSR_TR16(EnableFlag value) { registers.RTSR.Fields.TR16 = value; }
+		void set_RTSR_TR17(EnableFlag value) { registers.RTSR.Fields.TR17 = value; }
+		void set_RTSR_TR18(EnableFlag value) { registers.RTSR.Fields.TR18 = value; }
+		void set_RTSR_TR19(EnableFlag value) { registers.RTSR.Fields.TR19 = value; }
+		void set_RTSR_TR20(EnableFlag value) { registers.RTSR.Fields.TR20 = value; }
+		void set_RTSR_TR21(EnableFlag value) { registers.RTSR.Fields.TR21 = value; }
+		void set_RTSR_TR22(EnableFlag value) { registers.RTSR.Fields.TR22 = value; }
+
+		// FTSR Fields
+		EnableFlag get_FTSR_TR0() const { return registers.FTSR.Fields.TR0; }
+		EnableFlag get_FTSR_TR1() const { return registers.FTSR.Fields.TR1; }
+		EnableFlag get_FTSR_TR2() const { return registers.FTSR.Fields.TR2; }
+		EnableFlag get_FTSR_TR3() const { return registers.FTSR.Fields.TR3; }
+		EnableFlag get_FTSR_TR4() const { return registers.FTSR.Fields.TR4; }
+		EnableFlag get_FTSR_TR5() const { return registers.FTSR.Fields.TR5; }
+		EnableFlag get_FTSR_TR6() const { return registers.FTSR.Fields.TR6; }
+		EnableFlag get_FTSR_TR7() const { return registers.FTSR.Fields.TR7; }
+		EnableFlag get_FTSR_TR8() const { return registers.FTSR.Fields.TR8; }
+		EnableFlag get_FTSR_TR9() const { return registers.FTSR.Fields.TR9; }
+		EnableFlag get_FTSR_TR10() const { return registers.FTSR.Fields.TR10; }
+		EnableFlag get_FTSR_TR11() const { return registers.FTSR.Fields.TR11; }
+		EnableFlag get_FTSR_TR12() const { return registers.FTSR.Fields.TR12; }
+		EnableFlag get_FTSR_TR13() const { return registers.FTSR.Fields.TR13; }
+		EnableFlag get_FTSR_TR14() const { return registers.FTSR.Fields.TR14; }
+		EnableFlag get_FTSR_TR15() const { return registers.FTSR.Fields.TR15; }
+		EnableFlag get_FTSR_TR16() const { return registers.FTSR.Fields.TR16; }
+		EnableFlag get_FTSR_TR17() const { return registers.FTSR.Fields.TR17; }
+		EnableFlag get_FTSR_TR18() const { return registers.FTSR.Fields.TR18; }
+		EnableFlag get_FTSR_TR19() const { return registers.FTSR.Fields.TR19; }
+		EnableFlag get_FTSR_TR20() const { return registers.FTSR.Fields.TR20; }
+		EnableFlag get_FTSR_TR21() const { return registers.FTSR.Fields.TR21; }
+		EnableFlag get_FTSR_TR22() const { return registers.FTSR.Fields.TR22; }
+		void set_FTSR_TR0(EnableFlag value) { registers.FTSR.Fields.TR0 = value; }
+		void set_FTSR_TR1(EnableFlag value) { registers.FTSR.Fields.TR1 = value; }
+		void set_FTSR_TR2(EnableFlag value) { registers.FTSR.Fields.TR2 = value; }
+		void set_FTSR_TR3(EnableFlag value) { registers.FTSR.Fields.TR3 = value; }
+		void set_FTSR_TR4(EnableFlag value) { registers.FTSR.Fields.TR4 = value; }
+		void set_FTSR_TR5(EnableFlag value) { registers.FTSR.Fields.TR5 = value; }
+		void set_FTSR_TR6(EnableFlag value) { registers.FTSR.Fields.TR6 = value; }
+		void set_FTSR_TR7(EnableFlag value) { registers.FTSR.Fields.TR7 = value; }
+		void set_FTSR_TR8(EnableFlag value) { registers.FTSR.Fields.TR8 = value; }
+		void set_FTSR_TR9(EnableFlag value) { registers.FTSR.Fields.TR9 = value; }
+		void set_FTSR_TR10(EnableFlag value) { registers.FTSR.Fields.TR10 = value; }
+		void set_FTSR_TR11(EnableFlag value) { registers.FTSR.Fields.TR11 = value; }
+		void set_FTSR_TR12(EnableFlag value) { registers.FTSR.Fields.TR12 = value; }
+		void set_FTSR_TR13(EnableFlag value) { registers.FTSR.Fields.TR13 = value; }
+		void set_FTSR_TR14(EnableFlag value) { registers.FTSR.Fields.TR14 = value; }
+		void set_FTSR_TR15(EnableFlag value) { registers.FTSR.Fields.TR15 = value; }
+		void set_FTSR_TR16(EnableFlag value) { registers.FTSR.Fields.TR16 = value; }
+		void set_FTSR_TR17(EnableFlag value) { registers.FTSR.Fields.TR17 = value; }
+		void set_FTSR_TR18(EnableFlag value) { registers.FTSR.Fields.TR18 = value; }
+		void set_FTSR_TR19(EnableFlag value) { registers.FTSR.Fields.TR19 = value; }
+		void set_FTSR_TR20(EnableFlag value) { registers.FTSR.Fields.TR20 = value; }
+		void set_FTSR_TR21(EnableFlag value) { registers.FTSR.Fields.TR21 = value; }
+		void set_FTSR_TR22(EnableFlag value) { registers.FTSR.Fields.TR22 = value; }
+
+		// SWIER Fields
+		SoftwareInterrupt get_SWIER_SWIER0() const { return registers.SWIER.Fields.SWIER0; }
+		SoftwareInterrupt get_SWIER_SWIER1() const { return registers.SWIER.Fields.SWIER1; }
+		SoftwareInterrupt get_SWIER_SWIER2() const { return registers.SWIER.Fields.SWIER2; }
+		SoftwareInterrupt get_SWIER_SWIER3() const { return registers.SWIER.Fields.SWIER3; }
+		SoftwareInterrupt get_SWIER_SWIER4() const { return registers.SWIER.Fields.SWIER4; }
+		SoftwareInterrupt get_SWIER_SWIER5() const { return registers.SWIER.Fields.SWIER5; }
+		SoftwareInterrupt get_SWIER_SWIER6() const { return registers.SWIER.Fields.SWIER6; }
+		SoftwareInterrupt get_SWIER_SWIER7() const { return registers.SWIER.Fields.SWIER7; }
+		SoftwareInterrupt get_SWIER_SWIER8() const { return registers.SWIER.Fields.SWIER8; }
+		SoftwareInterrupt get_SWIER_SWIER9() const { return registers.SWIER.Fields.SWIER9; }
+		SoftwareInterrupt get_SWIER_SWIER10() const { return registers.SWIER.Fields.SWIER10; }
+		SoftwareInterrupt get_SWIER_SWIER11() const { return registers.SWIER.Fields.SWIER11; }
+		SoftwareInterrupt get_SWIER_SWIER12() const { return registers.SWIER.Fields.SWIER12; }
+		SoftwareInterrupt get_SWIER_SWIER13() const { return registers.SWIER.Fields.SWIER13; }
+		SoftwareInterrupt get_SWIER_SWIER14() const { return registers.SWIER.Fields.SWIER14; }
+		SoftwareInterrupt get_SWIER_SWIER15() const { return registers.SWIER.Fields.SWIER15; }
+		SoftwareInterrupt get_SWIER_SWIER16() const { return registers.SWIER.Fields.SWIER16; }
+		SoftwareInterrupt get_SWIER_SWIER17() const { return registers.SWIER.Fields.SWIER17; }
+		SoftwareInterrupt get_SWIER_SWIER18() const { return registers.SWIER.Fields.SWIER18; }
+		SoftwareInterrupt get_SWIER_SWIER19() const { return registers.SWIER.Fields.SWIER19; }
+		SoftwareInterrupt get_SWIER_SWIER20() const { return registers.SWIER.Fields.SWIER20; }
+		SoftwareInterrupt get_SWIER_SWIER21() const { return registers.SWIER.Fields.SWIER21; }
+		SoftwareInterrupt get_SWIER_SWIER22() const { return registers.SWIER.Fields.SWIER22; }
+		void set_SWIER_SWIER0(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER0 = value; }
+		void set_SWIER_SWIER1(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER1 = value; }
+		void set_SWIER_SWIER2(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER2 = value; }
+		void set_SWIER_SWIER3(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER3 = value; }
+		void set_SWIER_SWIER4(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER4 = value; }
+		void set_SWIER_SWIER5(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER5 = value; }
+		void set_SWIER_SWIER6(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER6 = value; }
+		void set_SWIER_SWIER7(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER7 = value; }
+		void set_SWIER_SWIER8(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER8 = value; }
+		void set_SWIER_SWIER9(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER9 = value; }
+		void set_SWIER_SWIER10(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER10 = value; }
+		void set_SWIER_SWIER11(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER11 = value; }
+		void set_SWIER_SWIER12(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER12 = value; }
+		void set_SWIER_SWIER13(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER13 = value; }
+		void set_SWIER_SWIER14(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER14 = value; }
+		void set_SWIER_SWIER15(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER15 = value; }
+		void set_SWIER_SWIER16(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER16 = value; }
+		void set_SWIER_SWIER17(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER17 = value; }
+		void set_SWIER_SWIER18(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER18 = value; }
+		void set_SWIER_SWIER19(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER19 = value; }
+		void set_SWIER_SWIER20(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER20 = value; }
+		void set_SWIER_SWIER21(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER21 = value; }
+		void set_SWIER_SWIER22(SoftwareInterrupt value) { registers.SWIER.Fields.SWIER22 = value; }
+
+		// PR Fields
+		PendingBit get_PR_PR0() const { return registers.PR.Fields.PR0; }
+		PendingBit get_PR_PR1() const { return registers.PR.Fields.PR1; }
+		PendingBit get_PR_PR2() const { return registers.PR.Fields.PR2; }
+		PendingBit get_PR_PR3() const { return registers.PR.Fields.PR3; }
+		PendingBit get_PR_PR4() const { return registers.PR.Fields.PR4; }
+		PendingBit get_PR_PR5() const { return registers.PR.Fields.PR5; }
+		PendingBit get_PR_PR6() const { return registers.PR.Fields.PR6; }
+		PendingBit get_PR_PR7() const { return registers.PR.Fields.PR7; }
+		PendingBit get_PR_PR8() const { return registers.PR.Fields.PR8; }
+		PendingBit get_PR_PR9() const { return registers.PR.Fields.PR9; }
+		PendingBit get_PR_PR10() const { return registers.PR.Fields.PR10; }
+		PendingBit get_PR_PR11() const { return registers.PR.Fields.PR11; }
+		PendingBit get_PR_PR12() const { return registers.PR.Fields.PR12; }
+		PendingBit get_PR_PR13() const { return registers.PR.Fields.PR13; }
+		PendingBit get_PR_PR14() const { return registers.PR.Fields.PR14; }
+		PendingBit get_PR_PR15() const { return registers.PR.Fields.PR15; }
+		PendingBit get_PR_PR16() const { return registers.PR.Fields.PR16; }
+		PendingBit get_PR_PR17() const { return registers.PR.Fields.PR17; }
+		PendingBit get_PR_PR18() const { return registers.PR.Fields.PR18; }
+		PendingBit get_PR_PR19() const { return registers.PR.Fields.PR19; }
+		PendingBit get_PR_PR20() const { return registers.PR.Fields.PR20; }
+		PendingBit get_PR_PR21() const { return registers.PR.Fields.PR21; }
+		PendingBit get_PR_PR22() const { return registers.PR.Fields.PR22; }
+		void set_PR_PR0(PendingBit value) { registers.PR.Fields.PR0 = value; }
+		void set_PR_PR1(PendingBit value) { registers.PR.Fields.PR1 = value; }
+		void set_PR_PR2(PendingBit value) { registers.PR.Fields.PR2 = value; }
+		void set_PR_PR3(PendingBit value) { registers.PR.Fields.PR3 = value; }
+		void set_PR_PR4(PendingBit value) { registers.PR.Fields.PR4 = value; }
+		void set_PR_PR5(PendingBit value) { registers.PR.Fields.PR5 = value; }
+		void set_PR_PR6(PendingBit value) { registers.PR.Fields.PR6 = value; }
+		void set_PR_PR7(PendingBit value) { registers.PR.Fields.PR7 = value; }
+		void set_PR_PR8(PendingBit value) { registers.PR.Fields.PR8 = value; }
+		void set_PR_PR9(PendingBit value) { registers.PR.Fields.PR9 = value; }
+		void set_PR_PR10(PendingBit value) { registers.PR.Fields.PR10 = value; }
+		void set_PR_PR11(PendingBit value) { registers.PR.Fields.PR11 = value; }
+		void set_PR_PR12(PendingBit value) { registers.PR.Fields.PR12 = value; }
+		void set_PR_PR13(PendingBit value) { registers.PR.Fields.PR13 = value; }
+		void set_PR_PR14(PendingBit value) { registers.PR.Fields.PR14 = value; }
+		void set_PR_PR15(PendingBit value) { registers.PR.Fields.PR15 = value; }
+		void set_PR_PR16(PendingBit value) { registers.PR.Fields.PR16 = value; }
+		void set_PR_PR17(PendingBit value) { registers.PR.Fields.PR17 = value; }
+		void set_PR_PR18(PendingBit value) { registers.PR.Fields.PR18 = value; }
+		void set_PR_PR19(PendingBit value) { registers.PR.Fields.PR19 = value; }
+		void set_PR_PR20(PendingBit value) { registers.PR.Fields.PR20 = value; }
+		void set_PR_PR21(PendingBit value) { registers.PR.Fields.PR21 = value; }
+		void set_PR_PR22(PendingBit value) { registers.PR.Fields.PR22 = value; }
+
+	private:
+
+		ExtiRegisters & registers;
 	};
 }
 #endif // EXTI_REGISTER_MAP_HPP_

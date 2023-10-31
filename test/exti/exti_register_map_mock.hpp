@@ -5,7 +5,7 @@
 using namespace stm32::exti;
 using namespace testing;
 
-class MockExtiRegisterMap : public ExtiRegisterMap
+class MockExtiRegisterMap : public IExtiRegisterMap
 {
 public:
 
