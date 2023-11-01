@@ -37,11 +37,11 @@ namespace stm32::rcc
 
 		void SetAHB1PeripheralClockEnabled(Ahb1Peripheral peripheral, bool isEnabled);
 	
-		RccPeripheral(uint32_t addr) : device(*reinterpret_cast<RccRegisterMap*>(addr)) { }
+		RccPeripheral(IRccRegisterMap & device) : device(device) { }
 
 	private:
 
-		RccRegisterMap & device;
+		IRccRegisterMap & device;
 	};
 }
 #endif

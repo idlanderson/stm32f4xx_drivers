@@ -5,7 +5,8 @@
 
 namespace stm32::rcc
 {
-    RccPeripheral RCC(RCC_BASEADDR);
+    RccRegisterMap rccRegMap(RCC_BASEADDR);
+    RccPeripheral RCC(rccRegMap);
 }
 
 #endif // RCC_DEF_HPP_
