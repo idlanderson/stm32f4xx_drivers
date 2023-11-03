@@ -11,6 +11,10 @@ namespace stm32::exti
         ExtiPeripheral(IExtiRegisterMap & device) : device(device) { }
         void SetInterruptMask(uint8_t line, InterruptMask mask);
         void SetEventMask(uint8_t line, InterruptMask mask);
+        void SetRisingTriggerEnabled(uint8_t line, bool isEnabled);
+        void SetFallingTriggerEnabled(uint8_t line, bool isEnabled);
+        void GenerateInterruptRequest(uint8_t line);
+        void ClearPendingBit(uint8_t line);
     private:
         IExtiRegisterMap & device;
     };
