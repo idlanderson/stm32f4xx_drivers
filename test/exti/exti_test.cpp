@@ -2,15 +2,15 @@
 #include "exti.hpp"
 #include <cstring>
 
-class ExtiPeripheralTestWithMock : public ::testing::Test
-{
-public:
-    ExtiPeripheralTestWithMock() : exti(registerMap) { }
-protected:
-    MockExtiRegisterMap registerMap;
-    ExtiPeripheral exti;
-};
-
+// This test fixture uses a "real" copy of ExtiRegisterMap and ExtiRegisters.
+// ExtiRegisters registers:
+//      The structure which, on the microcontroller, points to the actual addresses of the memory-mapped registers of the EXTI peripheral.
+//      For the unit tests, this struct will just be a RAM-copy, but it will allow the unit tests to validate that the registers have been
+//      written to the correct values. This will not completely confirm that it will work correctly on the actual hardware, but at least
+//      it is possible to confirm that the correct bits are written for particular fields.
+// ExtiRegisterMap registerMap:
+//      This is a "wrapper" around ExtiRegisters and provides accessors to read and write the register fields. This can be mocked if needed.
+//      In this text fixture, this class is not mocked.
 class ExtiPeripheralTest : public ::testing::Test
 {
 public:
@@ -29,6 +29,17 @@ protected:
 
     ExtiRegisters registers = {};
     ExtiRegisterMap registerMap;
+    ExtiPeripheral exti;
+};
+
+// This test fixture uses a "mock" version of ExtiRegisterMap which GMock can use to validate that the 
+// correct get and set accessors were called at the appropriate times.
+class ExtiPeripheralTestWithMock : public ::testing::Test
+{
+public:
+    ExtiPeripheralTestWithMock() : exti(registerMap) { }
+protected:
+    MockExtiRegisterMap registerMap;
     ExtiPeripheral exti;
 };
 
@@ -140,4 +151,46 @@ TEST_F(ExtiPeripheralTest, SetFallingTriggerEnabled)
     exti.SetFallingTriggerEnabled(23U, true);
     
     EXPECT_EQ(0x00000000U, registers.FTSR.Value);
+}
+
+TEST_F(ExtiPeripheralTest, GenerateInterruptRequest)
+{
+    uint32_t expected = 0U;
+
+    for (uint8_t line = 0U; line <= 22U; line++)
+    {
+        registers.SWIER.Value = 0x00000000U;
+        expected = (1U << line);
+
+        exti.GenerateInterruptRequest(line);
+
+        EXPECT_EQ(expected, registers.SWIER.Value);
+    }
+
+    registers.SWIER.Value = 0x00000000U;
+
+    exti.GenerateInterruptRequest(23U);
+    
+    EXPECT_EQ(0x00000000U, registers.SWIER.Value);
+}
+
+TEST_F(ExtiPeripheralTest, ClearPendingBit)
+{
+    uint32_t expected = 0U;
+
+    for (uint8_t line = 0U; line <= 22U; line++)
+    {
+        registers.PR.Value = 0x00000000U;
+        expected = (1U << line);
+
+        exti.ClearPendingBit(line);
+
+        EXPECT_EQ(expected, registers.PR.Value);
+    }
+
+    registers.PR.Value = 0x00000000U;
+
+    exti.ClearPendingBit(23U);
+    
+    EXPECT_EQ(0x00000000U, registers.PR.Value);
 }

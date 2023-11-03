@@ -59,6 +59,6 @@ namespace stm32::exti
         // Writing 1 to the pending bit will clear it.
         pr |= 0x1U << line;
 
-        device.set_FTSR_TR(pr);
+        device.set_PR_PR(pr);
     }
 }
