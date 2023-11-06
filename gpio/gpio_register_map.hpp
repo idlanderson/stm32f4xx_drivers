@@ -253,306 +253,8 @@ namespace stm32::gpio
 		volatile uint32_t Value;
 	};
 
-	class GpioRegisterMap
+	struct GpioRegisters
 	{
-	public:
-
-		// MODER Fields
-		Mode get_MODER_MODER0() const { return MODER.Fields.MODER0; }
-		Mode get_MODER_MODER1() const { return MODER.Fields.MODER1; }
-		Mode get_MODER_MODER2() const { return MODER.Fields.MODER2; }
-		Mode get_MODER_MODER3() const { return MODER.Fields.MODER3; }
-		Mode get_MODER_MODER4() const { return MODER.Fields.MODER4; }
-		Mode get_MODER_MODER5() const { return MODER.Fields.MODER5; }
-		Mode get_MODER_MODER6() const { return MODER.Fields.MODER6; }
-		Mode get_MODER_MODER7() const { return MODER.Fields.MODER7; }
-		Mode get_MODER_MODER8() const { return MODER.Fields.MODER8; }
-		Mode get_MODER_MODER9() const { return MODER.Fields.MODER9; }
-		Mode get_MODER_MODER10() const { return MODER.Fields.MODER10; }
-		Mode get_MODER_MODER11() const { return MODER.Fields.MODER11; }
-		Mode get_MODER_MODER12() const { return MODER.Fields.MODER12; }
-		Mode get_MODER_MODER13() const { return MODER.Fields.MODER13; }
-		Mode get_MODER_MODER14() const { return MODER.Fields.MODER14; }
-		Mode get_MODER_MODER15() const { return MODER.Fields.MODER15; }
-		void set_MODER_MODER0(Mode value) { MODER.Fields.MODER0 = value; }
-		void set_MODER_MODER1(Mode value) { MODER.Fields.MODER1 = value; }
-		void set_MODER_MODER2(Mode value) { MODER.Fields.MODER2 = value; }
-		void set_MODER_MODER3(Mode value) { MODER.Fields.MODER3 = value; }
-		void set_MODER_MODER4(Mode value) { MODER.Fields.MODER4 = value; }
-		void set_MODER_MODER5(Mode value) { MODER.Fields.MODER5 = value; }
-		void set_MODER_MODER6(Mode value) { MODER.Fields.MODER6 = value; }
-		void set_MODER_MODER7(Mode value) { MODER.Fields.MODER7 = value; }
-		void set_MODER_MODER8(Mode value) { MODER.Fields.MODER8 = value; }
-		void set_MODER_MODER9(Mode value) { MODER.Fields.MODER9 = value; }
-		void set_MODER_MODER10(Mode value) { MODER.Fields.MODER10 = value; }
-		void set_MODER_MODER11(Mode value) { MODER.Fields.MODER11 = value; }
-		void set_MODER_MODER12(Mode value) { MODER.Fields.MODER12 = value; }
-		void set_MODER_MODER13(Mode value) { MODER.Fields.MODER13 = value; }
-		void set_MODER_MODER14(Mode value) { MODER.Fields.MODER14 = value; }
-		void set_MODER_MODER15(Mode value) { MODER.Fields.MODER15 = value; }
-
-		// OTYPER Fields
-		OutputType get_OTYPER_OT0() const { return OTYPER.Fields.OT0; }
-		OutputType get_OTYPER_OT1() const { return OTYPER.Fields.OT1; }
-		OutputType get_OTYPER_OT2() const { return OTYPER.Fields.OT2; }
-		OutputType get_OTYPER_OT3() const { return OTYPER.Fields.OT3; }
-		OutputType get_OTYPER_OT4() const { return OTYPER.Fields.OT4; }
-		OutputType get_OTYPER_OT5() const { return OTYPER.Fields.OT5; }
-		OutputType get_OTYPER_OT6() const { return OTYPER.Fields.OT6; }
-		OutputType get_OTYPER_OT7() const { return OTYPER.Fields.OT7; }
-		OutputType get_OTYPER_OT8() const { return OTYPER.Fields.OT8; }
-		OutputType get_OTYPER_OT9() const { return OTYPER.Fields.OT9; }
-		OutputType get_OTYPER_OT10() const { return OTYPER.Fields.OT10; }
-		OutputType get_OTYPER_OT11() const { return OTYPER.Fields.OT11; }
-		OutputType get_OTYPER_OT12() const { return OTYPER.Fields.OT12; }
-		OutputType get_OTYPER_OT13() const { return OTYPER.Fields.OT13; }
-		OutputType get_OTYPER_OT14() const { return OTYPER.Fields.OT14; }
-		OutputType get_OTYPER_OT15() const { return OTYPER.Fields.OT15; }
-		void set_OTYPER_OT0(OutputType value) { OTYPER.Fields.OT0 = value; }
-		void set_OTYPER_OT1(OutputType value) { OTYPER.Fields.OT1 = value; }
-		void set_OTYPER_OT2(OutputType value) { OTYPER.Fields.OT2 = value; }
-		void set_OTYPER_OT3(OutputType value) { OTYPER.Fields.OT3 = value; }
-		void set_OTYPER_OT4(OutputType value) { OTYPER.Fields.OT4 = value; }
-		void set_OTYPER_OT5(OutputType value) { OTYPER.Fields.OT5 = value; }
-		void set_OTYPER_OT6(OutputType value) { OTYPER.Fields.OT6 = value; }
-		void set_OTYPER_OT7(OutputType value) { OTYPER.Fields.OT7 = value; }
-		void set_OTYPER_OT8(OutputType value) { OTYPER.Fields.OT8 = value; }
-		void set_OTYPER_OT9(OutputType value) { OTYPER.Fields.OT9 = value; }
-		void set_OTYPER_OT10(OutputType value) { OTYPER.Fields.OT10 = value; }
-		void set_OTYPER_OT11(OutputType value) { OTYPER.Fields.OT11 = value; }
-		void set_OTYPER_OT12(OutputType value) { OTYPER.Fields.OT12 = value; }
-		void set_OTYPER_OT13(OutputType value) { OTYPER.Fields.OT13 = value; }
-		void set_OTYPER_OT14(OutputType value) { OTYPER.Fields.OT14 = value; }
-		void set_OTYPER_OT15(OutputType value) { OTYPER.Fields.OT15 = value; }
-
-		// OSPEEDR Fields
-		Speed get_OSPEEDR_OSPEEDR0() const { return OSPEEDR.Fields.OSPEEDR0; }
-		Speed get_OSPEEDR_OSPEEDR1() const { return OSPEEDR.Fields.OSPEEDR1; }
-		Speed get_OSPEEDR_OSPEEDR2() const { return OSPEEDR.Fields.OSPEEDR2; }
-		Speed get_OSPEEDR_OSPEEDR3() const { return OSPEEDR.Fields.OSPEEDR3; }
-		Speed get_OSPEEDR_OSPEEDR4() const { return OSPEEDR.Fields.OSPEEDR4; }
-		Speed get_OSPEEDR_OSPEEDR5() const { return OSPEEDR.Fields.OSPEEDR5; }
-		Speed get_OSPEEDR_OSPEEDR6() const { return OSPEEDR.Fields.OSPEEDR6; }
-		Speed get_OSPEEDR_OSPEEDR7() const { return OSPEEDR.Fields.OSPEEDR7; }
-		Speed get_OSPEEDR_OSPEEDR8() const { return OSPEEDR.Fields.OSPEEDR8; }
-		Speed get_OSPEEDR_OSPEEDR9() const { return OSPEEDR.Fields.OSPEEDR9; }
-		Speed get_OSPEEDR_OSPEEDR10() const { return OSPEEDR.Fields.OSPEEDR10; }
-		Speed get_OSPEEDR_OSPEEDR11() const { return OSPEEDR.Fields.OSPEEDR11; }
-		Speed get_OSPEEDR_OSPEEDR12() const { return OSPEEDR.Fields.OSPEEDR12; }
-		Speed get_OSPEEDR_OSPEEDR13() const { return OSPEEDR.Fields.OSPEEDR13; }
-		Speed get_OSPEEDR_OSPEEDR14() const { return OSPEEDR.Fields.OSPEEDR14; }
-		Speed get_OSPEEDR_OSPEEDR15() const { return OSPEEDR.Fields.OSPEEDR15; }
-		void set_OSPEEDR_OSPEEDR0(Speed value) { OSPEEDR.Fields.OSPEEDR0 = value; }
-		void set_OSPEEDR_OSPEEDR1(Speed value) { OSPEEDR.Fields.OSPEEDR1 = value; }
-		void set_OSPEEDR_OSPEEDR2(Speed value) { OSPEEDR.Fields.OSPEEDR2 = value; }
-		void set_OSPEEDR_OSPEEDR3(Speed value) { OSPEEDR.Fields.OSPEEDR3 = value; }
-		void set_OSPEEDR_OSPEEDR4(Speed value) { OSPEEDR.Fields.OSPEEDR4 = value; }
-		void set_OSPEEDR_OSPEEDR5(Speed value) { OSPEEDR.Fields.OSPEEDR5 = value; }
-		void set_OSPEEDR_OSPEEDR6(Speed value) { OSPEEDR.Fields.OSPEEDR6 = value; }
-		void set_OSPEEDR_OSPEEDR7(Speed value) { OSPEEDR.Fields.OSPEEDR7 = value; }
-		void set_OSPEEDR_OSPEEDR8(Speed value) { OSPEEDR.Fields.OSPEEDR8 = value; }
-		void set_OSPEEDR_OSPEEDR9(Speed value) { OSPEEDR.Fields.OSPEEDR9 = value; }
-		void set_OSPEEDR_OSPEEDR10(Speed value) { OSPEEDR.Fields.OSPEEDR10 = value; }
-		void set_OSPEEDR_OSPEEDR11(Speed value) { OSPEEDR.Fields.OSPEEDR11 = value; }
-		void set_OSPEEDR_OSPEEDR12(Speed value) { OSPEEDR.Fields.OSPEEDR12 = value; }
-		void set_OSPEEDR_OSPEEDR13(Speed value) { OSPEEDR.Fields.OSPEEDR13 = value; }
-		void set_OSPEEDR_OSPEEDR14(Speed value) { OSPEEDR.Fields.OSPEEDR14 = value; }
-		void set_OSPEEDR_OSPEEDR15(Speed value) { OSPEEDR.Fields.OSPEEDR15 = value; }
-
-		// PUPDR Fields
-		PullUpPullDown get_PUPDR_PUPDR0() const { return PUPDR.Fields.PUPDR0; }
-		PullUpPullDown get_PUPDR_PUPDR1() const { return PUPDR.Fields.PUPDR1; }
-		PullUpPullDown get_PUPDR_PUPDR2() const { return PUPDR.Fields.PUPDR2; }
-		PullUpPullDown get_PUPDR_PUPDR3() const { return PUPDR.Fields.PUPDR3; }
-		PullUpPullDown get_PUPDR_PUPDR4() const { return PUPDR.Fields.PUPDR4; }
-		PullUpPullDown get_PUPDR_PUPDR5() const { return PUPDR.Fields.PUPDR5; }
-		PullUpPullDown get_PUPDR_PUPDR6() const { return PUPDR.Fields.PUPDR6; }
-		PullUpPullDown get_PUPDR_PUPDR7() const { return PUPDR.Fields.PUPDR7; }
-		PullUpPullDown get_PUPDR_PUPDR8() const { return PUPDR.Fields.PUPDR8; }
-		PullUpPullDown get_PUPDR_PUPDR9() const { return PUPDR.Fields.PUPDR9; }
-		PullUpPullDown get_PUPDR_PUPDR10() const { return PUPDR.Fields.PUPDR10; }
-		PullUpPullDown get_PUPDR_PUPDR11() const { return PUPDR.Fields.PUPDR11; }
-		PullUpPullDown get_PUPDR_PUPDR12() const { return PUPDR.Fields.PUPDR12; }
-		PullUpPullDown get_PUPDR_PUPDR13() const { return PUPDR.Fields.PUPDR13; }
-		PullUpPullDown get_PUPDR_PUPDR14() const { return PUPDR.Fields.PUPDR14; }
-		PullUpPullDown get_PUPDR_PUPDR15() const { return PUPDR.Fields.PUPDR15; }
-		void set_PUPDR_PUPDR0(PullUpPullDown value) { PUPDR.Fields.PUPDR0 = value; }
-		void set_PUPDR_PUPDR1(PullUpPullDown value) { PUPDR.Fields.PUPDR1 = value; }
-		void set_PUPDR_PUPDR2(PullUpPullDown value) { PUPDR.Fields.PUPDR2 = value; }
-		void set_PUPDR_PUPDR3(PullUpPullDown value) { PUPDR.Fields.PUPDR3 = value; }
-		void set_PUPDR_PUPDR4(PullUpPullDown value) { PUPDR.Fields.PUPDR4 = value; }
-		void set_PUPDR_PUPDR5(PullUpPullDown value) { PUPDR.Fields.PUPDR5 = value; }
-		void set_PUPDR_PUPDR6(PullUpPullDown value) { PUPDR.Fields.PUPDR6 = value; }
-		void set_PUPDR_PUPDR7(PullUpPullDown value) { PUPDR.Fields.PUPDR7 = value; }
-		void set_PUPDR_PUPDR8(PullUpPullDown value) { PUPDR.Fields.PUPDR8 = value; }
-		void set_PUPDR_PUPDR9(PullUpPullDown value) { PUPDR.Fields.PUPDR9 = value; }
-		void set_PUPDR_PUPDR10(PullUpPullDown value) { PUPDR.Fields.PUPDR10 = value; }
-		void set_PUPDR_PUPDR11(PullUpPullDown value) { PUPDR.Fields.PUPDR11 = value; }
-		void set_PUPDR_PUPDR12(PullUpPullDown value) { PUPDR.Fields.PUPDR12 = value; }
-		void set_PUPDR_PUPDR13(PullUpPullDown value) { PUPDR.Fields.PUPDR13 = value; }
-		void set_PUPDR_PUPDR14(PullUpPullDown value) { PUPDR.Fields.PUPDR14 = value; }
-		void set_PUPDR_PUPDR15(PullUpPullDown value) { PUPDR.Fields.PUPDR15 = value; }
-
-		// IDR Fields
-		uint32_t get_IDR_IDR0() const { return IDR.Fields.IDR0; }
-		uint32_t get_IDR_IDR1() const { return IDR.Fields.IDR1; }
-		uint32_t get_IDR_IDR2() const { return IDR.Fields.IDR2; }
-		uint32_t get_IDR_IDR3() const { return IDR.Fields.IDR3; }
-		uint32_t get_IDR_IDR4() const { return IDR.Fields.IDR4; }
-		uint32_t get_IDR_IDR5() const { return IDR.Fields.IDR5; }
-		uint32_t get_IDR_IDR6() const { return IDR.Fields.IDR6; }
-		uint32_t get_IDR_IDR7() const { return IDR.Fields.IDR7; }
-		uint32_t get_IDR_IDR8() const { return IDR.Fields.IDR8; }
-		uint32_t get_IDR_IDR9() const { return IDR.Fields.IDR9; }
-		uint32_t get_IDR_IDR10() const { return IDR.Fields.IDR10; }
-		uint32_t get_IDR_IDR11() const { return IDR.Fields.IDR11; }
-		uint32_t get_IDR_IDR12() const { return IDR.Fields.IDR12; }
-		uint32_t get_IDR_IDR13() const { return IDR.Fields.IDR13; }
-		uint32_t get_IDR_IDR14() const { return IDR.Fields.IDR14; }
-		uint32_t get_IDR_IDR15() const { return IDR.Fields.IDR15; }
-
-		// ODR Fields
-		uint32_t get_ODR_ODR0() const { return ODR.Fields.ODR0; }
-		uint32_t get_ODR_ODR1() const { return ODR.Fields.ODR1; }
-		uint32_t get_ODR_ODR2() const { return ODR.Fields.ODR2; }
-		uint32_t get_ODR_ODR3() const { return ODR.Fields.ODR3; }
-		uint32_t get_ODR_ODR4() const { return ODR.Fields.ODR4; }
-		uint32_t get_ODR_ODR5() const { return ODR.Fields.ODR5; }
-		uint32_t get_ODR_ODR6() const { return ODR.Fields.ODR6; }
-		uint32_t get_ODR_ODR7() const { return ODR.Fields.ODR7; }
-		uint32_t get_ODR_ODR8() const { return ODR.Fields.ODR8; }
-		uint32_t get_ODR_ODR9() const { return ODR.Fields.ODR9; }
-		uint32_t get_ODR_ODR10() const { return ODR.Fields.ODR10; }
-		uint32_t get_ODR_ODR11() const { return ODR.Fields.ODR11; }
-		uint32_t get_ODR_ODR12() const { return ODR.Fields.ODR12; }
-		uint32_t get_ODR_ODR13() const { return ODR.Fields.ODR13; }
-		uint32_t get_ODR_ODR14() const { return ODR.Fields.ODR14; }
-		uint32_t get_ODR_ODR15() const { return ODR.Fields.ODR15; }
-		void set_ODR_ODR0(uint32_t value) { ODR.Fields.ODR0 = value; }
-		void set_ODR_ODR1(uint32_t value) { ODR.Fields.ODR1 = value; }
-		void set_ODR_ODR2(uint32_t value) { ODR.Fields.ODR2 = value; }
-		void set_ODR_ODR3(uint32_t value) { ODR.Fields.ODR3 = value; }
-		void set_ODR_ODR4(uint32_t value) { ODR.Fields.ODR4 = value; }
-		void set_ODR_ODR5(uint32_t value) { ODR.Fields.ODR5 = value; }
-		void set_ODR_ODR6(uint32_t value) { ODR.Fields.ODR6 = value; }
-		void set_ODR_ODR7(uint32_t value) { ODR.Fields.ODR7 = value; }
-		void set_ODR_ODR8(uint32_t value) { ODR.Fields.ODR8 = value; }
-		void set_ODR_ODR9(uint32_t value) { ODR.Fields.ODR9 = value; }
-		void set_ODR_ODR10(uint32_t value) { ODR.Fields.ODR10 = value; }
-		void set_ODR_ODR11(uint32_t value) { ODR.Fields.ODR11 = value; }
-		void set_ODR_ODR12(uint32_t value) { ODR.Fields.ODR12 = value; }
-		void set_ODR_ODR13(uint32_t value) { ODR.Fields.ODR13 = value; }
-		void set_ODR_ODR14(uint32_t value) { ODR.Fields.ODR14 = value; }
-		void set_ODR_ODR15(uint32_t value) { ODR.Fields.ODR15 = value; }
-
-		// BSRR Fields
-		void set_BSRR_BS0(uint32_t value) { BSRR.Fields.BS0 = value; }
-		void set_BSRR_BS1(uint32_t value) { BSRR.Fields.BS1 = value; }
-		void set_BSRR_BS2(uint32_t value) { BSRR.Fields.BS2 = value; }
-		void set_BSRR_BS3(uint32_t value) { BSRR.Fields.BS3 = value; }
-		void set_BSRR_BS4(uint32_t value) { BSRR.Fields.BS4 = value; }
-		void set_BSRR_BS5(uint32_t value) { BSRR.Fields.BS5 = value; }
-		void set_BSRR_BS6(uint32_t value) { BSRR.Fields.BS6 = value; }
-		void set_BSRR_BS7(uint32_t value) { BSRR.Fields.BS7 = value; }
-		void set_BSRR_BS8(uint32_t value) { BSRR.Fields.BS8 = value; }
-		void set_BSRR_BS9(uint32_t value) { BSRR.Fields.BS9 = value; }
-		void set_BSRR_BS10(uint32_t value) { BSRR.Fields.BS10 = value; }
-		void set_BSRR_BS11(uint32_t value) { BSRR.Fields.BS11 = value; }
-		void set_BSRR_BS12(uint32_t value) { BSRR.Fields.BS12 = value; }
-		void set_BSRR_BS13(uint32_t value) { BSRR.Fields.BS13 = value; }
-		void set_BSRR_BS14(uint32_t value) { BSRR.Fields.BS14 = value; }
-		void set_BSRR_BS15(uint32_t value) { BSRR.Fields.BS15 = value; }
-		void set_BSRR_BR0(uint32_t value) { BSRR.Fields.BR0 = value; }
-		void set_BSRR_BR1(uint32_t value) { BSRR.Fields.BR1 = value; }
-		void set_BSRR_BR2(uint32_t value) { BSRR.Fields.BR2 = value; }
-		void set_BSRR_BR3(uint32_t value) { BSRR.Fields.BR3 = value; }
-		void set_BSRR_BR4(uint32_t value) { BSRR.Fields.BR4 = value; }
-		void set_BSRR_BR5(uint32_t value) { BSRR.Fields.BR5 = value; }
-		void set_BSRR_BR6(uint32_t value) { BSRR.Fields.BR6 = value; }
-		void set_BSRR_BR7(uint32_t value) { BSRR.Fields.BR7 = value; }
-		void set_BSRR_BR8(uint32_t value) { BSRR.Fields.BR8 = value; }
-		void set_BSRR_BR9(uint32_t value) { BSRR.Fields.BR9 = value; }
-		void set_BSRR_BR10(uint32_t value) { BSRR.Fields.BR10 = value; }
-		void set_BSRR_BR11(uint32_t value) { BSRR.Fields.BR11 = value; }
-		void set_BSRR_BR12(uint32_t value) { BSRR.Fields.BR12 = value; }
-		void set_BSRR_BR13(uint32_t value) { BSRR.Fields.BR13 = value; }
-		void set_BSRR_BR14(uint32_t value) { BSRR.Fields.BR14 = value; }
-		void set_BSRR_BR15(uint32_t value) { BSRR.Fields.BR15 = value; }
-
-		// LCKR Fields
-		PortConfigurationLock get_LCKR_LCK0() const { return LCKR.Fields.LCK0; }
-		PortConfigurationLock get_LCKR_LCK1() const { return LCKR.Fields.LCK1; }
-		PortConfigurationLock get_LCKR_LCK2() const { return LCKR.Fields.LCK2; }
-		PortConfigurationLock get_LCKR_LCK3() const { return LCKR.Fields.LCK3; }
-		PortConfigurationLock get_LCKR_LCK4() const { return LCKR.Fields.LCK4; }
-		PortConfigurationLock get_LCKR_LCK5() const { return LCKR.Fields.LCK5; }
-		PortConfigurationLock get_LCKR_LCK6() const { return LCKR.Fields.LCK6; }
-		PortConfigurationLock get_LCKR_LCK7() const { return LCKR.Fields.LCK7; }
-		PortConfigurationLock get_LCKR_LCK8() const { return LCKR.Fields.LCK8; }
-		PortConfigurationLock get_LCKR_LCK9() const { return LCKR.Fields.LCK9; }
-		PortConfigurationLock get_LCKR_LCK10() const { return LCKR.Fields.LCK10; }
-		PortConfigurationLock get_LCKR_LCK11() const { return LCKR.Fields.LCK11; }
-		PortConfigurationLock get_LCKR_LCK12() const { return LCKR.Fields.LCK12; }
-		PortConfigurationLock get_LCKR_LCK13() const { return LCKR.Fields.LCK13; }
-		PortConfigurationLock get_LCKR_LCK14() const { return LCKR.Fields.LCK14; }
-		PortConfigurationLock get_LCKR_LCK15() const { return LCKR.Fields.LCK15; }
-		PortConfigurationLockKey get_LCKR_LCKK() const { return LCKR.Fields.LCKK; }
-		void set_LCKR_LCK0(PortConfigurationLock value) { LCKR.Fields.LCK0 = value; }
-		void set_LCKR_LCK1(PortConfigurationLock value) { LCKR.Fields.LCK1 = value; }
-		void set_LCKR_LCK2(PortConfigurationLock value) { LCKR.Fields.LCK2 = value; }
-		void set_LCKR_LCK3(PortConfigurationLock value) { LCKR.Fields.LCK3 = value; }
-		void set_LCKR_LCK4(PortConfigurationLock value) { LCKR.Fields.LCK4 = value; }
-		void set_LCKR_LCK5(PortConfigurationLock value) { LCKR.Fields.LCK5 = value; }
-		void set_LCKR_LCK6(PortConfigurationLock value) { LCKR.Fields.LCK6 = value; }
-		void set_LCKR_LCK7(PortConfigurationLock value) { LCKR.Fields.LCK7 = value; }
-		void set_LCKR_LCK8(PortConfigurationLock value) { LCKR.Fields.LCK8 = value; }
-		void set_LCKR_LCK9(PortConfigurationLock value) { LCKR.Fields.LCK9 = value; }
-		void set_LCKR_LCK10(PortConfigurationLock value) { LCKR.Fields.LCK10 = value; }
-		void set_LCKR_LCK11(PortConfigurationLock value) { LCKR.Fields.LCK11 = value; }
-		void set_LCKR_LCK12(PortConfigurationLock value) { LCKR.Fields.LCK12 = value; }
-		void set_LCKR_LCK13(PortConfigurationLock value) { LCKR.Fields.LCK13 = value; }
-		void set_LCKR_LCK14(PortConfigurationLock value) { LCKR.Fields.LCK14 = value; }
-		void set_LCKR_LCK15(PortConfigurationLock value) { LCKR.Fields.LCK15 = value; }
-		void set_LCKR_LCKK(PortConfigurationLockKey value) { LCKR.Fields.LCKK = value; }
-
-		// AFRL Fields
-		AlternateFunction get_AFRL_AFRL0() const { return AFRL.Fields.AFRL0; }
-		AlternateFunction get_AFRL_AFRL1() const { return AFRL.Fields.AFRL1; }
-		AlternateFunction get_AFRL_AFRL2() const { return AFRL.Fields.AFRL2; }
-		AlternateFunction get_AFRL_AFRL3() const { return AFRL.Fields.AFRL3; }
-		AlternateFunction get_AFRL_AFRL4() const { return AFRL.Fields.AFRL4; }
-		AlternateFunction get_AFRL_AFRL5() const { return AFRL.Fields.AFRL5; }
-		AlternateFunction get_AFRL_AFRL6() const { return AFRL.Fields.AFRL6; }
-		AlternateFunction get_AFRL_AFRL7() const { return AFRL.Fields.AFRL7; }
-		void set_AFRL_AFRL0(AlternateFunction value) { AFRL.Fields.AFRL0 = value; }
-		void set_AFRL_AFRL1(AlternateFunction value) { AFRL.Fields.AFRL1 = value; }
-		void set_AFRL_AFRL2(AlternateFunction value) { AFRL.Fields.AFRL2 = value; }
-		void set_AFRL_AFRL3(AlternateFunction value) { AFRL.Fields.AFRL3 = value; }
-		void set_AFRL_AFRL4(AlternateFunction value) { AFRL.Fields.AFRL4 = value; }
-		void set_AFRL_AFRL5(AlternateFunction value) { AFRL.Fields.AFRL5 = value; }
-		void set_AFRL_AFRL6(AlternateFunction value) { AFRL.Fields.AFRL6 = value; }
-		void set_AFRL_AFRL7(AlternateFunction value) { AFRL.Fields.AFRL7 = value; }
-
-		// AFRH Fields
-		AlternateFunction get_AFRH_AFRH8() const { return AFRH.Fields.AFRH8; }
-		AlternateFunction get_AFRH_AFRH9() const { return AFRH.Fields.AFRH9; }
-		AlternateFunction get_AFRH_AFRH10() const { return AFRH.Fields.AFRH10; }
-		AlternateFunction get_AFRH_AFRH11() const { return AFRH.Fields.AFRH11; }
-		AlternateFunction get_AFRH_AFRH12() const { return AFRH.Fields.AFRH12; }
-		AlternateFunction get_AFRH_AFRH13() const { return AFRH.Fields.AFRH13; }
-		AlternateFunction get_AFRH_AFRH14() const { return AFRH.Fields.AFRH14; }
-		AlternateFunction get_AFRH_AFRH15() const { return AFRH.Fields.AFRH15; }
-		void set_AFRH_AFRH8(AlternateFunction value) { AFRH.Fields.AFRH8 = value; }
-		void set_AFRH_AFRH9(AlternateFunction value) { AFRH.Fields.AFRH9 = value; }
-		void set_AFRH_AFRH10(AlternateFunction value) { AFRH.Fields.AFRH10 = value; }
-		void set_AFRH_AFRH11(AlternateFunction value) { AFRH.Fields.AFRH11 = value; }
-		void set_AFRH_AFRH12(AlternateFunction value) { AFRH.Fields.AFRH12 = value; }
-		void set_AFRH_AFRH13(AlternateFunction value) { AFRH.Fields.AFRH13 = value; }
-		void set_AFRH_AFRH14(AlternateFunction value) { AFRH.Fields.AFRH14 = value; }
-		void set_AFRH_AFRH15(AlternateFunction value) { AFRH.Fields.AFRH15 = value; }
-
-	private:
-
 		MODER_t MODER; // Address Offset 0x0
 		OTYPER_t OTYPER; // Address Offset 0x4
 		OSPEEDR_t OSPEEDR; // Address Offset 0x8
@@ -563,6 +265,614 @@ namespace stm32::gpio
 		LCKR_t LCKR; // Address Offset 0x1C
 		AFRL_t AFRL; // Address Offset 0x20
 		AFRH_t AFRH; // Address Offset 0x24
+	};
+
+	class IGpioRegisterMap
+	{
+	public:
+
+		// MODER Fields
+		virtual Mode get_MODER_MODER0() const = 0;
+		virtual Mode get_MODER_MODER1() const = 0;
+		virtual Mode get_MODER_MODER2() const = 0;
+		virtual Mode get_MODER_MODER3() const = 0;
+		virtual Mode get_MODER_MODER4() const = 0;
+		virtual Mode get_MODER_MODER5() const = 0;
+		virtual Mode get_MODER_MODER6() const = 0;
+		virtual Mode get_MODER_MODER7() const = 0;
+		virtual Mode get_MODER_MODER8() const = 0;
+		virtual Mode get_MODER_MODER9() const = 0;
+		virtual Mode get_MODER_MODER10() const = 0;
+		virtual Mode get_MODER_MODER11() const = 0;
+		virtual Mode get_MODER_MODER12() const = 0;
+		virtual Mode get_MODER_MODER13() const = 0;
+		virtual Mode get_MODER_MODER14() const = 0;
+		virtual Mode get_MODER_MODER15() const = 0;
+		virtual void set_MODER_MODER0(Mode value) = 0;
+		virtual void set_MODER_MODER1(Mode value) = 0;
+		virtual void set_MODER_MODER2(Mode value) = 0;
+		virtual void set_MODER_MODER3(Mode value) = 0;
+		virtual void set_MODER_MODER4(Mode value) = 0;
+		virtual void set_MODER_MODER5(Mode value) = 0;
+		virtual void set_MODER_MODER6(Mode value) = 0;
+		virtual void set_MODER_MODER7(Mode value) = 0;
+		virtual void set_MODER_MODER8(Mode value) = 0;
+		virtual void set_MODER_MODER9(Mode value) = 0;
+		virtual void set_MODER_MODER10(Mode value) = 0;
+		virtual void set_MODER_MODER11(Mode value) = 0;
+		virtual void set_MODER_MODER12(Mode value) = 0;
+		virtual void set_MODER_MODER13(Mode value) = 0;
+		virtual void set_MODER_MODER14(Mode value) = 0;
+		virtual void set_MODER_MODER15(Mode value) = 0;
+
+		// OTYPER Fields
+		virtual OutputType get_OTYPER_OT0() const = 0;
+		virtual OutputType get_OTYPER_OT1() const = 0;
+		virtual OutputType get_OTYPER_OT2() const = 0;
+		virtual OutputType get_OTYPER_OT3() const = 0;
+		virtual OutputType get_OTYPER_OT4() const = 0;
+		virtual OutputType get_OTYPER_OT5() const = 0;
+		virtual OutputType get_OTYPER_OT6() const = 0;
+		virtual OutputType get_OTYPER_OT7() const = 0;
+		virtual OutputType get_OTYPER_OT8() const = 0;
+		virtual OutputType get_OTYPER_OT9() const = 0;
+		virtual OutputType get_OTYPER_OT10() const = 0;
+		virtual OutputType get_OTYPER_OT11() const = 0;
+		virtual OutputType get_OTYPER_OT12() const = 0;
+		virtual OutputType get_OTYPER_OT13() const = 0;
+		virtual OutputType get_OTYPER_OT14() const = 0;
+		virtual OutputType get_OTYPER_OT15() const = 0;
+		virtual void set_OTYPER_OT0(OutputType value) = 0;
+		virtual void set_OTYPER_OT1(OutputType value) = 0;
+		virtual void set_OTYPER_OT2(OutputType value) = 0;
+		virtual void set_OTYPER_OT3(OutputType value) = 0;
+		virtual void set_OTYPER_OT4(OutputType value) = 0;
+		virtual void set_OTYPER_OT5(OutputType value) = 0;
+		virtual void set_OTYPER_OT6(OutputType value) = 0;
+		virtual void set_OTYPER_OT7(OutputType value) = 0;
+		virtual void set_OTYPER_OT8(OutputType value) = 0;
+		virtual void set_OTYPER_OT9(OutputType value) = 0;
+		virtual void set_OTYPER_OT10(OutputType value) = 0;
+		virtual void set_OTYPER_OT11(OutputType value) = 0;
+		virtual void set_OTYPER_OT12(OutputType value) = 0;
+		virtual void set_OTYPER_OT13(OutputType value) = 0;
+		virtual void set_OTYPER_OT14(OutputType value) = 0;
+		virtual void set_OTYPER_OT15(OutputType value) = 0;
+
+		// OSPEEDR Fields
+		virtual Speed get_OSPEEDR_OSPEEDR0() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR1() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR2() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR3() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR4() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR5() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR6() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR7() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR8() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR9() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR10() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR11() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR12() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR13() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR14() const = 0;
+		virtual Speed get_OSPEEDR_OSPEEDR15() const = 0;
+		virtual void set_OSPEEDR_OSPEEDR0(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR1(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR2(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR3(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR4(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR5(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR6(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR7(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR8(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR9(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR10(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR11(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR12(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR13(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR14(Speed value) = 0;
+		virtual void set_OSPEEDR_OSPEEDR15(Speed value) = 0;
+
+		// PUPDR Fields
+		virtual PullUpPullDown get_PUPDR_PUPDR0() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR1() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR2() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR3() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR4() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR5() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR6() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR7() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR8() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR9() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR10() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR11() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR12() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR13() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR14() const = 0;
+		virtual PullUpPullDown get_PUPDR_PUPDR15() const = 0;
+		virtual void set_PUPDR_PUPDR0(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR1(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR2(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR3(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR4(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR5(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR6(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR7(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR8(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR9(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR10(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR11(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR12(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR13(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR14(PullUpPullDown value) = 0;
+		virtual void set_PUPDR_PUPDR15(PullUpPullDown value) = 0;
+
+		// IDR Fields
+		virtual uint32_t get_IDR_IDR0() const = 0;
+		virtual uint32_t get_IDR_IDR1() const = 0;
+		virtual uint32_t get_IDR_IDR2() const = 0;
+		virtual uint32_t get_IDR_IDR3() const = 0;
+		virtual uint32_t get_IDR_IDR4() const = 0;
+		virtual uint32_t get_IDR_IDR5() const = 0;
+		virtual uint32_t get_IDR_IDR6() const = 0;
+		virtual uint32_t get_IDR_IDR7() const = 0;
+		virtual uint32_t get_IDR_IDR8() const = 0;
+		virtual uint32_t get_IDR_IDR9() const = 0;
+		virtual uint32_t get_IDR_IDR10() const = 0;
+		virtual uint32_t get_IDR_IDR11() const = 0;
+		virtual uint32_t get_IDR_IDR12() const = 0;
+		virtual uint32_t get_IDR_IDR13() const = 0;
+		virtual uint32_t get_IDR_IDR14() const = 0;
+		virtual uint32_t get_IDR_IDR15() const = 0;
+
+		// ODR Fields
+		virtual uint32_t get_ODR_ODR0() const = 0;
+		virtual uint32_t get_ODR_ODR1() const = 0;
+		virtual uint32_t get_ODR_ODR2() const = 0;
+		virtual uint32_t get_ODR_ODR3() const = 0;
+		virtual uint32_t get_ODR_ODR4() const = 0;
+		virtual uint32_t get_ODR_ODR5() const = 0;
+		virtual uint32_t get_ODR_ODR6() const = 0;
+		virtual uint32_t get_ODR_ODR7() const = 0;
+		virtual uint32_t get_ODR_ODR8() const = 0;
+		virtual uint32_t get_ODR_ODR9() const = 0;
+		virtual uint32_t get_ODR_ODR10() const = 0;
+		virtual uint32_t get_ODR_ODR11() const = 0;
+		virtual uint32_t get_ODR_ODR12() const = 0;
+		virtual uint32_t get_ODR_ODR13() const = 0;
+		virtual uint32_t get_ODR_ODR14() const = 0;
+		virtual uint32_t get_ODR_ODR15() const = 0;
+		virtual void set_ODR_ODR0(uint32_t value) = 0;
+		virtual void set_ODR_ODR1(uint32_t value) = 0;
+		virtual void set_ODR_ODR2(uint32_t value) = 0;
+		virtual void set_ODR_ODR3(uint32_t value) = 0;
+		virtual void set_ODR_ODR4(uint32_t value) = 0;
+		virtual void set_ODR_ODR5(uint32_t value) = 0;
+		virtual void set_ODR_ODR6(uint32_t value) = 0;
+		virtual void set_ODR_ODR7(uint32_t value) = 0;
+		virtual void set_ODR_ODR8(uint32_t value) = 0;
+		virtual void set_ODR_ODR9(uint32_t value) = 0;
+		virtual void set_ODR_ODR10(uint32_t value) = 0;
+		virtual void set_ODR_ODR11(uint32_t value) = 0;
+		virtual void set_ODR_ODR12(uint32_t value) = 0;
+		virtual void set_ODR_ODR13(uint32_t value) = 0;
+		virtual void set_ODR_ODR14(uint32_t value) = 0;
+		virtual void set_ODR_ODR15(uint32_t value) = 0;
+
+		// BSRR Fields
+		virtual void set_BSRR_BS0(uint32_t value) = 0;
+		virtual void set_BSRR_BS1(uint32_t value) = 0;
+		virtual void set_BSRR_BS2(uint32_t value) = 0;
+		virtual void set_BSRR_BS3(uint32_t value) = 0;
+		virtual void set_BSRR_BS4(uint32_t value) = 0;
+		virtual void set_BSRR_BS5(uint32_t value) = 0;
+		virtual void set_BSRR_BS6(uint32_t value) = 0;
+		virtual void set_BSRR_BS7(uint32_t value) = 0;
+		virtual void set_BSRR_BS8(uint32_t value) = 0;
+		virtual void set_BSRR_BS9(uint32_t value) = 0;
+		virtual void set_BSRR_BS10(uint32_t value) = 0;
+		virtual void set_BSRR_BS11(uint32_t value) = 0;
+		virtual void set_BSRR_BS12(uint32_t value) = 0;
+		virtual void set_BSRR_BS13(uint32_t value) = 0;
+		virtual void set_BSRR_BS14(uint32_t value) = 0;
+		virtual void set_BSRR_BS15(uint32_t value) = 0;
+		virtual void set_BSRR_BR0(uint32_t value) = 0;
+		virtual void set_BSRR_BR1(uint32_t value) = 0;
+		virtual void set_BSRR_BR2(uint32_t value) = 0;
+		virtual void set_BSRR_BR3(uint32_t value) = 0;
+		virtual void set_BSRR_BR4(uint32_t value) = 0;
+		virtual void set_BSRR_BR5(uint32_t value) = 0;
+		virtual void set_BSRR_BR6(uint32_t value) = 0;
+		virtual void set_BSRR_BR7(uint32_t value) = 0;
+		virtual void set_BSRR_BR8(uint32_t value) = 0;
+		virtual void set_BSRR_BR9(uint32_t value) = 0;
+		virtual void set_BSRR_BR10(uint32_t value) = 0;
+		virtual void set_BSRR_BR11(uint32_t value) = 0;
+		virtual void set_BSRR_BR12(uint32_t value) = 0;
+		virtual void set_BSRR_BR13(uint32_t value) = 0;
+		virtual void set_BSRR_BR14(uint32_t value) = 0;
+		virtual void set_BSRR_BR15(uint32_t value) = 0;
+
+		// LCKR Fields
+		virtual PortConfigurationLock get_LCKR_LCK0() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK1() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK2() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK3() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK4() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK5() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK6() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK7() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK8() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK9() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK10() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK11() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK12() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK13() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK14() const = 0;
+		virtual PortConfigurationLock get_LCKR_LCK15() const = 0;
+		virtual PortConfigurationLockKey get_LCKR_LCKK() const = 0;
+		virtual void set_LCKR_LCK0(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK1(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK2(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK3(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK4(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK5(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK6(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK7(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK8(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK9(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK10(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK11(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK12(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK13(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK14(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCK15(PortConfigurationLock value) = 0;
+		virtual void set_LCKR_LCKK(PortConfigurationLockKey value) = 0;
+
+		// AFRL Fields
+		virtual AlternateFunction get_AFRL_AFRL0() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL1() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL2() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL3() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL4() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL5() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL6() const = 0;
+		virtual AlternateFunction get_AFRL_AFRL7() const = 0;
+		virtual void set_AFRL_AFRL0(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL1(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL2(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL3(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL4(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL5(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL6(AlternateFunction value) = 0;
+		virtual void set_AFRL_AFRL7(AlternateFunction value) = 0;
+
+		// AFRH Fields
+		virtual AlternateFunction get_AFRH_AFRH8() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH9() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH10() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH11() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH12() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH13() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH14() const = 0;
+		virtual AlternateFunction get_AFRH_AFRH15() const = 0;
+		virtual void set_AFRH_AFRH8(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH9(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH10(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH11(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH12(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH13(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH14(AlternateFunction value) = 0;
+		virtual void set_AFRH_AFRH15(AlternateFunction value) = 0;
+	};
+
+	class GpioRegisterMap : public IGpioRegisterMap
+	{
+	public:
+
+		GpioRegisterMap(GpioRegisters & registers)
+			: registers(registers) { }
+
+		GpioRegisterMap(uint32_t addr)
+			: registers(*reinterpret_cast<GpioRegisters*>(addr)) { }
+
+		// MODER Fields
+		Mode get_MODER_MODER0() const { return registers.MODER.Fields.MODER0; }
+		Mode get_MODER_MODER1() const { return registers.MODER.Fields.MODER1; }
+		Mode get_MODER_MODER2() const { return registers.MODER.Fields.MODER2; }
+		Mode get_MODER_MODER3() const { return registers.MODER.Fields.MODER3; }
+		Mode get_MODER_MODER4() const { return registers.MODER.Fields.MODER4; }
+		Mode get_MODER_MODER5() const { return registers.MODER.Fields.MODER5; }
+		Mode get_MODER_MODER6() const { return registers.MODER.Fields.MODER6; }
+		Mode get_MODER_MODER7() const { return registers.MODER.Fields.MODER7; }
+		Mode get_MODER_MODER8() const { return registers.MODER.Fields.MODER8; }
+		Mode get_MODER_MODER9() const { return registers.MODER.Fields.MODER9; }
+		Mode get_MODER_MODER10() const { return registers.MODER.Fields.MODER10; }
+		Mode get_MODER_MODER11() const { return registers.MODER.Fields.MODER11; }
+		Mode get_MODER_MODER12() const { return registers.MODER.Fields.MODER12; }
+		Mode get_MODER_MODER13() const { return registers.MODER.Fields.MODER13; }
+		Mode get_MODER_MODER14() const { return registers.MODER.Fields.MODER14; }
+		Mode get_MODER_MODER15() const { return registers.MODER.Fields.MODER15; }
+		void set_MODER_MODER0(Mode value) { registers.MODER.Fields.MODER0 = value; }
+		void set_MODER_MODER1(Mode value) { registers.MODER.Fields.MODER1 = value; }
+		void set_MODER_MODER2(Mode value) { registers.MODER.Fields.MODER2 = value; }
+		void set_MODER_MODER3(Mode value) { registers.MODER.Fields.MODER3 = value; }
+		void set_MODER_MODER4(Mode value) { registers.MODER.Fields.MODER4 = value; }
+		void set_MODER_MODER5(Mode value) { registers.MODER.Fields.MODER5 = value; }
+		void set_MODER_MODER6(Mode value) { registers.MODER.Fields.MODER6 = value; }
+		void set_MODER_MODER7(Mode value) { registers.MODER.Fields.MODER7 = value; }
+		void set_MODER_MODER8(Mode value) { registers.MODER.Fields.MODER8 = value; }
+		void set_MODER_MODER9(Mode value) { registers.MODER.Fields.MODER9 = value; }
+		void set_MODER_MODER10(Mode value) { registers.MODER.Fields.MODER10 = value; }
+		void set_MODER_MODER11(Mode value) { registers.MODER.Fields.MODER11 = value; }
+		void set_MODER_MODER12(Mode value) { registers.MODER.Fields.MODER12 = value; }
+		void set_MODER_MODER13(Mode value) { registers.MODER.Fields.MODER13 = value; }
+		void set_MODER_MODER14(Mode value) { registers.MODER.Fields.MODER14 = value; }
+		void set_MODER_MODER15(Mode value) { registers.MODER.Fields.MODER15 = value; }
+
+		// OTYPER Fields
+		OutputType get_OTYPER_OT0() const { return registers.OTYPER.Fields.OT0; }
+		OutputType get_OTYPER_OT1() const { return registers.OTYPER.Fields.OT1; }
+		OutputType get_OTYPER_OT2() const { return registers.OTYPER.Fields.OT2; }
+		OutputType get_OTYPER_OT3() const { return registers.OTYPER.Fields.OT3; }
+		OutputType get_OTYPER_OT4() const { return registers.OTYPER.Fields.OT4; }
+		OutputType get_OTYPER_OT5() const { return registers.OTYPER.Fields.OT5; }
+		OutputType get_OTYPER_OT6() const { return registers.OTYPER.Fields.OT6; }
+		OutputType get_OTYPER_OT7() const { return registers.OTYPER.Fields.OT7; }
+		OutputType get_OTYPER_OT8() const { return registers.OTYPER.Fields.OT8; }
+		OutputType get_OTYPER_OT9() const { return registers.OTYPER.Fields.OT9; }
+		OutputType get_OTYPER_OT10() const { return registers.OTYPER.Fields.OT10; }
+		OutputType get_OTYPER_OT11() const { return registers.OTYPER.Fields.OT11; }
+		OutputType get_OTYPER_OT12() const { return registers.OTYPER.Fields.OT12; }
+		OutputType get_OTYPER_OT13() const { return registers.OTYPER.Fields.OT13; }
+		OutputType get_OTYPER_OT14() const { return registers.OTYPER.Fields.OT14; }
+		OutputType get_OTYPER_OT15() const { return registers.OTYPER.Fields.OT15; }
+		void set_OTYPER_OT0(OutputType value) { registers.OTYPER.Fields.OT0 = value; }
+		void set_OTYPER_OT1(OutputType value) { registers.OTYPER.Fields.OT1 = value; }
+		void set_OTYPER_OT2(OutputType value) { registers.OTYPER.Fields.OT2 = value; }
+		void set_OTYPER_OT3(OutputType value) { registers.OTYPER.Fields.OT3 = value; }
+		void set_OTYPER_OT4(OutputType value) { registers.OTYPER.Fields.OT4 = value; }
+		void set_OTYPER_OT5(OutputType value) { registers.OTYPER.Fields.OT5 = value; }
+		void set_OTYPER_OT6(OutputType value) { registers.OTYPER.Fields.OT6 = value; }
+		void set_OTYPER_OT7(OutputType value) { registers.OTYPER.Fields.OT7 = value; }
+		void set_OTYPER_OT8(OutputType value) { registers.OTYPER.Fields.OT8 = value; }
+		void set_OTYPER_OT9(OutputType value) { registers.OTYPER.Fields.OT9 = value; }
+		void set_OTYPER_OT10(OutputType value) { registers.OTYPER.Fields.OT10 = value; }
+		void set_OTYPER_OT11(OutputType value) { registers.OTYPER.Fields.OT11 = value; }
+		void set_OTYPER_OT12(OutputType value) { registers.OTYPER.Fields.OT12 = value; }
+		void set_OTYPER_OT13(OutputType value) { registers.OTYPER.Fields.OT13 = value; }
+		void set_OTYPER_OT14(OutputType value) { registers.OTYPER.Fields.OT14 = value; }
+		void set_OTYPER_OT15(OutputType value) { registers.OTYPER.Fields.OT15 = value; }
+
+		// OSPEEDR Fields
+		Speed get_OSPEEDR_OSPEEDR0() const { return registers.OSPEEDR.Fields.OSPEEDR0; }
+		Speed get_OSPEEDR_OSPEEDR1() const { return registers.OSPEEDR.Fields.OSPEEDR1; }
+		Speed get_OSPEEDR_OSPEEDR2() const { return registers.OSPEEDR.Fields.OSPEEDR2; }
+		Speed get_OSPEEDR_OSPEEDR3() const { return registers.OSPEEDR.Fields.OSPEEDR3; }
+		Speed get_OSPEEDR_OSPEEDR4() const { return registers.OSPEEDR.Fields.OSPEEDR4; }
+		Speed get_OSPEEDR_OSPEEDR5() const { return registers.OSPEEDR.Fields.OSPEEDR5; }
+		Speed get_OSPEEDR_OSPEEDR6() const { return registers.OSPEEDR.Fields.OSPEEDR6; }
+		Speed get_OSPEEDR_OSPEEDR7() const { return registers.OSPEEDR.Fields.OSPEEDR7; }
+		Speed get_OSPEEDR_OSPEEDR8() const { return registers.OSPEEDR.Fields.OSPEEDR8; }
+		Speed get_OSPEEDR_OSPEEDR9() const { return registers.OSPEEDR.Fields.OSPEEDR9; }
+		Speed get_OSPEEDR_OSPEEDR10() const { return registers.OSPEEDR.Fields.OSPEEDR10; }
+		Speed get_OSPEEDR_OSPEEDR11() const { return registers.OSPEEDR.Fields.OSPEEDR11; }
+		Speed get_OSPEEDR_OSPEEDR12() const { return registers.OSPEEDR.Fields.OSPEEDR12; }
+		Speed get_OSPEEDR_OSPEEDR13() const { return registers.OSPEEDR.Fields.OSPEEDR13; }
+		Speed get_OSPEEDR_OSPEEDR14() const { return registers.OSPEEDR.Fields.OSPEEDR14; }
+		Speed get_OSPEEDR_OSPEEDR15() const { return registers.OSPEEDR.Fields.OSPEEDR15; }
+		void set_OSPEEDR_OSPEEDR0(Speed value) { registers.OSPEEDR.Fields.OSPEEDR0 = value; }
+		void set_OSPEEDR_OSPEEDR1(Speed value) { registers.OSPEEDR.Fields.OSPEEDR1 = value; }
+		void set_OSPEEDR_OSPEEDR2(Speed value) { registers.OSPEEDR.Fields.OSPEEDR2 = value; }
+		void set_OSPEEDR_OSPEEDR3(Speed value) { registers.OSPEEDR.Fields.OSPEEDR3 = value; }
+		void set_OSPEEDR_OSPEEDR4(Speed value) { registers.OSPEEDR.Fields.OSPEEDR4 = value; }
+		void set_OSPEEDR_OSPEEDR5(Speed value) { registers.OSPEEDR.Fields.OSPEEDR5 = value; }
+		void set_OSPEEDR_OSPEEDR6(Speed value) { registers.OSPEEDR.Fields.OSPEEDR6 = value; }
+		void set_OSPEEDR_OSPEEDR7(Speed value) { registers.OSPEEDR.Fields.OSPEEDR7 = value; }
+		void set_OSPEEDR_OSPEEDR8(Speed value) { registers.OSPEEDR.Fields.OSPEEDR8 = value; }
+		void set_OSPEEDR_OSPEEDR9(Speed value) { registers.OSPEEDR.Fields.OSPEEDR9 = value; }
+		void set_OSPEEDR_OSPEEDR10(Speed value) { registers.OSPEEDR.Fields.OSPEEDR10 = value; }
+		void set_OSPEEDR_OSPEEDR11(Speed value) { registers.OSPEEDR.Fields.OSPEEDR11 = value; }
+		void set_OSPEEDR_OSPEEDR12(Speed value) { registers.OSPEEDR.Fields.OSPEEDR12 = value; }
+		void set_OSPEEDR_OSPEEDR13(Speed value) { registers.OSPEEDR.Fields.OSPEEDR13 = value; }
+		void set_OSPEEDR_OSPEEDR14(Speed value) { registers.OSPEEDR.Fields.OSPEEDR14 = value; }
+		void set_OSPEEDR_OSPEEDR15(Speed value) { registers.OSPEEDR.Fields.OSPEEDR15 = value; }
+
+		// PUPDR Fields
+		PullUpPullDown get_PUPDR_PUPDR0() const { return registers.PUPDR.Fields.PUPDR0; }
+		PullUpPullDown get_PUPDR_PUPDR1() const { return registers.PUPDR.Fields.PUPDR1; }
+		PullUpPullDown get_PUPDR_PUPDR2() const { return registers.PUPDR.Fields.PUPDR2; }
+		PullUpPullDown get_PUPDR_PUPDR3() const { return registers.PUPDR.Fields.PUPDR3; }
+		PullUpPullDown get_PUPDR_PUPDR4() const { return registers.PUPDR.Fields.PUPDR4; }
+		PullUpPullDown get_PUPDR_PUPDR5() const { return registers.PUPDR.Fields.PUPDR5; }
+		PullUpPullDown get_PUPDR_PUPDR6() const { return registers.PUPDR.Fields.PUPDR6; }
+		PullUpPullDown get_PUPDR_PUPDR7() const { return registers.PUPDR.Fields.PUPDR7; }
+		PullUpPullDown get_PUPDR_PUPDR8() const { return registers.PUPDR.Fields.PUPDR8; }
+		PullUpPullDown get_PUPDR_PUPDR9() const { return registers.PUPDR.Fields.PUPDR9; }
+		PullUpPullDown get_PUPDR_PUPDR10() const { return registers.PUPDR.Fields.PUPDR10; }
+		PullUpPullDown get_PUPDR_PUPDR11() const { return registers.PUPDR.Fields.PUPDR11; }
+		PullUpPullDown get_PUPDR_PUPDR12() const { return registers.PUPDR.Fields.PUPDR12; }
+		PullUpPullDown get_PUPDR_PUPDR13() const { return registers.PUPDR.Fields.PUPDR13; }
+		PullUpPullDown get_PUPDR_PUPDR14() const { return registers.PUPDR.Fields.PUPDR14; }
+		PullUpPullDown get_PUPDR_PUPDR15() const { return registers.PUPDR.Fields.PUPDR15; }
+		void set_PUPDR_PUPDR0(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR0 = value; }
+		void set_PUPDR_PUPDR1(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR1 = value; }
+		void set_PUPDR_PUPDR2(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR2 = value; }
+		void set_PUPDR_PUPDR3(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR3 = value; }
+		void set_PUPDR_PUPDR4(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR4 = value; }
+		void set_PUPDR_PUPDR5(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR5 = value; }
+		void set_PUPDR_PUPDR6(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR6 = value; }
+		void set_PUPDR_PUPDR7(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR7 = value; }
+		void set_PUPDR_PUPDR8(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR8 = value; }
+		void set_PUPDR_PUPDR9(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR9 = value; }
+		void set_PUPDR_PUPDR10(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR10 = value; }
+		void set_PUPDR_PUPDR11(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR11 = value; }
+		void set_PUPDR_PUPDR12(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR12 = value; }
+		void set_PUPDR_PUPDR13(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR13 = value; }
+		void set_PUPDR_PUPDR14(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR14 = value; }
+		void set_PUPDR_PUPDR15(PullUpPullDown value) { registers.PUPDR.Fields.PUPDR15 = value; }
+
+		// IDR Fields
+		uint32_t get_IDR_IDR0() const { return registers.IDR.Fields.IDR0; }
+		uint32_t get_IDR_IDR1() const { return registers.IDR.Fields.IDR1; }
+		uint32_t get_IDR_IDR2() const { return registers.IDR.Fields.IDR2; }
+		uint32_t get_IDR_IDR3() const { return registers.IDR.Fields.IDR3; }
+		uint32_t get_IDR_IDR4() const { return registers.IDR.Fields.IDR4; }
+		uint32_t get_IDR_IDR5() const { return registers.IDR.Fields.IDR5; }
+		uint32_t get_IDR_IDR6() const { return registers.IDR.Fields.IDR6; }
+		uint32_t get_IDR_IDR7() const { return registers.IDR.Fields.IDR7; }
+		uint32_t get_IDR_IDR8() const { return registers.IDR.Fields.IDR8; }
+		uint32_t get_IDR_IDR9() const { return registers.IDR.Fields.IDR9; }
+		uint32_t get_IDR_IDR10() const { return registers.IDR.Fields.IDR10; }
+		uint32_t get_IDR_IDR11() const { return registers.IDR.Fields.IDR11; }
+		uint32_t get_IDR_IDR12() const { return registers.IDR.Fields.IDR12; }
+		uint32_t get_IDR_IDR13() const { return registers.IDR.Fields.IDR13; }
+		uint32_t get_IDR_IDR14() const { return registers.IDR.Fields.IDR14; }
+		uint32_t get_IDR_IDR15() const { return registers.IDR.Fields.IDR15; }
+
+		// ODR Fields
+		uint32_t get_ODR_ODR0() const { return registers.ODR.Fields.ODR0; }
+		uint32_t get_ODR_ODR1() const { return registers.ODR.Fields.ODR1; }
+		uint32_t get_ODR_ODR2() const { return registers.ODR.Fields.ODR2; }
+		uint32_t get_ODR_ODR3() const { return registers.ODR.Fields.ODR3; }
+		uint32_t get_ODR_ODR4() const { return registers.ODR.Fields.ODR4; }
+		uint32_t get_ODR_ODR5() const { return registers.ODR.Fields.ODR5; }
+		uint32_t get_ODR_ODR6() const { return registers.ODR.Fields.ODR6; }
+		uint32_t get_ODR_ODR7() const { return registers.ODR.Fields.ODR7; }
+		uint32_t get_ODR_ODR8() const { return registers.ODR.Fields.ODR8; }
+		uint32_t get_ODR_ODR9() const { return registers.ODR.Fields.ODR9; }
+		uint32_t get_ODR_ODR10() const { return registers.ODR.Fields.ODR10; }
+		uint32_t get_ODR_ODR11() const { return registers.ODR.Fields.ODR11; }
+		uint32_t get_ODR_ODR12() const { return registers.ODR.Fields.ODR12; }
+		uint32_t get_ODR_ODR13() const { return registers.ODR.Fields.ODR13; }
+		uint32_t get_ODR_ODR14() const { return registers.ODR.Fields.ODR14; }
+		uint32_t get_ODR_ODR15() const { return registers.ODR.Fields.ODR15; }
+		void set_ODR_ODR0(uint32_t value) { registers.ODR.Fields.ODR0 = value; }
+		void set_ODR_ODR1(uint32_t value) { registers.ODR.Fields.ODR1 = value; }
+		void set_ODR_ODR2(uint32_t value) { registers.ODR.Fields.ODR2 = value; }
+		void set_ODR_ODR3(uint32_t value) { registers.ODR.Fields.ODR3 = value; }
+		void set_ODR_ODR4(uint32_t value) { registers.ODR.Fields.ODR4 = value; }
+		void set_ODR_ODR5(uint32_t value) { registers.ODR.Fields.ODR5 = value; }
+		void set_ODR_ODR6(uint32_t value) { registers.ODR.Fields.ODR6 = value; }
+		void set_ODR_ODR7(uint32_t value) { registers.ODR.Fields.ODR7 = value; }
+		void set_ODR_ODR8(uint32_t value) { registers.ODR.Fields.ODR8 = value; }
+		void set_ODR_ODR9(uint32_t value) { registers.ODR.Fields.ODR9 = value; }
+		void set_ODR_ODR10(uint32_t value) { registers.ODR.Fields.ODR10 = value; }
+		void set_ODR_ODR11(uint32_t value) { registers.ODR.Fields.ODR11 = value; }
+		void set_ODR_ODR12(uint32_t value) { registers.ODR.Fields.ODR12 = value; }
+		void set_ODR_ODR13(uint32_t value) { registers.ODR.Fields.ODR13 = value; }
+		void set_ODR_ODR14(uint32_t value) { registers.ODR.Fields.ODR14 = value; }
+		void set_ODR_ODR15(uint32_t value) { registers.ODR.Fields.ODR15 = value; }
+
+		// BSRR Fields
+		void set_BSRR_BS0(uint32_t value) { registers.BSRR.Fields.BS0 = value; }
+		void set_BSRR_BS1(uint32_t value) { registers.BSRR.Fields.BS1 = value; }
+		void set_BSRR_BS2(uint32_t value) { registers.BSRR.Fields.BS2 = value; }
+		void set_BSRR_BS3(uint32_t value) { registers.BSRR.Fields.BS3 = value; }
+		void set_BSRR_BS4(uint32_t value) { registers.BSRR.Fields.BS4 = value; }
+		void set_BSRR_BS5(uint32_t value) { registers.BSRR.Fields.BS5 = value; }
+		void set_BSRR_BS6(uint32_t value) { registers.BSRR.Fields.BS6 = value; }
+		void set_BSRR_BS7(uint32_t value) { registers.BSRR.Fields.BS7 = value; }
+		void set_BSRR_BS8(uint32_t value) { registers.BSRR.Fields.BS8 = value; }
+		void set_BSRR_BS9(uint32_t value) { registers.BSRR.Fields.BS9 = value; }
+		void set_BSRR_BS10(uint32_t value) { registers.BSRR.Fields.BS10 = value; }
+		void set_BSRR_BS11(uint32_t value) { registers.BSRR.Fields.BS11 = value; }
+		void set_BSRR_BS12(uint32_t value) { registers.BSRR.Fields.BS12 = value; }
+		void set_BSRR_BS13(uint32_t value) { registers.BSRR.Fields.BS13 = value; }
+		void set_BSRR_BS14(uint32_t value) { registers.BSRR.Fields.BS14 = value; }
+		void set_BSRR_BS15(uint32_t value) { registers.BSRR.Fields.BS15 = value; }
+		void set_BSRR_BR0(uint32_t value) { registers.BSRR.Fields.BR0 = value; }
+		void set_BSRR_BR1(uint32_t value) { registers.BSRR.Fields.BR1 = value; }
+		void set_BSRR_BR2(uint32_t value) { registers.BSRR.Fields.BR2 = value; }
+		void set_BSRR_BR3(uint32_t value) { registers.BSRR.Fields.BR3 = value; }
+		void set_BSRR_BR4(uint32_t value) { registers.BSRR.Fields.BR4 = value; }
+		void set_BSRR_BR5(uint32_t value) { registers.BSRR.Fields.BR5 = value; }
+		void set_BSRR_BR6(uint32_t value) { registers.BSRR.Fields.BR6 = value; }
+		void set_BSRR_BR7(uint32_t value) { registers.BSRR.Fields.BR7 = value; }
+		void set_BSRR_BR8(uint32_t value) { registers.BSRR.Fields.BR8 = value; }
+		void set_BSRR_BR9(uint32_t value) { registers.BSRR.Fields.BR9 = value; }
+		void set_BSRR_BR10(uint32_t value) { registers.BSRR.Fields.BR10 = value; }
+		void set_BSRR_BR11(uint32_t value) { registers.BSRR.Fields.BR11 = value; }
+		void set_BSRR_BR12(uint32_t value) { registers.BSRR.Fields.BR12 = value; }
+		void set_BSRR_BR13(uint32_t value) { registers.BSRR.Fields.BR13 = value; }
+		void set_BSRR_BR14(uint32_t value) { registers.BSRR.Fields.BR14 = value; }
+		void set_BSRR_BR15(uint32_t value) { registers.BSRR.Fields.BR15 = value; }
+
+		// LCKR Fields
+		PortConfigurationLock get_LCKR_LCK0() const { return registers.LCKR.Fields.LCK0; }
+		PortConfigurationLock get_LCKR_LCK1() const { return registers.LCKR.Fields.LCK1; }
+		PortConfigurationLock get_LCKR_LCK2() const { return registers.LCKR.Fields.LCK2; }
+		PortConfigurationLock get_LCKR_LCK3() const { return registers.LCKR.Fields.LCK3; }
+		PortConfigurationLock get_LCKR_LCK4() const { return registers.LCKR.Fields.LCK4; }
+		PortConfigurationLock get_LCKR_LCK5() const { return registers.LCKR.Fields.LCK5; }
+		PortConfigurationLock get_LCKR_LCK6() const { return registers.LCKR.Fields.LCK6; }
+		PortConfigurationLock get_LCKR_LCK7() const { return registers.LCKR.Fields.LCK7; }
+		PortConfigurationLock get_LCKR_LCK8() const { return registers.LCKR.Fields.LCK8; }
+		PortConfigurationLock get_LCKR_LCK9() const { return registers.LCKR.Fields.LCK9; }
+		PortConfigurationLock get_LCKR_LCK10() const { return registers.LCKR.Fields.LCK10; }
+		PortConfigurationLock get_LCKR_LCK11() const { return registers.LCKR.Fields.LCK11; }
+		PortConfigurationLock get_LCKR_LCK12() const { return registers.LCKR.Fields.LCK12; }
+		PortConfigurationLock get_LCKR_LCK13() const { return registers.LCKR.Fields.LCK13; }
+		PortConfigurationLock get_LCKR_LCK14() const { return registers.LCKR.Fields.LCK14; }
+		PortConfigurationLock get_LCKR_LCK15() const { return registers.LCKR.Fields.LCK15; }
+		PortConfigurationLockKey get_LCKR_LCKK() const { return registers.LCKR.Fields.LCKK; }
+		void set_LCKR_LCK0(PortConfigurationLock value) { registers.LCKR.Fields.LCK0 = value; }
+		void set_LCKR_LCK1(PortConfigurationLock value) { registers.LCKR.Fields.LCK1 = value; }
+		void set_LCKR_LCK2(PortConfigurationLock value) { registers.LCKR.Fields.LCK2 = value; }
+		void set_LCKR_LCK3(PortConfigurationLock value) { registers.LCKR.Fields.LCK3 = value; }
+		void set_LCKR_LCK4(PortConfigurationLock value) { registers.LCKR.Fields.LCK4 = value; }
+		void set_LCKR_LCK5(PortConfigurationLock value) { registers.LCKR.Fields.LCK5 = value; }
+		void set_LCKR_LCK6(PortConfigurationLock value) { registers.LCKR.Fields.LCK6 = value; }
+		void set_LCKR_LCK7(PortConfigurationLock value) { registers.LCKR.Fields.LCK7 = value; }
+		void set_LCKR_LCK8(PortConfigurationLock value) { registers.LCKR.Fields.LCK8 = value; }
+		void set_LCKR_LCK9(PortConfigurationLock value) { registers.LCKR.Fields.LCK9 = value; }
+		void set_LCKR_LCK10(PortConfigurationLock value) { registers.LCKR.Fields.LCK10 = value; }
+		void set_LCKR_LCK11(PortConfigurationLock value) { registers.LCKR.Fields.LCK11 = value; }
+		void set_LCKR_LCK12(PortConfigurationLock value) { registers.LCKR.Fields.LCK12 = value; }
+		void set_LCKR_LCK13(PortConfigurationLock value) { registers.LCKR.Fields.LCK13 = value; }
+		void set_LCKR_LCK14(PortConfigurationLock value) { registers.LCKR.Fields.LCK14 = value; }
+		void set_LCKR_LCK15(PortConfigurationLock value) { registers.LCKR.Fields.LCK15 = value; }
+		void set_LCKR_LCKK(PortConfigurationLockKey value) { registers.LCKR.Fields.LCKK = value; }
+
+		// AFRL Fields
+		AlternateFunction get_AFRL_AFRL0() const { return registers.AFRL.Fields.AFRL0; }
+		AlternateFunction get_AFRL_AFRL1() const { return registers.AFRL.Fields.AFRL1; }
+		AlternateFunction get_AFRL_AFRL2() const { return registers.AFRL.Fields.AFRL2; }
+		AlternateFunction get_AFRL_AFRL3() const { return registers.AFRL.Fields.AFRL3; }
+		AlternateFunction get_AFRL_AFRL4() const { return registers.AFRL.Fields.AFRL4; }
+		AlternateFunction get_AFRL_AFRL5() const { return registers.AFRL.Fields.AFRL5; }
+		AlternateFunction get_AFRL_AFRL6() const { return registers.AFRL.Fields.AFRL6; }
+		AlternateFunction get_AFRL_AFRL7() const { return registers.AFRL.Fields.AFRL7; }
+		void set_AFRL_AFRL0(AlternateFunction value) { registers.AFRL.Fields.AFRL0 = value; }
+		void set_AFRL_AFRL1(AlternateFunction value) { registers.AFRL.Fields.AFRL1 = value; }
+		void set_AFRL_AFRL2(AlternateFunction value) { registers.AFRL.Fields.AFRL2 = value; }
+		void set_AFRL_AFRL3(AlternateFunction value) { registers.AFRL.Fields.AFRL3 = value; }
+		void set_AFRL_AFRL4(AlternateFunction value) { registers.AFRL.Fields.AFRL4 = value; }
+		void set_AFRL_AFRL5(AlternateFunction value) { registers.AFRL.Fields.AFRL5 = value; }
+		void set_AFRL_AFRL6(AlternateFunction value) { registers.AFRL.Fields.AFRL6 = value; }
+		void set_AFRL_AFRL7(AlternateFunction value) { registers.AFRL.Fields.AFRL7 = value; }
+
+		// AFRH Fields
+		AlternateFunction get_AFRH_AFRH8() const { return registers.AFRH.Fields.AFRH8; }
+		AlternateFunction get_AFRH_AFRH9() const { return registers.AFRH.Fields.AFRH9; }
+		AlternateFunction get_AFRH_AFRH10() const { return registers.AFRH.Fields.AFRH10; }
+		AlternateFunction get_AFRH_AFRH11() const { return registers.AFRH.Fields.AFRH11; }
+		AlternateFunction get_AFRH_AFRH12() const { return registers.AFRH.Fields.AFRH12; }
+		AlternateFunction get_AFRH_AFRH13() const { return registers.AFRH.Fields.AFRH13; }
+		AlternateFunction get_AFRH_AFRH14() const { return registers.AFRH.Fields.AFRH14; }
+		AlternateFunction get_AFRH_AFRH15() const { return registers.AFRH.Fields.AFRH15; }
+		void set_AFRH_AFRH8(AlternateFunction value) { registers.AFRH.Fields.AFRH8 = value; }
+		void set_AFRH_AFRH9(AlternateFunction value) { registers.AFRH.Fields.AFRH9 = value; }
+		void set_AFRH_AFRH10(AlternateFunction value) { registers.AFRH.Fields.AFRH10 = value; }
+		void set_AFRH_AFRH11(AlternateFunction value) { registers.AFRH.Fields.AFRH11 = value; }
+		void set_AFRH_AFRH12(AlternateFunction value) { registers.AFRH.Fields.AFRH12 = value; }
+		void set_AFRH_AFRH13(AlternateFunction value) { registers.AFRH.Fields.AFRH13 = value; }
+		void set_AFRH_AFRH14(AlternateFunction value) { registers.AFRH.Fields.AFRH14 = value; }
+		void set_AFRH_AFRH15(AlternateFunction value) { registers.AFRH.Fields.AFRH15 = value; }
+
+	private:
+
+		GpioRegisters & registers;
 	};
 }
 #endif // GPIO_REGISTER_MAP_HPP_

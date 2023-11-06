@@ -414,6 +414,8 @@ class Peripheral:
             f"class {self.name}RegisterMap : public I{self.name}RegisterMap\n"
             f"{{\n"
             f"public:\n\n"
+            f"\t{self.name}RegisterMap({self.name}Registers & registers)\n"
+            f"\t\t: registers(registers) {{ }}\n\n"
             f"\t{self.name}RegisterMap(uint32_t addr)\n"
             f"\t\t: registers(*reinterpret_cast<{self.name}Registers*>(addr)) {{ }}\n"
         )
@@ -532,7 +534,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "exti"
+peripheral_name = "gpio"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

@@ -5,7 +5,7 @@
 using namespace stm32::gpio;
 using namespace testing;
 
-class MockGpioRegisterMap : public GpioRegisterMap
+class MockGpioRegisterMap : public IGpioRegisterMap
 {
 public:
 

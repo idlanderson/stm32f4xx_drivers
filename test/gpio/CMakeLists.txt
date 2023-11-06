@@ -1,6 +1,6 @@
 add_executable(
     gpio_test
-    #gpio_test.cpp
+    gpio_test.cpp
     gpio_register_map_test.cpp
 )
 
