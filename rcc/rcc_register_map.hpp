@@ -1084,7 +1084,7 @@ namespace stm32::rcc
 	{
 	public:
 
-		RccRegisterMap(RccRegisters registers)
+		RccRegisterMap(RccRegisters & registers)
 			: registers(registers) { }
 
 		RccRegisterMap(uint32_t addr)
