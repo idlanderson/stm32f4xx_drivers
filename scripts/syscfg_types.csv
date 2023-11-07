@@ -1,0 +1,19 @@
+MemoryMapping,0,Main Flash memory
+MemoryMapping,1,System Flash memory
+MemoryMapping,2,FSMC Bank1
+MemoryMapping,3,Embedded SRAM
+EthernetPhyInterface,0,MII interface
+EthernetPhyInterface,1,RMII PHY interface
+ExtiConfiguration,0,PAx pin
+ExtiConfiguration,1,PBx pin
+ExtiConfiguration,2,PCx pin
+ExtiConfiguration,3,PDx pin
+ExtiConfiguration,4,PEx pin
+ExtiConfiguration,5,PFx pin
+ExtiConfiguration,6,PGx pin
+ExtiConfiguration,7,PHx pin
+ExtiConfiguration,8,PIx pin
+CompensationCellPowerDown,0,power-down mode
+CompensationCellPowerDown,1,enabled
+CompensationCellReadyFlag,0,not ready
+CompensationCellReadyFlag,1,ready

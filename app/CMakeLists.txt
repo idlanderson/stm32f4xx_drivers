@@ -3,4 +3,4 @@ add_executable(${PROJECT_NAME}.elf
     "syscalls.c"
     "main.cpp")
 
-target_link_libraries(${PROJECT_NAME}.elf rcc gpio spi)
+target_link_libraries(${PROJECT_NAME}.elf rcc gpio spi syscfg)

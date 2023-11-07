@@ -534,7 +534,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "exti"
+peripheral_name = "syscfg"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

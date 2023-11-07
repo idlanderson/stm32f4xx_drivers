@@ -1,11 +1,13 @@
 #include "gpio_ports.hpp"
 #include "rcc_def.hpp"
 #include "spi_def.hpp"
+#include "syscfg_def.hpp"
 #include <type_traits>
 
 using namespace stm32::gpio;
 using namespace stm32::rcc;
 using namespace stm32::spi;
+using namespace stm32::syscfg;
 
 using Pin = stm32::gpio::PinNumber;
 using PinSpeed = stm32::gpio::Speed;

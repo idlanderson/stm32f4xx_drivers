@@ -1,0 +1,20 @@
+MEMRMP,MemoryMapping,Memory mapping selection,MEM_MODE,0,2,rw
+PMC,EthernetPhyInterface,Ethernet PHY interface selection,MII_RMII_SEL,23,1,rw
+EXTICR1,ExtiConfiguration,EXTI x configuration,EXTI0,0,4,rw
+EXTICR1,ExtiConfiguration,EXTI x configuration,EXTI1,4,4,rw
+EXTICR1,ExtiConfiguration,EXTI x configuration,EXTI2,8,4,rw
+EXTICR1,ExtiConfiguration,EXTI x configuration,EXTI3,12,4,rw
+EXTICR2,ExtiConfiguration,EXTI x configuration,EXTI4,0,4,rw
+EXTICR2,ExtiConfiguration,EXTI x configuration,EXTI5,4,4,rw
+EXTICR2,ExtiConfiguration,EXTI x configuration,EXTI6,8,4,rw
+EXTICR2,ExtiConfiguration,EXTI x configuration,EXTI7,12,4,rw
+EXTICR3,ExtiConfiguration,EXTI x configuration,EXTI8,0,4,rw
+EXTICR3,ExtiConfiguration,EXTI x configuration,EXTI9,4,4,rw
+EXTICR3,ExtiConfiguration,EXTI x configuration,EXTI10,8,4,rw
+EXTICR3,ExtiConfiguration,EXTI x configuration,EXTI11,12,4,rw
+EXTICR4,ExtiConfiguration,EXTI x configuration,EXTI12,0,4,rw
+EXTICR4,ExtiConfiguration,EXTI x configuration,EXTI13,4,4,rw
+EXTICR4,ExtiConfiguration,EXTI x configuration,EXTI14,8,4,rw
+EXTICR4,ExtiConfiguration,EXTI x configuration,EXTI15,12,4,rw
+CMPCR,CompensationCellPowerDown,Compensation cell power-down,CMP_PD,0,1,rw
+CMPCR,CompensationCellReadyFlag,Compensation cell ready flag,READY,8,1,r
