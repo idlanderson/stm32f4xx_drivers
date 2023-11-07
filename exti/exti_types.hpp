@@ -9,25 +9,25 @@ namespace stm32::exti
 {
 	using Reserved = uint32_t;
 
-	enum class InterruptMask
+	enum class InterruptMask : uint32_t
 	{
 		Masked = 0U,
 		NotMasked = 1U,
 	};
 
-	enum class EnableFlag
+	enum class EnableFlag : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class SoftwareInterrupt
+	enum class SoftwareInterrupt : uint32_t
 	{
 		NoInterrupt = 0U,
 		TriggerInterrupt = 1U,
 	};
 
-	enum class PendingBit
+	enum class PendingBit : uint32_t
 	{
 		NoTriggerRequestOccurred = 0U,
 		TriggerRequestOccurred = 1U,

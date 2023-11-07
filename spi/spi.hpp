@@ -19,6 +19,7 @@ namespace stm32::spi
     {
     public:
 
+        SpiPeripheral(ISpiRegisterMap & device) : device(device) { }
 		SpiPeripheral(uint32_t addr) : device(*reinterpret_cast<SpiRegisterMap*>(addr)) { }
 
         DataFrameFormat GetDataFrameFormat() const;
@@ -49,7 +50,7 @@ namespace stm32::spi
 
     private:
 
-        SpiRegisterMap & device;
+        ISpiRegisterMap & device;
     };
 }
 

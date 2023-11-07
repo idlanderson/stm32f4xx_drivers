@@ -44,7 +44,7 @@ class EnumType:
 
     def generate(self):
 
-        output = f"enum class {self.name}\n{{\n"
+        output = f"enum class {self.name} : uint32_t\n{{\n"
 
         for enum_value in self.enum_values:
             output += f"\t{to_camel_case(enum_value.description)} = {enum_value.value}U,\n"
@@ -534,7 +534,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "gpio"
+peripheral_name = "exti"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

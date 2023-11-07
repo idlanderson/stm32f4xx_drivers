@@ -7,7 +7,6 @@ add_executable(
 target_link_libraries(
     spi_test
     spi
-    device
     gtest_main
     gmock_main
 )

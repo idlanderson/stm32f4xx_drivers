@@ -136,110 +136,8 @@ namespace stm32::spi
 		volatile uint32_t Value;
 	};
 
-	class SpiRegisterMap
+	struct SpiRegisters
 	{
-	public:
-
-		// CR1 Fields
-		ClockPhase get_CR1_CPHA() const { return CR1.Fields.CPHA; }
-		ClockPolarity get_CR1_CPOL() const { return CR1.Fields.CPOL; }
-		MasterSelection get_CR1_MSTR() const { return CR1.Fields.MSTR; }
-		BaudRateControl get_CR1_BR() const { return CR1.Fields.BR; }
-		SpiEnable get_CR1_SPE() const { return CR1.Fields.SPE; }
-		LsbFirst get_CR1_LSBFIRST() const { return CR1.Fields.LSBFIRST; }
-		InternalSlaveSelect get_CR1_SSI() const { return CR1.Fields.SSI; }
-		SoftwareSlaveManagement get_CR1_SSM() const { return CR1.Fields.SSM; }
-		ReceiveOnly get_CR1_RXONLY() const { return CR1.Fields.RXONLY; }
-		DataFrameFormat get_CR1_DFF() const { return CR1.Fields.DFF; }
-		CrcTransferNext get_CR1_CRCNEXT() const { return CR1.Fields.CRCNEXT; }
-		HardwareCrcCalculationEnable get_CR1_CRCEN() const { return CR1.Fields.CRCEN; }
-		OutputEnableInBidirectionalMode get_CR1_BIDIOE() const { return CR1.Fields.BIDIOE; }
-		BidirectionalDataModeEnable get_CR1_BIDIMODE() const { return CR1.Fields.BIDIMODE; }
-		void set_CR1_CPHA(ClockPhase value) { CR1.Fields.CPHA = value; }
-		void set_CR1_CPOL(ClockPolarity value) { CR1.Fields.CPOL = value; }
-		void set_CR1_MSTR(MasterSelection value) { CR1.Fields.MSTR = value; }
-		void set_CR1_BR(BaudRateControl value) { CR1.Fields.BR = value; }
-		void set_CR1_SPE(SpiEnable value) { CR1.Fields.SPE = value; }
-		void set_CR1_LSBFIRST(LsbFirst value) { CR1.Fields.LSBFIRST = value; }
-		void set_CR1_SSI(InternalSlaveSelect value) { CR1.Fields.SSI = value; }
-		void set_CR1_SSM(SoftwareSlaveManagement value) { CR1.Fields.SSM = value; }
-		void set_CR1_RXONLY(ReceiveOnly value) { CR1.Fields.RXONLY = value; }
-		void set_CR1_DFF(DataFrameFormat value) { CR1.Fields.DFF = value; }
-		void set_CR1_CRCNEXT(CrcTransferNext value) { CR1.Fields.CRCNEXT = value; }
-		void set_CR1_CRCEN(HardwareCrcCalculationEnable value) { CR1.Fields.CRCEN = value; }
-		void set_CR1_BIDIOE(OutputEnableInBidirectionalMode value) { CR1.Fields.BIDIOE = value; }
-		void set_CR1_BIDIMODE(BidirectionalDataModeEnable value) { CR1.Fields.BIDIMODE = value; }
-
-		// CR2 Fields
-		RxBufferDmaEnable get_CR2_RXDMAEN() const { return CR2.Fields.RXDMAEN; }
-		TxBufferDmaEnable get_CR2_TXDMAEN() const { return CR2.Fields.TXDMAEN; }
-		SsOutputEnable get_CR2_SSOE() const { return CR2.Fields.SSOE; }
-		FrameFormat get_CR2_FRF() const { return CR2.Fields.FRF; }
-		ErrorInterruptEnable get_CR2_ERRIE() const { return CR2.Fields.ERRIE; }
-		RxBufferNotEmptyInterruptEnable get_CR2_RXNEIE() const { return CR2.Fields.RXNEIE; }
-		TxBufferEmptyInterruptEnable get_CR2_TXEIE() const { return CR2.Fields.TXEIE; }
-		void set_CR2_RXDMAEN(RxBufferDmaEnable value) { CR2.Fields.RXDMAEN = value; }
-		void set_CR2_TXDMAEN(TxBufferDmaEnable value) { CR2.Fields.TXDMAEN = value; }
-		void set_CR2_SSOE(SsOutputEnable value) { CR2.Fields.SSOE = value; }
-		void set_CR2_FRF(FrameFormat value) { CR2.Fields.FRF = value; }
-		void set_CR2_ERRIE(ErrorInterruptEnable value) { CR2.Fields.ERRIE = value; }
-		void set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable value) { CR2.Fields.RXNEIE = value; }
-		void set_CR2_TXEIE(TxBufferEmptyInterruptEnable value) { CR2.Fields.TXEIE = value; }
-
-		// SR Fields
-		ReceiveBufferNotEmpty get_SR_RXNE() const { return SR.Fields.RXNE; }
-		TransmitBufferEmpty get_SR_TXE() const { return SR.Fields.TXE; }
-		ChannelSide get_SR_CHSIDE() const { return SR.Fields.CHSIDE; }
-		UnderrunFlag get_SR_UDR() const { return SR.Fields.UDR; }
-		CrcErrorFlag get_SR_CRCERR() const { return SR.Fields.CRCERR; }
-		ModeFault get_SR_MODF() const { return SR.Fields.MODF; }
-		OverrunFlag get_SR_OVR() const { return SR.Fields.OVR; }
-		BusyFlag get_SR_BSY() const { return SR.Fields.BSY; }
-		FrameFormatError get_SR_FRE() const { return SR.Fields.FRE; }
-		void set_SR_CRCERR(CrcErrorFlag value) { SR.Fields.CRCERR = value; }
-
-		// DR Fields
-		uint32_t get_DR_DR() const { return DR.Fields.DR; }
-		void set_DR_DR(uint32_t value) { DR.Fields.DR = value; }
-
-		// CRCPR Fields
-		uint32_t get_CRCPR_CRCPOLY() const { return CRCPR.Fields.CRCPOLY; }
-		void set_CRCPR_CRCPOLY(uint32_t value) { CRCPR.Fields.CRCPOLY = value; }
-
-		// RXCRCR Fields
-		uint32_t get_RXCRCR_RXCRC() const { return RXCRCR.Fields.RXCRC; }
-
-		// TXCRCR Fields
-		uint32_t get_TXCRCR_TXCRC() const { return TXCRCR.Fields.TXCRC; }
-
-		// I2SCFGR Fields
-		ChannelLength get_I2SCFGR_CHLEN() const { return I2SCFGR.Fields.CHLEN; }
-		DataLengthToBeTransferred get_I2SCFGR_DATLEN() const { return I2SCFGR.Fields.DATLEN; }
-		SteadyStateClockPolarity get_I2SCFGR_CKPOL() const { return I2SCFGR.Fields.CKPOL; }
-		I2SStandardSelection get_I2SCFGR_I2SSTD() const { return I2SCFGR.Fields.I2SSTD; }
-		PcmFrameSynchronization get_I2SCFGR_PCMSYNC() const { return I2SCFGR.Fields.PCMSYNC; }
-		I2SConfigurationMode get_I2SCFGR_I2SCFG() const { return I2SCFGR.Fields.I2SCFG; }
-		I2SEnable get_I2SCFGR_I2SE() const { return I2SCFGR.Fields.I2SE; }
-		I2SModeSelection get_I2SCFGR_I2SMOD() const { return I2SCFGR.Fields.I2SMOD; }
-		void set_I2SCFGR_CHLEN(ChannelLength value) { I2SCFGR.Fields.CHLEN = value; }
-		void set_I2SCFGR_DATLEN(DataLengthToBeTransferred value) { I2SCFGR.Fields.DATLEN = value; }
-		void set_I2SCFGR_CKPOL(SteadyStateClockPolarity value) { I2SCFGR.Fields.CKPOL = value; }
-		void set_I2SCFGR_I2SSTD(I2SStandardSelection value) { I2SCFGR.Fields.I2SSTD = value; }
-		void set_I2SCFGR_PCMSYNC(PcmFrameSynchronization value) { I2SCFGR.Fields.PCMSYNC = value; }
-		void set_I2SCFGR_I2SCFG(I2SConfigurationMode value) { I2SCFGR.Fields.I2SCFG = value; }
-		void set_I2SCFGR_I2SE(I2SEnable value) { I2SCFGR.Fields.I2SE = value; }
-		void set_I2SCFGR_I2SMOD(I2SModeSelection value) { I2SCFGR.Fields.I2SMOD = value; }
-
-		// I2SPR Fields
-		uint32_t get_I2SPR_I2SDIV() const { return I2SPR.Fields.I2SDIV; }
-		OddFactorForThePrescaler get_I2SPR_ODD() const { return I2SPR.Fields.ODD; }
-		MasterClockOutputEnable get_I2SPR_MCKOE() const { return I2SPR.Fields.MCKOE; }
-		void set_I2SPR_I2SDIV(uint32_t value) { I2SPR.Fields.I2SDIV = value; }
-		void set_I2SPR_ODD(OddFactorForThePrescaler value) { I2SPR.Fields.ODD = value; }
-		void set_I2SPR_MCKOE(MasterClockOutputEnable value) { I2SPR.Fields.MCKOE = value; }
-
-	private:
-
 		CR1_t CR1; // Address Offset 0x0
 		CR2_t CR2; // Address Offset 0x4
 		SR_t SR; // Address Offset 0x8
@@ -249,6 +147,222 @@ namespace stm32::spi
 		TXCRCR_t TXCRCR; // Address Offset 0x18
 		I2SCFGR_t I2SCFGR; // Address Offset 0x1C
 		I2SPR_t I2SPR; // Address Offset 0x20
+	};
+
+	class ISpiRegisterMap
+	{
+	public:
+
+		// CR1 Fields
+		virtual ClockPhase get_CR1_CPHA() const = 0;
+		virtual ClockPolarity get_CR1_CPOL() const = 0;
+		virtual MasterSelection get_CR1_MSTR() const = 0;
+		virtual BaudRateControl get_CR1_BR() const = 0;
+		virtual SpiEnable get_CR1_SPE() const = 0;
+		virtual LsbFirst get_CR1_LSBFIRST() const = 0;
+		virtual InternalSlaveSelect get_CR1_SSI() const = 0;
+		virtual SoftwareSlaveManagement get_CR1_SSM() const = 0;
+		virtual ReceiveOnly get_CR1_RXONLY() const = 0;
+		virtual DataFrameFormat get_CR1_DFF() const = 0;
+		virtual CrcTransferNext get_CR1_CRCNEXT() const = 0;
+		virtual HardwareCrcCalculationEnable get_CR1_CRCEN() const = 0;
+		virtual OutputEnableInBidirectionalMode get_CR1_BIDIOE() const = 0;
+		virtual BidirectionalDataModeEnable get_CR1_BIDIMODE() const = 0;
+		virtual void set_CR1_CPHA(ClockPhase value) = 0;
+		virtual void set_CR1_CPOL(ClockPolarity value) = 0;
+		virtual void set_CR1_MSTR(MasterSelection value) = 0;
+		virtual void set_CR1_BR(BaudRateControl value) = 0;
+		virtual void set_CR1_SPE(SpiEnable value) = 0;
+		virtual void set_CR1_LSBFIRST(LsbFirst value) = 0;
+		virtual void set_CR1_SSI(InternalSlaveSelect value) = 0;
+		virtual void set_CR1_SSM(SoftwareSlaveManagement value) = 0;
+		virtual void set_CR1_RXONLY(ReceiveOnly value) = 0;
+		virtual void set_CR1_DFF(DataFrameFormat value) = 0;
+		virtual void set_CR1_CRCNEXT(CrcTransferNext value) = 0;
+		virtual void set_CR1_CRCEN(HardwareCrcCalculationEnable value) = 0;
+		virtual void set_CR1_BIDIOE(OutputEnableInBidirectionalMode value) = 0;
+		virtual void set_CR1_BIDIMODE(BidirectionalDataModeEnable value) = 0;
+
+		// CR2 Fields
+		virtual RxBufferDmaEnable get_CR2_RXDMAEN() const = 0;
+		virtual TxBufferDmaEnable get_CR2_TXDMAEN() const = 0;
+		virtual SsOutputEnable get_CR2_SSOE() const = 0;
+		virtual FrameFormat get_CR2_FRF() const = 0;
+		virtual ErrorInterruptEnable get_CR2_ERRIE() const = 0;
+		virtual RxBufferNotEmptyInterruptEnable get_CR2_RXNEIE() const = 0;
+		virtual TxBufferEmptyInterruptEnable get_CR2_TXEIE() const = 0;
+		virtual void set_CR2_RXDMAEN(RxBufferDmaEnable value) = 0;
+		virtual void set_CR2_TXDMAEN(TxBufferDmaEnable value) = 0;
+		virtual void set_CR2_SSOE(SsOutputEnable value) = 0;
+		virtual void set_CR2_FRF(FrameFormat value) = 0;
+		virtual void set_CR2_ERRIE(ErrorInterruptEnable value) = 0;
+		virtual void set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable value) = 0;
+		virtual void set_CR2_TXEIE(TxBufferEmptyInterruptEnable value) = 0;
+
+		// SR Fields
+		virtual ReceiveBufferNotEmpty get_SR_RXNE() const = 0;
+		virtual TransmitBufferEmpty get_SR_TXE() const = 0;
+		virtual ChannelSide get_SR_CHSIDE() const = 0;
+		virtual UnderrunFlag get_SR_UDR() const = 0;
+		virtual CrcErrorFlag get_SR_CRCERR() const = 0;
+		virtual ModeFault get_SR_MODF() const = 0;
+		virtual OverrunFlag get_SR_OVR() const = 0;
+		virtual BusyFlag get_SR_BSY() const = 0;
+		virtual FrameFormatError get_SR_FRE() const = 0;
+		virtual void set_SR_CRCERR(CrcErrorFlag value) = 0;
+
+		// DR Fields
+		virtual uint32_t get_DR_DR() const = 0;
+		virtual void set_DR_DR(uint32_t value) = 0;
+
+		// CRCPR Fields
+		virtual uint32_t get_CRCPR_CRCPOLY() const = 0;
+		virtual void set_CRCPR_CRCPOLY(uint32_t value) = 0;
+
+		// RXCRCR Fields
+		virtual uint32_t get_RXCRCR_RXCRC() const = 0;
+
+		// TXCRCR Fields
+		virtual uint32_t get_TXCRCR_TXCRC() const = 0;
+
+		// I2SCFGR Fields
+		virtual ChannelLength get_I2SCFGR_CHLEN() const = 0;
+		virtual DataLengthToBeTransferred get_I2SCFGR_DATLEN() const = 0;
+		virtual SteadyStateClockPolarity get_I2SCFGR_CKPOL() const = 0;
+		virtual I2SStandardSelection get_I2SCFGR_I2SSTD() const = 0;
+		virtual PcmFrameSynchronization get_I2SCFGR_PCMSYNC() const = 0;
+		virtual I2SConfigurationMode get_I2SCFGR_I2SCFG() const = 0;
+		virtual I2SEnable get_I2SCFGR_I2SE() const = 0;
+		virtual I2SModeSelection get_I2SCFGR_I2SMOD() const = 0;
+		virtual void set_I2SCFGR_CHLEN(ChannelLength value) = 0;
+		virtual void set_I2SCFGR_DATLEN(DataLengthToBeTransferred value) = 0;
+		virtual void set_I2SCFGR_CKPOL(SteadyStateClockPolarity value) = 0;
+		virtual void set_I2SCFGR_I2SSTD(I2SStandardSelection value) = 0;
+		virtual void set_I2SCFGR_PCMSYNC(PcmFrameSynchronization value) = 0;
+		virtual void set_I2SCFGR_I2SCFG(I2SConfigurationMode value) = 0;
+		virtual void set_I2SCFGR_I2SE(I2SEnable value) = 0;
+		virtual void set_I2SCFGR_I2SMOD(I2SModeSelection value) = 0;
+
+		// I2SPR Fields
+		virtual uint32_t get_I2SPR_I2SDIV() const = 0;
+		virtual OddFactorForThePrescaler get_I2SPR_ODD() const = 0;
+		virtual MasterClockOutputEnable get_I2SPR_MCKOE() const = 0;
+		virtual void set_I2SPR_I2SDIV(uint32_t value) = 0;
+		virtual void set_I2SPR_ODD(OddFactorForThePrescaler value) = 0;
+		virtual void set_I2SPR_MCKOE(MasterClockOutputEnable value) = 0;
+	};
+
+	class SpiRegisterMap : public ISpiRegisterMap
+	{
+	public:
+
+		SpiRegisterMap(SpiRegisters & registers)
+			: registers(registers) { }
+
+		SpiRegisterMap(uint32_t addr)
+			: registers(*reinterpret_cast<SpiRegisters*>(addr)) { }
+
+		// CR1 Fields
+		ClockPhase get_CR1_CPHA() const { return registers.CR1.Fields.CPHA; }
+		ClockPolarity get_CR1_CPOL() const { return registers.CR1.Fields.CPOL; }
+		MasterSelection get_CR1_MSTR() const { return registers.CR1.Fields.MSTR; }
+		BaudRateControl get_CR1_BR() const { return registers.CR1.Fields.BR; }
+		SpiEnable get_CR1_SPE() const { return registers.CR1.Fields.SPE; }
+		LsbFirst get_CR1_LSBFIRST() const { return registers.CR1.Fields.LSBFIRST; }
+		InternalSlaveSelect get_CR1_SSI() const { return registers.CR1.Fields.SSI; }
+		SoftwareSlaveManagement get_CR1_SSM() const { return registers.CR1.Fields.SSM; }
+		ReceiveOnly get_CR1_RXONLY() const { return registers.CR1.Fields.RXONLY; }
+		DataFrameFormat get_CR1_DFF() const { return registers.CR1.Fields.DFF; }
+		CrcTransferNext get_CR1_CRCNEXT() const { return registers.CR1.Fields.CRCNEXT; }
+		HardwareCrcCalculationEnable get_CR1_CRCEN() const { return registers.CR1.Fields.CRCEN; }
+		OutputEnableInBidirectionalMode get_CR1_BIDIOE() const { return registers.CR1.Fields.BIDIOE; }
+		BidirectionalDataModeEnable get_CR1_BIDIMODE() const { return registers.CR1.Fields.BIDIMODE; }
+		void set_CR1_CPHA(ClockPhase value) { registers.CR1.Fields.CPHA = value; }
+		void set_CR1_CPOL(ClockPolarity value) { registers.CR1.Fields.CPOL = value; }
+		void set_CR1_MSTR(MasterSelection value) { registers.CR1.Fields.MSTR = value; }
+		void set_CR1_BR(BaudRateControl value) { registers.CR1.Fields.BR = value; }
+		void set_CR1_SPE(SpiEnable value) { registers.CR1.Fields.SPE = value; }
+		void set_CR1_LSBFIRST(LsbFirst value) { registers.CR1.Fields.LSBFIRST = value; }
+		void set_CR1_SSI(InternalSlaveSelect value) { registers.CR1.Fields.SSI = value; }
+		void set_CR1_SSM(SoftwareSlaveManagement value) { registers.CR1.Fields.SSM = value; }
+		void set_CR1_RXONLY(ReceiveOnly value) { registers.CR1.Fields.RXONLY = value; }
+		void set_CR1_DFF(DataFrameFormat value) { registers.CR1.Fields.DFF = value; }
+		void set_CR1_CRCNEXT(CrcTransferNext value) { registers.CR1.Fields.CRCNEXT = value; }
+		void set_CR1_CRCEN(HardwareCrcCalculationEnable value) { registers.CR1.Fields.CRCEN = value; }
+		void set_CR1_BIDIOE(OutputEnableInBidirectionalMode value) { registers.CR1.Fields.BIDIOE = value; }
+		void set_CR1_BIDIMODE(BidirectionalDataModeEnable value) { registers.CR1.Fields.BIDIMODE = value; }
+
+		// CR2 Fields
+		RxBufferDmaEnable get_CR2_RXDMAEN() const { return registers.CR2.Fields.RXDMAEN; }
+		TxBufferDmaEnable get_CR2_TXDMAEN() const { return registers.CR2.Fields.TXDMAEN; }
+		SsOutputEnable get_CR2_SSOE() const { return registers.CR2.Fields.SSOE; }
+		FrameFormat get_CR2_FRF() const { return registers.CR2.Fields.FRF; }
+		ErrorInterruptEnable get_CR2_ERRIE() const { return registers.CR2.Fields.ERRIE; }
+		RxBufferNotEmptyInterruptEnable get_CR2_RXNEIE() const { return registers.CR2.Fields.RXNEIE; }
+		TxBufferEmptyInterruptEnable get_CR2_TXEIE() const { return registers.CR2.Fields.TXEIE; }
+		void set_CR2_RXDMAEN(RxBufferDmaEnable value) { registers.CR2.Fields.RXDMAEN = value; }
+		void set_CR2_TXDMAEN(TxBufferDmaEnable value) { registers.CR2.Fields.TXDMAEN = value; }
+		void set_CR2_SSOE(SsOutputEnable value) { registers.CR2.Fields.SSOE = value; }
+		void set_CR2_FRF(FrameFormat value) { registers.CR2.Fields.FRF = value; }
+		void set_CR2_ERRIE(ErrorInterruptEnable value) { registers.CR2.Fields.ERRIE = value; }
+		void set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable value) { registers.CR2.Fields.RXNEIE = value; }
+		void set_CR2_TXEIE(TxBufferEmptyInterruptEnable value) { registers.CR2.Fields.TXEIE = value; }
+
+		// SR Fields
+		ReceiveBufferNotEmpty get_SR_RXNE() const { return registers.SR.Fields.RXNE; }
+		TransmitBufferEmpty get_SR_TXE() const { return registers.SR.Fields.TXE; }
+		ChannelSide get_SR_CHSIDE() const { return registers.SR.Fields.CHSIDE; }
+		UnderrunFlag get_SR_UDR() const { return registers.SR.Fields.UDR; }
+		CrcErrorFlag get_SR_CRCERR() const { return registers.SR.Fields.CRCERR; }
+		ModeFault get_SR_MODF() const { return registers.SR.Fields.MODF; }
+		OverrunFlag get_SR_OVR() const { return registers.SR.Fields.OVR; }
+		BusyFlag get_SR_BSY() const { return registers.SR.Fields.BSY; }
+		FrameFormatError get_SR_FRE() const { return registers.SR.Fields.FRE; }
+		void set_SR_CRCERR(CrcErrorFlag value) { registers.SR.Fields.CRCERR = value; }
+
+		// DR Fields
+		uint32_t get_DR_DR() const { return registers.DR.Fields.DR; }
+		void set_DR_DR(uint32_t value) { registers.DR.Fields.DR = value; }
+
+		// CRCPR Fields
+		uint32_t get_CRCPR_CRCPOLY() const { return registers.CRCPR.Fields.CRCPOLY; }
+		void set_CRCPR_CRCPOLY(uint32_t value) { registers.CRCPR.Fields.CRCPOLY = value; }
+
+		// RXCRCR Fields
+		uint32_t get_RXCRCR_RXCRC() const { return registers.RXCRCR.Fields.RXCRC; }
+
+		// TXCRCR Fields
+		uint32_t get_TXCRCR_TXCRC() const { return registers.TXCRCR.Fields.TXCRC; }
+
+		// I2SCFGR Fields
+		ChannelLength get_I2SCFGR_CHLEN() const { return registers.I2SCFGR.Fields.CHLEN; }
+		DataLengthToBeTransferred get_I2SCFGR_DATLEN() const { return registers.I2SCFGR.Fields.DATLEN; }
+		SteadyStateClockPolarity get_I2SCFGR_CKPOL() const { return registers.I2SCFGR.Fields.CKPOL; }
+		I2SStandardSelection get_I2SCFGR_I2SSTD() const { return registers.I2SCFGR.Fields.I2SSTD; }
+		PcmFrameSynchronization get_I2SCFGR_PCMSYNC() const { return registers.I2SCFGR.Fields.PCMSYNC; }
+		I2SConfigurationMode get_I2SCFGR_I2SCFG() const { return registers.I2SCFGR.Fields.I2SCFG; }
+		I2SEnable get_I2SCFGR_I2SE() const { return registers.I2SCFGR.Fields.I2SE; }
+		I2SModeSelection get_I2SCFGR_I2SMOD() const { return registers.I2SCFGR.Fields.I2SMOD; }
+		void set_I2SCFGR_CHLEN(ChannelLength value) { registers.I2SCFGR.Fields.CHLEN = value; }
+		void set_I2SCFGR_DATLEN(DataLengthToBeTransferred value) { registers.I2SCFGR.Fields.DATLEN = value; }
+		void set_I2SCFGR_CKPOL(SteadyStateClockPolarity value) { registers.I2SCFGR.Fields.CKPOL = value; }
+		void set_I2SCFGR_I2SSTD(I2SStandardSelection value) { registers.I2SCFGR.Fields.I2SSTD = value; }
+		void set_I2SCFGR_PCMSYNC(PcmFrameSynchronization value) { registers.I2SCFGR.Fields.PCMSYNC = value; }
+		void set_I2SCFGR_I2SCFG(I2SConfigurationMode value) { registers.I2SCFGR.Fields.I2SCFG = value; }
+		void set_I2SCFGR_I2SE(I2SEnable value) { registers.I2SCFGR.Fields.I2SE = value; }
+		void set_I2SCFGR_I2SMOD(I2SModeSelection value) { registers.I2SCFGR.Fields.I2SMOD = value; }
+
+		// I2SPR Fields
+		uint32_t get_I2SPR_I2SDIV() const { return registers.I2SPR.Fields.I2SDIV; }
+		OddFactorForThePrescaler get_I2SPR_ODD() const { return registers.I2SPR.Fields.ODD; }
+		MasterClockOutputEnable get_I2SPR_MCKOE() const { return registers.I2SPR.Fields.MCKOE; }
+		void set_I2SPR_I2SDIV(uint32_t value) { registers.I2SPR.Fields.I2SDIV = value; }
+		void set_I2SPR_ODD(OddFactorForThePrescaler value) { registers.I2SPR.Fields.ODD = value; }
+		void set_I2SPR_MCKOE(MasterClockOutputEnable value) { registers.I2SPR.Fields.MCKOE = value; }
+
+	private:
+
+		SpiRegisters & registers;
 	};
 }
 #endif // SPI_REGISTER_MAP_HPP_

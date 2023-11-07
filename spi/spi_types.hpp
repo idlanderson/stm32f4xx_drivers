@@ -9,25 +9,25 @@ namespace stm32::spi
 {
 	using Reserved = uint32_t;
 
-	enum class ClockPhase
+	enum class ClockPhase : uint32_t
 	{
 		FirstClockTransition = 0U,
 		SecondClockTransition = 1U,
 	};
 
-	enum class ClockPolarity
+	enum class ClockPolarity : uint32_t
 	{
 		CkTo0WhenIdle = 0U,
 		CkTo1WhenIdle = 1U,
 	};
 
-	enum class MasterSelection
+	enum class MasterSelection : uint32_t
 	{
 		Slave = 0U,
 		Master = 1U,
 	};
 
-	enum class BaudRateControl
+	enum class BaudRateControl : uint32_t
 	{
 		FpclkDiv2 = 0U,
 		FpclkDiv4 = 1U,
@@ -39,169 +39,169 @@ namespace stm32::spi
 		FpclkDiv256 = 7U,
 	};
 
-	enum class SpiEnable
+	enum class SpiEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class LsbFirst
+	enum class LsbFirst : uint32_t
 	{
 		MsbTransmittedFirst = 0U,
 		LsbTransmittedFirst = 1U,
 	};
 
-	enum class InternalSlaveSelect
+	enum class InternalSlaveSelect : uint32_t
 	{
 		DriveNssLow = 0U,
 		DriveNssHigh = 1U,
 	};
 
-	enum class SoftwareSlaveManagement
+	enum class SoftwareSlaveManagement : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class ReceiveOnly
+	enum class ReceiveOnly : uint32_t
 	{
 		FullDuplex = 0U,
 		OutputDisabled = 1U,
 	};
 
-	enum class DataFrameFormat
+	enum class DataFrameFormat : uint32_t
 	{
 		_8Bit = 0U,
 		_16Bit = 1U,
 	};
 
-	enum class CrcTransferNext
+	enum class CrcTransferNext : uint32_t
 	{
 		DataPhase = 0U,
 		NextTransferIsCrc = 1U,
 	};
 
-	enum class HardwareCrcCalculationEnable
+	enum class HardwareCrcCalculationEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class OutputEnableInBidirectionalMode
+	enum class OutputEnableInBidirectionalMode : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class BidirectionalDataModeEnable
+	enum class BidirectionalDataModeEnable : uint32_t
 	{
 		_2LineUnidirectional = 0U,
 		_1LineBidirectional = 1U,
 	};
 
-	enum class RxBufferDmaEnable
+	enum class RxBufferDmaEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class TxBufferDmaEnable
+	enum class TxBufferDmaEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class SsOutputEnable
+	enum class SsOutputEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class FrameFormat
+	enum class FrameFormat : uint32_t
 	{
 		MotorolaMode = 0U,
 		TiMode = 1U,
 	};
 
-	enum class ErrorInterruptEnable
+	enum class ErrorInterruptEnable : uint32_t
 	{
 		Masked = 0U,
 		Enabled = 1U,
 	};
 
-	enum class RxBufferNotEmptyInterruptEnable
+	enum class RxBufferNotEmptyInterruptEnable : uint32_t
 	{
 		Masked = 0U,
 		NotMasked = 1U,
 	};
 
-	enum class TxBufferEmptyInterruptEnable
+	enum class TxBufferEmptyInterruptEnable : uint32_t
 	{
 		Masked = 0U,
 		NotMasked = 1U,
 	};
 
-	enum class ReceiveBufferNotEmpty
+	enum class ReceiveBufferNotEmpty : uint32_t
 	{
 		Empty = 0U,
 		NotEmpty = 1U,
 	};
 
-	enum class TransmitBufferEmpty
+	enum class TransmitBufferEmpty : uint32_t
 	{
 		NotEmpty = 0U,
 		Empty = 1U,
 	};
 
-	enum class ChannelSide
+	enum class ChannelSide : uint32_t
 	{
 		Left = 0U,
 		Right = 1U,
 	};
 
-	enum class UnderrunFlag
+	enum class UnderrunFlag : uint32_t
 	{
 		NoUnderrunOccurred = 0U,
 		UnderrunOccurred = 1U,
 	};
 
-	enum class CrcErrorFlag
+	enum class CrcErrorFlag : uint32_t
 	{
 		Matches = 0U,
 		DoesNotMatch = 1U,
 	};
 
-	enum class ModeFault
+	enum class ModeFault : uint32_t
 	{
 		NoModeFault = 0U,
 		ModeFault = 1U,
 	};
 
-	enum class OverrunFlag
+	enum class OverrunFlag : uint32_t
 	{
 		NoOverrunOccurred = 0U,
 		OverrunOccurred = 1U,
 	};
 
-	enum class BusyFlag
+	enum class BusyFlag : uint32_t
 	{
 		NotBusy = 0U,
 		Busy = 1U,
 	};
 
-	enum class FrameFormatError
+	enum class FrameFormatError : uint32_t
 	{
 		NoFrameFormatError = 0U,
 		FrameFormatErrorOccurred = 1U,
 	};
 
-	enum class ChannelLength
+	enum class ChannelLength : uint32_t
 	{
 		_16Bit = 0U,
 		_32Bit = 1U,
 	};
 
-	enum class DataLengthToBeTransferred
+	enum class DataLengthToBeTransferred : uint32_t
 	{
 		_16Bit = 0U,
 		_24Bit = 1U,
@@ -209,13 +209,13 @@ namespace stm32::spi
 		NotAllowed = 3U,
 	};
 
-	enum class SteadyStateClockPolarity
+	enum class SteadyStateClockPolarity : uint32_t
 	{
 		Low = 0U,
 		High = 1U,
 	};
 
-	enum class I2SStandardSelection
+	enum class I2SStandardSelection : uint32_t
 	{
 		I2SPhilipsStandard = 0U,
 		MsbJustifiedStandard = 1U,
@@ -223,13 +223,13 @@ namespace stm32::spi
 		PcmStandard = 3U,
 	};
 
-	enum class PcmFrameSynchronization
+	enum class PcmFrameSynchronization : uint32_t
 	{
 		ShortFrame = 0U,
 		LongFrame = 1U,
 	};
 
-	enum class I2SConfigurationMode
+	enum class I2SConfigurationMode : uint32_t
 	{
 		SlaveTransmit = 0U,
 		SlaveReceive = 1U,
@@ -237,25 +237,25 @@ namespace stm32::spi
 		MasterReceive = 3U,
 	};
 
-	enum class I2SEnable
+	enum class I2SEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,
 	};
 
-	enum class I2SModeSelection
+	enum class I2SModeSelection : uint32_t
 	{
 		SpiMode = 0U,
 		I2SMode = 1U,
 	};
 
-	enum class OddFactorForThePrescaler
+	enum class OddFactorForThePrescaler : uint32_t
 	{
 		I2SdivTimes2 = 0U,
 		I2SdivTimes2Plus1 = 1U,
 	};
 
-	enum class MasterClockOutputEnable
+	enum class MasterClockOutputEnable : uint32_t
 	{
 		Disabled = 0U,
 		Enabled = 1U,

@@ -5,7 +5,7 @@
 using namespace stm32::spi;
 using namespace testing;
 
-class MockSpiRegisterMap : public SpiRegisterMap
+class MockSpiRegisterMap : public ISpiRegisterMap
 {
 public:
 

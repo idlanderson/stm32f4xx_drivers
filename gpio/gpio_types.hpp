@@ -9,7 +9,7 @@ namespace stm32::gpio
 {
 	using Reserved = uint32_t;
 
-	enum class Mode
+	enum class Mode : uint32_t
 	{
 		Input = 0U,
 		GeneralPurposeOutput = 1U,
@@ -17,13 +17,13 @@ namespace stm32::gpio
 		Analog = 3U,
 	};
 
-	enum class OutputType
+	enum class OutputType : uint32_t
 	{
 		PushPull = 0U,
 		OpenDrain = 1U,
 	};
 
-	enum class Speed
+	enum class Speed : uint32_t
 	{
 		LowSpeed = 0U,
 		MediumSpeed = 1U,
@@ -31,26 +31,26 @@ namespace stm32::gpio
 		VeryHighSpeed = 3U,
 	};
 
-	enum class PullUpPullDown
+	enum class PullUpPullDown : uint32_t
 	{
 		NoPullUpPullDown = 0U,
 		PullUp = 1U,
 		PullDown = 2U,
 	};
 
-	enum class PortConfigurationLock
+	enum class PortConfigurationLock : uint32_t
 	{
 		NotLocked = 0U,
 		Locked = 1U,
 	};
 
-	enum class PortConfigurationLockKey
+	enum class PortConfigurationLockKey : uint32_t
 	{
 		KeyNotActive = 0U,
 		KeyActive = 1U,
 	};
 
-	enum class AlternateFunction
+	enum class AlternateFunction : uint32_t
 	{
 		Af0 = 0U,
 		Af1 = 1U,
