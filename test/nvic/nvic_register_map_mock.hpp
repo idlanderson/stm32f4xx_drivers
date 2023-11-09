@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "nvic_register_map.hpp"
+#include <cstring>
 
 using namespace stm32::nvic;
 using namespace testing;
@@ -38,3 +39,23 @@ public:
 	MOCK_METHOD(void, set_STIR_INTID, (uint32_t), (override));
 };
 
+class NvicPeripheralTest : public ::testing::Test
+{
+public:
+	NvicPeripheralTest() : registerMap(registers), nvic(registerMap) { }
+protected:
+	void SetUp() override { std::memset(&registers, 0, sizeof(registers)); } 
+	void TearDown() override { SetUp(); }
+	NvicRegisters registers = { };
+	NvicRegisterMap registerMap;
+	NvicPeripheral nvic;
+};
+
+class NvicPeripheralTestWithMock : public ::testing::Test
+{
+public:
+	NvicPeripheralTestWithMock() : nvic(registerMap) { }
+protected:
+	MockNvicRegisterMap registerMap;
+	NvicPeripheral nvic;
+};

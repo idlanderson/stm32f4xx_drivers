@@ -13,8 +13,9 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_subdirectory(gpio)
 add_subdirectory(rcc)
+add_subdirectory(gpio)
 add_subdirectory(spi)
-add_subdirectory(exti)
 add_subdirectory(syscfg)
+add_subdirectory(nvic)
+add_subdirectory(exti)

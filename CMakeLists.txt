@@ -21,6 +21,7 @@ add_subdirectory(rcc)
 add_subdirectory(gpio)
 add_subdirectory(spi)
 add_subdirectory(syscfg)
+add_subdirectory(nvic)
 add_subdirectory(exti)
 
 if (BUILD_TESTS)

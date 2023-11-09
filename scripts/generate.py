@@ -509,6 +509,32 @@ class Peripheral:
 
         return output
 
+    def generate_test_fixtures(self):
+
+        output = (
+            f"class {self.name}PeripheralTest : public ::testing::Test\n"
+            f"{{\n"
+            f"public:\n"
+            f"\t{self.name}PeripheralTest() : registerMap(registers), {self.name.lower()}(registerMap) {{ }}\n"
+            f"protected:\n"
+            f"\tvoid SetUp() override {{ std::memset(&registers, 0, sizeof(registers)); }} \n"
+            f"\tvoid TearDown() override {{ SetUp(); }}\n"
+            f"\t{self.name}Registers registers = {{ }};\n"
+            f"\t{self.name}RegisterMap registerMap;\n"
+            f"\t{self.name}Peripheral {self.name.lower()};\n"
+            f"}};\n\n"
+            f"class {self.name}PeripheralTestWithMock : public ::testing::Test\n"
+            f"{{\n"
+            f"public:\n"
+            f"\t{self.name}PeripheralTestWithMock() : {self.name.lower()}(registerMap) {{ }}\n"
+            f"protected:\n"
+            f"\tMock{self.name}RegisterMap registerMap;\n"
+            f"\t{self.name}Peripheral {self.name.lower()};\n"
+            f"}};"
+        )
+
+        return output
+
     def generate_unit_tests(self):
 
         output = ""
@@ -583,14 +609,17 @@ class Peripheral:
         with open(file_name, 'w') as file:   
         
             mock_class = self.generate_mock_class()
-        
+            test_fixtures = self.generate_test_fixtures()
+
             file.write(
                 f"#include <gtest/gtest.h>\n"
                 f"#include <gmock/gmock.h>\n"
-                f"#include \"{header_to_include}\"\n\n"
+                f"#include \"{header_to_include}\"\n"
+                f"#include <cstring>\n\n"
                 f"using namespace {top_level_namespace}::{self.name.lower()};\n"
                 f"using namespace testing;\n\n"
                 f"{mock_class}"
+                f"{test_fixtures}"
             )
 
 peripheral_name = "nvic"
