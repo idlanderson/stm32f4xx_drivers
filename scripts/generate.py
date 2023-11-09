@@ -76,23 +76,41 @@ class RegisterField:
         else:
             return "uint32_t"
 
-    def generate_getter(self):
-        return f"{self.generate_data_type()} {self.generate_method_name('get')}() const {{ return registers.{self.reg_short_name}.Fields.{self.name}; }}\n"
+    def generate_getter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"{self.generate_data_type()} {self.generate_method_name('get')}() const {{ return registers.{self.reg_short_name}.Fields.{self.name}; }}\n"
+        elif number_of_registers > 1:
+            return f"{self.generate_data_type()} {self.generate_method_name('get')}(uint16_t index) const {{ return registers.{self.reg_short_name}[index].Fields.{self.name}; }}\n"
 
-    def generate_setter(self):
-        return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ registers.{self.reg_short_name}.Fields.{self.name} = value; }}\n"
+    def generate_setter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"void {self.generate_method_name('set')}({self.generate_data_type()} value) {{ registers.{self.reg_short_name}.Fields.{self.name} = value; }}\n"
+        elif number_of_registers > 1:
+            return f"void {self.generate_method_name('set')}(uint16_t index, {self.generate_data_type()} value) {{ registers.{self.reg_short_name}[index].Fields.{self.name} = value; }}\n"
 
-    def generate_virtual_getter(self):
-        return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
+    def generate_virtual_getter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}() const = 0;\n"
+        elif number_of_registers > 1:
+            return f"virtual {self.generate_data_type()} {self.generate_method_name('get')}(uint16_t index) const = 0;\n"
 
-    def generate_virtual_setter(self):
-        return f"virtual void {self.generate_method_name('set')}({self.generate_data_type()} value) = 0;\n"
+    def generate_virtual_setter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"virtual void {self.generate_method_name('set')}({self.generate_data_type()} value) = 0;\n"
+        elif number_of_registers > 1:
+            return f"virtual void {self.generate_method_name('set')}(uint16_t index, {self.generate_data_type()} value) = 0;\n"
 
-    def generate_mock_getter(self):
-        return f"MOCK_METHOD({self.generate_data_type()}, {self.generate_method_name('get')}, (), (const, override));\n"
+    def generate_mock_getter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"MOCK_METHOD({self.generate_data_type()}, {self.generate_method_name('get')}, (), (const, override));\n"
+        elif number_of_registers > 1:
+            return f"MOCK_METHOD({self.generate_data_type()}, {self.generate_method_name('get')}, (uint16_t), (const, override));\n"
 
-    def generate_mock_setter(self):
-        return f"MOCK_METHOD(void, {self.generate_method_name('set')}, ({self.generate_data_type()}), (override));\n"
+    def generate_mock_setter(self, number_of_registers):
+        if number_of_registers == 1:
+            return f"MOCK_METHOD(void, {self.generate_method_name('set')}, ({self.generate_data_type()}), (override));\n"
+        elif number_of_registers > 1:
+            return f"MOCK_METHOD(void, {self.generate_method_name('set')}, (uint16_t, {self.generate_data_type()}), (override));\n"
 
     def generate_unit_test(self):
 
@@ -113,19 +131,25 @@ class Register:
 
     name : str
     offset : int
+    number : int
     fields : List[RegisterField]
 
-    def __init__(self, name, offset):
+    def __init__(self, name, offset, number):
         self.name = name
         self.offset = offset
+        self.number = number
         self.fields = []
-        print(f"New Register: Name={self.name}, Offset=0x{self.offset:X}")
+        print(f"New Register: Name={self.name}, Offset=0x{self.offset:X}, Number={self.number}")
 
     def add_field(self, name, description, bit_position, width, access, type):
         self.fields.append(RegisterField(self.name, name, description, bit_position, width, access, type))
 
     def generate_class_member_variable(self):
-        return f"{self.name}_t {self.name}; // Address Offset 0x{self.offset:X}\n"
+
+        if self.number == 1:
+            return f"{self.name}_t {self.name}; // Address Offset 0x{self.offset:X}\n"
+        else:
+            return f"{self.name}_t {self.name}[{self.number}]; // Address Offset 0x{self.offset:X}\n"
 
     def generate_reserved_field(self, start_bit, width, index, padding):
 
@@ -218,11 +242,11 @@ class Register:
 
         for field in self.fields:
             if "r" in field.access:
-                output += field.generate_getter()
+                output += field.generate_getter(self.number)
         
         for field in self.fields:
             if "w" in field.access:
-                output += field.generate_setter()
+                output += field.generate_setter(self.number)
 
         return output
     
@@ -232,11 +256,11 @@ class Register:
 
         for field in self.fields:
             if "r" in field.access:
-                output += field.generate_virtual_getter()
+                output += field.generate_virtual_getter(self.number)
         
         for field in self.fields:
             if "w" in field.access:
-                output += field.generate_virtual_setter()
+                output += field.generate_virtual_setter(self.number)
 
         return output
 
@@ -246,11 +270,11 @@ class Register:
 
         for field in self.fields:
             if "r" in field.access:
-                output += field.generate_mock_getter()
+                output += field.generate_mock_getter(self.number)
         
         for field in self.fields:
             if "w" in field.access:
-                output += field.generate_mock_setter()
+                output += field.generate_mock_setter(self.number)
 
         return output
 
@@ -293,13 +317,17 @@ class Peripheral:
 
             register = None
             name = ""
+            number = 1
 
             for row in csv_reader:
 
                 name = row[0]
                 offset = int(row[1], 16)
 
-                register = Register(name, offset)
+                if len(row) >= 3:
+                    number = int(row[2])
+
+                register = Register(name, offset, number)
                 self.registers.append(register)
 
     def parse_register_fields_csv(self, file_name):
@@ -329,6 +357,9 @@ class Peripheral:
                 register.add_field(field_name, field_description, bit_position, width, access, field_type)
 
     def parse_types_csv(self, file_name):
+
+        if not os.path.exists(file_name):
+            return
 
         print(f"Parsing CSV Types File: {file_name}")
 
@@ -378,16 +409,44 @@ class Peripheral:
         )
 
         highest_register = max(self.registers, key=lambda register: register.offset)
-        number_of_reserved = 0
+        
+        reserved_field_index = 0
+        number_of_reserved_words = 0
+        number_of_registers_in_group = 0
 
         for offset in range(0, highest_register.offset + register_size_in_bytes, register_size_in_bytes):
+
+            # In the case of multi-register groups, skip the offset until you get to the end
+            if number_of_registers_in_group > 0:
+                number_of_registers_in_group -= 1
+                continue
+
             matching_register = [register for register in self.registers if register.offset == offset]
 
             if matching_register:
+
+                # Some registers are part of a group of related registers.
+                number_of_registers_in_group = matching_register[0].number - 1
+
+                print(f"Offset = 0x{offset:X}. Register {matching_register[0].name}")
+
+                # Insert a reserved field before the register field, if needed.
+                if number_of_reserved_words > 0:
+
+                    reserved_field_index += 1
+
+                    if number_of_reserved_words == 1:    
+                        output += f"\tReserved Reserved{reserved_field_index};\n"
+                    elif number_of_reserved_words > 1:
+                        output += f"\tReserved Reserved{reserved_field_index}[{number_of_reserved_words}];\n"
+                    
+                    number_of_reserved_words = 0
+
                 output += textwrap.indent(matching_register[0].generate_class_member_variable(), "\t")
+
             else:
-                number_of_reserved += 1
-                output += f"\tReserved Reserved{number_of_reserved}; // Address Offset 0x{offset:X}\n"
+                number_of_reserved_words += 1
+                print(f"Offset = 0x{offset:X}. Number of reserved words = {number_of_reserved_words}")
 
         output += "};\n\n"
 
@@ -534,7 +593,7 @@ class Peripheral:
                 f"{mock_class}"
             )
 
-peripheral_name = "syscfg"
+peripheral_name = "nvic"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 

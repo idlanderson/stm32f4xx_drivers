@@ -1,0 +1,7 @@
+ISER,,Interrupt set-enable bits,SETENA,0,32,rw
+ICER,,Interrupt clear-enable bits,CLRENA,0,32,rw
+ISPR,,Interrupt set-pending bits,SETPEND,0,32,rw
+ICPR,,Interrupt clear-pending bits,CLRPEND,0,32,rw
+IABR,,Interrupt active flags,ACTIVE,0,32,rw
+IPR,,Interrupt priority,PRI,0,32,rw
+STIR,,Interrupt ID of the interrupt to trigger,INTID,0,8,rw
