@@ -243,10 +243,13 @@ class Register:
         for field in self.fields:
             if "r" in field.access:
                 output += field.generate_getter(self.number)
-        
+
         for field in self.fields:
             if "w" in field.access:
                 output += field.generate_setter(self.number)
+
+        if self.number > 1:
+            output += f"size_t get_{self.name}_size() const {{ return sizeof(registers.{self.name}) / sizeof(registers.{self.name}[0]); }}\n"
 
         return output
     
@@ -262,6 +265,9 @@ class Register:
             if "w" in field.access:
                 output += field.generate_virtual_setter(self.number)
 
+        if self.number > 1:
+            output += f"virtual size_t get_{self.name}_size() const = 0;\n"
+
         return output
 
     def generate_mock_methods(self):
@@ -275,6 +281,9 @@ class Register:
         for field in self.fields:
             if "w" in field.access:
                 output += field.generate_mock_setter(self.number)
+
+        if self.number > 1:
+            output += f"MOCK_METHOD(size_t, get_{self.name}_size, (), (const, override));\n"
 
         return output
 

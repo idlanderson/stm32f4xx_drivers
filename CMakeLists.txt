@@ -25,6 +25,7 @@ add_subdirectory(nvic)
 add_subdirectory(exti)
 
 if (BUILD_TESTS)
+    add_compile_options(-ggdb)
     add_subdirectory(test)
 else()
     add_subdirectory(app)

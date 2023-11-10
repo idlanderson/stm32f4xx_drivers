@@ -96,26 +96,32 @@ namespace stm32::nvic
 		// ISER Fields
 		virtual uint32_t get_ISER_SETENA(uint16_t index) const = 0;
 		virtual void set_ISER_SETENA(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_ISER_size() const = 0;
 
 		// ICER Fields
 		virtual uint32_t get_ICER_CLRENA(uint16_t index) const = 0;
 		virtual void set_ICER_CLRENA(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_ICER_size() const = 0;
 
 		// ISPR Fields
 		virtual uint32_t get_ISPR_SETPEND(uint16_t index) const = 0;
 		virtual void set_ISPR_SETPEND(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_ISPR_size() const = 0;
 
 		// ICPR Fields
 		virtual uint32_t get_ICPR_CLRPEND(uint16_t index) const = 0;
 		virtual void set_ICPR_CLRPEND(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_ICPR_size() const = 0;
 
 		// IABR Fields
 		virtual uint32_t get_IABR_ACTIVE(uint16_t index) const = 0;
 		virtual void set_IABR_ACTIVE(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_IABR_size() const = 0;
 
 		// IPR Fields
 		virtual uint32_t get_IPR_PRI(uint16_t index) const = 0;
 		virtual void set_IPR_PRI(uint16_t index, uint32_t value) = 0;
+		virtual size_t get_IPR_size() const = 0;
 
 		// STIR Fields
 		virtual uint32_t get_STIR_INTID() const = 0;
@@ -135,26 +141,32 @@ namespace stm32::nvic
 		// ISER Fields
 		uint32_t get_ISER_SETENA(uint16_t index) const { return registers.ISER[index].Fields.SETENA; }
 		void set_ISER_SETENA(uint16_t index, uint32_t value) { registers.ISER[index].Fields.SETENA = value; }
+		size_t get_ISER_size() const { return sizeof(registers.ISER) / sizeof(registers.ISER[0]); }
 
 		// ICER Fields
 		uint32_t get_ICER_CLRENA(uint16_t index) const { return registers.ICER[index].Fields.CLRENA; }
 		void set_ICER_CLRENA(uint16_t index, uint32_t value) { registers.ICER[index].Fields.CLRENA = value; }
+		size_t get_ICER_size() const { return sizeof(registers.ICER) / sizeof(registers.ICER[0]); }
 
 		// ISPR Fields
 		uint32_t get_ISPR_SETPEND(uint16_t index) const { return registers.ISPR[index].Fields.SETPEND; }
 		void set_ISPR_SETPEND(uint16_t index, uint32_t value) { registers.ISPR[index].Fields.SETPEND = value; }
+		size_t get_ISPR_size() const { return sizeof(registers.ISPR) / sizeof(registers.ISPR[0]); }
 
 		// ICPR Fields
 		uint32_t get_ICPR_CLRPEND(uint16_t index) const { return registers.ICPR[index].Fields.CLRPEND; }
 		void set_ICPR_CLRPEND(uint16_t index, uint32_t value) { registers.ICPR[index].Fields.CLRPEND = value; }
+		size_t get_ICPR_size() const { return sizeof(registers.ICPR) / sizeof(registers.ICPR[0]); }
 
 		// IABR Fields
 		uint32_t get_IABR_ACTIVE(uint16_t index) const { return registers.IABR[index].Fields.ACTIVE; }
 		void set_IABR_ACTIVE(uint16_t index, uint32_t value) { registers.IABR[index].Fields.ACTIVE = value; }
+		size_t get_IABR_size() const { return sizeof(registers.IABR) / sizeof(registers.IABR[0]); }
 
 		// IPR Fields
 		uint32_t get_IPR_PRI(uint16_t index) const { return registers.IPR[index].Fields.PRI; }
 		void set_IPR_PRI(uint16_t index, uint32_t value) { registers.IPR[index].Fields.PRI = value; }
+		size_t get_IPR_size() const { return sizeof(registers.IPR) / sizeof(registers.IPR[0]); }
 
 		// STIR Fields
 		uint32_t get_STIR_INTID() const { return registers.STIR.Fields.INTID; }
