@@ -3,7 +3,7 @@ add_library(nvic STATIC "")
 target_sources(nvic PRIVATE 
     nvic.cpp 
     nvic.hpp 
-    #nvic_def.hpp 
+    nvic_def.hpp 
     nvic_register_map.hpp
     nvic_types.hpp)
 
