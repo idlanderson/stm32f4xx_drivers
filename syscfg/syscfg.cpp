@@ -7,7 +7,7 @@ namespace stm32::syscfg
         device.set_MEMRMP_MEM_MODE(memoryMapping);
     }
 
-    void SyscfgPeripheral::ConfigureGpioInterrupt(uint8_t extiLine, ExtiConfiguration extiConfiguration)
+    void SyscfgPeripheral::ConfigureGpioIrq(uint8_t extiLine, ExtiConfiguration extiConfiguration)
     {
         switch (extiLine)
         {

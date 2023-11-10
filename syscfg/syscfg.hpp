@@ -13,7 +13,7 @@ namespace stm32::syscfg
 		SyscfgPeripheral(ISyscfgRegisterMap & device) : device(device) { }
 
         void SetMemoryMapping(MemoryMapping memoryMapping);
-        void ConfigureGpioInterrupt(uint8_t extiLine, ExtiConfiguration extiConfiguration);
+        void ConfigureGpioIrq(uint8_t extiLine, ExtiConfiguration extiConfiguration);
     private:
         ISyscfgRegisterMap & device;
     };

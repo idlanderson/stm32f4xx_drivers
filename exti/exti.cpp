@@ -2,7 +2,7 @@
 
 namespace stm32::exti
 {
-    void ExtiPeripheral::SetInterruptMask(uint8_t line, InterruptMask mask)
+    void ExtiPeripheral::SetIrqMask(uint8_t line, InterruptMask mask)
     {
         uint32_t mr = device.get_IMR_MR();
 
@@ -42,7 +42,7 @@ namespace stm32::exti
         device.set_FTSR_TR(tr);
     }
 
-    void ExtiPeripheral::GenerateInterruptRequest(uint8_t line)
+    void ExtiPeripheral::GenerateIrq(uint8_t line)
     {
         uint32_t swier = device.get_SWIER_SWIER();
 

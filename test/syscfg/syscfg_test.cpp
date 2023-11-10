@@ -28,14 +28,14 @@ protected:
     SyscfgPeripheral syscfg;
 };
 
-TEST_F(SyscfgPeripheralTest, ConfigureGpioInterrupt)
+TEST_F(SyscfgPeripheralTest, ConfigureGpioIrq)
 {
     uint32_t expected = 0x00000000U;
 
     for (uint8_t line = 0U; line <= 3U; line++)
     {
         expected |= (8U << (line * 4U));
-        syscfg.ConfigureGpioInterrupt(line, ExtiConfiguration::PixPin);
+        syscfg.ConfigureGpioIrq(line, ExtiConfiguration::PixPin);
         EXPECT_EQ(expected, registers.EXTICR1.Value);
     }
 
@@ -44,7 +44,7 @@ TEST_F(SyscfgPeripheralTest, ConfigureGpioInterrupt)
     for (uint8_t line = 4U; line <= 7U; line++)
     {
         expected |= (8U << ((line - 4U) * 4U));
-        syscfg.ConfigureGpioInterrupt(line, ExtiConfiguration::PixPin);
+        syscfg.ConfigureGpioIrq(line, ExtiConfiguration::PixPin);
         EXPECT_EQ(expected, registers.EXTICR2.Value);
     }
 
@@ -53,7 +53,7 @@ TEST_F(SyscfgPeripheralTest, ConfigureGpioInterrupt)
     for (uint8_t line = 8U; line <= 11U; line++)
     {
         expected |= (8U << ((line - 8U) * 4U));
-        syscfg.ConfigureGpioInterrupt(line, ExtiConfiguration::PixPin);
+        syscfg.ConfigureGpioIrq(line, ExtiConfiguration::PixPin);
         EXPECT_EQ(expected, registers.EXTICR3.Value);
     }
 
@@ -62,7 +62,7 @@ TEST_F(SyscfgPeripheralTest, ConfigureGpioInterrupt)
     for (uint8_t line = 12U; line <= 15U; line++)
     {
         expected |= (8U << ((line - 12U) * 4U));
-        syscfg.ConfigureGpioInterrupt(line, ExtiConfiguration::PixPin);
+        syscfg.ConfigureGpioIrq(line, ExtiConfiguration::PixPin);
         EXPECT_EQ(expected, registers.EXTICR4.Value);
     }
 }

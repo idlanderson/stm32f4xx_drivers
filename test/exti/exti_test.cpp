@@ -43,7 +43,7 @@ protected:
     ExtiPeripheral exti;
 };
 
-TEST_F(ExtiPeripheralTestWithMock, SetInterruptMask)
+TEST_F(ExtiPeripheralTestWithMock, SetIrqMask)
 {
     uint32_t expected = 0U;
 
@@ -52,7 +52,7 @@ TEST_F(ExtiPeripheralTestWithMock, SetInterruptMask)
         expected = (1U << line);
         EXPECT_CALL(registerMap, get_IMR_MR).Times(1);
         EXPECT_CALL(registerMap, set_IMR_MR(expected)).Times(1);
-        exti.SetInterruptMask(line, InterruptMask::NotMasked);
+        exti.SetIrqMask(line, InterruptMask::NotMasked);
     }
 }
 
@@ -69,7 +69,7 @@ TEST_F(ExtiPeripheralTestWithMock, SetEventMask)
     }
 }
 
-TEST_F(ExtiPeripheralTest, SetInterruptMask)
+TEST_F(ExtiPeripheralTest, SetIrqMask)
 {
     uint32_t expected = 0U;
 
@@ -78,14 +78,14 @@ TEST_F(ExtiPeripheralTest, SetInterruptMask)
         registers.IMR.Value = 0x00000000U;
         expected = (1U << line);
 
-        exti.SetInterruptMask(line, InterruptMask::NotMasked);
+        exti.SetIrqMask(line, InterruptMask::NotMasked);
 
         EXPECT_EQ(expected, registers.IMR.Value);
     }
 
     registers.IMR.Value = 0x00000000U;
 
-    exti.SetInterruptMask(23U, InterruptMask::NotMasked);
+    exti.SetIrqMask(23U, InterruptMask::NotMasked);
     
     EXPECT_EQ(0x00000000U, registers.IMR.Value);
 }
@@ -153,7 +153,7 @@ TEST_F(ExtiPeripheralTest, SetFallingTriggerEnabled)
     EXPECT_EQ(0x00000000U, registers.FTSR.Value);
 }
 
-TEST_F(ExtiPeripheralTest, GenerateInterruptRequest)
+TEST_F(ExtiPeripheralTest, GenerateIrq)
 {
     uint32_t expected = 0U;
 
@@ -162,14 +162,14 @@ TEST_F(ExtiPeripheralTest, GenerateInterruptRequest)
         registers.SWIER.Value = 0x00000000U;
         expected = (1U << line);
 
-        exti.GenerateInterruptRequest(line);
+        exti.GenerateIrq(line);
 
         EXPECT_EQ(expected, registers.SWIER.Value);
     }
 
     registers.SWIER.Value = 0x00000000U;
 
-    exti.GenerateInterruptRequest(23U);
+    exti.GenerateIrq(23U);
     
     EXPECT_EQ(0x00000000U, registers.SWIER.Value);
 }

@@ -101,7 +101,7 @@ namespace stm32::nvic
         device.set_IPR_PRI(index, ipr);
     }
 
-    void NvicPeripheral::TriggerInterrupt(IrqNumber irqNumber)
+    void NvicPeripheral::TriggerIrq(IrqNumber irqNumber)
     {
         device.set_STIR_INTID(static_cast<uint32_t>(irqNumber));
     }

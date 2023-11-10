@@ -106,7 +106,7 @@ namespace stm32::nvic
         bool IsIrqActive(IrqNumber irqNumber);
         std::vector<IrqNumber> GetActiveIrqs();
         void SetIrqPriority(IrqNumber irqNumber, IrqPriority irqPriority);
-        void TriggerInterrupt(IrqNumber irqNumber);
+        void TriggerIrq(IrqNumber irqNumber);
     private:
         INvicRegisterMap & device;
     };
