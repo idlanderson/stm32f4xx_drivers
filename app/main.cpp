@@ -4,7 +4,7 @@
 #include "exti_def.hpp"
 #include "nvic_def.hpp"
 #include "syscfg_def.hpp"
-#include <type_traits>
+#include <iostream>
 
 using namespace stm32::gpio;
 using namespace stm32::rcc;
@@ -38,6 +38,8 @@ void WaitForButtonPress(void)
 
 int main()
 {
+    std::cout << "Starting application..." << std::endl;
+
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
     RCC.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);
 
@@ -72,12 +74,16 @@ int main()
     GPIOD.WritePin(Pin::Pin14, 1U);
     GPIOD.WritePin(Pin::Pin15, 1U);
 
+    std::cout << "Application running." << std::endl;
+
     for (;;)
     {
         delay();
 
         if (GPIOA.ReadPin(Pin::Pin0) == 1U)
         {
+            std::cout << "Button pressed" << std::endl;
+
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);
             GPIOD.TogglePin(Pin::Pin14);
