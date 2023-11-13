@@ -8,11 +8,20 @@
 
 namespace stm32::spi
 {
+    using SpiData = std::vector<uint8_t>;
+
     enum class BusConfig
     {
         FullDuplex,
         HalfDuplex,
         SimplexRxOnly
+    };
+
+    enum class SpiState
+    {
+        Ready,
+        Sending,
+        Receiving
     };
 
     class SpiPeripheral
@@ -45,12 +54,27 @@ namespace stm32::spi
         bool HasOverrunOccurred() const;
         bool IsBusy() const;
 
-        void SendData(std::vector<uint8_t> data);
-        std::vector<uint8_t> ReceiveData(uint32_t length);
+        void SendData(const SpiData & data);
+        SpiData ReceiveData(uint32_t length);
+
+        void SendDataAsync(const SpiData & data);
+        void ReceiveDataAsync(uint32_t length);
+
+        void HandleIrq();
 
     private:
 
+        void HandleSendDataIrq();
+        void HandleReceiveDataIrq();
+        void HandleOverrunErrorIrq();
+
         ISpiRegisterMap & device;
+
+        SpiState state = SpiState::Ready;
+
+        SpiData txBuffer;
+        SpiData rxBuffer;
+        uint32_t rxLength = 0U;
     };
 }
 

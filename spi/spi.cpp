@@ -116,7 +116,7 @@ namespace stm32::spi
         return (bool)device.get_SR_BSY();
     }
 
-    void SpiPeripheral::SendData(std::vector<uint8_t> data)
+    void SpiPeripheral::SendData(const SpiData & data)
     {
         uint32_t remainingLengthToSend = data.size();
         uint32_t currentIndex = 0U;
@@ -145,11 +145,11 @@ namespace stm32::spi
         }
     }
 
-    std::vector<uint8_t> SpiPeripheral::ReceiveData(uint32_t length)
+    SpiData SpiPeripheral::ReceiveData(uint32_t length)
     {
         uint32_t remainingLengthToReceive = length;
         DataFrameFormat dataFrameFormat = GetDataFrameFormat();
-        std::vector<uint8_t> dataReceived;
+        SpiData dataReceived;
 
         while (remainingLengthToReceive > 0U)
         {
@@ -175,5 +175,111 @@ namespace stm32::spi
         }
 
         return dataReceived;
+    }
+
+    void SpiPeripheral::SendDataAsync(const SpiData & data)
+    {
+        if (state != SpiState::Ready)
+        {
+            return;
+        }
+
+        state = SpiState::Sending;
+        txBuffer.assign(data.begin(), data.end());
+        device.set_CR2_TXEIE(TxBufferEmptyInterruptEnable::NotMasked);
+    }
+
+    void SpiPeripheral::ReceiveDataAsync(uint32_t length)
+    {
+        if (state != SpiState::Ready)
+        {
+            return;
+        }
+
+        state = SpiState::Receiving;
+        rxLength = length;
+        device.set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable::NotMasked);
+    }
+
+    void SpiPeripheral::HandleIrq()
+    {
+        if (device.get_CR2_TXEIE() == TxBufferEmptyInterruptEnable::NotMasked &&
+            device.get_SR_TXE() == TransmitBufferEmpty::Empty)
+        {
+            HandleSendDataIrq();
+        }
+        else if (
+            device.get_CR2_RXNEIE() == RxBufferNotEmptyInterruptEnable::NotMasked &&
+            device.get_SR_RXNE() == ReceiveBufferNotEmpty::NotEmpty)
+        {
+            HandleReceiveDataIrq();
+        }
+        else if (
+            device.get_CR2_ERRIE() == ErrorInterruptEnable::Enabled &&
+            device.get_SR_OVR() == OverrunFlag::OverrunOccurred)
+        {
+            HandleOverrunErrorIrq();
+        }
+    }
+
+    void SpiPeripheral::HandleSendDataIrq()
+    {
+        auto dataFrameFormat = GetDataFrameFormat();
+
+        if (dataFrameFormat == DataFrameFormat::_8Bit)
+        {
+            device.set_DR_DR(txBuffer[0]);
+            txBuffer.erase(txBuffer.begin());
+        }
+        else if (dataFrameFormat == DataFrameFormat::_16Bit)
+        {
+            uint8_t data0 = txBuffer[0];
+            uint8_t data1 = txBuffer[1];
+            txBuffer.erase(txBuffer.begin());
+            txBuffer.erase(txBuffer.begin());
+            device.set_DR_DR((data0 << 8U) | data1);
+        }
+
+        if (txBuffer.size() <= 0U)
+        {
+            device.set_CR2_TXEIE(TxBufferEmptyInterruptEnable::Masked);
+            state = SpiState::Ready;
+
+            // Call a callback.
+        }
+    }
+
+    void SpiPeripheral::HandleReceiveDataIrq()
+    {
+        auto dataFrameFormat = GetDataFrameFormat();
+
+        if (dataFrameFormat == DataFrameFormat::_8Bit)
+        {
+            uint8_t data = (uint8_t)device.get_DR_DR();
+            rxBuffer.push_back(data);
+            rxLength--;
+        }
+        else if (dataFrameFormat == DataFrameFormat::_16Bit)
+        {
+            uint16_t data = (uint16_t)device.get_DR_DR();
+            rxBuffer.push_back((uint8_t)(0x000000FFU & (data >> 8U)));
+            rxBuffer.push_back((uint8_t)(0x000000FFU & data));
+            rxLength -= 2U;
+        }
+
+        if (rxLength <= 0U)
+        {
+            device.set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable::Masked);
+            state = SpiState::Ready;
+
+            // Call a callback.
+        }
+    }
+
+    void SpiPeripheral::HandleOverrunErrorIrq()
+    {
+        // Clear the OVR flag.
+        device.get_DR_DR();
+        device.get_SR_OVR();
     }
 }
