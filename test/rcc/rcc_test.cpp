@@ -25,46 +25,46 @@ protected:
     RccPeripheral rcc;
 };
 
-TEST_F(RccPeripheralTest, SetAHB1PeripheralClockEnabled)
+TEST_F(RccPeripheralTest, SetPeripheralClockEnabled)
 {
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOA, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOA, true);
     EXPECT_EQ(0x00000001U, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOB, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOB, true);
     EXPECT_EQ(0x00000003U, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOC, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOC, true);
     EXPECT_EQ(0x00000007U, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOD, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOD, true);
     EXPECT_EQ(0x0000000FU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOE, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOE, true);
     EXPECT_EQ(0x0000001FU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOF, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOF, true);
     EXPECT_EQ(0x0000003FU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOG, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOG, true);
     EXPECT_EQ(0x0000007FU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOH, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOH, true);
     EXPECT_EQ(0x000000FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::GPIOI, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOI, true);
     EXPECT_EQ(0x000001FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::CRC, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::CRC, true);
     EXPECT_EQ(0x000011FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::BKPSRAM, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::BKPSRAM, true);
     EXPECT_EQ(0x000411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::CCMDATARAM, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::CCMDATARAM, true);
     EXPECT_EQ(0x001411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::DMA1, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::DMA1, true);
     EXPECT_EQ(0x003411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::DMA2, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::DMA2, true);
     EXPECT_EQ(0x007411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::ETHMAC, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::ETHMAC, true);
     EXPECT_EQ(0x027411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::ETHMACTX, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::ETHMACTX, true);
     EXPECT_EQ(0x067411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::ETHMACRX, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::ETHMACRX, true);
     EXPECT_EQ(0x0E7411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::ETHMACPTP, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::ETHMACPTP, true);
     EXPECT_EQ(0x1E7411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::OTGHS, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::OTGHS, true);
     EXPECT_EQ(0x3E7411FFU, registers.AHB1ENR.Value);
-    rcc.SetAHB1PeripheralClockEnabled(RccPeripheral::Ahb1Peripheral::OTGHSULPI, true);
+    rcc.SetPeripheralClockEnabled(RccPeripheral::Peripheral::OTGHSULPI, true);
     EXPECT_EQ(0x7E7411FFU, registers.AHB1ENR.Value);
 }

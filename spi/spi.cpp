@@ -1,4 +1,5 @@
 #include "spi.hpp"
+#include <iostream>
 
 namespace stm32::spi
 {
@@ -184,6 +185,8 @@ namespace stm32::spi
             return;
         }
 
+        std::cout << "SendDataAsync" << std::endl;
+
         state = SpiState::Sending;
         txBuffer.assign(data.begin(), data.end());
         device.set_CR2_TXEIE(TxBufferEmptyInterruptEnable::NotMasked);
@@ -224,6 +227,8 @@ namespace stm32::spi
 
     void SpiPeripheral::HandleSendDataIrq()
     {
+        std::cout << "HandleSendDataIrq" << std::endl;
+
         auto dataFrameFormat = GetDataFrameFormat();
 
         if (dataFrameFormat == DataFrameFormat::_8Bit)
@@ -251,6 +256,8 @@ namespace stm32::spi
 
     void SpiPeripheral::HandleReceiveDataIrq()
     {
+        std::cout << "HandleReceiveDataIrq" << std::endl;
+
         auto dataFrameFormat = GetDataFrameFormat();
 
         if (dataFrameFormat == DataFrameFormat::_8Bit)
@@ -278,6 +285,8 @@ namespace stm32::spi
 
     void SpiPeripheral::HandleOverrunErrorIrq()
     {
+        std::cout << "HandleOverrunErrorIrq" << std::endl;
+
         // Clear the OVR flag.
         device.get_DR_DR();
         device.get_SR_OVR();

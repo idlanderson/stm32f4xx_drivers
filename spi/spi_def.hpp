@@ -5,12 +5,19 @@
 
 namespace stm32::spi
 {
-    SpiPeripheral SPI1(SPI1_BASEADDR);
-    SpiPeripheral SPI2(SPI2_BASEADDR);
-    SpiPeripheral SPI3(SPI3_BASEADDR);
-    SpiPeripheral SPI4(SPI4_BASEADDR);
-    SpiPeripheral SPI5(SPI5_BASEADDR);
-    SpiPeripheral SPI6(SPI6_BASEADDR);
+    SpiRegisterMap spi1RegMap(SPI1_BASEADDR);
+    SpiRegisterMap spi2RegMap(SPI2_BASEADDR);
+    SpiRegisterMap spi3RegMap(SPI3_BASEADDR);
+    SpiRegisterMap spi4RegMap(SPI4_BASEADDR);
+    SpiRegisterMap spi5RegMap(SPI5_BASEADDR);
+    SpiRegisterMap spi6RegMap(SPI6_BASEADDR);
+
+    SpiPeripheral SPI1(spi1RegMap);
+    SpiPeripheral SPI2(spi2RegMap);
+    SpiPeripheral SPI3(spi3RegMap);
+    SpiPeripheral SPI4(spi4RegMap);
+    SpiPeripheral SPI5(spi5RegMap);
+    SpiPeripheral SPI6(spi6RegMap);
 }
 
 #endif // SPI_DEF_HPP_H_

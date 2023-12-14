@@ -14,7 +14,6 @@
             ],
             "swoConfig": {
                 "enabled": true,
-                "swoPort": "61235",
                 "cpuFrequency": 16000000,
                 "swoFrequency": 2000000,
                 "source": "probe",

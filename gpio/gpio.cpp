@@ -138,6 +138,15 @@ namespace stm32::gpio
         this->SetPinOutputType(pin, outputType);
     }
 
+    void GpioPeripheral::ConfigureAltFcnPin(PinNumber pin, Speed speed, PullUpPullDown pullUpPullDown, OutputType outputType, AlternateFunction altFcn)
+    {
+        this->SetPinMode(pin, Mode::AlternateFunction);
+        this->SetPinSpeed(pin, speed);
+        this->SetPinPullUpPullDown(pin, pullUpPullDown);
+        this->SetPinOutputType(pin, outputType);
+        this->SetPinAltFcn(pin, altFcn);
+    }
+
     uint8_t GpioPeripheral::ReadPin(PinNumber pin)
     {
         switch (pin)

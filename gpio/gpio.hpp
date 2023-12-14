@@ -40,6 +40,7 @@ namespace stm32::gpio
         
         void ConfigureInputPin(PinNumber pin, Speed speed);
         void ConfigureOutputPin(PinNumber pin, Speed speed, PullUpPullDown pullUpPullDown, OutputType outputType);
+        void ConfigureAltFcnPin(PinNumber pin, Speed speed, PullUpPullDown pullUpPullDown, OutputType outputType, AlternateFunction altFcn);
 
         uint8_t ReadPin(PinNumber pin);
         void WritePin(PinNumber pin, uint8_t value);
