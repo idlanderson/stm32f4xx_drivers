@@ -1,0 +1,22 @@
+PeripheralEnable,0,Peripheral disable
+PeripheralEnable,1,Peripheral enable
+AcknowledgeEnable,0,No acknowledge returned
+AcknowledgeEnable,1,Acknowledge returned
+AddressingMode,0,7-bit slave address
+AddressingMode,1,10-bit slave address
+DualAddressingModeEnable,0,Only OAR1
+DualAddressingModeEnable,1,Both OAR1 and OAR2
+StartBit,0,No Start condition
+StartBit,1,Start condition generated
+AddressSentMatched,0,Address mismatched or not transmitted
+AddressSentMatched,1,Address matched or transmitted
+MasterSlave,0,Slave Mode
+MasterSlave,1,Master Mode
+BusBusy,0,No communication
+BusBusy,1,Communication ongoing
+TransmitterReceiver,0,Data bytes received
+TransmitterReceiver,1,Data bytes transmitted
+FmModeDutyCycle,0,Low High Ratio 2
+FmModeDutyCycle,1,Low High Radio 16 over 9
+MasterModeSelection,0,Sm mode I2C
+MasterModeSelection,1,Fm mode I2C

@@ -1,0 +1,16 @@
+CR1,PeripheralEnable,Peripheral enable,PE,0,1,rw
+CR1,AcknowledgeEnable,Acknowledge enable,ACK,10,1,rw
+CR2,,Peripheral clock frequency,FREQ,0,6,rw
+OAR1,,Interface address,ADD,0,10,rw
+OAR1,AddressingMode,Addressing mode (slave mode),ADDMODE,15,1,rw
+OAR2,DualAddressingModeEnable,Dual addressing mode enable,ENDUAL,0,1,rw
+OAR2,,Interface address,ADD2,1,7,rw
+DR,,8-bit data register,DR,0,8,rw
+SR1,StartBit,Start bit (Master mode),SB,0,1,r
+SR1,AddressSentMatched,Address sent (master mode)/matched (slave mode),ADDR,1,1,r
+SR2,MasterSlave,Master/slave,MSL,0,1,r
+SR2,BusBusy,Bus busy,BUSY,1,1,r
+SR2,TransmitterReceiver,Transmitter/receiver,TRA,2,1,r
+CCR,,"Clock control register in Fm/Sm mode (Master mode) ",CCR,0,12,rw
+CCR,FmModeDutyCycle,Fm mode duty cycle,DUTY,14,1,rw
+CCR,MasterModeSelection,I2C master mode selection,FS,15,1,rw

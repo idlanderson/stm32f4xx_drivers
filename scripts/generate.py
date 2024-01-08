@@ -631,7 +631,7 @@ class Peripheral:
                 f"{test_fixtures}"
             )
 
-peripheral_name = "nvic"
+peripheral_name = "i2c"
 
 peripheral = Peripheral(to_camel_case(peripheral_name))
 
