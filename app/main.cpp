@@ -29,9 +29,11 @@ void SpiInit(void)
 {
     std::cout << "Initializing SPI..." << std::endl;
 
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::SYSCFG, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOB, true);
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOD, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::SPI2, true);
-
+    
     // PB12 = NSS
     // Apparently there is a hardware problem with the NSS pin. It always stays at 0 when using Hardware Slave Management.
     // We need to manually actuate the NSS line using the software.
@@ -75,10 +77,10 @@ void SpiInit(void)
     SPI2.SetSlaveSelectOutputEnabled(SsOutputEnable::Enabled);
     SPI2.SetEnabled(SpiEnable::Enabled);
 
-    // PD6 = SPI interrupt pin
+    // PD6 = Interrupt pin which notifies the master that data is available.
     // The flow is like this:
     //      GPIOD Pin 6 (falling edge) -> EXTI Line 6 -> NVIC IRQ Number 23 -> EXTI9_5_Handler()
-    GPIOD.ConfigureInputPin(Pin::Pin6, Speed::LowSpeed);
+    GPIOD.ConfigureInputPin(Pin::Pin6, Speed::VeryHighSpeed);
     
     // Configure GPIOD Pin 6 to trigger EXTI interrupt on line 6.
     SYSCFG.ConfigureGpioIrq(6U, ExtiConfiguration::PdxPin);
@@ -99,26 +101,12 @@ void SpiInit(void)
     std::cout << "SPI initialized." << std::endl;
 }
 
-void EXTI9_5_Handler()
+bool spiDataAvailable = false;
+
+void LedAndButtonApplication()
 {
-    std::cout << "EXTI9_5_Handler" << std::endl;
-}
-
-void SPI2_Handler()
-{
-    std::cout << "SPI2_Handler" << std::endl;
-
-    SPI2.HandleIrq();
-}
-
-int main()
-{
-    std::cout << "Starting application..." << std::endl;
-
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOA, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOD, true);
-
-    SpiInit();
 
     GPIOA.ConfigureInputPin(Pin::Pin0, PinSpeed::VeryHighSpeed);
 
@@ -165,10 +153,59 @@ int main()
             GPIOD.TogglePin(Pin::Pin13);
             GPIOD.TogglePin(Pin::Pin14);
             GPIOD.TogglePin(Pin::Pin15);
-
-            SPI2.SendDataAsync({ 1U });
         }
     }
+}
+
+void SpiAsyncRxExercise()
+{
+    std::cout << "Starting application..." << std::endl;
+
+    SpiInit();
+
+    std::cout << "Application running. Waiting for SPI data..." << std::endl;
+
+    stm32::spi::SpiData dummyTx = { 0xAB };
+
+    for (;;)
+    {
+        while (!spiDataAvailable);
+
+        //std::cout << "SPI data is available" << std::endl;
+
+        SPI2.SendDataAsync(dummyTx);
+        SPI2.ReceiveDataAsync(1);
+
+        spiDataAvailable = false;
+    }
+}
+
+int main()
+{
+    SpiAsyncRxExercise();
 
     return 0U;
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void EXTI9_5_Handler(void)
+{
+    // std::cout << "EXTI9_5_Handler" << std::endl;
+    EXTI.ClearPendingBit(6);
+    NVIC.ClearPendingIrq(IrqNumber::EXTI9_5);
+    spiDataAvailable = true;
+}
+
+void SPI2_Handler(void)
+{
+    // std::cout << "SPI2_Handler" << std::endl;
+
+    SPI2.HandleIrq();
+}
+
+#ifdef __cplusplus
+}
+#endif

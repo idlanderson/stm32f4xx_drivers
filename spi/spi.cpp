@@ -1,5 +1,4 @@
 #include "spi.hpp"
-#include <iostream>
 
 namespace stm32::spi
 {
@@ -185,8 +184,6 @@ namespace stm32::spi
             return;
         }
 
-        std::cout << "SendDataAsync" << std::endl;
-
         state = SpiState::Sending;
         txBuffer.assign(data.begin(), data.end());
         device.set_CR2_TXEIE(TxBufferEmptyInterruptEnable::NotMasked);
@@ -223,17 +220,20 @@ namespace stm32::spi
         {
             HandleOverrunErrorIrq();
         }
+        else
+        {
+            // TODO: Handle unknown IRQ.
+        }
     }
 
     void SpiPeripheral::HandleSendDataIrq()
     {
-        std::cout << "HandleSendDataIrq" << std::endl;
-
         auto dataFrameFormat = GetDataFrameFormat();
 
         if (dataFrameFormat == DataFrameFormat::_8Bit)
         {
-            device.set_DR_DR(txBuffer[0]);
+            uint8_t byteToSend = txBuffer[0];
+            device.set_DR_DR(byteToSend);
             txBuffer.erase(txBuffer.begin());
         }
         else if (dataFrameFormat == DataFrameFormat::_16Bit)
@@ -250,14 +250,12 @@ namespace stm32::spi
             device.set_CR2_TXEIE(TxBufferEmptyInterruptEnable::Masked);
             state = SpiState::Ready;
 
-            // Call a callback.
+            // TODO: Call a callback.
         }
     }
 
     void SpiPeripheral::HandleReceiveDataIrq()
     {
-        std::cout << "HandleReceiveDataIrq" << std::endl;
-
         auto dataFrameFormat = GetDataFrameFormat();
 
         if (dataFrameFormat == DataFrameFormat::_8Bit)
@@ -279,14 +277,12 @@ namespace stm32::spi
             device.set_CR2_RXNEIE(RxBufferNotEmptyInterruptEnable::Masked);
             state = SpiState::Ready;
 
-            // Call a callback.
+            // TODO: Call a callback.
         }
     }
 
     void SpiPeripheral::HandleOverrunErrorIrq()
     {
-        std::cout << "HandleOverrunErrorIrq" << std::endl;
-
         // Clear the OVR flag.
         device.get_DR_DR();
         device.get_SR_OVR();
