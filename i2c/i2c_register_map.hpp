@@ -35,7 +35,8 @@ namespace stm32::i2c
 		volatile struct
 		{
 			uint32_t       ADD         : 10; // [0:9]   rw : Interface address
-			Reserved       Reserved1   : 5; // [10:14]    : RESERVED FIELD.
+			Reserved       Reserved1   : 4; // [10:13]    : RESERVED FIELD.
+			uint32_t       RESERVEDBIT14 : 1; // [14]    w  : Reserved bit. Should always be kept at 1 by software.
 			AddressingMode ADDMODE     : 1; // [15]    rw : Addressing mode (slave mode)
 			Reserved       Reserved2   : 16; // [16:31]    : RESERVED FIELD.
 		} Fields;
@@ -129,6 +130,7 @@ namespace stm32::i2c
 		virtual uint32_t get_OAR1_ADD() const = 0;
 		virtual AddressingMode get_OAR1_ADDMODE() const = 0;
 		virtual void set_OAR1_ADD(uint32_t value) = 0;
+		virtual void set_OAR1_RESERVEDBIT14(uint32_t value) = 0;
 		virtual void set_OAR1_ADDMODE(AddressingMode value) = 0;
 
 		// OAR2 Fields
@@ -183,6 +185,7 @@ namespace stm32::i2c
 		uint32_t get_OAR1_ADD() const { return registers.OAR1.Fields.ADD; }
 		AddressingMode get_OAR1_ADDMODE() const { return registers.OAR1.Fields.ADDMODE; }
 		void set_OAR1_ADD(uint32_t value) { registers.OAR1.Fields.ADD = value; }
+		void set_OAR1_RESERVEDBIT14(uint32_t value) { registers.OAR1.Fields.RESERVEDBIT14 = value; }
 		void set_OAR1_ADDMODE(AddressingMode value) { registers.OAR1.Fields.ADDMODE = value; }
 
 		// OAR2 Fields

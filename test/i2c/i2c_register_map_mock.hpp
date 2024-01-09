@@ -24,6 +24,7 @@ public:
 	MOCK_METHOD(uint32_t, get_OAR1_ADD, (), (const, override));
 	MOCK_METHOD(AddressingMode, get_OAR1_ADDMODE, (), (const, override));
 	MOCK_METHOD(void, set_OAR1_ADD, (uint32_t), (override));
+	MOCK_METHOD(void, set_OAR1_RESERVEDBIT14, (uint32_t), (override));
 	MOCK_METHOD(void, set_OAR1_ADDMODE, (AddressingMode), (override));
 
 	// OAR2 Fields

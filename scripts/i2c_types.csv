@@ -18,5 +18,5 @@ TransmitterReceiver,0,Data bytes received
 TransmitterReceiver,1,Data bytes transmitted
 FmModeDutyCycle,0,Low High Ratio 2
 FmModeDutyCycle,1,Low High Radio 16 over 9
-MasterModeSelection,0,Sm mode I2C
-MasterModeSelection,1,Fm mode I2C
+MasterModeSelection,0,Standard Mode
+MasterModeSelection,1,Fast Mode

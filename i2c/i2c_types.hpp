@@ -71,8 +71,8 @@ namespace stm32::i2c
 
 	enum class MasterModeSelection : uint32_t
 	{
-		SmModeI2C = 0U,
-		FmModeI2C = 1U,
+		StandardMode = 0U,
+		FastMode = 1U,
 	};
 
 }

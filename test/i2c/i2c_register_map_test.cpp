@@ -36,6 +36,14 @@ TEST(OAR1, ADD)
 	EXPECT_EQ(0x000003FFU, reg.Value);
 }
 
+TEST(OAR1, RESERVEDBIT14)
+{
+	OAR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.RESERVEDBIT14 = (uint32_t)1U;
+	EXPECT_EQ(0x00004000U, reg.Value);
+}
+
 TEST(OAR1, ADDMODE)
 {
 	OAR1_t reg;
