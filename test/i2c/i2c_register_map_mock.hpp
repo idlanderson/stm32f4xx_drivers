@@ -12,8 +12,14 @@ public:
 
 	// CR1 Fields
 	MOCK_METHOD(PeripheralEnable, get_CR1_PE, (), (const, override));
+	MOCK_METHOD(ClockStretchingDisable, get_CR1_NOSTRETCH, (), (const, override));
+	MOCK_METHOD(StartGeneration, get_CR1_START, (), (const, override));
+	MOCK_METHOD(StopGeneration, get_CR1_STOP, (), (const, override));
 	MOCK_METHOD(AcknowledgeEnable, get_CR1_ACK, (), (const, override));
 	MOCK_METHOD(void, set_CR1_PE, (PeripheralEnable), (override));
+	MOCK_METHOD(void, set_CR1_NOSTRETCH, (ClockStretchingDisable), (override));
+	MOCK_METHOD(void, set_CR1_START, (StartGeneration), (override));
+	MOCK_METHOD(void, set_CR1_STOP, (StopGeneration), (override));
 	MOCK_METHOD(void, set_CR1_ACK, (AcknowledgeEnable), (override));
 
 	// CR2 Fields
@@ -40,6 +46,20 @@ public:
 	// SR1 Fields
 	MOCK_METHOD(StartBit, get_SR1_SB, (), (const, override));
 	MOCK_METHOD(AddressSentMatched, get_SR1_ADDR, (), (const, override));
+	MOCK_METHOD(ByteTransferFinished, get_SR1_BTF, (), (const, override));
+	MOCK_METHOD(StopDetection, get_SR1_STOPF, (), (const, override));
+	MOCK_METHOD(DataRegisterNotEmpty, get_SR1_RxNE, (), (const, override));
+	MOCK_METHOD(DataRegisterEmpty, get_SR1_TxE, (), (const, override));
+	MOCK_METHOD(BusError, get_SR1_BERR, (), (const, override));
+	MOCK_METHOD(ArbitrationLost, get_SR1_ARLO, (), (const, override));
+	MOCK_METHOD(AcknowledgeFailure, get_SR1_AF, (), (const, override));
+	MOCK_METHOD(OverrunUnderrun, get_SR1_OVR, (), (const, override));
+	MOCK_METHOD(TimeoutError, get_SR1_TIMEOUT, (), (const, override));
+	MOCK_METHOD(void, set_SR1_BERR, (BusError), (override));
+	MOCK_METHOD(void, set_SR1_ARLO, (ArbitrationLost), (override));
+	MOCK_METHOD(void, set_SR1_AF, (AcknowledgeFailure), (override));
+	MOCK_METHOD(void, set_SR1_OVR, (OverrunUnderrun), (override));
+	MOCK_METHOD(void, set_SR1_TIMEOUT, (TimeoutError), (override));
 
 	// SR2 Fields
 	MOCK_METHOD(MasterSlave, get_SR2_MSL, (), (const, override));
@@ -53,6 +73,10 @@ public:
 	MOCK_METHOD(void, set_CCR_CCR, (uint32_t), (override));
 	MOCK_METHOD(void, set_CCR_DUTY, (FmModeDutyCycle), (override));
 	MOCK_METHOD(void, set_CCR_FS, (MasterModeSelection), (override));
+
+	// TRISE Fields
+	MOCK_METHOD(uint32_t, get_TRISE_TRISE, (), (const, override));
+	MOCK_METHOD(void, set_TRISE_TRISE, (uint32_t), (override));
 };
 
 class I2CPeripheralTest : public ::testing::Test

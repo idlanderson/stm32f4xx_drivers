@@ -15,6 +15,24 @@ namespace stm32::i2c
 		PeripheralEnable = 1U,
 	};
 
+	enum class ClockStretchingDisable : uint32_t
+	{
+		ClockStretchingEnabled = 0U,
+		ClockStretchingDisabled = 1U,
+	};
+
+	enum class StartGeneration : uint32_t
+	{
+		NoStartGeneration = 0U,
+		StartGeneration = 1U,
+	};
+
+	enum class StopGeneration : uint32_t
+	{
+		NoStopGeneration = 0U,
+		StopGeneration = 1U,
+	};
+
 	enum class AcknowledgeEnable : uint32_t
 	{
 		NoAcknowledgeReturned = 0U,
@@ -45,6 +63,60 @@ namespace stm32::i2c
 		AddressMatchedOrTransmitted = 1U,
 	};
 
+	enum class ByteTransferFinished : uint32_t
+	{
+		NotDone = 0U,
+		Succeeded = 1U,
+	};
+
+	enum class StopDetection : uint32_t
+	{
+		NoStopConditionDetected = 0U,
+		StopConditionDetected = 1U,
+	};
+
+	enum class DataRegisterNotEmpty : uint32_t
+	{
+		Empty = 0U,
+		NotEmpty = 1U,
+	};
+
+	enum class DataRegisterEmpty : uint32_t
+	{
+		NotEmpty = 0U,
+		Empty = 1U,
+	};
+
+	enum class BusError : uint32_t
+	{
+		NoMisplacedStartOrStopCondition = 0U,
+		MisplacedStartOrStopCondition = 1U,
+	};
+
+	enum class ArbitrationLost : uint32_t
+	{
+		NoArbitrationLostDetected = 0U,
+		ArbitrationLostDetected = 1U,
+	};
+
+	enum class AcknowledgeFailure : uint32_t
+	{
+		NoAcknowledgeFailure = 0U,
+		AcknowledgeFailure = 1U,
+	};
+
+	enum class OverrunUnderrun : uint32_t
+	{
+		NoOverrunUnderrun = 0U,
+		OverrunOrUnderrun = 1U,
+	};
+
+	enum class TimeoutError : uint32_t
+	{
+		NoTimeoutError = 0U,
+		TimeoutError = 1U,
+	};
+
 	enum class MasterSlave : uint32_t
 	{
 		SlaveMode = 0U,
@@ -65,8 +137,8 @@ namespace stm32::i2c
 
 	enum class FmModeDutyCycle : uint32_t
 	{
-		LowHighRatio2 = 0U,
-		LowHighRadio16Over9 = 1U,
+		Ratio2 = 0U,
+		Ratio16Over9 = 1U,
 	};
 
 	enum class MasterModeSelection : uint32_t

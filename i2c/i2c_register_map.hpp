@@ -12,10 +12,13 @@ namespace stm32::i2c
 	{
 		volatile struct
 		{
-			PeripheralEnable  PE          : 1; // [0]     rw : Peripheral enable
-			Reserved          Reserved1   : 9; // [1:9]      : RESERVED FIELD.
-			AcknowledgeEnable ACK         : 1; // [10]    rw : Acknowledge enable
-			Reserved          Reserved2   : 21; // [11:31]    : RESERVED FIELD.
+			PeripheralEnable       PE          : 1; // [0]     rw : Peripheral enable
+			Reserved               Reserved1   : 6; // [1:6]      : RESERVED FIELD.
+			ClockStretchingDisable NOSTRETCH   : 1; // [7]     rw : Clock stretching disable (Slave mode)
+			StartGeneration        START       : 1; // [8]     rw : Start generation
+			StopGeneration         STOP        : 1; // [9]     rw : Stop generation
+			AcknowledgeEnable      ACK         : 1; // [10]    rw : Acknowledge enable
+			Reserved               Reserved2   : 21; // [11:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -68,9 +71,21 @@ namespace stm32::i2c
 	{
 		volatile struct
 		{
-			StartBit           SB          : 1; // [0]     r  : Start bit (Master mode)
-			AddressSentMatched ADDR        : 1; // [1]     r  : Address sent (master mode)/matched (slave mode)
-			Reserved           Reserved1   : 30; // [2:31]     : RESERVED FIELD.
+			StartBit             SB          : 1; // [0]     r  : Start bit (Master mode)
+			AddressSentMatched   ADDR        : 1; // [1]     r  : Address sent (master mode)/matched (slave mode)
+			ByteTransferFinished BTF         : 1; // [2]     r  : Byte transfer finished
+			Reserved             Reserved1   : 1; // [3]        : RESERVED FIELD.
+			StopDetection        STOPF       : 1; // [4]     r  : Stop detection (slave mode)
+			Reserved             Reserved2   : 1; // [5]        : RESERVED FIELD.
+			DataRegisterNotEmpty RxNE        : 1; // [6]     r  : Data register not empty (receivers)
+			DataRegisterEmpty    TxE         : 1; // [7]     r  : Data register empty (transmitters)
+			BusError             BERR        : 1; // [8]     rw : Bus error
+			ArbitrationLost      ARLO        : 1; // [9]     rw : Arbitration lost (master mode)
+			AcknowledgeFailure   AF          : 1; // [10]    rw : Acknowledge failure
+			OverrunUnderrun      OVR         : 1; // [11]    rw : Overrun/Underrun
+			Reserved             Reserved3   : 2; // [12:13]    : RESERVED FIELD.
+			TimeoutError         TIMEOUT     : 1; // [14]    rw : Timeout or Tlow error
+			Reserved             Reserved4   : 17; // [15:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -100,6 +115,16 @@ namespace stm32::i2c
 		volatile uint32_t Value;
 	};
 
+	union TRISE_t
+	{
+		volatile struct
+		{
+			uint32_t TRISE       : 6; // [0:5]   rw : Maximum rise time in Fm/Sm mode (Master mode)
+			Reserved Reserved1   : 26; // [6:31]     : RESERVED FIELD.
+		} Fields;
+		volatile uint32_t Value;
+	};
+
 	struct I2CRegisters
 	{
 		CR1_t CR1; // Address Offset 0x0
@@ -110,6 +135,7 @@ namespace stm32::i2c
 		SR1_t SR1; // Address Offset 0x14
 		SR2_t SR2; // Address Offset 0x18
 		CCR_t CCR; // Address Offset 0x1C
+		TRISE_t TRISE; // Address Offset 0x20
 	};
 
 	class II2CRegisterMap
@@ -118,8 +144,14 @@ namespace stm32::i2c
 
 		// CR1 Fields
 		virtual PeripheralEnable get_CR1_PE() const = 0;
+		virtual ClockStretchingDisable get_CR1_NOSTRETCH() const = 0;
+		virtual StartGeneration get_CR1_START() const = 0;
+		virtual StopGeneration get_CR1_STOP() const = 0;
 		virtual AcknowledgeEnable get_CR1_ACK() const = 0;
 		virtual void set_CR1_PE(PeripheralEnable value) = 0;
+		virtual void set_CR1_NOSTRETCH(ClockStretchingDisable value) = 0;
+		virtual void set_CR1_START(StartGeneration value) = 0;
+		virtual void set_CR1_STOP(StopGeneration value) = 0;
 		virtual void set_CR1_ACK(AcknowledgeEnable value) = 0;
 
 		// CR2 Fields
@@ -146,6 +178,20 @@ namespace stm32::i2c
 		// SR1 Fields
 		virtual StartBit get_SR1_SB() const = 0;
 		virtual AddressSentMatched get_SR1_ADDR() const = 0;
+		virtual ByteTransferFinished get_SR1_BTF() const = 0;
+		virtual StopDetection get_SR1_STOPF() const = 0;
+		virtual DataRegisterNotEmpty get_SR1_RxNE() const = 0;
+		virtual DataRegisterEmpty get_SR1_TxE() const = 0;
+		virtual BusError get_SR1_BERR() const = 0;
+		virtual ArbitrationLost get_SR1_ARLO() const = 0;
+		virtual AcknowledgeFailure get_SR1_AF() const = 0;
+		virtual OverrunUnderrun get_SR1_OVR() const = 0;
+		virtual TimeoutError get_SR1_TIMEOUT() const = 0;
+		virtual void set_SR1_BERR(BusError value) = 0;
+		virtual void set_SR1_ARLO(ArbitrationLost value) = 0;
+		virtual void set_SR1_AF(AcknowledgeFailure value) = 0;
+		virtual void set_SR1_OVR(OverrunUnderrun value) = 0;
+		virtual void set_SR1_TIMEOUT(TimeoutError value) = 0;
 
 		// SR2 Fields
 		virtual MasterSlave get_SR2_MSL() const = 0;
@@ -159,6 +205,10 @@ namespace stm32::i2c
 		virtual void set_CCR_CCR(uint32_t value) = 0;
 		virtual void set_CCR_DUTY(FmModeDutyCycle value) = 0;
 		virtual void set_CCR_FS(MasterModeSelection value) = 0;
+
+		// TRISE Fields
+		virtual uint32_t get_TRISE_TRISE() const = 0;
+		virtual void set_TRISE_TRISE(uint32_t value) = 0;
 	};
 
 	class I2CRegisterMap : public II2CRegisterMap
@@ -173,8 +223,14 @@ namespace stm32::i2c
 
 		// CR1 Fields
 		PeripheralEnable get_CR1_PE() const { return registers.CR1.Fields.PE; }
+		ClockStretchingDisable get_CR1_NOSTRETCH() const { return registers.CR1.Fields.NOSTRETCH; }
+		StartGeneration get_CR1_START() const { return registers.CR1.Fields.START; }
+		StopGeneration get_CR1_STOP() const { return registers.CR1.Fields.STOP; }
 		AcknowledgeEnable get_CR1_ACK() const { return registers.CR1.Fields.ACK; }
 		void set_CR1_PE(PeripheralEnable value) { registers.CR1.Fields.PE = value; }
+		void set_CR1_NOSTRETCH(ClockStretchingDisable value) { registers.CR1.Fields.NOSTRETCH = value; }
+		void set_CR1_START(StartGeneration value) { registers.CR1.Fields.START = value; }
+		void set_CR1_STOP(StopGeneration value) { registers.CR1.Fields.STOP = value; }
 		void set_CR1_ACK(AcknowledgeEnable value) { registers.CR1.Fields.ACK = value; }
 
 		// CR2 Fields
@@ -201,6 +257,20 @@ namespace stm32::i2c
 		// SR1 Fields
 		StartBit get_SR1_SB() const { return registers.SR1.Fields.SB; }
 		AddressSentMatched get_SR1_ADDR() const { return registers.SR1.Fields.ADDR; }
+		ByteTransferFinished get_SR1_BTF() const { return registers.SR1.Fields.BTF; }
+		StopDetection get_SR1_STOPF() const { return registers.SR1.Fields.STOPF; }
+		DataRegisterNotEmpty get_SR1_RxNE() const { return registers.SR1.Fields.RxNE; }
+		DataRegisterEmpty get_SR1_TxE() const { return registers.SR1.Fields.TxE; }
+		BusError get_SR1_BERR() const { return registers.SR1.Fields.BERR; }
+		ArbitrationLost get_SR1_ARLO() const { return registers.SR1.Fields.ARLO; }
+		AcknowledgeFailure get_SR1_AF() const { return registers.SR1.Fields.AF; }
+		OverrunUnderrun get_SR1_OVR() const { return registers.SR1.Fields.OVR; }
+		TimeoutError get_SR1_TIMEOUT() const { return registers.SR1.Fields.TIMEOUT; }
+		void set_SR1_BERR(BusError value) { registers.SR1.Fields.BERR = value; }
+		void set_SR1_ARLO(ArbitrationLost value) { registers.SR1.Fields.ARLO = value; }
+		void set_SR1_AF(AcknowledgeFailure value) { registers.SR1.Fields.AF = value; }
+		void set_SR1_OVR(OverrunUnderrun value) { registers.SR1.Fields.OVR = value; }
+		void set_SR1_TIMEOUT(TimeoutError value) { registers.SR1.Fields.TIMEOUT = value; }
 
 		// SR2 Fields
 		MasterSlave get_SR2_MSL() const { return registers.SR2.Fields.MSL; }
@@ -214,6 +284,10 @@ namespace stm32::i2c
 		void set_CCR_CCR(uint32_t value) { registers.CCR.Fields.CCR = value; }
 		void set_CCR_DUTY(FmModeDutyCycle value) { registers.CCR.Fields.DUTY = value; }
 		void set_CCR_FS(MasterModeSelection value) { registers.CCR.Fields.FS = value; }
+
+		// TRISE Fields
+		uint32_t get_TRISE_TRISE() const { return registers.TRISE.Fields.TRISE; }
+		void set_TRISE_TRISE(uint32_t value) { registers.TRISE.Fields.TRISE = value; }
 
 	private:
 

@@ -12,6 +12,30 @@ TEST(CR1, PE)
 	EXPECT_EQ(0x00000001U, reg.Value);
 }
 
+TEST(CR1, NOSTRETCH)
+{
+	CR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.NOSTRETCH = (ClockStretchingDisable)1U;
+	EXPECT_EQ(0x00000080U, reg.Value);
+}
+
+TEST(CR1, START)
+{
+	CR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.START = (StartGeneration)1U;
+	EXPECT_EQ(0x00000100U, reg.Value);
+}
+
+TEST(CR1, STOP)
+{
+	CR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.STOP = (StopGeneration)1U;
+	EXPECT_EQ(0x00000200U, reg.Value);
+}
+
 TEST(CR1, ACK)
 {
 	CR1_t reg;
@@ -92,6 +116,78 @@ TEST(SR1, ADDR)
 	EXPECT_EQ(0x00000002U, reg.Value);
 }
 
+TEST(SR1, BTF)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.BTF = (ByteTransferFinished)1U;
+	EXPECT_EQ(0x00000004U, reg.Value);
+}
+
+TEST(SR1, STOPF)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.STOPF = (StopDetection)1U;
+	EXPECT_EQ(0x00000010U, reg.Value);
+}
+
+TEST(SR1, RxNE)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.RxNE = (DataRegisterNotEmpty)1U;
+	EXPECT_EQ(0x00000040U, reg.Value);
+}
+
+TEST(SR1, TxE)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.TxE = (DataRegisterEmpty)1U;
+	EXPECT_EQ(0x00000080U, reg.Value);
+}
+
+TEST(SR1, BERR)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.BERR = (BusError)1U;
+	EXPECT_EQ(0x00000100U, reg.Value);
+}
+
+TEST(SR1, ARLO)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.ARLO = (ArbitrationLost)1U;
+	EXPECT_EQ(0x00000200U, reg.Value);
+}
+
+TEST(SR1, AF)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.AF = (AcknowledgeFailure)1U;
+	EXPECT_EQ(0x00000400U, reg.Value);
+}
+
+TEST(SR1, OVR)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.OVR = (OverrunUnderrun)1U;
+	EXPECT_EQ(0x00000800U, reg.Value);
+}
+
+TEST(SR1, TIMEOUT)
+{
+	SR1_t reg;
+	reg.Value = 0U;
+	reg.Fields.TIMEOUT = (TimeoutError)1U;
+	EXPECT_EQ(0x00004000U, reg.Value);
+}
+
 TEST(SR2, MSL)
 {
 	SR2_t reg;
@@ -138,5 +234,13 @@ TEST(CCR, FS)
 	reg.Value = 0U;
 	reg.Fields.FS = (MasterModeSelection)1U;
 	EXPECT_EQ(0x00008000U, reg.Value);
+}
+
+TEST(TRISE, TRISE)
+{
+	TRISE_t reg;
+	reg.Value = 0U;
+	reg.Fields.TRISE = (uint32_t)63U;
+	EXPECT_EQ(0x0000003FU, reg.Value);
 }
 

@@ -1,5 +1,11 @@
 PeripheralEnable,0,Peripheral disable
 PeripheralEnable,1,Peripheral enable
+ClockStretchingDisable,0,Clock stretching enabled
+ClockStretchingDisable,1,Clock stretching disabled
+StartGeneration,0,No Start generation
+StartGeneration,1,Start generation
+StopGeneration,0,No Stop generation
+StopGeneration,1,Stop generation
 AcknowledgeEnable,0,No acknowledge returned
 AcknowledgeEnable,1,Acknowledge returned
 AddressingMode,0,7-bit slave address
@@ -10,13 +16,31 @@ StartBit,0,No Start condition
 StartBit,1,Start condition generated
 AddressSentMatched,0,Address mismatched or not transmitted
 AddressSentMatched,1,Address matched or transmitted
+ByteTransferFinished,0,Not Done
+ByteTransferFinished,1,Succeeded
+StopDetection,0,No Stop condition detected
+StopDetection,1,Stop condition detected
+DataRegisterNotEmpty,0,Empty
+DataRegisterNotEmpty,1,Not Empty
+DataRegisterEmpty,0,Not Empty
+DataRegisterEmpty,1,Empty
+BusError,0,No misplaced Start or Stop condition
+BusError,1,Misplaced Start or Stop condition
+ArbitrationLost,0,No Arbitration Lost detected
+ArbitrationLost,1,Arbitration Lost detected
+AcknowledgeFailure,0,No acknowledge failure
+AcknowledgeFailure,1,Acknowledge failure
+OverrunUnderrun,0,No overrun/underrun
+OverrunUnderrun,1,Overrun or underrun
+TimeoutError,0,No timeout error
+TimeoutError,1,Timeout Error
 MasterSlave,0,Slave Mode
 MasterSlave,1,Master Mode
 BusBusy,0,No communication
 BusBusy,1,Communication ongoing
 TransmitterReceiver,0,Data bytes received
 TransmitterReceiver,1,Data bytes transmitted
-FmModeDutyCycle,0,Low High Ratio 2
-FmModeDutyCycle,1,Low High Radio 16 over 9
+FmModeDutyCycle,0,Ratio 2
+FmModeDutyCycle,1,Ratio 16 over 9
 MasterModeSelection,0,Standard Mode
 MasterModeSelection,1,Fast Mode
