@@ -79,7 +79,19 @@ namespace stm32::i2c
         }
     }
 
-    void I2CPeripheral::MasterSendData(vector<uint8_t> & data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterSendData(const char * data, uint8_t slaveAddress)
+    {
+        string s(data);
+        MasterSendData(s, slaveAddress);
+    }
+
+    void I2CPeripheral::MasterSendData(const string & data, uint8_t slaveAddress)
+    {
+        vector<uint8_t> dataVector(data.begin(), data.end());
+        MasterSendData(dataVector, slaveAddress);
+    }
+
+    void I2CPeripheral::MasterSendData(const vector<uint8_t> & data, uint8_t slaveAddress)
     {
         GenerateStartCondition();
 

@@ -208,9 +208,7 @@ void I2CExercise()
         {
             std::cout << "Button pressed" << std::endl;
 
-            vector<uint8_t> data = { 'H', 'i', ' ', 'J', 'o', 'e', 'l', ' ', 'a', 'n', 'd', ' ', 'O', 'w', 'e', 'n', '!', '\0'};
-
-            I2C1.MasterSendData(data, 0x68U);
+            I2C1.MasterSendData("Hi Joel and Owen!", 0x68U);
 
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);

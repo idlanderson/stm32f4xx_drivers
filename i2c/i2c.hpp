@@ -4,6 +4,7 @@
 #include "stm32f4xx.hpp"
 #include "i2c_register_map.hpp"
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -32,7 +33,9 @@ namespace stm32::i2c
         void SetDeviceAddress(AddressingMode addressingMode, uint16_t address);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz, FmModeDutyCycle fastModeDutyCycle);
-        void MasterSendData(vector<uint8_t> & data, uint8_t slaveAddress);
+        void MasterSendData(const vector<uint8_t> & data, uint8_t slaveAddress);
+        void MasterSendData(const string & data, uint8_t slaveAddress);
+        void MasterSendData(const char * data, uint8_t slaveAddress);
 
     private:
 
