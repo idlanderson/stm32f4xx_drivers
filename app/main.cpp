@@ -4,6 +4,7 @@
 #include "exti_def.hpp"
 #include "nvic_def.hpp"
 #include "syscfg_def.hpp"
+#include "i2c_def.hpp"
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -14,6 +15,7 @@ using namespace stm32::spi;
 using namespace stm32::syscfg;
 using namespace stm32::nvic;
 using namespace stm32::exti;
+using namespace stm32::i2c;
 
 using Pin = stm32::gpio::PinNumber;
 using PinSpeed = stm32::gpio::Speed;
@@ -103,7 +105,7 @@ void SpiInit(void)
 
 bool spiDataAvailable = false;
 
-void LedAndButtonApplication()
+void LedAndButtonInit()
 {
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOA, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOD, true);
@@ -133,28 +135,6 @@ void LedAndButtonApplication()
         PinSpeed::VeryHighSpeed, 
         PullUpPullDown::NoPullUpPullDown, 
         OutputType::PushPull);
-
-    GPIOD.WritePin(Pin::Pin12, 1U);
-    GPIOD.WritePin(Pin::Pin13, 1U);
-    GPIOD.WritePin(Pin::Pin14, 1U);
-    GPIOD.WritePin(Pin::Pin15, 1U);
-
-    std::cout << "Application running." << std::endl;
-
-    for (;;)
-    {
-        delay();
-
-        if (GPIOA.ReadPin(Pin::Pin0) == 1U)
-        {
-            std::cout << "Button pressed" << std::endl;
-
-            GPIOD.TogglePin(Pin::Pin12);
-            GPIOD.TogglePin(Pin::Pin13);
-            GPIOD.TogglePin(Pin::Pin14);
-            GPIOD.TogglePin(Pin::Pin15);
-        }
-    }
 }
 
 void SpiAsyncRxExercise()
@@ -180,9 +160,69 @@ void SpiAsyncRxExercise()
     }
 }
 
+void I2CInit()
+{
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOB, true);
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::I2C1, true);
+
+    // I2C1 SCL = PB6 Alternate Function 4
+    GPIOB.ConfigureAltFcnPin(
+        PinNumber::Pin6,
+        Speed::VeryHighSpeed,
+        PullUpPullDown::PullUp,
+        OutputType::OpenDrain,
+        AlternateFunction::Af4);
+
+    // I2C1 SDA = PB7 Alternate Function 4
+    GPIOB.ConfigureAltFcnPin(
+        PinNumber::Pin7,
+        Speed::VeryHighSpeed,
+        PullUpPullDown::PullUp,
+        OutputType::OpenDrain,
+        AlternateFunction::Af4);
+
+    I2C1.SetAcknowledgeEnable(AcknowledgeEnable::AcknowledgeReturned);
+    I2C1.SetSerialClock(16U, 100U);
+}
+
+void I2CExercise()
+{
+    std::cout << "Starting I2C test application..." << std::endl;
+
+    I2CInit();
+
+    LedAndButtonInit();
+
+    GPIOD.WritePin(Pin::Pin12, 1U);
+    GPIOD.WritePin(Pin::Pin13, 1U);
+    GPIOD.WritePin(Pin::Pin14, 1U);
+    GPIOD.WritePin(Pin::Pin15, 1U);
+
+    std::cout << "I2C1 initialized. Waiting for button press..." << std::endl;
+
+    for (;;)
+    {
+        delay();
+
+        if (GPIOA.ReadPin(Pin::Pin0) == 1U)
+        {
+            std::cout << "Button pressed" << std::endl;
+
+            vector<uint8_t> data = { 'H', 'i', ' ', 'J', 'o', 'e', 'l', ' ', 'a', 'n', 'd', ' ', 'O', 'w', 'e', 'n', '!', '\0'};
+
+            I2C1.MasterSendData(data, 0x68U);
+
+            GPIOD.TogglePin(Pin::Pin12);
+            GPIOD.TogglePin(Pin::Pin13);
+            GPIOD.TogglePin(Pin::Pin14);
+            GPIOD.TogglePin(Pin::Pin15);
+        }
+    }
+}
+
 int main()
 {
-    SpiAsyncRxExercise();
+    I2CExercise();
 
     return 0U;
 }

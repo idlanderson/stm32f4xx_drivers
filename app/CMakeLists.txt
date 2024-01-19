@@ -7,6 +7,7 @@ target_link_libraries(${PROJECT_NAME}.elf
     rcc 
     gpio
     spi
+    i2c
     syscfg
     rcc
     nvic

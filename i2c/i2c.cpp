@@ -19,6 +19,8 @@ namespace stm32::i2c
             serialClockKHz     >= MinSerialClockKHz &&
             serialClockKHz     <= MaxSerialClockKHz_FastMode)
         {
+            device.set_CR1_PE(PeripheralEnable::PeripheralEnable);
+
             device.set_CR2_FREQ(peripheralClockMHz);
 
             MasterModeSelection mode = 
