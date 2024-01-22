@@ -79,25 +79,25 @@ namespace stm32::i2c
         }
     }
 
-    void I2CPeripheral::MasterWriteData(uint8_t data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(uint8_t data, uint8_t slaveAddress, bool useRepeatedStart)
     {
         vector<uint8_t> v { data };
-        MasterWriteData(v, slaveAddress);
+        MasterWriteData(v, slaveAddress, useRepeatedStart);
     }
 
-    void I2CPeripheral::MasterWriteData(const char * data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(const char * data, uint8_t slaveAddress, bool useRepeatedStart)
     {
         string s(data);
-        MasterWriteData(s, slaveAddress);
+        MasterWriteData(s, slaveAddress, useRepeatedStart);
     }
 
-    void I2CPeripheral::MasterWriteData(const string & data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(const string & data, uint8_t slaveAddress, bool useRepeatedStart)
     {
         vector<uint8_t> dataVector(data.begin(), data.end());
-        MasterWriteData(dataVector, slaveAddress);
+        MasterWriteData(dataVector, slaveAddress, useRepeatedStart);
     }
 
-    void I2CPeripheral::MasterWriteData(const vector<uint8_t> & data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(const vector<uint8_t> & data, uint8_t slaveAddress, bool useRepeatedStart)
     {
         GenerateStartCondition();
 
@@ -112,10 +112,13 @@ namespace stm32::i2c
         while (device.get_SR1_TxE() != DataRegisterEmpty::Empty);
         while (device.get_SR1_BTF() != ByteTransferFinished::Succeeded);
 
-        GenerateStopCondition();
+        if (!useRepeatedStart)
+        {
+            GenerateStopCondition();
+        }
     }
 
-    vector<uint8_t> I2CPeripheral::MasterReadData(uint32_t length, uint8_t slaveAddress)
+    vector<uint8_t> I2CPeripheral::MasterReadData(uint32_t length, uint8_t slaveAddress, bool useRepeatedStart)
     {
         vector<uint8_t> data;
 
@@ -128,7 +131,12 @@ namespace stm32::i2c
 
         if (length == 1)
         {
-            StopReading();
+            SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);
+
+            if (!useRepeatedStart)
+            {
+                GenerateStopCondition();
+            }
 
             WaitForRxData();
 
@@ -144,7 +152,12 @@ namespace stm32::i2c
 
                 if (i == 2U)
                 {
-                    StopReading();
+                    SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);
+
+                    if (!useRepeatedStart)
+                    {
+                        GenerateStopCondition();
+                    }
                 }
 
                 // Read the data.
@@ -200,12 +213,6 @@ namespace stm32::i2c
         
         // Transmit the byte.
         device.set_DR_DR(byte);
-    }
-
-    void I2CPeripheral::StopReading()
-    {
-        SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);
-        GenerateStopCondition();
     }
 
     void I2CPeripheral::WaitForRxData()

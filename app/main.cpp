@@ -208,7 +208,7 @@ void I2CTxExercise()
         {
             std::cout << "Button pressed" << std::endl;
 
-            I2C1.MasterWriteData("Hi Joel and Owen!", 0x68U);
+            I2C1.MasterWriteData("Hi Joel and Owen!", 0x68U, false);
 
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);
@@ -245,14 +245,14 @@ void I2CRxExercise()
         {
             std::cout << "Button pressed" << std::endl;
 
-            I2C1.MasterWriteData(I2C_READ_DATA_LENGTH, ARDUINO);
+            I2C1.MasterWriteData(I2C_READ_DATA_LENGTH, ARDUINO, true);
 
-            auto length = I2C1.MasterReadData(1U, ARDUINO);
+            auto length = I2C1.MasterReadData(1U, ARDUINO, true);
 
             std::cout << "Length = " << static_cast<int>(length[0]) << std::endl;
 
-            I2C1.MasterWriteData(I2C_READ_DATA, ARDUINO);
-            auto data = I2C1.MasterReadData(length[0], ARDUINO);
+            I2C1.MasterWriteData(I2C_READ_DATA, ARDUINO, true);
+            auto data = I2C1.MasterReadData(length[0], ARDUINO, false);
 
             for (auto d : data)
             {
