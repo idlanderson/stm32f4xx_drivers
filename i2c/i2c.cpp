@@ -79,23 +79,30 @@ namespace stm32::i2c
         }
     }
 
-    void I2CPeripheral::MasterSendData(const char * data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(uint8_t data, uint8_t slaveAddress)
+    {
+        vector<uint8_t> v { data };
+        MasterWriteData(v, slaveAddress);
+    }
+
+    void I2CPeripheral::MasterWriteData(const char * data, uint8_t slaveAddress)
     {
         string s(data);
-        MasterSendData(s, slaveAddress);
+        MasterWriteData(s, slaveAddress);
     }
 
-    void I2CPeripheral::MasterSendData(const string & data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(const string & data, uint8_t slaveAddress)
     {
         vector<uint8_t> dataVector(data.begin(), data.end());
-        MasterSendData(dataVector, slaveAddress);
+        MasterWriteData(dataVector, slaveAddress);
     }
 
-    void I2CPeripheral::MasterSendData(const vector<uint8_t> & data, uint8_t slaveAddress)
+    void I2CPeripheral::MasterWriteData(const vector<uint8_t> & data, uint8_t slaveAddress)
     {
         GenerateStartCondition();
 
         ExecuteAddressPhase(slaveAddress, ReadWriteFlag::Write);
+        ClearAddressFlag();
 
         for (uint8_t byte : data)
         {
@@ -106,6 +113,49 @@ namespace stm32::i2c
         while (device.get_SR1_BTF() != ByteTransferFinished::Succeeded);
 
         GenerateStopCondition();
+    }
+
+    vector<uint8_t> I2CPeripheral::MasterReadData(uint32_t length, uint8_t slaveAddress)
+    {
+        vector<uint8_t> data;
+
+        if (length == 0U) return data;
+
+        GenerateStartCondition();
+
+        ExecuteAddressPhase(slaveAddress, ReadWriteFlag::Read);
+        ClearAddressFlag();
+
+        if (length == 1)
+        {
+            StopReading();
+
+            WaitForRxData();
+
+            // Read the data.
+            uint8_t dataByte = device.get_DR_DR();
+            data.push_back(dataByte);
+        }
+        else if (length > 1)
+        {
+            for (uint32_t i = length; i > 0U; i--)
+            {
+                WaitForRxData();
+
+                if (i == 2U)
+                {
+                    StopReading();
+                }
+
+                // Read the data.
+                uint8_t dataByte = device.get_DR_DR();
+                data.push_back(dataByte);
+            }
+        }
+
+        SetAcknowledgeEnable(AcknowledgeEnable::AcknowledgeReturned);
+
+        return data;
     }
 
     void I2CPeripheral::GenerateStartCondition()
@@ -131,7 +181,10 @@ namespace stm32::i2c
 
         // Wait until the address has been matched.
         while (device.get_SR1_ADDR() != AddressSentMatched::AddressMatchedOrTransmitted);
+    }
 
+    void I2CPeripheral::ClearAddressFlag()
+    {
         // Clear the ADDR flag.
         // According to the STM32 reference manual:
         // "This bit is cleared by software reading SR1 register followed reading SR2"
@@ -147,5 +200,17 @@ namespace stm32::i2c
         
         // Transmit the byte.
         device.set_DR_DR(byte);
+    }
+
+    void I2CPeripheral::StopReading()
+    {
+        SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);
+        GenerateStopCondition();
+    }
+
+    void I2CPeripheral::WaitForRxData()
+    {
+        // Wait for the RxNE flag to indicate that the Rx data register is not empty.
+        while (device.get_SR1_RxNE() != DataRegisterNotEmpty::NotEmpty);
     }
 } // namespace stm32::i2c

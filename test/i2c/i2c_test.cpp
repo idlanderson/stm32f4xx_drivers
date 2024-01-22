@@ -104,7 +104,7 @@ TEST_F(I2CPeripheralTest, SetSerialClockFastMode)
     EXPECT_EQ(0x00000001U, registers.TRISE.Value);
 }
 
-TEST_F(I2CPeripheralTestWithMock, MasterSendData)
+TEST_F(I2CPeripheralTestWithMock, MasterWriteData)
 {
     // Start condition
     EXPECT_CALL(registerMap, set_CR1_START(StartGeneration::StartGeneration)).Times(1);
@@ -135,5 +135,5 @@ TEST_F(I2CPeripheralTestWithMock, MasterSendData)
     EXPECT_CALL(registerMap, set_CR1_STOP(StopGeneration::StopGeneration)).Times(1);
 
     vector<uint8_t> data = { 0xABU, 0xCDU };
-    i2c.MasterSendData(data, 0x01U);
+    i2c.MasterWriteData(data, 0x01U);
 }

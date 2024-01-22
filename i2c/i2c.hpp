@@ -33,9 +33,11 @@ namespace stm32::i2c
         void SetDeviceAddress(AddressingMode addressingMode, uint16_t address);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz, FmModeDutyCycle fastModeDutyCycle);
-        void MasterSendData(const vector<uint8_t> & data, uint8_t slaveAddress);
-        void MasterSendData(const string & data, uint8_t slaveAddress);
-        void MasterSendData(const char * data, uint8_t slaveAddress);
+        void MasterWriteData(uint8_t data, uint8_t slaveAddress);
+        void MasterWriteData(const vector<uint8_t> & data, uint8_t slaveAddress);
+        void MasterWriteData(const string & data, uint8_t slaveAddress);
+        void MasterWriteData(const char * data, uint8_t slaveAddress);
+        vector<uint8_t> MasterReadData(uint32_t length, uint8_t slaveAddress);
 
     private:
 
@@ -49,6 +51,9 @@ namespace stm32::i2c
         void GenerateStartCondition();
         void GenerateStopCondition();
         void ExecuteAddressPhase(uint8_t slaveAddress, ReadWriteFlag readWriteFlag);
+        void ClearAddressFlag();
+        void StopReading();
+        void WaitForRxData();
         void SendDataByte(uint8_t byte);
 
         const uint8_t MinPeripheralClockMHz = 2U;

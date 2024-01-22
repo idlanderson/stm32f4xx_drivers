@@ -185,7 +185,7 @@ void I2CInit()
     I2C1.SetSerialClock(16U, 100U);
 }
 
-void I2CExercise()
+void I2CTxExercise()
 {
     std::cout << "Starting I2C test application..." << std::endl;
 
@@ -208,7 +208,58 @@ void I2CExercise()
         {
             std::cout << "Button pressed" << std::endl;
 
-            I2C1.MasterSendData("Hi Joel and Owen!", 0x68U);
+            I2C1.MasterWriteData("Hi Joel and Owen!", 0x68U);
+
+            GPIOD.TogglePin(Pin::Pin12);
+            GPIOD.TogglePin(Pin::Pin13);
+            GPIOD.TogglePin(Pin::Pin14);
+            GPIOD.TogglePin(Pin::Pin15);
+        }
+    }
+}
+
+#define ARDUINO                 0x68U
+#define I2C_READ_DATA_LENGTH    0x51U
+#define I2C_READ_DATA           0x52U
+
+void I2CRxExercise()
+{
+    std::cout << "Starting I2C test application (I2C Rx)..." << std::endl;
+
+    I2CInit();
+
+    LedAndButtonInit();
+
+    GPIOD.WritePin(Pin::Pin12, 1U);
+    GPIOD.WritePin(Pin::Pin13, 1U);
+    GPIOD.WritePin(Pin::Pin14, 1U);
+    GPIOD.WritePin(Pin::Pin15, 1U);
+
+    std::cout << "I2C1 initialized. Waiting for button press..." << std::endl;
+
+    for (;;)
+    {
+        delay();
+
+        if (GPIOA.ReadPin(Pin::Pin0) == 1U)
+        {
+            std::cout << "Button pressed" << std::endl;
+
+            I2C1.MasterWriteData(I2C_READ_DATA_LENGTH, ARDUINO);
+
+            auto length = I2C1.MasterReadData(1U, ARDUINO);
+
+            std::cout << "Length = " << static_cast<int>(length[0]) << std::endl;
+
+            I2C1.MasterWriteData(I2C_READ_DATA, ARDUINO);
+            auto data = I2C1.MasterReadData(length[0], ARDUINO);
+
+            for (auto d : data)
+            {
+                std::cout << d;
+            }
+
+            std::cout << std::endl;
 
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);
@@ -220,7 +271,7 @@ void I2CExercise()
 
 int main()
 {
-    I2CExercise();
+    I2CRxExercise();
 
     return 0U;
 }
