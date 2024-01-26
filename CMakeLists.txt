@@ -4,6 +4,9 @@ option(BUILD_TESTS "Build the unit tests" OFF)
 
 if (NOT BUILD_TESTS)
     set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/toolchain.cmake")
+else()
+    set(CMAKE_C_COMPILER "gcc")
+    set(CMAKE_CXX_COMPILER "g++")
 endif()
 
 # CMake normally attempts a 'test compile and link'. This will fail when

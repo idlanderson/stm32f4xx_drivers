@@ -135,5 +135,5 @@ TEST_F(I2CPeripheralTestWithMock, MasterWriteData)
     EXPECT_CALL(registerMap, set_CR1_STOP(StopGeneration::StopGeneration)).Times(1);
 
     vector<uint8_t> data = { 0xABU, 0xCDU };
-    i2c.MasterWriteData(data, 0x01U);
+    i2c.MasterWriteData(data, 0x01U, false);
 }

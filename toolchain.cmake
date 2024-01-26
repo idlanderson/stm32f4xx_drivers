@@ -2,8 +2,17 @@
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-set(CMAKE_C_COMPILER "arm-none-eabi-gcc.exe")
-set(CMAKE_CXX_COMPILER "arm-none-eabi-g++.exe")
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX)
+    set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
+    set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
+else()
+    set(CMAKE_C_COMPILER "arm-none-eabi-gcc.exe")
+    set(CMAKE_CXX_COMPILER "arm-none-eabi-g++.exe")
+endif()
 
 add_compile_options(
     -c 

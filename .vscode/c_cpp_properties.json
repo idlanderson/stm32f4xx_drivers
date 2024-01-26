@@ -16,7 +16,21 @@
             "cStandard": "c17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "windows-gcc-arm",
-            "configurationProvider": "ms-vscode.cpptools" // https://stackoverflow.com/questions/45583473/include-errors-detected-in-vscode
+            "configurationProvider": "ms-vscode.cpptools"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/gpio/**",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/build/_deps/googletest-src/googlemock/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/arm-none-eabi-g++",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm"
         }
     ],
     "version": 4

@@ -4,14 +4,24 @@
 		{
 			"type": "shell",
 			"label": "Clean and Build drivers_cpp.elf",
-			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"windows": {
+				"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build"
+			},
+			"linux": {
+				"command": "rm -rf ./build; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build"
+			}
 		},
 		{
 			"type": "shell",
 			"label": "Clean and Build Unit Tests",
-			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=ON; cmake --build build",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"windows": {
+				"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=ON; cmake --build build",
+			},
+			"linux": {
+				"command": "rm -rf ./build; cmake -S . -B build -DBUILD_TESTS=ON; cmake --build build",
+			}
 		},
 		{
 			"type": "shell",
@@ -28,14 +38,24 @@
 		{
 			"type": "shell",
 			"label": "Run GDB and Flash Target",
-			"command": "arm-none-eabi-gdb -x scripts/flash_gdb --batch",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"windows": {
+				"command": "arm-none-eabi-gdb -x scripts/flash_gdb --batch",
+			},
+			"linux": {
+				"command": "arm-none-eabi-gdb -x ./scripts/flash_gdb --batch",
+			}
 		},
 		{
 			"type": "shell",
 			"label": "Clean/Build drivers.elf and Flash to Target",
-			"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build; arm-none-eabi-gdb -x scripts/flash_gdb --batch",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"windows": {
+				"command": "Remove-Item ./build -Recurse -ErrorAction Ignore; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build; arm-none-eabi-gdb -x scripts/flash_gdb --batch",
+			},
+			"linux": {
+				"command": "rm -rf ./build; cmake -S . -B build -DBUILD_TESTS=OFF; cmake --build build; gdb-multiarch -x ./scripts/flash_gdb --batch",				
+			}
 		}
 	]
 }
