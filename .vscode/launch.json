@@ -3,6 +3,7 @@
     "configurations": [
         {
             "type": "cortex-debug",
+            "gdbPath": "gdb-multiarch",
             "request": "launch",
             "name": "Debug (OpenOCD)",
             "servertype": "openocd",
