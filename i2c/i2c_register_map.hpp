@@ -27,8 +27,12 @@ namespace stm32::i2c
 	{
 		volatile struct
 		{
-			uint32_t FREQ        : 6; // [0:5]   rw : Peripheral clock frequency
-			Reserved Reserved1   : 26; // [6:31]     : RESERVED FIELD.
+			uint32_t        FREQ        : 6; // [0:5]   rw : Peripheral clock frequency
+			Reserved        Reserved1   : 2; // [6:7]      : RESERVED FIELD.
+			InterruptEnable ITERREN     : 1; // [8]     rw : Error interrupt enable
+			InterruptEnable ITEVTEN     : 1; // [9]     rw : Event interrupt enable
+			InterruptEnable ITBUFEN     : 1; // [10]    rw : Buffer interrupt enable
+			Reserved        Reserved2   : 21; // [11:31]    : RESERVED FIELD.
 		} Fields;
 		volatile uint32_t Value;
 	};
@@ -156,7 +160,13 @@ namespace stm32::i2c
 
 		// CR2 Fields
 		virtual uint32_t get_CR2_FREQ() const = 0;
+		virtual InterruptEnable get_CR2_ITERREN() const = 0;
+		virtual InterruptEnable get_CR2_ITEVTEN() const = 0;
+		virtual InterruptEnable get_CR2_ITBUFEN() const = 0;
 		virtual void set_CR2_FREQ(uint32_t value) = 0;
+		virtual void set_CR2_ITERREN(InterruptEnable value) = 0;
+		virtual void set_CR2_ITEVTEN(InterruptEnable value) = 0;
+		virtual void set_CR2_ITBUFEN(InterruptEnable value) = 0;
 
 		// OAR1 Fields
 		virtual uint32_t get_OAR1_ADD() const = 0;
@@ -235,7 +245,13 @@ namespace stm32::i2c
 
 		// CR2 Fields
 		uint32_t get_CR2_FREQ() const { return registers.CR2.Fields.FREQ; }
+		InterruptEnable get_CR2_ITERREN() const { return registers.CR2.Fields.ITERREN; }
+		InterruptEnable get_CR2_ITEVTEN() const { return registers.CR2.Fields.ITEVTEN; }
+		InterruptEnable get_CR2_ITBUFEN() const { return registers.CR2.Fields.ITBUFEN; }
 		void set_CR2_FREQ(uint32_t value) { registers.CR2.Fields.FREQ = value; }
+		void set_CR2_ITERREN(InterruptEnable value) { registers.CR2.Fields.ITERREN = value; }
+		void set_CR2_ITEVTEN(InterruptEnable value) { registers.CR2.Fields.ITEVTEN = value; }
+		void set_CR2_ITBUFEN(InterruptEnable value) { registers.CR2.Fields.ITBUFEN = value; }
 
 		// OAR1 Fields
 		uint32_t get_OAR1_ADD() const { return registers.OAR1.Fields.ADD; }

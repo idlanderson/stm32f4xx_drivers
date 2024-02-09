@@ -13,6 +13,7 @@
             "configFiles": [
                 "board/stm32f4discovery.cfg"
             ],
+            "preLaunchTask": "Build",
             "swoConfig": {
                 "enabled": true,
                 "cpuFrequency": 16000000,

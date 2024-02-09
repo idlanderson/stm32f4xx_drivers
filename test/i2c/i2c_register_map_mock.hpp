@@ -24,7 +24,13 @@ public:
 
 	// CR2 Fields
 	MOCK_METHOD(uint32_t, get_CR2_FREQ, (), (const, override));
+	MOCK_METHOD(InterruptEnable, get_CR2_ITERREN, (), (const, override));
+	MOCK_METHOD(InterruptEnable, get_CR2_ITEVTEN, (), (const, override));
+	MOCK_METHOD(InterruptEnable, get_CR2_ITBUFEN, (), (const, override));
 	MOCK_METHOD(void, set_CR2_FREQ, (uint32_t), (override));
+	MOCK_METHOD(void, set_CR2_ITERREN, (InterruptEnable), (override));
+	MOCK_METHOD(void, set_CR2_ITEVTEN, (InterruptEnable), (override));
+	MOCK_METHOD(void, set_CR2_ITBUFEN, (InterruptEnable), (override));
 
 	// OAR1 Fields
 	MOCK_METHOD(uint32_t, get_OAR1_ADD, (), (const, override));

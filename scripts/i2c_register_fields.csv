@@ -4,6 +4,9 @@ CR1,StartGeneration,Start generation,START,8,1,rw
 CR1,StopGeneration,Stop generation,STOP,9,1,rw
 CR1,AcknowledgeEnable,Acknowledge enable,ACK,10,1,rw
 CR2,,Peripheral clock frequency,FREQ,0,6,rw
+CR2,InterruptEnable,Error interrupt enable,ITERREN,8,1,rw
+CR2,InterruptEnable,Event interrupt enable,ITEVTEN,9,1,rw
+CR2,InterruptEnable,Buffer interrupt enable,ITBUFEN,10,1,rw
 OAR1,,Interface address,ADD,0,10,rw
 OAR1,,Reserved bit. Should always be kept at 1 by software.,RESERVEDBIT14,14,1,w
 OAR1,AddressingMode,Addressing mode (slave mode),ADDMODE,15,1,rw

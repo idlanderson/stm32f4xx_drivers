@@ -52,6 +52,30 @@ TEST(CR2, FREQ)
 	EXPECT_EQ(0x0000003FU, reg.Value);
 }
 
+TEST(CR2, ITERREN)
+{
+	CR2_t reg;
+	reg.Value = 0U;
+	reg.Fields.ITERREN = (InterruptEnable)1U;
+	EXPECT_EQ(0x00000100U, reg.Value);
+}
+
+TEST(CR2, ITEVTEN)
+{
+	CR2_t reg;
+	reg.Value = 0U;
+	reg.Fields.ITEVTEN = (InterruptEnable)1U;
+	EXPECT_EQ(0x00000200U, reg.Value);
+}
+
+TEST(CR2, ITBUFEN)
+{
+	CR2_t reg;
+	reg.Value = 0U;
+	reg.Fields.ITBUFEN = (InterruptEnable)1U;
+	EXPECT_EQ(0x00000400U, reg.Value);
+}
+
 TEST(OAR1, ADD)
 {
 	OAR1_t reg;

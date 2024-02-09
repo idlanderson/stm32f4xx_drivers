@@ -39,6 +39,12 @@ namespace stm32::i2c
 		AcknowledgeReturned = 1U,
 	};
 
+	enum class InterruptEnable : uint32_t
+	{
+		InterruptDisable = 0U,
+		InterruptEnable = 1U,
+	};
+
 	enum class AddressingMode : uint32_t
 	{
 		_7BitSlaveAddress = 0U,

@@ -5,9 +5,9 @@
 #include "nvic_def.hpp"
 #include "syscfg_def.hpp"
 #include "i2c_def.hpp"
-#include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <stdio.h>
 
 using namespace stm32::gpio;
 using namespace stm32::rcc;
@@ -22,15 +22,13 @@ using PinSpeed = stm32::gpio::Speed;
 using PullUpPullDown = stm32::gpio::PullUpPullDown;
 using OutputType = stm32::gpio::OutputType;
 
-void delay(void)
+void delay(uint32_t value)
 {
-	for (uint32_t i = 0U; i < 500000U / 2U; i++);
+	for (uint32_t i = 0U; i < value / 2U; i++);
 }
 
 void SpiInit(void)
 {
-    std::cout << "Initializing SPI..." << std::endl;
-
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::SYSCFG, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOB, true);
     RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOD, true);
@@ -99,8 +97,6 @@ void SpiInit(void)
     // Enable the SPI2 interrupts. These will be triggered when the TXEIE and RXNEIE flags are set.
     // The handler is SPI2_Handler().
     NVIC.EnableIrq(IrqNumber::SPI2);
-
-    std::cout << "SPI initialized." << std::endl;
 }
 
 bool spiDataAvailable = false;
@@ -139,19 +135,13 @@ void LedAndButtonInit()
 
 void SpiAsyncRxExercise()
 {
-    std::cout << "Starting application..." << std::endl;
-
     SpiInit();
-
-    std::cout << "Application running. Waiting for SPI data..." << std::endl;
 
     stm32::spi::SpiData dummyTx = { 0xAB };
 
     for (;;)
     {
         while (!spiDataAvailable);
-
-        //std::cout << "SPI data is available" << std::endl;
 
         SPI2.SendDataAsync(dummyTx);
         SPI2.ReceiveDataAsync(1);
@@ -181,14 +171,11 @@ void I2CInit()
         OutputType::OpenDrain,
         AlternateFunction::Af4);
 
-    I2C1.SetAcknowledgeEnable(AcknowledgeEnable::AcknowledgeReturned);
     I2C1.SetSerialClock(16U, 100U);
 }
 
 void I2CTxExercise()
 {
-    std::cout << "Starting I2C test application..." << std::endl;
-
     I2CInit();
 
     LedAndButtonInit();
@@ -198,17 +185,13 @@ void I2CTxExercise()
     GPIOD.WritePin(Pin::Pin14, 1U);
     GPIOD.WritePin(Pin::Pin15, 1U);
 
-    std::cout << "I2C1 initialized. Waiting for button press..." << std::endl;
-
     for (;;)
     {
-        delay();
+        delay(500000U);
 
         if (GPIOA.ReadPin(Pin::Pin0) == 1U)
         {
-            std::cout << "Button pressed" << std::endl;
-
-            I2C1.MasterWriteData("Hi Joel and Owen!", 0x68U, false);
+            I2C1.MasterWriteData("Hello world!", 0x68U, false);
 
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);
@@ -224,8 +207,6 @@ void I2CTxExercise()
 
 void I2CRxExercise()
 {
-    std::cout << "Starting I2C test application (I2C Rx)..." << std::endl;
-
     I2CInit();
 
     LedAndButtonInit();
@@ -235,31 +216,117 @@ void I2CRxExercise()
     GPIOD.WritePin(Pin::Pin14, 1U);
     GPIOD.WritePin(Pin::Pin15, 1U);
 
-    std::cout << "I2C1 initialized. Waiting for button press..." << std::endl;
-
     for (;;)
     {
-        delay();
+        delay(500000U);
 
         if (GPIOA.ReadPin(Pin::Pin0) == 1U)
         {
-            std::cout << "Button pressed" << std::endl;
-
             I2C1.MasterWriteData(I2C_READ_DATA_LENGTH, ARDUINO, true);
-
+            
             auto length = I2C1.MasterReadData(1U, ARDUINO, true);
 
-            std::cout << "Length = " << static_cast<int>(length[0]) << std::endl;
+            printf("Length = %d\n", static_cast<int>(length[0]));
 
             I2C1.MasterWriteData(I2C_READ_DATA, ARDUINO, true);
             auto data = I2C1.MasterReadData(length[0], ARDUINO, false);
 
             for (auto d : data)
             {
-                std::cout << d;
+                printf("%c", d);
             }
+            
+            GPIOD.TogglePin(Pin::Pin12);
+            GPIOD.TogglePin(Pin::Pin13);
+            GPIOD.TogglePin(Pin::Pin14);
+            GPIOD.TogglePin(Pin::Pin15);
+        }
+    }
+}
 
-            std::cout << std::endl;
+void I2CAsyncExercise()
+{
+    I2CInit();
+
+    NVIC.EnableIrq(IrqNumber::I2C1_EV);
+    NVIC.EnableIrq(IrqNumber::I2C1_ER);
+
+    LedAndButtonInit();
+
+    GPIOD.WritePin(Pin::Pin12, 1U);
+    GPIOD.WritePin(Pin::Pin13, 1U);
+    GPIOD.WritePin(Pin::Pin14, 1U);
+    GPIOD.WritePin(Pin::Pin15, 1U);
+
+    printf("I2C1 initialized. Waiting for button press...\n");
+
+    I2C1.OnBusError([]() 
+    { 
+        printf("Bus Error\n"); 
+        I2C1.CloseCommunication();
+    });
+
+    I2C1.OnArbitrationLost([]() 
+    { 
+        printf("Arbitration Lost\n"); 
+        I2C1.CloseCommunication();
+    });
+
+    I2C1.OnAcknowledgeFailure([]() 
+    { 
+        printf("Acknowledge Failure\n");
+        I2C1.CloseCommunication();
+    });
+
+    I2C1.OnOverrunUnderrun([]() 
+    { 
+        printf("Overrun/Underrun\n"); 
+        I2C1.CloseCommunication();
+    });
+
+    I2C1.OnTimeout([]() 
+    { 
+        printf("Timeout\n"); 
+        I2C1.CloseCommunication();
+    });
+
+    for (;;)
+    {
+        delay(500000U);
+
+        if (GPIOA.ReadPin(Pin::Pin0) == 1U)
+        {
+            printf("Button pressed.\n");
+
+            I2C1.MasterWriteDataAsync(I2C_READ_DATA_LENGTH, ARDUINO);
+
+            while(I2C1.IsBusy());
+
+            uint8_t length = 0;
+
+            I2C1.MasterReadDataAsync(1U, ARDUINO, [& length](vector<uint8_t> & receivedData)
+            { 
+                length = receivedData[0];
+            });
+
+            while(I2C1.IsBusy());
+
+            printf("Read 1 complete. Length = %d\n", length);
+
+            I2C1.MasterWriteDataAsync(I2C_READ_DATA, ARDUINO);
+
+            while(I2C1.IsBusy());
+
+            string result;
+
+            I2C1.MasterReadDataAsync(length, ARDUINO, [& result](vector<uint8_t> & receivedData)
+            {
+                result.assign(receivedData.begin(), receivedData.end());
+            });
+
+            while(I2C1.IsBusy());
+
+            printf("Read 2 complete. Data = %s\n", result.c_str());
 
             GPIOD.TogglePin(Pin::Pin12);
             GPIOD.TogglePin(Pin::Pin13);
@@ -271,7 +338,7 @@ void I2CRxExercise()
 
 int main()
 {
-    I2CRxExercise();
+    I2CAsyncExercise();
 
     return 0U;
 }
@@ -282,7 +349,6 @@ extern "C" {
 
 void EXTI9_5_Handler(void)
 {
-    // std::cout << "EXTI9_5_Handler" << std::endl;
     EXTI.ClearPendingBit(6);
     NVIC.ClearPendingIrq(IrqNumber::EXTI9_5);
     spiDataAvailable = true;
@@ -290,9 +356,19 @@ void EXTI9_5_Handler(void)
 
 void SPI2_Handler(void)
 {
-    // std::cout << "SPI2_Handler" << std::endl;
-
     SPI2.HandleIrq();
+}
+
+void I2C1_EV_Handler(void)
+{
+    NVIC.ClearPendingIrq(IrqNumber::I2C1_EV);
+    I2C1.HandleEventIrq();
+}
+
+void I2C1_ER_Handler(void)
+{
+    NVIC.ClearPendingIrq(IrqNumber::I2C1_ER);
+    I2C1.HandleErrorIrq();
 }
 
 #ifdef __cplusplus

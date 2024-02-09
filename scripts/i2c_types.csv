@@ -8,6 +8,8 @@ StopGeneration,0,No Stop generation
 StopGeneration,1,Stop generation
 AcknowledgeEnable,0,No acknowledge returned
 AcknowledgeEnable,1,Acknowledge returned
+InterruptEnable,0,Interrupt disable
+InterruptEnable,1,Interrupt enable
 AddressingMode,0,7-bit slave address
 AddressingMode,1,10-bit slave address
 DualAddressingModeEnable,0,Only OAR1
