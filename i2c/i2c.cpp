@@ -363,9 +363,26 @@ namespace stm32::i2c
         return stateInfo.State();
     }
 
+    void I2CPeripheral::SlaveWriteData(uint8_t data)
+    {
+        if (device.get_SR2_MSL() == MasterSlave::SlaveMode)
+        {
+            device.set_DR_DR(data);
+        }
+    }
+
+    uint8_t I2CPeripheral::SlaveReadData()
+    {
+        return device.get_SR2_MSL() == MasterSlave::SlaveMode ? device.get_DR_DR() : 0U;
+    }
+
     void I2CPeripheral::CloseCommunication()
     {
-        GenerateStopCondition();
+        if (device.get_SR2_MSL() == MasterSlave::MasterMode)
+        {
+            GenerateStopCondition();
+        }
+
         SetInterruptsEnabled(InterruptEnable::InterruptDisable);
         SetAcknowledgeEnable(AcknowledgeEnable::AcknowledgeReturned);
 
@@ -375,7 +392,7 @@ namespace stm32::i2c
     /// @brief This function is meant to be invoked from an interrupt service routine to handle I2C_EV interrupts.
     void I2CPeripheral::HandleEventIrq()
     {
-        if (stateInfo.State() != RxTxState::Idle && device.get_CR2_ITEVTEN() == InterruptEnable::InterruptEnable)
+        if (device.get_CR2_ITEVTEN() == InterruptEnable::InterruptEnable)
         {
             if (device.get_SR1_SB() == StartBit::StartConditionGenerated)
             {
@@ -430,9 +447,8 @@ namespace stm32::i2c
 
     inline void I2CPeripheral::HandleEventIrq_ADDR()
     {
-        // IRQ EV6 (ADDR=1). This either means:
-        //  Master Mode: The address was successfully sent and ACK'ed.
-        //  Slave Mode:  The address was successfully matched.
+        // Master Mode: IRQ EV6 (ADDR=1). The address was successfully sent and ACK'ed.
+        // Slave Mode:  IRQ EV1 (ADDR=1). The address was successfully matched.
         
         if (device.get_SR2_MSL() == MasterSlave::MasterMode && 
             stateInfo.State() == RxTxState::Receiving && 
@@ -447,26 +463,50 @@ namespace stm32::i2c
         ClearAddressFlag();
 
         // Next: 
-        //  Transmission:
+        //  Master Transmission:
         //      IRQ EV8_1 (TxE = 1) will be triggered. See HandleEventIrq_TxE.
-        //  Reception:
+        //  Master Reception:
         //      Slave will transmit a byte.
         //      IRQ EV7/EV7_1 (RxNE = 1) will be triggered. See HandleEventIrq_RxNE.
+        //  Slave Transmission:
+        //      IRQ EV3-1/EV3 (TxE = 1) will be triggered. HandleEventIrq_TxE.
+        //  Slave Reception:
+        //      Master will transmit a byte.
+        //      IRQ EV2 (RxNE = 1) will be triggered. See HandleEventIrq_RxNE.
     }
 
     inline void I2CPeripheral::HandleEventIrq_TxE()
     {
-        // IRQ EV8 (TxE=1). DR is ready to receive a byte.
-
-        if (stateInfo.State() == RxTxState::Transmitting && stateInfo.HasMoreDataToWrite())
+        if (device.get_SR2_MSL() == MasterSlave::MasterMode)
         {
-            device.set_DR_DR(stateInfo.NextDataToWrite());
+            // Master transmitter. IRQ EV8 (TxE=1). DR is ready to receive a byte.
 
-            // Next:
-            //  If there are more data bytes to be transmitted:
-            //      IRQ EV8 will be triggered again.
-            //  Otherwise (i.e. we're done transmiting):
-            //      IRQ EV8_2 will be triggered. See HandleEventIrq_BTF.
+            if (stateInfo.State() == RxTxState::Transmitting && stateInfo.HasMoreDataToWrite())
+            {
+                device.set_DR_DR(stateInfo.NextDataToWrite());
+
+                // Next:
+                //  If there are more data bytes to be transmitted:
+                //      IRQ EV8 will be triggered again.
+                //  Otherwise (i.e. we're done transmiting):
+                //      IRQ EV8_2 will be triggered. See HandleEventIrq_BTF.
+            }
+        }
+        else
+        {
+            // Slave transmitter. IRQ EV3-1 or IRV EV3 (TxE=1).
+
+            if (device.get_SR2_TRA() == TransmitterReceiver::DataBytesTransmitted)
+            {
+                // Slave device is in transmitter mode (i.e. the Master is requesting data).
+                // Notify the application to send data. The application can call
+                // SlaveWriteData to send the next byte.
+
+                if (slaveDataRequestCallback)
+                {
+                    slaveDataRequestCallback();
+                }
+            }
         }
     }
 
@@ -517,19 +557,30 @@ namespace stm32::i2c
 
     inline void I2CPeripheral::HandleEventIrq_RxNE()
     {
-        // IRQ EV7 or EV7_1a/b (RxNE=1)
-
-        if (device.get_SR2_MSL() == MasterSlave::MasterMode && stateInfo.State() == RxTxState::Receiving)
+        if (device.get_SR2_MSL() == MasterSlave::MasterMode)
         {
-            // Read the Data.
-            stateInfo.ReadDataByte(device.get_DR_DR());
+            HandleEventIrq_RxNE_MasterMode();
+        }
+        else if (device.get_SR2_MSL() == MasterSlave::SlaveMode)
+        {
+            HandleEventIrq_RxNE_SlaveMode();
+        }
+    }
+
+    inline void I2CPeripheral::HandleEventIrq_RxNE_MasterMode()
+    {
+        if (stateInfo.State() == RxTxState::Receiving)
+        {
+            // Master receiver. IRQ EV7 or EV7_1a/b (RxNE=1)
+
+            stateInfo.ReadDataByte(device.get_DR_DR()); // Read the Data.
 
             if (stateInfo.LengthToRead() > 1U && stateInfo.RemainingLengthToRead() == 1U)
             {
                 // EV7_1a. During multi-byte reception, disable the ACK on the second last byte.
                 // The master will send a NACK to the slave, indicating that no more data
                 // should be sent.
-                SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);    
+                SetAcknowledgeEnable(AcknowledgeEnable::NoAcknowledgeReturned);
             }
 
             if (stateInfo.RemainingLengthToRead() == 0U)
@@ -550,6 +601,21 @@ namespace stm32::i2c
                 {
                     rxCompleteCallback(stateInfo.RxData());
                 }
+            }
+        }
+    }
+
+    inline void I2CPeripheral::HandleEventIrq_RxNE_SlaveMode()
+    {
+        if (device.get_SR2_TRA() == TransmitterReceiver::DataBytesReceived)
+        {
+            // Slave receiver. IRQ EV2 (RxNE=1). Notify the application that
+            // a byte has been received from the Master. The application can
+            // call SlaveReadData to read the received byte.
+
+            if (slaveDataReceivedCallback)
+            {
+                slaveDataReceivedCallback();
             }
         }
     }

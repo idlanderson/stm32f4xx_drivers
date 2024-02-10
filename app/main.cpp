@@ -336,9 +336,53 @@ void I2CAsyncExercise()
     }
 }
 
+void I2CSlaveExercise()
+{
+    I2CInit();
+
+    I2C1.SetDeviceAddress(0x69U);
+    I2C1.SetAcknowledgeEnable(AcknowledgeEnable::AcknowledgeReturned);
+    I2C1.SetInterruptsEnabled(InterruptEnable::InterruptEnable);
+
+    NVIC.EnableIrq(IrqNumber::I2C1_EV);
+    NVIC.EnableIrq(IrqNumber::I2C1_ER);
+
+    static string messageToSend = "Hello from STM32";
+    static int messageIndex = 0U;
+    static uint8_t commandCode = 0xFFU;
+
+    I2C1.OnDataRequestedFromSlave([]()
+    {
+        if (commandCode == 0x51U)
+        {
+            I2C1.SlaveWriteData(static_cast<uint8_t>(messageToSend.size()));
+        }
+        else if (commandCode == 0x52U)
+        {
+            I2C1.SlaveWriteData(static_cast<uint8_t>(messageToSend[messageIndex]));
+            messageIndex++;
+        }
+    });
+
+    I2C1.OnDataReceivedBySlave([]()
+    {
+        commandCode = I2C1.SlaveReadData();
+    });
+
+    I2C1.OnAcknowledgeFailure([]()
+    {
+        commandCode = 0xFFU;
+        messageIndex = 0U;
+    });
+
+    printf("I2C1 initialized. Waiting for command from Master...\n");
+
+    while(true);
+}
+
 int main()
 {
-    I2CAsyncExercise();
+    I2CSlaveExercise();
 
     return 0U;
 }

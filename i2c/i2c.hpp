@@ -22,6 +22,8 @@ namespace stm32::i2c
     using ErrorCallback = function<void()>;
     using TxCompleteCallback = function<void()>;
     using RxCompleteCallback = function<void(vector<uint8_t> &)>;
+    using DataRequestCallback = function<void()>;
+    using DataReceivedCallback = function<void()>;
 
     class I2CPeripheral
     {
@@ -39,6 +41,7 @@ namespace stm32::i2c
         void SetDeviceAddress(AddressingMode addressingMode, uint16_t address);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz);
         void SetSerialClock(uint8_t peripheralClockMHz, uint16_t serialClockKHz, FmModeDutyCycle fastModeDutyCycle);
+        void SetInterruptsEnabled(InterruptEnable enable);
 
         void MasterWriteData(uint8_t data, uint8_t slaveAddress, bool useRepeatedStart = false);
         void MasterWriteData(const vector<uint8_t> & data, uint8_t slaveAddress, bool useRepeatedStart = false);
@@ -54,6 +57,9 @@ namespace stm32::i2c
 
         RxTxState MasterReadDataAsync(uint32_t length, uint8_t slaveAddress, RxCompleteCallback callback = {}, bool useRepeatedStart = false);
 
+        void SlaveWriteData(uint8_t data);
+        uint8_t SlaveReadData();
+
         void CloseCommunication();
         
         void HandleEventIrq();
@@ -61,11 +67,16 @@ namespace stm32::i2c
 
         bool IsBusy();
 
+        void OnDataRequestedFromSlave(DataRequestCallback c) { slaveDataRequestCallback = c; }
+        void OnDataReceivedBySlave(DataReceivedCallback c) { slaveDataReceivedCallback = c; }
+        void OnStopReceived(ErrorCallback c) { stopFlagCallback = c; }
         void OnBusError(ErrorCallback c) { busErrorCallback = c; }
         void OnArbitrationLost(ErrorCallback c) { arbitrationLostCallback = c; }
         void OnAcknowledgeFailure(ErrorCallback c) { acknowledgeFailureCallback = c; }
         void OnOverrunUnderrun(ErrorCallback c) { overrunUnderrunCallback = c; }
         void OnTimeout(ErrorCallback c) { timeoutCallback = c; }
+
+        void SetAcknowledgeEnable(AcknowledgeEnable enable);
 
     private:
 
@@ -75,8 +86,6 @@ namespace stm32::i2c
             Read = 1U
         };
 
-        void SetAcknowledgeEnable(AcknowledgeEnable enable);
-        void SetInterruptsEnabled(InterruptEnable enable);
         void GenerateStartCondition();
         void GenerateStopCondition();
         void SendAddress(uint8_t slaveAddress, ReadWriteFlag readWriteFlag);
@@ -95,6 +104,8 @@ namespace stm32::i2c
         void HandleEventIrq_BTF();
         void HandleEventIrq_TxE();
         void HandleEventIrq_RxNE();
+        void HandleEventIrq_RxNE_SlaveMode();
+        void HandleEventIrq_RxNE_MasterMode();
         void HandleEventIrq_STOPF();
 
         void HandleErrorIrq_BERR();
@@ -198,6 +209,8 @@ namespace stm32::i2c
         ErrorCallback acknowledgeFailureCallback;
         ErrorCallback overrunUnderrunCallback;
         ErrorCallback timeoutCallback;
+        DataRequestCallback slaveDataRequestCallback;
+        DataReceivedCallback slaveDataReceivedCallback;
     };
 } // namespace stm32::i2c
 
