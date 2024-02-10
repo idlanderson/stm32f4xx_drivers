@@ -363,6 +363,8 @@ namespace stm32::i2c
         return stateInfo.State();
     }
 
+    /// @brief Writes a byte of data to the Master while the device is operating in Slave mode.
+    /// @param data The byte of data to write.
     void I2CPeripheral::SlaveWriteData(uint8_t data)
     {
         if (device.get_SR2_MSL() == MasterSlave::SlaveMode)
@@ -371,11 +373,14 @@ namespace stm32::i2c
         }
     }
 
+    /// @brief Reads a byte of data received from the Master while the device is operating in Slave mode.
+    /// @return The byte of data received, or 0 if the device is not currently operating in Slave mode.
     uint8_t I2CPeripheral::SlaveReadData()
     {
         return device.get_SR2_MSL() == MasterSlave::SlaveMode ? device.get_DR_DR() : 0U;
     }
 
+    /// @brief Closes all I2C communication.
     void I2CPeripheral::CloseCommunication()
     {
         if (device.get_SR2_MSL() == MasterSlave::MasterMode)
