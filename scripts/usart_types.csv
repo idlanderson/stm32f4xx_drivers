@@ -1,0 +1,92 @@
+ParityError,0,No parity error
+ParityError,1,Parity error
+FramingError,0,No framing error detected
+FramingError,1,Framing error or break detected
+NoiceDetectedFlag,0,No noise detected
+NoiceDetectedFlag,1,Noise detected
+OverrunError,0,No overrun error
+OverrunError,1,Overrun error detected
+IdleLineDetected,0,No Idle Line detected
+IdleLineDetected,1,Idle Line detected
+ReadDataRegisterNotEmpty,0,Data not received
+ReadDataRegisterNotEmpty,1,Received data ready
+TransmissionComplete,0,Not complete
+TransmissionComplete,1,Complete
+TransmitDataRegisterEmpty,0,Not transferred to shift register
+TransmitDataRegisterEmpty,1,Transferred to shift register
+LinBreakDetectionFlag,0,Not detected
+LinBreakDetectionFlag,1,Detected
+CtsFlag,0,No change on CTS line
+CtsFlag,1,Chan ge on CTS line
+SendBreak,0,No break transmitted
+SendBreak,1,Break transmitted
+ReceiverWakeup,0,Active Mode
+ReceiverWakeup,1,Mute Mode
+ReceiverEnable,0,Disabled
+ReceiverEnable,1,Enabled
+TransmitterEnable,0,Disabled
+TransmitterEnable,1,Enabled
+IdleInterruptEnable,0,Disabled
+IdleInterruptEnable,1,Enabled
+RxneInterruptEnable,0,Disabled
+RxneInterruptEnable,1,Enabled
+TcInterruptEnable,0,Disabled
+TcInterruptEnable,1,Enabled
+TxeInterruptEnable,0,Disabled
+TxeInterruptEnable,1,Enabled
+PeInterruptEnable,0,Disabled
+PeInterruptEnable,1,Enabled
+ParitySelection,0,Even
+ParitySelection,1,Odd
+ParityControlEnable,0,Disabled
+ParityControlEnable,1,Enabled
+WakeupMethod,0,Idle Line
+WakeupMethod,1,Address Mark
+WordLength,0,8 data bits
+WordLength,1,9 data bits
+UsartEnable,0,Disabled
+UsartEnable,1,Enabled
+OversamplingMode,0,By 16
+OversamplingMode,1,By 8
+LinBreakDetectionLength,0,10 bit break detection
+LinBreakDetectionLength,1,11 bit break detection
+LinBreakDetectionInterruptEnable,0,Disabled
+LinBreakDetectionInterruptEnable,1,Enabled
+LastBitClockPulse,0,Not output to CK
+LastBitClockPulse,1,Output to CK
+ClockPhase,0,1st clock transition
+ClockPhase,1,2nd clock transition
+ClockPolarity,0,Low on CK
+ClockPolarity,1,High on CK
+ClockEnable,0,Disabled
+ClockEnable,1,Enabled
+StopBits,0,1 stop bit
+StopBits,1,0.5 stop bit
+StopBits,2,2 stop bits
+StopBits,3,1.5 stop bits
+LinModeEnable,0,Disabled
+LinModeEnable,1,Enabled
+ErrorInterruptEnable,0,Disabled
+ErrorInterruptEnable,1,Enabled
+IrdaModeEnable,0,Disabled
+IrdaModeEnable,1,Enabled
+IrdaLowPower,0,Normal Mode
+IrdaLowPower,1,Low-Power Mode
+HalfDuplexSelection,0,Not selected
+HalfDuplexSelection,1,Selected
+SmartcardNackEnable,0,Disabled
+SmartcardNackEnable,1,Enabled
+SmartcardModeEnable,0,Disabled
+SmartcardModeEnable,1,Enabled
+DmaEnableReciever,0,Disabled
+DmaEnableReciever,1,Enabled
+DmaEnableTransmitter,0,Disabled
+DmaEnableTransmitter,1,Enabled
+RtsEnable,0,Disabled
+RtsEnable,1,Enabled
+CtsEnable,0,Disabled
+CtsEnable,1,Enabled
+CtsInterruptEnable,0,Disabled
+CtsInterruptEnable,1,Enabled
+OneSampleBitMethodEnable,0,Three sample bit
+OneSampleBitMethodEnable,1,One sample bit

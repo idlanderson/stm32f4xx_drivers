@@ -1,0 +1,51 @@
+SR,ParityError,Parity error,PE,0,1,r
+SR,FramingError,Framing error,FE,1,1,r
+SR,NoiceDetectedFlag,Noise detected flag,NF,2,1,r
+SR,OverrunError,Overrun error,ORE,3,1,r
+SR,IdleLineDetected,IDLE line detected,IDLE,4,1,r
+SR,ReadDataRegisterNotEmpty,Read data register not empty,RXNE,5,1,rw
+SR,TransmissionComplete,Transmission complete,TC,6,1,rw
+SR,TransmitDataRegisterEmpty,Transmit data register empty,TXE,7,1,r
+SR,LinBreakDetectionFlag,LIN break detection flag,LBD,8,1,rw
+SR,CtsFlag,CTS flag,CTS,9,1,rw
+DR,,Data value,DR,0,9,rw
+BRR,,Fraction of USARTDIV,DIV_Fraction,0,4,rw
+BRR,,Mantissa of USARTDIV,DIV_Mantissa,4,12,rw
+CR1,SendBreak,Send break,SBK,0,1,rw
+CR1,ReceiverWakeup,Receiver wakeup,RWU,1,1,rw
+CR1,ReceiverEnable,Receiver enable,RE,2,1,rw
+CR1,TransmitterEnable,Transmitter enable,TE,3,1,rw
+CR1,IdleInterruptEnable,IDLE interrupt enable,IDLEIE,4,1,rw
+CR1,RxneInterruptEnable,RXNE interrupt enable,RXNEIE,5,1,rw
+CR1,TcInterruptEnable,Transmission complete interrupt enable,TCIE,6,1,rw
+CR1,TxeInterruptEnable,TXE interrupt enable,TXEIE,7,1,rw
+CR1,PeInterruptEnable,PE interrupt enable,PEIE,8,1,rw
+CR1,ParitySelection,Parity selection,PS,9,1,rw
+CR1,ParityControlEnable,Parity control enable,PCE,10,1,rw
+CR1,WakeupMethod,Wakeup method,WAKE,11,1,rw
+CR1,WordLength,Word length,M,12,1,rw
+CR1,UsartEnable,USART enable,UE,13,1,rw
+CR1,OversamplingMode,Oversampling mode,OVER8,15,1,rw
+CR2,,Address of USART node,ADD,0,4,rw
+CR2,LinBreakDetectionLength,LIN break detection length,LBDL,5,1,rw
+CR2,LinBreakDetectionInterruptEnable,LIN break detection interrupt enable,LBDIE,6,1,rw
+CR2,LastBitClockPulse,Last bit clock pulse,LBCL,8,1,rw
+CR2,ClockPhase,Clock phase,CPHA,9,1,rw
+CR2,ClockPolarity,Clock polarity,CPOL,10,1,rw
+CR2,ClockEnable,Clock enable,CLKEN,11,1,rw
+CR2,StopBits,Stop bits,STOP,12,2,rw
+CR2,LinModeEnable,LIN mode enable,LINEN,14,1,rw
+CR3,ErrorInterruptEnable,Error interrupt enable,EIE,0,1,rw
+CR3,IrdaModeEnable,IrDA mode enable,IREN,1,1,rw
+CR3,IrdaLowPower,IrDA low-power,IRLP,2,1,rw
+CR3,HalfDuplexSelection,Half-duplex selection,HDSEL,3,1,rw
+CR3,SmartcardNackEnable,Smartcard NACK enable,NACK,4,1,rw
+CR3,SmartcardModeEnable,Smartcard mode enable,SCEN,5,1,rw
+CR3,DmaEnableReciever,DMA enable reciever,DMAR,6,1,rw
+CR3,DmaEnableTransmitter,DMA enable transmitter,DMAT,7,1,rw
+CR3,RtsEnable,RTS enable,RTSE,8,1,rw
+CR3,CtsEnable,CTS enable,CTSE,9,1,rw
+CR3,CtsInterruptEnable,CTS interrupt enable,CTSIE,10,1,rw
+CR3,OneSampleBitMethodEnable,One sample bit method enable,ONEBIT,11,1,rw
+GTPR,,Prescalar value,PSC,0,8,rw
+GTPR,,Guard time value,GT,8,8,rw
