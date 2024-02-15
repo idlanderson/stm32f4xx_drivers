@@ -101,4 +101,57 @@ namespace stm32::usart
             device.set_DR_DR(dr);
         }
     }
+
+    vector<uint8_t> UsartPeripheral::ReceiveData(uint32_t length)
+    {
+        vector<uint8_t> data = { };
+
+        if (length == 0U) return data;
+
+        WordLength wordLength = device.get_CR1_M();
+        ParityControlEnable parityEnabled = device.get_CR1_PCE();
+
+        uint32_t numberOfBytesReceived = 0U;
+
+        while (numberOfBytesReceived < length)
+        {
+            // Wait until a byte of data is received...
+            while (device.get_SR_RXNE() != ReadDataRegisterNotEmpty::ReceivedDataReady);
+
+            if (wordLength == WordLength::_8DataBits)
+            {
+                if (parityEnabled == ParityControlEnable::Enabled)
+                {
+                    // M = 0, PCE = 1: 7 data bits + parity bit
+                    data.push_back(device.get_DR_DR() & 0x7FU); // Mask the MSB since it's the parity bit.
+                }
+                else
+                {
+                    // M = 0, PCE = 0: 8 data bits (no parity bit)
+                    data.push_back(device.get_DR_DR() & 0xFFU); // All 8 bits can be used.
+                }
+
+                numberOfBytesReceived++;
+            }
+            else if (wordLength == WordLength::_9DataBits)
+            {
+                uint32_t dr = device.get_DR_DR();
+
+                if (parityEnabled == ParityControlEnable::Disabled)
+                {
+                    uint8_t bit8 = static_cast<uint8_t>((dr >> 8U) & 0x01U);
+                    data.push_back(bit8);
+                    numberOfBytesReceived++;
+                }
+
+                if (numberOfBytesReceived < length)
+                {
+                    data.push_back(dr & 0xFFU);
+                    numberOfBytesReceived++;
+                }
+            }
+        }
+
+        return data;
+    }
 }

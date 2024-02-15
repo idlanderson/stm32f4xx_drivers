@@ -231,3 +231,140 @@ TEST_F(UsartPeripheralTestWithMock, SendData0Bytes)
 
     usart.SendData(data);
 }
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveData8BitsNoParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0x1ABU))
+        .WillOnce(Return(0x1CDU))
+        .WillOnce(Return(0x1EFU));
+
+    auto data = usart.ReceiveData(3U);
+
+    EXPECT_THAT(data, ElementsAre(0xABU, 0xCDU, 0xEFU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveData8BitsWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0xABU))
+        .WillOnce(Return(0xCDU))
+        .WillOnce(Return(0xEFU));
+
+    auto data = usart.ReceiveData(3U);
+
+    EXPECT_THAT(data, ElementsAre(0x2BU, 0x4DU, 0x6FU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveData9BitsWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0x1ABU))   // '1' is the parity bit. Assume even parity.
+        .WillOnce(Return(0x1CDU))   // '1' is the parity bit. Assume even parity.
+        .WillOnce(Return(0x1EFU));  // '1' is the parity bit. Assume even parity.
+
+    auto data = usart.ReceiveData(3U);
+
+    EXPECT_THAT(data, ElementsAre(0xABU, 0xCDU, 0xEFU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveData9BitsNoParityEvenLength)
+{
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0x1ABU))   // '1' is part of the data.
+        .WillOnce(Return(0x1CDU))   // '1' is part of the data.
+        .WillOnce(Return(0x1EFU));  // '1' is part of the data.
+
+    auto data = usart.ReceiveData(6U);
+
+    EXPECT_THAT(data, ElementsAre(0x01U, 0xABU, 0x01U, 0xCDU, 0x01U, 0xEFU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveData9BitsNoParityOddLength)
+{
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0x1ABU))   // '1' is part of the data.
+        .WillOnce(Return(0x1CDU))   // '1' is part of the data.
+        .WillOnce(Return(0x1EFU));  // '1' is part of the data.
+
+    auto data = usart.ReceiveData(5U);
+
+    EXPECT_THAT(data, ElementsAre(0x01U, 0xABU, 0x01U, 0xCDU, 0x01U));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveDataLengthIs0)
+{
+    EXPECT_CALL(registerMap, get_CR1_M()).Times(0);
+    EXPECT_CALL(registerMap, get_CR1_PCE()).Times(0);
+    EXPECT_CALL(registerMap, get_SR_RXNE()).Times(0);
+    EXPECT_CALL(registerMap, get_DR_DR()).Times(0);
+
+    auto data = usart.ReceiveData(0U);
+
+    EXPECT_THAT(data, ElementsAre());
+}

@@ -36,6 +36,7 @@ namespace stm32::usart
         void SetStopBits(StopBits stopBits);
         void SetHardwareFlowControl(bool rtsEnable, bool ctsEnable);
         void SendData(const vector<uint8_t> & data);
+        vector<uint8_t> ReceiveData(uint32_t length);
     private:
         IUsartRegisterMap & device;
     };
