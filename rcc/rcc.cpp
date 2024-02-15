@@ -2,6 +2,11 @@
 
 namespace stm32::rcc
 {
+    void RccPeripheral::SetSystemClockSource(SystemClock systemClockSource)
+    {
+        device.set_CFGR_SW(systemClockSource);
+    }
+    
     void RccPeripheral::SetPeripheralClockEnabled(Peripheral peripheral, bool isEnabled)
     {
         EnableFlag enableFlag = isEnabled ? EnableFlag::Enable : EnableFlag::Disable;
@@ -70,6 +75,106 @@ namespace stm32::rcc
         case Peripheral::TIM10: device.set_APB2ENR_TIM10EN(enableFlag); break;
         case Peripheral::TIM11: device.set_APB2ENR_TIM11EN(enableFlag); break;
         default: break;
+        }
+    }
+
+    uint32_t RccPeripheral::GetSystemClockFrequency() const
+    {
+        SystemClock systemClockSource = device.get_CFGR_SWS();
+        uint32_t systemClockFrequency = 0U;
+
+        if (systemClockSource == SystemClock::HsiOscillator)
+        {
+            // Internal (HSI) oscillator.
+            systemClockFrequency = HsiSystemClockFrequencyHz;
+        }
+        else if (systemClockSource == SystemClock::HseOscillator)
+        {
+            // External (HSE) oscillator.
+            systemClockFrequency = HseSystemClockFrequencyHz;
+        }
+        else if (systemClockSource == SystemClock::Pll)
+        {
+            // PLL. TODO: Implement support for PLL.
+            systemClockFrequency = 0;
+        }
+        else
+        {
+            // Invalid clock source.
+            systemClockFrequency = 0;
+        }
+
+        return systemClockFrequency;
+    }
+
+    uint32_t RccPeripheral::GetAhbClockFrequency() const
+    {
+        uint32_t systemClockFrequency = GetSystemClockFrequency();
+        uint32_t ahbPrescaler = GetAhbPrescalar();
+
+        // AHB Clock = SYSCLK / AHB Prescalar
+        return systemClockFrequency / ahbPrescaler;
+    }
+
+    uint32_t RccPeripheral::GetApb1ClockFrequency() const
+    {
+        uint32_t ahbClock = GetAhbClockFrequency();
+        uint32_t apb1Prescaler = GetApbPrescalar(device.get_CFGR_PPRE1());
+
+        // APBx Peripheral Clock = AHB Clock / APBx Prescalar
+        return ahbClock / apb1Prescaler;
+    }
+
+    uint32_t RccPeripheral::GetApb2ClockFrequency() const
+    {
+        uint32_t ahbClock = GetAhbClockFrequency();
+        uint32_t apb1Prescaler = GetApbPrescalar(device.get_CFGR_PPRE2());
+
+        // APBx Peripheral Clock = AHB Clock / APBx Prescalar
+        return ahbClock / apb1Prescaler;
+    }
+
+    inline uint32_t RccPeripheral::GetAhbPrescalar() const
+    {
+        AhbPrescaler ahbPrescaler = device.get_CFGR_HPRE();
+
+        switch (ahbPrescaler)
+        {
+        case AhbPrescaler::SystemClockDividedBy2:
+            return 2U;
+        case AhbPrescaler::SystemClockDividedBy4:
+            return 4U;
+        case AhbPrescaler::SystemClockDividedBy8:
+            return 8U;
+        case AhbPrescaler::SystemClockDividedBy16:
+            return 16U;
+        case AhbPrescaler::SystemClockDividedBy64:
+            return 64U;
+        case AhbPrescaler::SystemClockDividedBy128:
+            return 128U;
+        case AhbPrescaler::SystemClockDividedBy256:
+            return 256U;
+        case AhbPrescaler::SystemClockDividedBy512:
+            return 512U;
+        default:
+            return 1U;
+        }
+    }
+
+    inline uint32_t RccPeripheral::GetApbPrescalar(ApbPrescaler apbPrescaler) const
+    {
+        switch (apbPrescaler)
+        {
+        case ApbPrescaler::AhbClockDividedBy2:
+            return 2U;
+        case ApbPrescaler::AhbClockDividedBy4:
+            return 4U;
+        case ApbPrescaler::AhbClockDividedBy8:
+            return 8U;
+        case ApbPrescaler::AhbClockDividedBy16:
+            return 16U;
+        default:
+            return 1U;
         }
     }
 }

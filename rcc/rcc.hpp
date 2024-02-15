@@ -89,7 +89,19 @@ namespace stm32::rcc
 
 		RccPeripheral(IRccRegisterMap & device) : device(device) { }
 
+		void SetSystemClockSource(SystemClock systemClockSource);
+		uint32_t GetSystemClockFrequency() const;
+		uint32_t GetAhbClockFrequency() const;
+		uint32_t GetApb1ClockFrequency() const;
+		uint32_t GetApb2ClockFrequency() const;
+
 	private:
+
+		uint32_t GetAhbPrescalar() const;
+		uint32_t GetApbPrescalar(ApbPrescaler apbPrescaler) const;
+
+		const uint32_t HsiSystemClockFrequencyHz = 16000000U;	// Internal RC oscillator.
+		const uint32_t HseSystemClockFrequencyHz = 8000000U;	// External X2 crystal oscillator present on the STM32F4 Discovery Board.
 
 		IRccRegisterMap & device;
 	};
