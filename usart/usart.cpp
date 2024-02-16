@@ -1,5 +1,4 @@
 #include "usart.hpp"
-#include <stdio.h>
 
 namespace stm32::usart
 {
@@ -8,10 +7,12 @@ namespace stm32::usart
     void UsartPeripheral::SetMode(UsartMode mode)
     {
         TransmitterEnable txEnable = mode == UsartMode::Tx || mode == UsartMode::RxTx ? TransmitterEnable::Enabled : TransmitterEnable::Disabled;
-        ReceiverEnable    rxEnable = mode == UsartMode::Rx || mode == UsartMode::RxTx ? ReceiverEnable::Enabled    : ReceiverEnable::Disabled;
+        ReceiverEnable rxEnable    = mode == UsartMode::Rx || mode == UsartMode::RxTx ? ReceiverEnable::Enabled    : ReceiverEnable::Disabled;
+        UsartEnable usartEnable    = mode != UsartMode::Disabled ? UsartEnable::Enabled : UsartEnable::Disabled;
 
         device.set_CR1_TE(txEnable);
         device.set_CR1_RE(rxEnable);
+        device.set_CR1_UE(usartEnable);
     }
 
     /// @brief Sets the baud rate of the USART peripheral.
@@ -73,6 +74,30 @@ namespace stm32::usart
         device.set_CR3_CTSE(cts);
     }
 
+    /// @brief Sends an std::string to a receiving device. This function will block
+    /// until all of the data is sent. Note that the exact format of the data sent to the
+    /// receiving device will depend on the configured word length and parity bit.
+    /// If a 8-bit word length is used with parity, then the MSB of each byte sent will
+    /// be replaced by the parity bit.
+    /// @param data A reference to the string.
+    void UsartPeripheral::SendData(const string & data)
+    {
+        vector<uint8_t> dataVector(data.begin(), data.end());
+        SendData(dataVector);
+    }
+
+    /// @brief Sends a C-style string to a receiving device. This function will block
+    /// until all of the data is sent. Note that the exact format of the data sent to the
+    /// receiving device will depend on the configured word length and parity bit.
+    /// If a 8-bit word length is used with parity, then the MSB of each byte sent will
+    /// be replaced by the parity bit.
+    /// @param data A pointer to the string.
+    void UsartPeripheral::SendData(const char * data)
+    {
+        string s(data);
+        SendData(s);
+    }
+
     /// @brief Sends a collection of data to a receiving device. This function will block
     /// until all of the data is sent. Note that the exact format of the data sent to the
     /// receiving device will depend on the configured word length and parity bit.
@@ -81,7 +106,10 @@ namespace stm32::usart
     /// @param data A reference to the vector containing data to send.
     void UsartPeripheral::SendData(const vector<uint8_t> & data)
     {
-        if (data.size() == 0U) return;
+        if (device.get_CR1_UE() == UsartEnable::Disabled || data.size() == 0U) 
+        {
+            return;
+        }
 
         WordLength wordLength = device.get_CR1_M();
         ParityControlEnable parityEnabled = device.get_CR1_PCE();
@@ -149,7 +177,7 @@ namespace stm32::usart
     {
         vector<uint8_t> data = { };
 
-        if (length == 0U) return data;
+        if (device.get_CR1_UE() == UsartEnable::Disabled || length == 0U) return data;
 
         WordLength wordLength = device.get_CR1_M();
         ParityControlEnable parityEnabled = device.get_CR1_PCE();

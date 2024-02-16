@@ -5,6 +5,7 @@
 #include "nvic_def.hpp"
 #include "syscfg_def.hpp"
 #include "i2c_def.hpp"
+#include "usart_def.hpp"
 #include <vector>
 #include <cstdlib>
 #include <stdio.h>
@@ -16,6 +17,7 @@ using namespace stm32::syscfg;
 using namespace stm32::nvic;
 using namespace stm32::exti;
 using namespace stm32::i2c;
+using namespace stm32::usart;
 
 using Pin = stm32::gpio::PinNumber;
 using PinSpeed = stm32::gpio::Speed;
@@ -71,8 +73,8 @@ void SpiInit(void)
     SPI2.SetDeviceMode(MasterSelection::Master);
     SPI2.SetBaudRate(BaudRateControl::FpclkDiv8);
     SPI2.SetDataFrameFormat(DataFrameFormat::_8Bit);
-    SPI2.SetClockPolarity(ClockPolarity::CkTo0WhenIdle);
-    SPI2.SetClockPhase(ClockPhase::FirstClockTransition);
+    SPI2.SetClockPolarity(stm32::spi::ClockPolarity::CkTo0WhenIdle);
+    SPI2.SetClockPhase(stm32::spi::ClockPhase::FirstClockTransition);
     SPI2.SetSlaveManagement(SoftwareSlaveManagement::Disabled);
     SPI2.SetSlaveSelectOutputEnabled(SsOutputEnable::Enabled);
     SPI2.SetEnabled(SpiEnable::Enabled);
@@ -380,9 +382,64 @@ void I2CSlaveExercise()
     while(true);
 }
 
+void UsartInit()
+{
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::GPIOA, true);
+    RCC.SetPeripheralClockEnabled(RccPeripheral::Peripheral::USART2, true);
+
+    // USART Tx = PA2 Alternate Function 7 (USART2 Tx)
+    GPIOA.ConfigureAltFcnPin(
+        PinNumber::Pin2,
+        Speed::VeryHighSpeed,
+        PullUpPullDown::PullUp,
+        OutputType::OpenDrain,
+        AlternateFunction::Af7);
+
+    // USART Rx = PA3 Alternate Function 7 (USART2 Rx)
+    GPIOA.ConfigureAltFcnPin(
+        PinNumber::Pin3,
+        Speed::VeryHighSpeed,
+        PullUpPullDown::PullUp,
+        OutputType::OpenDrain,
+        AlternateFunction::Af7);
+
+    USART2.SetMode(UsartMode::Tx);
+    USART2.SetBaudRate(RCC.GetApb1ClockFrequency(), 115200U, OversamplingMode::By16);
+    USART2.SetHardwareFlowControl(false, false);
+    USART2.SetParity(Parity::None);
+    USART2.SetStopBits(StopBits::_1StopBit);
+}
+
+void UsartTxExercise()
+{
+    UsartInit();
+
+    LedAndButtonInit();
+
+    GPIOD.WritePin(Pin::Pin12, 1U);
+    GPIOD.WritePin(Pin::Pin13, 1U);
+    GPIOD.WritePin(Pin::Pin14, 1U);
+    GPIOD.WritePin(Pin::Pin15, 1U);
+
+    for (;;)
+    {
+        delay(500000U);
+
+        if (GPIOA.ReadPin(Pin::Pin0) == 1U)
+        {
+            USART2.SendData("Hi from STM32 USART2!\n");
+
+            GPIOD.TogglePin(Pin::Pin12);
+            GPIOD.TogglePin(Pin::Pin13);
+            GPIOD.TogglePin(Pin::Pin14);
+            GPIOD.TogglePin(Pin::Pin15);
+        }
+    }
+}
+
 int main()
 {
-    I2CSlaveExercise();
+    UsartTxExercise();
 
     return 0U;
 }

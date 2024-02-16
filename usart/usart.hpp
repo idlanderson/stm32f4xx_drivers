@@ -4,6 +4,7 @@
 #include "stm32f4xx.hpp"
 #include "usart_register_map.hpp"
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -37,6 +38,8 @@ namespace stm32::usart
         void SetStopBits(StopBits stopBits);
         void SetHardwareFlowControl(bool rtsEnable, bool ctsEnable);
         void SendData(const vector<uint8_t> & data);
+        void SendData(const string & data);
+        void SendData(const char * data);
         vector<uint8_t> ReceiveData(uint32_t length);
     private:
         IUsartRegisterMap & device;
