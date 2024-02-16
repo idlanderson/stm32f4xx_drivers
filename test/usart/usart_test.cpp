@@ -16,6 +16,15 @@ TEST_F(UsartPeripheralTest, SetMode)
     EXPECT_EQ(0x00000000U, registers.CR1.Value);
 }
 
+TEST_F(UsartPeripheralTest, SetBaudRate)
+{
+    usart.SetBaudRate(16000000U, 9600U, OversamplingMode::By16);
+    EXPECT_EQ(0x00000683U, registers.BRR.Value);
+
+    usart.SetBaudRate(16000000U, 115200U, OversamplingMode::By8);
+    EXPECT_EQ(0x00000113U, registers.BRR.Value);
+}
+
 TEST_F(UsartPeripheralTest, SetParity)
 {
     usart.SetParity(Parity::Even);

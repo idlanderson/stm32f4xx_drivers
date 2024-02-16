@@ -31,6 +31,7 @@ namespace stm32::usart
         UsartPeripheral(uint32_t addr) : UsartPeripheral(*reinterpret_cast<UsartRegisterMap*>(addr)) { }
 
         void SetMode(UsartMode mode);
+        void SetBaudRate(uint32_t peripheralClockInHz, uint32_t baudRate, OversamplingMode oversamplingMode);
         void SetParity(Parity parity);
         void SetWordLength(WordLength wordLength);
         void SetStopBits(StopBits stopBits);

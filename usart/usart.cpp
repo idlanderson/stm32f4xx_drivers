@@ -3,6 +3,8 @@
 
 namespace stm32::usart
 {
+    /// @brief Sets the mode of the USART peripheral.
+    /// @param mode Mode to set (Rx, Tx or Rx/Tx).
     void UsartPeripheral::SetMode(UsartMode mode)
     {
         TransmitterEnable txEnable = mode == UsartMode::Tx || mode == UsartMode::RxTx ? TransmitterEnable::Enabled : TransmitterEnable::Disabled;
@@ -12,6 +14,30 @@ namespace stm32::usart
         device.set_CR1_RE(rxEnable);
     }
 
+    /// @brief Sets the baud rate of the USART peripheral.
+    /// @param peripheralClockInHz The frequency of the peripheral clock, in Hz (e.g. 16000000).
+    /// @param baudRate The desired baud rate, expressed in bps (e.g. 9600)
+    /// @param oversamplingMode The oversampling mode to use (8 or 16).
+    void UsartPeripheral::SetBaudRate(uint32_t peripheralClockInHz, uint32_t baudRate, OversamplingMode oversamplingMode)
+    {
+        device.set_CR1_OVER8(oversamplingMode);
+
+        uint8_t oversamplingFactor = oversamplingMode == OversamplingMode::By8 ? 8U : 16U;
+
+        uint32_t usartdiv = (100U * peripheralClockInHz) / (oversamplingFactor * baudRate);
+        uint32_t mantissa = usartdiv / 100U;
+        uint32_t fraction = (usartdiv - mantissa * 100U) * oversamplingFactor;
+
+        // Round the fraction up to the nearest hundred. Credit for the rounding solution: https://cplusplus.com/forum/general/198033/
+        uint32_t remainder = fraction % 100U;
+        fraction = ((fraction - remainder) + 100U) / 100U;
+
+        device.set_BRR_DIV_Mantissa(mantissa);
+        device.set_BRR_DIV_Fraction(fraction);
+    }
+
+    /// @brief Sets the parity bit mode selection.
+    /// @param parity The parity mode (None, Even or Odd).
     void UsartPeripheral::SetParity(Parity parity)
     {
         ParityControlEnable enable = parity == Parity::Even || parity == Parity::Odd ? ParityControlEnable::Enabled : ParityControlEnable::Disabled;
@@ -21,16 +47,23 @@ namespace stm32::usart
         device.set_CR1_PS(selection);
     }
 
+    /// @brief Sets the word length.
+    /// @param wordLength The word length (8-bit or 9-bit).
     void UsartPeripheral::SetWordLength(WordLength wordLength)
     {
         device.set_CR1_M(wordLength);
     }
 
+    /// @brief Sets the stop bit mode selection.
+    /// @param stopBits The stop bit mode (0.5, 1, 1.5 or 2 stop bits).
     void UsartPeripheral::SetStopBits(StopBits stopBits)
     {
         device.set_CR2_STOP(stopBits);
     }
 
+    /// @brief Enables or disables the hardware flow control lines (RTS and CTS).
+    /// @param rtsEnable Enable or disable RTS.
+    /// @param ctsEnable Enable or disable CTS.
     void UsartPeripheral::SetHardwareFlowControl(bool rtsEnable, bool ctsEnable)
     {
         RtsEnable rts = rtsEnable ? RtsEnable::Enabled : RtsEnable::Disabled;
@@ -40,6 +73,12 @@ namespace stm32::usart
         device.set_CR3_CTSE(cts);
     }
 
+    /// @brief Sends a collection of data to a receiving device. This function will block
+    /// until all of the data is sent. Note that the exact format of the data sent to the
+    /// receiving device will depend on the configured word length and parity bit.
+    /// If a 8-bit word length is used with parity, then the MSB of each byte sent will
+    /// be replaced by the parity bit.
+    /// @param data A reference to the vector containing data to send.
     void UsartPeripheral::SendData(const vector<uint8_t> & data)
     {
         if (data.size() == 0U) return;
@@ -102,6 +141,10 @@ namespace stm32::usart
         }
     }
 
+    /// @brief Receives data from a transmitting device. This function will block until all data
+    /// is received.
+    /// @param length The number of bytes to receive.
+    /// @return A vector containing the data bytes received.
     vector<uint8_t> UsartPeripheral::ReceiveData(uint32_t length)
     {
         vector<uint8_t> data = { };
