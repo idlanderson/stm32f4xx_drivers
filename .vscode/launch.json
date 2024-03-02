@@ -23,6 +23,78 @@
                     { "type": "console", "label": "ITM", "port": 0 }
                 ]
             }
-        }
+        },
+        {
+            "name": "Debug EXTI Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/exti/exti_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug GPIO Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/gpio/gpio_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug I2C Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/i2c/i2c_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug NVIC Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/nvic/nvic_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug RCC Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/rcc/rcc_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug SPI Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/spi/spi_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug SYSCFG Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/syscfg/syscfg_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
+        {
+            "name": "Debug USART Unit Tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/test/usart/usart_test",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "gdb-multiarch",
+            "preLaunchTask": "Build"
+        },
     ]
 }

@@ -21,7 +21,7 @@ project(drivers_cpp
     LANGUAGES C CXX)
 
 if (BUILD_TESTS)
-    add_compile_options(-fprofile-arcs -ftest-coverage -fprofile-abs-path)
+    add_compile_options(-ggdb -fprofile-arcs -ftest-coverage -fprofile-abs-path)
     add_link_options(-lgcov --coverage)
     add_subdirectory(test)
 else()
