@@ -20,6 +20,14 @@ project(drivers_cpp
     DESCRIPTION "STM32F4xx Drivers (C++)"
     LANGUAGES C CXX)
 
+if (BUILD_TESTS)
+    add_compile_options(-fprofile-arcs -ftest-coverage -fprofile-abs-path)
+    add_link_options(-lgcov --coverage)
+    add_subdirectory(test)
+else()
+    add_subdirectory(app)
+endif()
+
 add_subdirectory(rcc)
 add_subdirectory(gpio)
 add_subdirectory(spi)
@@ -28,10 +36,3 @@ add_subdirectory(usart)
 add_subdirectory(syscfg)
 add_subdirectory(nvic)
 add_subdirectory(exti)
-
-if (BUILD_TESTS)
-    add_compile_options(-ggdb)
-    add_subdirectory(test)
-else()
-    add_subdirectory(app)
-endif()
