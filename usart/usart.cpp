@@ -2,6 +2,11 @@
 
 namespace stm32::usart
 {
+    bool UsartPeripheral::IsBusy()
+    {
+        return state != RxTxState::Idle;
+    }
+
     /// @brief Sets the mode of the USART peripheral.
     /// @param mode Mode to set (Rx, Tx or Rx/Tx).
     void UsartPeripheral::SetMode(UsartMode mode)
@@ -106,67 +111,70 @@ namespace stm32::usart
     /// @param data A reference to the vector containing data to send.
     void UsartPeripheral::SendData(const vector<uint8_t> & data)
     {
-        if (device.get_CR1_UE() == UsartEnable::Disabled || data.size() == 0U) 
+        if (device.get_CR1_UE() == UsartEnable::Enabled && data.size() > 0U) 
         {
-            return;
+            wordLength    = device.get_CR1_M();
+            parityEnabled = device.get_CR1_PCE();
+
+            uint16_t i = 0U;
+
+            while (i < data.size())
+            {
+                // Wait until the hardware is ready to transmit.
+                // "Transferred to Shift Register" means that the main data register
+                // (TDR) is empty and ready for the next byte.
+                while (device.get_SR_TXE() != TransmitDataRegisterEmpty::TransferredToShiftRegister);
+
+                SendNext(data, i);
+            }
         }
+    }
 
-        WordLength wordLength = device.get_CR1_M();
-        ParityControlEnable parityEnabled = device.get_CR1_PCE();
-
+    void UsartPeripheral::SendNext(const vector<uint8_t> & data, uint16_t & i)
+    {
         // There are four different possible frame formats given the values of M and PCE:
         // M = 0, PCE = 0       SB | 8-bits data | STB          (8-bit word, no parity)
         // M = 0, PCE = 1       SB | 7-bits data | PB | STB     (8-bit word, parity)
         // M = 1, PCE = 0       SB | 9-bits data | STB          (9-bit word, no parity)
         // M = 1, PCE = 1       SB | 8-bits data | PB | STB     (9-bit word, parity)
 
-        uint16_t i = 0U;
+        uint32_t dr = 0U;
 
-        while (i < data.size())
+        if (wordLength    == WordLength::_8DataBits && 
+            parityEnabled == ParityControlEnable::Enabled)
         {
-            uint32_t dr = 0U;
-
-            // Wait until the hardware is ready to transmit.
-            // "Transferred to Shift Register" means that the main data register
-            // (TDR) is empty and ready for the next byte.
-            while (device.get_SR_TXE() != TransmitDataRegisterEmpty::TransferredToShiftRegister);
-
-            if (wordLength    == WordLength::_8DataBits && 
-                parityEnabled == ParityControlEnable::Enabled)
-            {
-                // M = 0, PCE = 1: 7 data bits + parity bit
-                // Bit 7 of DR will have no effect since it will be replaced by the parity bit.
-                dr = data[i] & 0x7FU;
-            }
-            else if (
-                wordLength    == WordLength::_9DataBits && 
-                parityEnabled == ParityControlEnable::Disabled && 
-                i < (data.size() - 1U))
-            {
-                // M = 1, PCE = 0: 9 data bits (no parity bit), with an even number of bytes in 'data'.
-                // This mode is often used to distinguish between an address byte and
-                // a data byte when multiple slave devices are present on the UART bus.
-                // In this case, the data should be provided as follows:
-                // [ 1, AA, 0, DD, 0, DD, ... ]
-                // Where AA is a slave address byte and DD is a data byte.
-                //  1 indicates: "the next byte is an address"
-                //  0 indicates: "the next byte is data"
-                dr = ((static_cast<uint32_t>(data[i] & 0x01U) << 8U)) | data[i + 1];
-                i++; // Advance an extra byte since we're using two bytes instead of one.
-            }
-            else
-            {
-                // Covers three cases:
-                // M = 0, PCE = 0: 8 data bits (no parity bit)
-                // M = 1, PCE = 1: 8 data bits (with parity bit)
-                // M = 1, PCE = 0: 9 data bits (no parity bit), but with odd number of bytes in 'data'
-                dr = data[i];
-            }
-
-            i++;
-
-            device.set_DR_DR(dr);
+            // M = 0, PCE = 1: 7 data bits + parity bit
+            // Bit 7 of DR will have no effect since it will be replaced by the parity bit.
+            dr = data[i] & 0x7FU;
         }
+        else if (
+            wordLength    == WordLength::_9DataBits && 
+            parityEnabled == ParityControlEnable::Disabled && 
+            i < (data.size() - 1U))
+        {
+            // M = 1, PCE = 0: 9 data bits (no parity bit), with an even number of bytes in 'data'.
+            // This mode is often used to distinguish between an address byte and
+            // a data byte when multiple slave devices are present on the UART bus.
+            // In this case, the data should be provided as follows:
+            // [ 1, AA, 0, DD, 0, DD, ... ]
+            // Where AA is a slave address byte and DD is a data byte.
+            //  1 indicates: "the next byte is an address"
+            //  0 indicates: "the next byte is data"
+            dr = ((static_cast<uint32_t>(data[i] & 0x01U) << 8U)) | data[i + 1];
+            i++; // Advance an extra byte since we're using two bytes instead of one.
+        }
+        else
+        {
+            // Covers three cases:
+            // M = 0, PCE = 0: 8 data bits (no parity bit)
+            // M = 1, PCE = 1: 8 data bits (with parity bit)
+            // M = 1, PCE = 0: 9 data bits (no parity bit), but with odd number of bytes in 'data'
+            dr = data[i];
+        }
+
+        i++;
+
+        device.set_DR_DR(dr);
     }
 
     /// @brief Receives data from a transmitting device. This function will block until all data
@@ -177,52 +185,175 @@ namespace stm32::usart
     {
         vector<uint8_t> data = { };
 
-        if (device.get_CR1_UE() == UsartEnable::Disabled || length == 0U) return data;
-
-        WordLength wordLength = device.get_CR1_M();
-        ParityControlEnable parityEnabled = device.get_CR1_PCE();
-
-        uint32_t numberOfBytesReceived = 0U;
-
-        while (numberOfBytesReceived < length)
+        if (device.get_CR1_UE() == UsartEnable::Enabled && length > 0U)
         {
-            // Wait until a byte of data is received...
-            while (device.get_SR_RXNE() != ReadDataRegisterNotEmpty::ReceivedDataReady);
+            wordLength    = device.get_CR1_M();
+            parityEnabled = device.get_CR1_PCE();
 
-            if (wordLength == WordLength::_8DataBits)
+            while (data.size() < length)
             {
-                if (parityEnabled == ParityControlEnable::Enabled)
-                {
-                    // M = 0, PCE = 1: 7 data bits + parity bit
-                    data.push_back(device.get_DR_DR() & 0x7FU); // Mask the MSB since it's the parity bit.
-                }
-                else
-                {
-                    // M = 0, PCE = 0: 8 data bits (no parity bit)
-                    data.push_back(device.get_DR_DR() & 0xFFU); // All 8 bits can be used.
-                }
+                // Wait until a byte of data is received...
+                while (device.get_SR_RXNE() != ReadDataRegisterNotEmpty::ReceivedDataReady);
 
-                numberOfBytesReceived++;
-            }
-            else if (wordLength == WordLength::_9DataBits)
-            {
-                uint32_t dr = device.get_DR_DR();
-
-                if (parityEnabled == ParityControlEnable::Disabled)
-                {
-                    uint8_t bit8 = static_cast<uint8_t>((dr >> 8U) & 0x01U);
-                    data.push_back(bit8);
-                    numberOfBytesReceived++;
-                }
-
-                if (numberOfBytesReceived < length)
-                {
-                    data.push_back(dr & 0xFFU);
-                    numberOfBytesReceived++;
-                }
+                ReceiveNext(data, length);
             }
         }
-
         return data;
+    }
+
+    void UsartPeripheral::ReceiveNext(vector<uint8_t> & data, uint32_t length)
+    {
+        if (wordLength == WordLength::_8DataBits)
+        {
+            if (parityEnabled == ParityControlEnable::Enabled)
+            {
+                // M = 0, PCE = 1: 7 data bits + parity bit
+                data.push_back(device.get_DR_DR() & 0x7FU); // Mask the MSB since it's the parity bit.
+            }
+            else
+            {
+                // M = 0, PCE = 0: 8 data bits (no parity bit)
+                data.push_back(device.get_DR_DR() & 0xFFU); // All 8 bits can be used.
+            }
+        }
+        else if (wordLength == WordLength::_9DataBits)
+        {
+            uint32_t dr = device.get_DR_DR();
+
+            if (parityEnabled == ParityControlEnable::Disabled)
+            {
+                uint8_t bit8 = static_cast<uint8_t>((dr >> 8U) & 0x01U);
+                data.push_back(bit8);
+            }
+
+            if (data.size() < length)
+            {
+                data.push_back(dr & 0xFFU);
+            }
+        }
+    }
+
+    void UsartPeripheral::SendDataAsync(const vector<uint8_t> & data, TxCompleteCallback callback)
+    {
+        if (device.get_CR1_UE() == UsartEnable::Enabled &&
+            state == RxTxState::Idle && 
+            data.size() > 0U)
+        {
+            device.set_CR1_TXEIE(TxeInterruptEnable::Enabled);
+
+            wordLength    = device.get_CR1_M();
+            parityEnabled = device.get_CR1_PCE();
+
+            txBuffer.assign(data.begin(), data.end());
+            txBufferIndex = 0U;
+            txCompleteCallback = callback;
+
+            state = RxTxState::Transmitting;
+
+            // Wait for interrupt from TXE.
+        }
+    }
+
+    void UsartPeripheral::SendDataAsync(const string & data, TxCompleteCallback callback)
+    {
+        vector<uint8_t> dataVector(data.begin(), data.end());
+        SendDataAsync(dataVector, callback);
+    }
+
+    void UsartPeripheral::SendDataAsync(const char * data, TxCompleteCallback callback)
+    {
+        string s(data);
+        SendDataAsync(s, callback);
+    }
+
+    void UsartPeripheral::ReceiveDataAsync(uint32_t length, RxCompleteCallback callback)
+    {
+        if (device.get_CR1_UE() == UsartEnable::Enabled &&
+            state == RxTxState::Idle && 
+            length > 0U)
+        {
+            device.set_CR1_RXNEIE(RxneInterruptEnable::Enabled);
+
+            wordLength    = device.get_CR1_M();
+            parityEnabled = device.get_CR1_PCE();
+
+            rxLength = length;
+            rxBuffer.clear();
+            rxCompleteCallback = callback;
+
+            state = RxTxState::Receiving;
+
+            // Wait for interrupt from RXNE.
+        }
+    }
+
+    void UsartPeripheral::HandleIrq()
+    {
+        if (device.get_SR_TXE() == TransmitDataRegisterEmpty::TransferredToShiftRegister)
+        {
+            HandleIrq_TXE();
+        }
+
+        if (device.get_SR_RXNE() == ReadDataRegisterNotEmpty::ReceivedDataReady)
+        {
+            HandleIrq_RXNE();
+        }
+    }
+
+    void UsartPeripheral::HandleIrq_TXE()
+    {
+        if (state == RxTxState::Transmitting)
+        {
+            if (txBufferIndex < txBuffer.size())
+            {
+                // Transfer is ongoing.
+                SendNext(txBuffer, txBufferIndex);
+            }
+            else
+            {
+                // Transfer is complete.
+                txBuffer.clear();
+                txBufferIndex = 0U;
+                device.set_CR1_TXEIE(TxeInterruptEnable::Disabled);
+
+                if (txCompleteCallback)
+                {
+                    txCompleteCallback();
+                }
+
+                txCompleteCallback = {};
+
+                state = RxTxState::Idle;
+            }
+        }
+    }
+
+    void UsartPeripheral::HandleIrq_RXNE()
+    {
+        if (state == RxTxState::Receiving)
+        {
+            if (rxBuffer.size() < rxLength)
+            {
+                // Reception is ongoing.
+                ReceiveNext(rxBuffer, rxLength);
+            }
+
+            if (rxBuffer.size() == rxLength)
+            {
+                // Reception is complete.
+                if (rxCompleteCallback)
+                {
+                    rxCompleteCallback(rxBuffer);
+                }
+
+                rxBuffer.clear();
+                rxLength = 0U;
+                rxCompleteCallback = {};
+
+                device.set_CR1_RXNEIE(RxneInterruptEnable::Disabled);
+
+                state = RxTxState::Idle;
+            }
+        }
     }
 }

@@ -94,13 +94,11 @@ TEST_F(UsartPeripheralTestWithMock, SendData8BitNoParity)
         .Times(3)
         .WillRepeatedly(Return(TransmitDataRegisterEmpty::TransferredToShiftRegister));
 
-    EXPECT_CALL(registerMap, set_DR_DR(0x000000ABU)).Times(1);
-    EXPECT_CALL(registerMap, set_DR_DR(0x000000CDU)).Times(1);
-    EXPECT_CALL(registerMap, set_DR_DR(0x000000EFU)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x00000034U)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x00000035U)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x00000036U)).Times(1);
 
-    vector<uint8_t> data = { 0xABU, 0xCDU, 0xEFU };
-
-    usart.SendData(data);
+    usart.SendData("456");
 }
 
 TEST_F(UsartPeripheralTestWithMock, SendData8BitWithParity)
@@ -460,4 +458,374 @@ TEST_F(UsartPeripheralTestWithMock, ReceiveDataUsartDisabled)
     auto data = usart.ReceiveData(1U);
 
     EXPECT_THAT(data, ElementsAre());
+}
+
+TEST_F(UsartPeripheralTestWithMock, SendDataAsync8BitNoParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Enabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::TransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, set_DR_DR(0x33U)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x34U)).Times(1);
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Disabled)).Times(1);
+
+    bool callbackCalled = false;
+    usart.SendDataAsync("34", [& callbackCalled]()
+    {
+        callbackCalled = true;
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+}
+
+TEST_F(UsartPeripheralTestWithMock, SendDataAsync8BitWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Enabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::TransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, set_DR_DR(0x2AU)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x3BU)).Times(1);
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Disabled)).Times(1);
+
+    vector<uint8_t> data = { 0xAAU, 0xBBU };
+    bool callbackCalled = false;
+    usart.SendDataAsync(data, [& callbackCalled]()
+    {
+        callbackCalled = true;
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+}
+
+TEST_F(UsartPeripheralTestWithMock, SendDataAsync9BitNoParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Enabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::TransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, set_DR_DR(0x01AAU)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x00BBU)).Times(1);
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Disabled)).Times(1);
+
+    vector<uint8_t> data = { 0x01U, 0xAAU, 0x00U, 0xBBU };
+    bool callbackCalled = false;
+    usart.SendDataAsync(data, [& callbackCalled]()
+    {
+        callbackCalled = true;
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+}
+
+TEST_F(UsartPeripheralTestWithMock, SendDataAsync9BitWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Enabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::TransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, set_DR_DR(0x37U)).Times(1);
+    EXPECT_CALL(registerMap, set_DR_DR(0x38U)).Times(1);
+
+    EXPECT_CALL(registerMap, set_CR1_TXEIE(TxeInterruptEnable::Disabled)).Times(1);
+
+    bool callbackCalled = false;
+    usart.SendDataAsync("78", [& callbackCalled]()
+    {
+        callbackCalled = true;
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveDataAsync8BitsNoParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+    
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Enabled)).Times(1);
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Disabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::NotTransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0xAAU))
+        .WillOnce(Return(0xBBU))
+        .WillOnce(Return(0xCCU));
+
+    bool callbackCalled = false;
+    vector<uint8_t> receivedData;
+
+    usart.ReceiveDataAsync(3, [& callbackCalled, & receivedData](vector<uint8_t> & data)
+    {
+        callbackCalled = true;
+        receivedData.assign(data.begin(), data.end());
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+    EXPECT_THAT(receivedData, ElementsAre(0xAAU, 0xBBU, 0xCCU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveDataAsync8BitsWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+    
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Enabled)).Times(1);
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Disabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_8DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::NotTransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0xAAU))
+        .WillOnce(Return(0xBBU))
+        .WillOnce(Return(0xCCU));
+
+    bool callbackCalled = false;
+    vector<uint8_t> receivedData;
+
+    usart.ReceiveDataAsync(3, [& callbackCalled, & receivedData](vector<uint8_t> & data)
+    {
+        callbackCalled = true;
+        receivedData.assign(data.begin(), data.end());
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+    EXPECT_THAT(receivedData, ElementsAre(0x2AU, 0x3BU, 0x4CU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveDataAsync9BitsNoParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+    
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Enabled)).Times(1);
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Disabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Disabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::NotTransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0x01AAU))
+        .WillOnce(Return(0x00BBU))
+        .WillOnce(Return(0x00CCU));
+
+    bool callbackCalled = false;
+    vector<uint8_t> receivedData;
+
+    usart.ReceiveDataAsync(6, [& callbackCalled, & receivedData](vector<uint8_t> & data)
+    {
+        callbackCalled = true;
+        receivedData.assign(data.begin(), data.end());
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+    EXPECT_THAT(receivedData, ElementsAre(0x01U, 0xAAU, 0x00U, 0xBBU, 0x00U, 0xCCU));
+}
+
+TEST_F(UsartPeripheralTestWithMock, ReceiveDataAsync9BitsWithParity)
+{
+    EXPECT_CALL(registerMap, get_CR1_UE())
+        .Times(1)
+        .WillOnce(Return(UsartEnable::Enabled));
+    
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Enabled)).Times(1);
+    EXPECT_CALL(registerMap, set_CR1_RXNEIE(RxneInterruptEnable::Disabled)).Times(1);
+
+    EXPECT_CALL(registerMap, get_CR1_M())
+        .Times(1)
+        .WillOnce(Return(WordLength::_9DataBits));
+
+    EXPECT_CALL(registerMap, get_CR1_PCE())
+        .Times(1)
+        .WillOnce(Return(ParityControlEnable::Enabled));
+
+    EXPECT_CALL(registerMap, get_SR_TXE())
+        .Times(3)
+        .WillRepeatedly(Return(TransmitDataRegisterEmpty::NotTransferredToShiftRegister));
+
+    EXPECT_CALL(registerMap, get_SR_RXNE())
+        .Times(3)
+        .WillRepeatedly(Return(ReadDataRegisterNotEmpty::ReceivedDataReady));
+
+    EXPECT_CALL(registerMap, get_DR_DR())
+        .Times(3)
+        .WillOnce(Return(0xAAU))
+        .WillOnce(Return(0xBBU))
+        .WillOnce(Return(0xCCU));
+
+    bool callbackCalled = false;
+    vector<uint8_t> receivedData;
+
+    usart.ReceiveDataAsync(3, [& callbackCalled, & receivedData](vector<uint8_t> & data)
+    {
+        callbackCalled = true;
+        receivedData.assign(data.begin(), data.end());
+    });
+
+    EXPECT_TRUE(usart.IsBusy());
+
+    usart.HandleIrq();
+    usart.HandleIrq();
+    usart.HandleIrq();
+
+    EXPECT_FALSE(usart.IsBusy());
+    EXPECT_TRUE(callbackCalled);
+    EXPECT_THAT(receivedData, ElementsAre(0xAAU, 0xBBU, 0xCCU));
 }
